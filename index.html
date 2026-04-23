@@ -7,24 +7,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@800;900&display=swap');
+        
         body { font-family: 'Inter', sans-serif; background-color: #fdfaf3; }
+        
+        /* Brand Heading Font */
         h1, h2, h3, .font-brand { font-family: 'Montserrat', sans-serif; }
+
+        /* Level Transitions */
         .page { display: none; animation: fadeIn 0.4s ease-out; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Game Elements */
         .drop-zone { transition: all 0.2s; border: 2px dashed #cbd5e1; background: rgba(255,255,255,0.8); cursor: pointer; }
         .drop-zone.hover { border-color: #f97316; background: rgba(249, 115, 22, 0.1); }
         .drop-zone.filled { border: none; background: #111827; color: white; }
+
         .draggable-item { cursor: grab; user-select: none; touch-action: none; }
         .draggable-item:active { cursor: grabbing; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
         .error-shake { animation: shake 0.3s ease-in-out; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d !important; }
-        @keyframes timePenalty { 0%, 100% { color: #fb923c; transform: scale(1); } 50% { color: #ef4444; transform: scale(1.2); } }
+        
+        @keyframes timePenalty {
+            0%, 100% { color: #fb923c; transform: scale(1); }
+            50% { color: #ef4444; transform: scale(1.2); }
+        }
         .timer-penalty { animation: timePenalty 0.5s ease-out; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
+    <!-- Global Header -->
     <header class="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-3 shadow-xl sticky top-0 z-50 border-b-4 border-orange-500">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
@@ -36,17 +54,28 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <div id="globalTimer" class="hidden font-mono text-2xl font-black text-orange-400 drop-shadow-md bg-gray-900/50 px-3 py-1 rounded-lg transition-colors">00:00</div>
-                <button id="menuBtn" onclick="showPage('menu')" class="hidden bg-white/10 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow">Main Menu</button>
+                <div id="globalTimer" class="hidden font-mono text-2xl font-black text-orange-400 drop-shadow-md bg-gray-900/50 px-3 py-1 rounded-lg transition-colors">
+                    00:00
+                </div>
+                <button id="menuBtn" onclick="showPage('menu')" class="hidden bg-white/10 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow">
+                    Main Menu
+                </button>
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 mt-6 w-full flex-1 mb-12">
+        
+        <!-- MAIN MENU -->
         <div id="page-menu" class="page active space-y-6">
+            
+            <!-- Custom Banner -->
             <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-900 group bg-gray-900 aspect-[3/1] md:aspect-[4/1]">
                 <img src="Facebook banner .jpg.png" alt="Aides to Scouting Banner" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" />
                 <div class="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-all duration-500 z-0"></div>
+                <div class="absolute inset-0 flex items-center justify-center drop-shadow-xl z-10" id="fallbackBannerText">
+                    <h2 class="text-3xl md:text-5xl font-brand font-black text-white uppercase tracking-wider text-center px-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Master the Trail</h2>
+                </div>
             </div>
 
             <div class="text-center space-y-2 mb-6">
@@ -65,6 +94,7 @@
                         </div>
                     </div>
                 </button>
+
                 <button onclick="prepareLevel('emblem')" class="bg-white p-6 rounded-3xl border-2 border-amber-100 hover:border-amber-500 hover:shadow-xl transition-all text-left group">
                     <div class="flex gap-4 items-start">
                         <div class="p-4 rounded-2xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-colors">
@@ -76,6 +106,7 @@
                         </div>
                     </div>
                 </button>
+
                 <button onclick="prepareLevel('triage')" class="bg-white p-6 rounded-3xl border-2 border-rose-100 hover:border-rose-500 hover:shadow-xl transition-all text-left group">
                     <div class="flex gap-4 items-start">
                         <div class="p-4 rounded-2xl bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white transition-colors">
@@ -87,6 +118,7 @@
                         </div>
                     </div>
                 </button>
+
                 <button onclick="prepareLevel('plants')" class="bg-white p-6 rounded-3xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-xl transition-all text-left group">
                     <div class="flex gap-4 items-start">
                         <div class="p-4 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
@@ -98,6 +130,7 @@
                         </div>
                     </div>
                 </button>
+
                 <button onclick="prepareLevel('knots')" class="bg-white p-6 rounded-3xl border-2 border-indigo-100 hover:border-indigo-500 hover:shadow-xl transition-all text-left group">
                     <div class="flex gap-4 items-start">
                         <div class="p-4 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
@@ -109,6 +142,7 @@
                         </div>
                     </div>
                 </button>
+
                 <button onclick="prepareLevel('essentials')" class="bg-white p-6 rounded-3xl border-2 border-sky-100 hover:border-sky-500 hover:shadow-xl transition-all text-left group">
                     <div class="flex gap-4 items-start">
                         <div class="p-4 rounded-2xl bg-sky-50 text-sky-600 group-hover:bg-sky-500 group-hover:text-white transition-colors">
@@ -124,29 +158,35 @@
             
             <footer class="mt-12 p-8 bg-white/50 border-2 border-dashed border-gray-900/10 rounded-3xl text-center">
                 <h3 class="font-brand font-black text-gray-900 uppercase tracking-widest text-lg mb-4">Follow the Podcast</h3>
+                
                 <div class="flex flex-wrap justify-center gap-4 mb-8">
                     <a href="https://podcasts.apple.com/us/podcast/aides-to-scouting/id1849273100" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-purple-600 hover:-translate-y-1 transition-all shadow-md">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5c-2.485 0-4.5-2.015-4.5-4.5S9.515 7.5 12 7.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5zm0-7.5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"/></svg>
                         <span class="font-bold text-sm">Apple Podcasts</span>
                     </a>
+                    
                     <a href="https://open.spotify.com/show/62wfjOw3n5CM170IvYPqIi" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-green-500 hover:-translate-y-1 transition-all shadow-md">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.585 14.41a.627.627 0 0 1-.863.208c-2.365-1.445-5.344-1.77-8.854-.97a.628.628 0 1 1-.29-1.222c3.84-.876 7.127-.506 9.799 1.121a.627.627 0 0 1 .208.863zm1.233-2.756a.78.78 0 0 1-1.074.257c-2.716-1.668-6.85-2.158-10.04-1.183a.782.782 0 1 1-.455-1.496c3.65-1.115 8.24-.567 11.312 1.348a.78.78 0 0 1 .257 1.074zm.116-2.887c-3.255-1.93-8.625-2.108-11.73-1.166a.936.936 0 1 1-.544-1.792c3.557-1.08 9.48-.876 13.23 1.346a.936.936 0 1 1-.956 1.612z"/></svg>
                         <span class="font-bold text-sm">Spotify</span>
                     </a>
+                    
                     <a href="https://www.youtube.com/@aidestoscouting" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-red-600 hover:-translate-y-1 transition-all shadow-md">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                         <span class="font-bold text-sm">YouTube</span>
                     </a>
+                    
                     <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-blue-600 hover:-translate-y-1 transition-all shadow-md">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                         <span class="font-bold text-sm">Facebook</span>
                     </a>
                 </div>
+
                 <p class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-1">Official Aides to Scouting Educational Tool</p>
                 <p class="text-[10px] text-slate-500">Bridging heritage and future leadership for the next generation.</p>
             </footer>
         </div>
 
+        <!-- GAME: SCOUT LAW -->
         <div id="page-law" class="page max-w-2xl mx-auto space-y-6">
             <div class="text-center">
                 <h2 class="text-4xl font-black text-gray-900 uppercase font-brand">Law Scramble</h2>
@@ -158,6 +198,7 @@
             </div>
         </div>
 
+        <!-- GAME: EMBLEM -->
         <div id="page-emblem" class="page space-y-6">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Emblem Pin-It</h2>
@@ -171,10 +212,13 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <button id="checkEmblemBtn" onclick="verifyEmblem()" class="hidden bg-gray-900 text-white font-black uppercase px-8 py-4 rounded-2xl shadow-lg hover:bg-orange-500 hover:scale-105 transition-all tracking-widest border-4 border-transparent hover:border-orange-600">Check Badge</button>
+                <button id="checkEmblemBtn" onclick="verifyEmblem()" class="hidden bg-gray-900 text-white font-black uppercase px-8 py-4 rounded-2xl shadow-lg hover:bg-orange-500 hover:scale-105 transition-all tracking-widest border-4 border-transparent hover:border-orange-600">
+                    Check Badge
+                </button>
             </div>
         </div>
 
+        <!-- GAME: TRIAGE -->
         <div id="page-triage" class="page max-w-xl mx-auto space-y-6">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Emergency Triage</h2>
@@ -184,6 +228,7 @@
             <div id="triageBank" class="grid gap-2"></div>
         </div>
 
+        <!-- GAME: PLANTS (SQUARESPACE LINKS) -->
         <div id="page-plants" class="page max-w-lg mx-auto space-y-8">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Safe or Toxic?</h2>
@@ -191,7 +236,9 @@
             </div>
             
             <div id="plantCard" class="bg-white rounded-[2.5rem] shadow-2xl p-8 text-center border-4 border-white aspect-[4/3] md:aspect-[3/2] flex flex-col justify-center items-center relative overflow-hidden mt-8 transition-colors">
+                
                 <div id="plantVisual" class="w-full h-full flex items-center justify-center absolute inset-0"></div>
+                
                 <div id="plantFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20">
                     <div id="plantFeedbackIcon" class="text-6xl mb-2 drop-shadow-lg"></div>
                     <h3 id="plantFeedbackName" class="text-4xl font-brand uppercase tracking-tighter text-center drop-shadow-md"></h3>
@@ -205,41 +252,53 @@
             </div>
         </div>
 
+        <!-- GAME: KNOTS -->
         <div id="page-knots" class="page max-w-3xl mx-auto space-y-6">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Knot Knowledge</h2>
                 <p class="text-indigo-600 font-bold uppercase tracking-widest text-sm mt-1">Match the correct knot to the scenario!</p>
             </div>
+            
             <div id="knotScenario" class="relative bg-amber-50 p-8 md:p-12 rounded-[2.5rem] shadow-xl text-center border-4 border-amber-900/10 min-h-[200px] flex items-center justify-center mt-8 overflow-hidden">
-                <svg class="absolute inset-0 w-full h-full text-amber-900/5" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" viewBox="0 0 400 200"><path d="M-50,100 Q100,-50 200,100 T450,100" /></svg>
+                <svg class="absolute inset-0 w-full h-full text-amber-900/5" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" viewBox="0 0 400 200">
+                    <path d="M-50,100 Q100,-50 200,100 T450,100" />
+                </svg>
                 <h3 id="knotScenarioText" class="relative z-10 text-2xl md:text-3xl font-black text-amber-950 leading-tight">Scenario goes here</h3>
             </div>
+            
             <div id="knotOptions" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"></div>
         </div>
 
+        <!-- GAME: 10 ESSENTIALS -->
         <div id="page-essentials" class="page max-w-4xl mx-auto space-y-6">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">The 10 Essentials</h2>
                 <p class="text-sky-600 font-bold uppercase tracking-widest text-sm mt-1">Tap the 10 Scout Basic Essentials. <br> <span class="text-rose-500 font-black">Warning: Decoys add +10 Seconds!</span></p>
                 <div class="mt-4 font-black text-2xl text-gray-900 bg-white inline-block px-6 py-2 rounded-full shadow border-2 border-sky-100"><span id="essentialsFoundCount">0</span> / 10 FOUND</div>
             </div>
-            <div id="essentialsGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-6"></div>
+            <div id="essentialsGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-6">
+            </div>
         </div>
+
     </main>
 
+    <!-- SUCCESS OVERLAY -->
     <div id="overlay" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[100] flex items-center justify-center hidden">
         <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl m-4 border-4 border-orange-500">
             <div id="overlayIcon" class="text-6xl mb-4">🏆</div>
             <h2 id="overlayTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight">Level Complete!</h2>
             <p id="overlayText" class="text-slate-600 mb-4">You've mastered this skill.</p>
+            
             <div class="bg-orange-50 rounded-xl p-3 mb-6 border border-orange-200 shadow-inner">
                 <p class="text-[10px] uppercase font-bold text-orange-600 tracking-widest">Final Time</p>
                 <p id="finalTimeDisplay" class="text-4xl font-mono font-black text-orange-900">00:00</p>
             </div>
+
             <button id="overlayBtn" class="w-full bg-orange-500 text-white hover:text-white font-black py-4 rounded-2xl shadow-lg hover:bg-orange-600 transition-all uppercase tracking-widest">Back to Menu</button>
         </div>
     </div>
 
+    <!-- START TIMER OVERLAY -->
     <div id="gameStartOverlay" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[100] flex items-center justify-center hidden">
         <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl m-4 border-4 border-orange-500">
             <div class="text-6xl mb-4">⏱️</div>
@@ -251,6 +310,7 @@
     </div>
 
     <script>
+        // --- GAME DATA ---
         const LAW = ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"];
         
         const EMBLEM = [
@@ -271,13 +331,32 @@
             { id: 6, text: "Minor Cuts & Scratches" }
         ];
 
+        // LOCAL GITHUB IMAGES
         const PLANTS = [
-            { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg" },
-            { name: "White Oak", status: "safe", tip: "Large rounded lobes, no itch here.", img: "oak.jpg" },
-            { name: "Virginia Creeper", status: "safe", tip: "Five leaves attached at the center.", img: "creeper.jpg" },
-            { name: "Poison Oak", status: "toxic", tip: "Fuzzy, lobed leaves in groups of three.", img: "poison_oak.jpg" },
-            { name: "Poison Sumac", status: "toxic", tip: "Red stems, 7-13 leaflets, grows in swamps.", img: "sumac.jpg" },
-            { name: "Sassafras", status: "safe", tip: "Leaves look like mittens or dinosaur tracks.", img: "sassafras.jpg" }
+            { 
+                name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.",
+                img: "ivy.jpg"
+            },
+            { 
+                name: "White Oak", status: "safe", tip: "Large rounded lobes, no itch here.",
+                img: "oak.jpg"
+            },
+            { 
+                name: "Virginia Creeper", status: "safe", tip: "Five leaves attached at the center.",
+                img: "creeper.jpg"
+            },
+            { 
+                name: "Poison Oak", status: "toxic", tip: "Fuzzy, lobed leaves in groups of three.",
+                img: "poison_oak.jpg"
+            },
+            {
+                name: "Poison Sumac", status: "toxic", tip: "Red stems, 7-13 leaflets, grows in swamps.",
+                img: "sumac.jpg"
+            },
+            {
+                name: "Sassafras", status: "safe", tip: "Leaves look like mittens or dinosaur tracks.",
+                img: "sassafras.jpg"
+            }
         ];
 
         const KNOTS = [
@@ -308,17 +387,23 @@
             { name: "Radio", icon: "📻", isEssential: false }
         ];
 
+        // --- STATE ---
         let currentLevel = 'menu';
         let activeSelection = null;
         let timerInt = null;
         let secondsElapsed = 0;
 
+        // --- TIMER LOGIC ---
         function startTimer() {
             clearInterval(timerInt);
             secondsElapsed = 0;
             updateTimerDisplay();
             document.getElementById('globalTimer').classList.remove('hidden');
-            timerInt = setInterval(() => { secondsElapsed++; updateTimerDisplay(); }, 1000);
+            
+            timerInt = setInterval(() => {
+                secondsElapsed++;
+                updateTimerDisplay();
+            }, 1000);
         }
 
         function updateTimerDisplay() {
@@ -336,11 +421,15 @@
             timerEl.classList.add('timer-penalty');
         }
 
-        function stopTimer() { clearInterval(timerInt); }
+        function stopTimer() {
+            clearInterval(timerInt);
+        }
 
+        // --- CORE NAVIGATION ---
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(`page-${id}`).classList.add('active');
+            
             if (id === 'menu') {
                 document.getElementById('menuBtn').style.display = 'none';
                 document.getElementById('globalTimer').classList.add('hidden');
@@ -349,15 +438,26 @@
             } else {
                 document.getElementById('menuBtn').style.display = 'block';
             }
+            
             currentLevel = id;
             window.scrollTo(0,0);
         }
 
         function prepareLevel(id) {
             currentLevel = id;
-            const titles = { 'law': 'Scout Law Scramble', 'emblem': 'Emblem Pin-It', 'triage': 'Emergency Triage', 'plants': 'Safe or Toxic?', 'knots': 'Knot Knowledge', 'essentials': 'The 10 Essentials' };
+            
+            const titles = {
+                'law': 'Scout Law Scramble',
+                'emblem': 'Emblem Pin-It',
+                'triage': 'Emergency Triage',
+                'plants': 'Safe or Toxic?',
+                'knots': 'Knot Knowledge',
+                'essentials': 'The 10 Essentials'
+            };
+            
             document.getElementById('startGameTitle').innerText = titles[id];
             document.getElementById('gameStartOverlay').classList.remove('hidden');
+            
             document.getElementById('globalTimer').innerText = "00:00";
             document.getElementById('globalTimer').classList.remove('hidden');
         }
@@ -366,6 +466,7 @@
             document.getElementById('gameStartOverlay').classList.add('hidden');
             showPage(currentLevel);
             startTimer();
+            
             if(currentLevel === 'law') initLaw();
             if(currentLevel === 'emblem') initEmblem();
             if(currentLevel === 'triage') initTriage();
@@ -379,20 +480,28 @@
             const overlay = document.getElementById('overlay');
             document.getElementById('overlayText').innerText = text;
             document.getElementById('finalTimeDisplay').innerText = document.getElementById('globalTimer').innerText;
+            
             const btn = document.getElementById('overlayBtn');
             btn.innerText = btnText;
-            btn.onclick = () => { overlay.classList.add('hidden'); nextAction(); };
+            btn.onclick = () => {
+                overlay.classList.add('hidden');
+                nextAction();
+            };
             overlay.classList.remove('hidden');
         }
 
-        // --- GAME INIT FUNCTIONS ---
+        // --- LEVEL 1: LAW ---
         let lawIdx = 0;
         function initLaw() {
             lawIdx = 0;
             const grid = document.getElementById('lawGrid');
             const bank = document.getElementById('lawBank');
             grid.innerHTML = ''; bank.innerHTML = '';
-            LAW.forEach((_, i) => { grid.innerHTML += `<div id="law-target-${i}" class="h-12 flex items-center px-4 rounded-xl text-xs font-bold border-2 border-slate-100 text-slate-300 bg-white"><span class="mr-2 opacity-50">${i+1}.</span>________</div>`; });
+            
+            LAW.forEach((_, i) => {
+                grid.innerHTML += `<div id="law-target-${i}" class="h-12 flex items-center px-4 rounded-xl text-xs font-bold border-2 border-slate-100 text-slate-300 bg-white"><span class="mr-2 opacity-50">${i+1}.</span>________</div>`;
+            });
+
             [...LAW].sort(() => Math.random() - 0.5).forEach(word => {
                 const b = document.createElement('button');
                 b.className = "px-4 py-2 bg-orange-50 text-orange-900 border-2 border-orange-100 rounded-xl font-bold text-xs hover:border-orange-500 hover:bg-orange-100 transition-all";
@@ -402,54 +511,95 @@
                         const target = document.getElementById(`law-target-${lawIdx}`);
                         target.innerHTML = `<span class="mr-2 opacity-50 text-orange-200">${lawIdx+1}.</span> ${word}`;
                         target.className = "h-12 flex items-center px-4 rounded-xl text-xs font-bold bg-orange-600 text-white border-transparent shadow-md scale-105 transition-transform";
-                        b.style.visibility = 'hidden'; lawIdx++;
-                        if(lawIdx === 12) showSuccess("You've mastered the Law! A Scout is all 12.", () => showPage('menu'));
+                        b.style.visibility = 'hidden';
+                        lawIdx++;
+                        if(lawIdx === 12) {
+                            showSuccess("You've mastered the Law! A Scout is all 12.", () => showPage('menu'));
+                        }
                     } else {
-                        b.classList.add('error-shake'); setTimeout(() => b.classList.remove('error-shake'), 400);
+                        b.classList.add('error-shake');
+                        setTimeout(() => b.classList.remove('error-shake'), 400);
                     }
                 };
                 bank.appendChild(b);
             });
         }
 
+        // --- LEVEL 2: EMBLEM ---
         let emblemPlaced = {};
         function initEmblem() {
-            emblemPlaced = {}; activeSelection = null;
+            emblemPlaced = {}; 
+            activeSelection = null;
             document.getElementById('checkEmblemBtn').classList.add('hidden');
-            renderEmblemBank(); renderEmblemTargets();
+            renderEmblemBank();
+            renderEmblemTargets();
         }
+
         function renderEmblemBank() {
-            const bank = document.getElementById('emblemBank'); bank.innerHTML = '';
+            const bank = document.getElementById('emblemBank');
+            bank.innerHTML = '';
+            
             const placedIds = Object.values(emblemPlaced).map(item => item.id);
+            
             EMBLEM.filter(item => !placedIds.includes(item.id)).forEach(item => {
                 const b = document.createElement('button');
                 b.className = "p-3 bg-white border-2 border-slate-100 rounded-xl font-bold text-[10px] text-gray-900 hover:border-amber-500 text-left transition-all shadow-sm";
-                if (activeSelection && activeSelection.id === item.id) b.classList.add('border-amber-500', 'bg-amber-50', 'scale-105');
+                if (activeSelection && activeSelection.id === item.id) {
+                    b.classList.add('border-amber-500', 'bg-amber-50', 'scale-105');
+                }
                 b.innerText = item.text;
-                b.onclick = () => { activeSelection = (activeSelection && activeSelection.id === item.id) ? null : item; renderEmblemBank(); };
+                b.onclick = () => {
+                    activeSelection = (activeSelection && activeSelection.id === item.id) ? null : item;
+                    renderEmblemBank();
+                };
                 bank.appendChild(b);
             });
         }
+
         function renderEmblemTargets() {
-            const container = document.getElementById('emblemTargets'); container.innerHTML = '';
+            const container = document.getElementById('emblemTargets');
+            container.innerHTML = '';
+            
             EMBLEM.forEach(item => {
                 const placedItem = emblemPlaced[item.id];
                 const t = document.createElement('div');
-                t.id = `emb-target-${item.id}`; t.style = item.style;
-                t.className = `drop-zone absolute rounded-lg flex items-center justify-center text-center p-1 text-[8px] font-black uppercase leading-tight transition-all cursor-pointer ${placedItem ? 'bg-amber-400 text-gray-900 border-2 border-amber-600 shadow-md z-10 scale-105' : 'bg-white/20 border-2 border-white/40 text-white/70 hover:border-amber-400 hover:bg-amber-400/20'}`;
+                t.id = `emb-target-${item.id}`;
+                t.style = item.style;
+                t.className = `drop-zone absolute rounded-lg flex items-center justify-center text-center p-1 text-[8px] font-black uppercase leading-tight transition-all cursor-pointer ${
+                    placedItem 
+                    ? 'bg-amber-400 text-gray-900 border-2 border-amber-600 shadow-md z-10 scale-105' 
+                    : 'bg-white/20 border-2 border-white/40 text-white/70 hover:border-amber-400 hover:bg-amber-400/20'
+                }`;
                 t.innerText = placedItem ? placedItem.text : item.name;
+                
                 t.onclick = () => {
-                    if (activeSelection) { emblemPlaced[item.id] = activeSelection; activeSelection = null; } 
-                    else if (placedItem) { delete emblemPlaced[item.id]; activeSelection = placedItem; }
-                    renderEmblemBank(); renderEmblemTargets();
-                    if (Object.keys(emblemPlaced).length === EMBLEM.length) document.getElementById('checkEmblemBtn').classList.remove('hidden');
-                    else document.getElementById('checkEmblemBtn').classList.add('hidden');
+                    if (activeSelection) {
+                        emblemPlaced[item.id] = activeSelection;
+                        activeSelection = null;
+                    } else if (placedItem) {
+                        delete emblemPlaced[item.id];
+                        activeSelection = placedItem;
+                    }
+                    renderEmblemBank();
+                    renderEmblemTargets();
+                    checkEmblemComplete();
                 };
                 container.appendChild(t);
             });
         }
+
+        function checkEmblemComplete() {
+            if (Object.keys(emblemPlaced).length === EMBLEM.length) {
+                document.getElementById('checkEmblemBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('checkEmblemBtn').classList.add('hidden');
+            }
+        }
+
         function verifyEmblem() {
-            let correctCount = 0; let wrongIds = [];
+            let correctCount = 0;
+            let wrongIds = [];
+            
             Object.keys(emblemPlaced).forEach(targetId => {
                 const tId = parseInt(targetId);
                 if (emblemPlaced[tId].id === tId) {
@@ -457,25 +607,44 @@
                     document.getElementById(`emb-target-${tId}`).classList.replace('bg-amber-400', 'bg-emerald-500');
                     document.getElementById(`emb-target-${tId}`).classList.replace('text-gray-900', 'text-white');
                     document.getElementById(`emb-target-${tId}`).classList.replace('border-amber-600', 'border-emerald-600');
-                } else wrongIds.push(tId);
+                } else {
+                    wrongIds.push(tId);
+                }
             });
-            if (correctCount === EMBLEM.length) setTimeout(() => { showSuccess("Excellent! You know the badge inside and out.", () => showPage('menu')); }, 500);
-            else {
-                const board = document.getElementById('emblemBoard'); board.classList.add('error-shake');
-                wrongIds.forEach(id => document.getElementById(`emb-target-${id}`).classList.add('bg-rose-500', 'text-white', 'border-rose-600'));
+
+            if (correctCount === EMBLEM.length) {
+                setTimeout(() => {
+                    showSuccess("Excellent! You know the badge inside and out.", () => showPage('menu'));
+                }, 500);
+            } else {
+                const board = document.getElementById('emblemBoard');
+                board.classList.add('error-shake');
+                
+                wrongIds.forEach(id => {
+                    const el = document.getElementById(`emb-target-${id}`);
+                    el.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+                });
+
                 setTimeout(() => {
                     board.classList.remove('error-shake');
-                    wrongIds.forEach(id => delete emblemPlaced[id]);
-                    renderEmblemBank(); renderEmblemTargets(); document.getElementById('checkEmblemBtn').classList.add('hidden');
+                    wrongIds.forEach(id => {
+                        delete emblemPlaced[id];
+                    });
+                    renderEmblemBank();
+                    renderEmblemTargets();
+                    checkEmblemComplete();
                 }, 800);
             }
         }
 
+        // --- LEVEL 3: TRIAGE ---
         let triageIdx = 0;
         function initTriage() {
             triageIdx = 0;
-            const list = document.getElementById('triageList'); const bank = document.getElementById('triageBank');
+            const list = document.getElementById('triageList');
+            const bank = document.getElementById('triageBank');
             list.innerHTML = ''; bank.innerHTML = '';
+
             [...TRIAGE].sort(() => Math.random() - 0.5).forEach(item => {
                 const b = document.createElement('button');
                 b.className = "p-4 bg-white border-2 border-rose-100 rounded-2xl font-bold text-sm text-gray-900 hover:border-rose-500 hover:bg-rose-50 transition-all text-left shadow-sm";
@@ -483,38 +652,59 @@
                 b.onclick = () => {
                     if (item.id === triageIdx + 1) {
                         list.innerHTML += `<div class="flex items-center gap-3 bg-white p-4 rounded-xl border-l-4 border-rose-600 shadow-sm"><span class="text-[10px] font-black text-rose-400">#${item.id}</span> <span class="text-sm font-bold text-gray-900">${item.text}</span></div>`;
-                        b.remove(); triageIdx++;
-                        if(triageIdx === 6) showSuccess("You saved the day! Order of treatment is vital.", () => showPage('menu'));
-                    } else { b.classList.add('error-shake'); setTimeout(() => b.classList.remove('error-shake'), 400); }
+                        b.remove();
+                        triageIdx++;
+                        if(triageIdx === 6) {
+                            showSuccess("You saved the day! Order of treatment is vital.", () => showPage('menu'));
+                        }
+                    } else {
+                        b.classList.add('error-shake');
+                        setTimeout(() => b.classList.remove('error-shake'), 400);
+                    }
                 };
                 bank.appendChild(b);
             });
         }
 
+        // --- LEVEL 4: PLANTS (WITH SQUARESPACE LINKS) ---
         let plantIdx = 0;
         let shuffledPlants = [];
+
         function initPlants() {
             plantIdx = 0;
             shuffledPlants = [...PLANTS].sort(() => Math.random() - 0.5);
             updatePlantCard();
         }
+
         function updatePlantCard() {
             const plant = shuffledPlants[plantIdx];
             const visualContainer = document.getElementById('plantVisual');
-            visualContainer.innerHTML = `<img src="${plant.img}" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" alt="${plant.name}" />`;
+            
+            visualContainer.innerHTML = `
+                <img 
+                    src="${plant.img}" 
+                    class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" 
+                    alt="${plant.name}" 
+                />
+            `;
+            
             document.getElementById('plantProgress').style.width = `${(plantIdx / shuffledPlants.length) * 100}%`;
             document.getElementById('plantFeedback').classList.add('hidden');
             document.getElementById('plantCard').classList.remove('bg-emerald-600', 'bg-rose-600');
             document.getElementById('plantCard').classList.add('bg-white');
         }
+
         function checkPlant(choice) {
             const plant = shuffledPlants[plantIdx];
             const feedback = document.getElementById('plantFeedback');
             const card = document.getElementById('plantCard');
+            
             document.getElementById('plantVisual').innerHTML = ''; 
+            
             feedback.classList.remove('hidden');
             document.getElementById('plantFeedbackName').innerText = plant.name;
             document.getElementById('plantFeedbackTip').innerText = plant.tip;
+            
             card.classList.remove('bg-white');
             
             if (choice === plant.status) {
@@ -524,75 +714,134 @@
                 document.getElementById('plantFeedbackIcon').innerText = "❌";
                 card.classList.add('bg-rose-600');
             }
+
             setTimeout(() => {
                 plantIdx++;
-                if (plantIdx === shuffledPlants.length) showSuccess("Master Woodsman! You've successfully identified all plants.", () => showPage('menu'));
-                else updatePlantCard();
+                if (plantIdx === shuffledPlants.length) {
+                    showSuccess("Master Woodsman! You've successfully identified all plants.", () => showPage('menu'));
+                } else {
+                    updatePlantCard();
+                }
             }, 2500); 
         }
 
+        // --- LEVEL 5: KNOTS ---
         let knotIdx = 0;
         let knotQuestions = [];
+
         function initKnots() {
             knotQuestions = [...KNOTS].sort(() => Math.random() - 0.5);
             knotIdx = 0;
             renderKnotQuestion();
         }
+
         function renderKnotQuestion() {
-            if (knotIdx >= knotQuestions.length) { showSuccess("You've tied up all the loose ends! Great job.", () => showPage('menu')); return; }
+            if (knotIdx >= knotQuestions.length) {
+                showSuccess("You've tied up all the loose ends! Great job.", () => showPage('menu'));
+                return;
+            }
+            
             const current = knotQuestions[knotIdx];
             document.getElementById('knotScenarioText').innerText = current.desc;
+
             let options = KNOTS.filter(k => k.name !== current.name).sort(() => Math.random() - 0.5).slice(0, 3);
-            options.push(current); options.sort(() => Math.random() - 0.5);
-            const container = document.getElementById('knotOptions'); container.innerHTML = '';
+            options.push(current);
+            options.sort(() => Math.random() - 0.5);
+
+            const container = document.getElementById('knotOptions');
+            container.innerHTML = '';
             
             options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = "flex items-center gap-4 p-5 bg-white border-4 border-indigo-50 rounded-2xl text-left hover:border-indigo-500 hover:bg-indigo-50 transition-all shadow-sm group";
-                const ropeIcon = `<div class="p-3 bg-indigo-100 text-indigo-600 rounded-full group-hover:bg-indigo-600 group-hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>`;
+                
+                const ropeIcon = `<div class="p-3 bg-indigo-100 text-indigo-600 rounded-full group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </div>`;
+                
                 btn.innerHTML = `${ropeIcon} <span class="font-black text-xl text-gray-900">${opt.name}</span>`;
+                
                 btn.onclick = () => {
                     if (opt.name === current.name) {
                         btn.className = "flex items-center gap-4 p-5 bg-emerald-600 border-4 border-emerald-700 rounded-2xl text-left transition-all shadow-lg scale-105";
                         btn.innerHTML = `<div class="p-3 bg-emerald-800 text-white rounded-full"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div> <span class="font-black text-xl text-white">${opt.name}</span>`;
-                        setTimeout(() => { knotIdx++; renderKnotQuestion(); }, 800);
-                    } else { btn.classList.add('error-shake'); setTimeout(() => btn.classList.remove('error-shake'), 400); }
+                        setTimeout(() => {
+                            knotIdx++;
+                            renderKnotQuestion();
+                        }, 800);
+                    } else {
+                        btn.classList.add('error-shake');
+                        setTimeout(() => btn.classList.remove('error-shake'), 400);
+                    }
                 };
                 container.appendChild(btn);
             });
         }
 
+        // --- LEVEL 6: 10 ESSENTIALS ---
         let essentialsFoundCount = 0;
         let activeEssentials = [];
+
         function initEssentials() {
-            essentialsFoundCount = 0; document.getElementById('essentialsFoundCount').innerText = "0";
+            essentialsFoundCount = 0;
+            document.getElementById('essentialsFoundCount').innerText = "0";
+            
             activeEssentials = [...ESSENTIALS].sort(() => Math.random() - 0.5);
-            const grid = document.getElementById('essentialsGrid'); grid.innerHTML = '';
+            
+            const grid = document.getElementById('essentialsGrid');
+            grid.innerHTML = '';
             
             activeEssentials.forEach((item, index) => {
                 const btn = document.createElement('button');
                 btn.id = `essential-btn-${index}`;
                 btn.className = "p-4 bg-white border-4 border-slate-100 rounded-2xl flex flex-col items-center justify-center transition-all hover:border-sky-300 hover:shadow-md aspect-square";
-                btn.innerHTML = `<span class="text-4xl mb-2">${item.icon}</span><span class="font-bold text-[10px] uppercase text-slate-600 leading-tight text-center">${item.name}</span>`;
+                
+                btn.innerHTML = `
+                    <span class="text-4xl mb-2">${item.icon}</span>
+                    <span class="font-bold text-[10px] uppercase text-slate-600 leading-tight text-center">${item.name}</span>
+                `;
+                
                 btn.onclick = () => clickEssential(btn, item);
                 grid.appendChild(btn);
             });
         }
+
         function clickEssential(btn, item) {
             if (btn.classList.contains('bg-emerald-100')) return;
+
             if (item.isEssential) {
                 btn.className = "p-4 bg-emerald-100 border-4 border-emerald-500 rounded-2xl flex flex-col items-center justify-center transition-all scale-105 shadow-lg aspect-square";
-                btn.innerHTML = `<span class="text-4xl mb-2">✅</span><span class="font-bold text-[10px] uppercase text-emerald-800 leading-tight text-center">${item.name}</span>`;
-                essentialsFoundCount++; document.getElementById('essentialsFoundCount').innerText = essentialsFoundCount;
-                if (essentialsFoundCount === 10) setTimeout(() => { showSuccess("Your bag is packed! You are ready for the trail.", () => showPage('menu')); }, 500);
+                btn.innerHTML = `
+                    <span class="text-4xl mb-2">✅</span>
+                    <span class="font-bold text-[10px] uppercase text-emerald-800 leading-tight text-center">${item.name}</span>
+                `;
+                
+                essentialsFoundCount++;
+                document.getElementById('essentialsFoundCount').innerText = essentialsFoundCount;
+
+                if (essentialsFoundCount === 10) {
+                    setTimeout(() => {
+                        showSuccess("Your bag is packed! You are ready for the trail.", () => showPage('menu'));
+                    }, 500);
+                }
             } else {
                 addTimePenalty(10);
-                btn.classList.add('error-shake'); const oldHTML = btn.innerHTML;
-                btn.innerHTML = `<span class="text-4xl mb-2">❌</span><span class="font-bold text-[10px] uppercase text-rose-800 leading-tight text-center">+10 SECONDS</span>`;
-                setTimeout(() => { btn.classList.remove('error-shake'); btn.innerHTML = oldHTML; }, 1000);
+                
+                btn.classList.add('error-shake');
+                const oldHTML = btn.innerHTML;
+                btn.innerHTML = `
+                    <span class="text-4xl mb-2">❌</span>
+                    <span class="font-bold text-[10px] uppercase text-rose-800 leading-tight text-center">+10 SECONDS</span>
+                `;
+                
+                setTimeout(() => {
+                    btn.classList.remove('error-shake');
+                    btn.innerHTML = oldHTML;
+                }, 1000);
             }
         }
 
+        // Initialize Menu
         window.onload = () => showPage('menu');
     </script>
 </body>
