@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- THIS LINE FIXES THE WIKIPEDIA IMAGE BLOCK -->
+    <meta name="referrer" content="no-referrer"> 
+    
+    <title>Advancement Arcade - Aides to Scouting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@800;900&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #fdfaf3; }
+        
+        /* Brand Heading Font */
+        h1, h2, h3, .font-brand { font-family: 'Montserrat', sans-serif; }
+
+        /* Level Transitions */
+        .page { display: none; animation: fadeIn 0.4s ease-out; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Game Elements */
+        .drop-zone { transition: all 0.2s; border: 2px dashed #cbd5e1; background: rgba(255,255,255,0.8); cursor: pointer; }
+        .drop-zone.hover { border-color: #f97316; background: rgba(249, 115, 22, 0.1); }
+        .drop-zone.filled { border: none; background: #111827; color: white; }
+
+        .draggable-item { cursor: grab; user-select: none; touch-action: none; }
+        .draggable-item:active { cursor: grabbing; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .error-shake { animation: shake 0.3s ease-in-out; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d !important; }
+        
+        @keyframes timePenalty {
+            0%, 100% { color: #fb923c; transform: scale(1); }
+            50% { color: #ef4444; transform: scale(1.2); }
+        }
+        .timer-penalty { animation: timePenalty 0.5s ease-out; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Global Header -->
+    <header class="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-3 shadow-xl sticky top-0 z-50 border-b-4 border-orange-500">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <!-- Tries Local File First -> Falls back to Squarespace URL -> Falls back to SVG -->
+                <img src="ATS Full Transparent.png" onerror="this.onerror=null; this.src='https://images.squarespace-cdn.com/content/v1/698e4866fa1ef87f1524117e/25892c7b-149c-45ff-991b-4edb5da647f2/ATS+Full+Transparent+.png.png?format=500w';" alt="ATS Logo" class="h-12 w-12 object-contain drop-shadow-md" />
+                <div>
+                    <h1 class="font-brand font-black text-xl leading-tight uppercase tracking-tight">Advancement Arcade</h1>
+                    <p class="text-[10px] text-orange-400 uppercase tracking-widest font-bold">Aides to Scouting</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- Global Timer Display -->
+                <div id="globalTimer" class="hidden font-mono text-2xl font-black text-orange-400 drop-shadow-md bg-gray-900/50 px-3 py-1 rounded-lg transition-colors">
+                    00:00
+                </div>
+                
+                <button id="menuBtn" onclick="showPage('menu')" class="hidden bg-white/10 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow">
+                    Main Menu
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-6 w-full flex-1 mb-12">
+        
+        <!-- MAIN MENU -->
+        <div id="page-menu" class="page active space-y-6">
+            
+            <!-- Custom Banner -->
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-900 group bg-gray-900 aspect-[3/1] md:aspect-[4/1]">
+                <img src="Facebook banner.jpg" onerror="this.onerror=null; this.src='https://images.squarespace-cdn.com/content/v1/698e4866fa1ef87f1524117e/a82a2fe4-58c7-4910-a69c-3cef0da97494/Facebook+banner+.jpg.png?format=1500w';" alt="Aides to Scouting Banner" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" />
+                <div class="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-all duration-500 z-0"></div>
+            </div>
+
+            <div class="text-center space-y-2 mb-6">
+                <p class="text-slate-600 max-w-xl mx-auto font-medium">Select any challenge below to test your Scouting knowledge.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Card 1: Law -->
+                <button onclick="prepareLevel('law')" class="bg-white p-6 rounded-3xl border-2 border-orange-100 hover:border-orange-500 hover:shadow-xl transition-all text-left group">
+                    <div class="flex gap-4 items-start">
+                        <div class="p-4 rounded-2xl bg-orange-50 text-orange-600 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-lg text-gray-900 uppercase group-hover:text-orange-600 transition-colors">Law Scramble</h3>
+                            <p class="text-xs text-slate-500">Master the 12 points.</p>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Card 2: Emblem -->
+                <button onclick="prepareLevel('emblem')" class="bg-white p-6 rounded-3xl border-2 border-amber-100 hover:border-amber-500 hover:shadow-xl transition-all text-left group">
+                    <div class="flex gap-4 items-start">
+                        <div class="p-4 rounded-2xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-lg text-gray-900 uppercase group-hover:text-amber-600 transition-colors">Emblem Pin-It</h3>
+                            <p class="text-xs text-slate-500">First Class Symbolism.</p>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Card 3: Triage -->
+                <button onclick="prepareLevel('triage')" class="bg-white p-6 rounded-3xl border-2 border-rose-100 hover:border-rose-500 hover:shadow-xl transition-all text-left group">
+                    <div class="flex gap-4 items-start">
+                        <div class="p-4 rounded-2xl bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-lg text-gray-900 uppercase group-hover:text-rose-600 transition-colors">First Aid Triage</h3>
+                            <p class="text-xs text-slate-500">Manage a crisis like a pro.</p>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Card 4: Plants -->
+                <button onclick="prepareLevel('plants')" class="bg-white p-6 rounded-3xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-xl transition-all text-left group">
+                    <div class="flex gap-4 items-start">
+                        <div class="p-4 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8a7 7 0 0 1-7 7c-1.18 0-2.31-.3-3.3-.85"/><path d="M11 20L5 20"/><path d="M11 13L11 22"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-lg text-gray-900 uppercase group-hover:text-emerald-600 transition-colors">Safe or Toxic?</h3>
+                            <p class="text-xs text-slate-500">Identify local flora visually.</p>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Card 5: Knots -->
+                <button onclick="prepareLevel('knots')" class="bg-white p-6 rounded-3xl border-2 border-indigo-100 hover:border-indigo-500 hover:shadow-xl transition-all text-left group">
+                    <div class="flex gap-4 items-start">
+                        <div class="p-4 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-lg text-gray-900 uppercase group-hover:text-indigo-600 transition-colors">Knot Knowledge</h3>
+                            <p class="text-xs text-slate-500">Match the correct knot.</p>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Card 6: Essentials -->
+                <button onclick="prepareLevel('essentials')" class="bg-white p-6 rounded-3xl border-2 border-sky-100 hover:border-sky-500 hover:shadow-xl transition-all text-left group">
+                    <div class="flex gap-4 items-start">
+                        <div class="p-4 rounded-2xl bg-sky-50 text-sky-600 group-hover:bg-sky-500 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h12Z"/><path d="M6 12h12"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-lg text-gray-900 uppercase group-hover:text-sky-600 transition-colors">10 Essentials</h3>
+                            <p class="text-xs text-slate-500">Pack your bag correctly.</p>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            
+            <!-- SOCIAL PODCAST FOOTER -->
+            <footer class="mt-12 p-8 bg-white/50 border-2 border-dashed border-gray-900/10 rounded-3xl text-center">
+                <h3 class="font-brand font-black text-gray-900 uppercase tracking-widest text-lg mb-4">Follow the Podcast</h3>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <!-- Apple Podcasts -->
+                    <a href="https://podcasts.apple.com/us/podcast/aides-to-scouting/id1849273100" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-purple-600 hover:-translate-y-1 transition-all shadow-md">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5c-2.485 0-4.5-2.015-4.5-4.5S9.515 7.5 12 7.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5zm0-7.5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"/></svg>
+                        <span class="font-bold text-sm">Apple Podcasts</span>
+                    </a>
+                    <!-- Spotify -->
+                    <a href="https://open.spotify.com/show/62wfjOw3n5CM170IvYPqIi" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-green-500 hover:-translate-y-1 transition-all shadow-md">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.585 14.41a.627.627 0 0 1-.863.208c-2.365-1.445-5.344-1.77-8.854-.97a.628.628 0 1 1-.29-1.222c3.84-.876 7.127-.506 9.799 1.121a.627.627 0 0 1 .208.863zm1.233-2.756a.78.78 0 0 1-1.074.257c-2.716-1.668-6.85-2.158-10.04-1.183a.782.782 0 1 1-.455-1.496c3.65-1.115 8.24-.567 11.312 1.348a.78.78 0 0 1 .257 1.074zm.116-2.887c-3.255-1.93-8.625-2.108-11.73-1.166a.936.936 0 1 1-.544-1.792c3.557-1.08 9.48-.876 13.23 1.346a.936.936 0 1 1-.956 1.612z"/></svg>
+                        <span class="font-bold text-sm">Spotify</span>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/@aidestoscouting" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-red-600 hover:-translate-y-1 transition-all shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                        <span class="font-bold text-sm">YouTube</span>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-full hover:bg-blue-600 hover:-translate-y-1 transition-all shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        <span class="font-bold text-sm">Facebook</span>
+                    </a>
+                </div>
+
+                <p class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-1">Official Aides to Scouting Educational Tool</p>
+                <p class="text-[10px] text-slate-500">Bridging heritage and future leadership for the next generation.</p>
+            </footer>
+        </div>
+
+        <!-- GAME: SCOUT LAW -->
+        <div id="page-law" class="page max-w-2xl mx-auto space-y-6">
+            <div class="text-center">
+                <h2 class="text-4xl font-black text-gray-900 uppercase font-brand">Law Scramble</h2>
+                <p class="text-orange-600 font-bold uppercase tracking-widest text-sm mt-1">A Scout is... (Tap them in order!)</p>
+            </div>
+            <div id="lawGrid" class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-8"></div>
+            <div class="bg-white p-6 rounded-3xl shadow-xl mt-4 border-2 border-orange-50">
+                <div id="lawBank" class="flex flex-wrap justify-center gap-2"></div>
+            </div>
+        </div>
+
+        <!-- GAME: EMBLEM -->
+        <div id="page-emblem" class="page space-y-6">
+            <div class="text-center">
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Emblem Pin-It</h2>
+                <p class="text-amber-600 font-bold uppercase tracking-widest text-sm mt-1">Select a meaning, then place it on the badge.</p>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-8 items-center justify-center mt-8">
+                <div id="emblemBank" class="w-full lg:w-64 grid gap-2"></div>
+                <div id="emblemBoard" class="relative w-full max-w-[400px] aspect-[1/1.1] bg-black rounded-[2.5rem] shadow-2xl p-6 border-4 border-gray-900/5 transition-transform">
+                    <!-- Tries Local File First -> Falls back to Squarespace URL -->
+                    <img src="first_class_badge.png.jpg" onerror="this.onerror=null; this.src='https://images.squarespace-cdn.com/content/v1/698e4866fa1ef87f1524117e/4433ad80-a1be-4435-80a4-4e8effdb7b8a/first_class_badge.png.jpg.png?format=500w';" alt="First Class Badge" class="w-full h-full object-contain drop-shadow-md opacity-90" />
+                    <div id="emblemTargets"></div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button id="checkEmblemBtn" onclick="verifyEmblem()" class="hidden bg-gray-900 text-white font-black uppercase px-8 py-4 rounded-2xl shadow-lg hover:bg-orange-500 hover:scale-105 transition-all tracking-widest border-4 border-transparent hover:border-orange-600">
+                    Check Badge
+                </button>
+            </div>
+        </div>
+
+        <!-- GAME: TRIAGE -->
+        <div id="page-triage" class="page max-w-xl mx-auto space-y-6">
+            <div class="text-center">
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Emergency Triage</h2>
+                <p class="text-rose-600 font-bold uppercase tracking-widest text-sm mt-1">Order the "Hurry Cases" by priority!</p>
+            </div>
+            <div id="triageList" class="space-y-2 bg-rose-50 p-6 rounded-3xl border-2 border-rose-100 min-h-[300px] mt-8"></div>
+            <div id="triageBank" class="grid gap-2"></div>
+        </div>
+
+        <!-- GAME: PLANTS (WITH REAL WIKIPEDIA IMAGES) -->
+        <div id="page-plants" class="page max-w-lg mx-auto space-y-8">
+            <div class="text-center">
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Safe or Toxic?</h2>
+                <div class="w-full h-2 bg-slate-200 rounded-full mt-3"><div id="plantProgress" class="h-full bg-emerald-500 w-0 transition-all"></div></div>
+            </div>
+            
+            <div id="plantCard" class="bg-white rounded-[2.5rem] shadow-2xl p-8 text-center border-4 border-white aspect-[4/3] md:aspect-[3/2] flex flex-col justify-center items-center relative overflow-hidden mt-8 transition-colors">
+                
+                <div id="plantVisual" class="w-full h-full flex items-center justify-center absolute inset-0"></div>
+                
+                <div id="plantFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20">
+                    <div id="plantFeedbackIcon" class="text-6xl mb-2 drop-shadow-lg"></div>
+                    <h3 id="plantFeedbackName" class="text-4xl font-brand uppercase tracking-tighter text-center drop-shadow-md"></h3>
+                    <p id="plantFeedbackTip" class="mt-4 font-bold text-lg opacity-90 text-center drop-shadow-md"></p>
+                </div>
+            </div>
+
+            <div class="flex gap-4">
+                <button onclick="checkPlant('safe')" class="flex-1 bg-emerald-100 text-emerald-900 py-6 rounded-3xl font-black text-xl shadow-lg hover:bg-emerald-500 hover:text-white transition-all border-4 border-transparent hover:border-emerald-600">SAFE</button>
+                <button onclick="checkPlant('toxic')" class="flex-1 bg-rose-100 text-rose-900 py-6 rounded-3xl font-black text-xl shadow-lg hover:bg-rose-500 hover:text-white transition-all border-4 border-transparent hover:border-rose-600">TOXIC</button>
+            </div>
+        </div>
+
+        <!-- GAME: KNOTS -->
+        <div id="page-knots" class="page max-w-3xl mx-auto space-y-6">
+            <div class="text-center">
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Knot Knowledge</h2>
+                <p class="text-indigo-600 font-bold uppercase tracking-widest text-sm mt-1">Match the correct knot to the scenario!</p>
+            </div>
+            
+            <div id="knotScenario" class="relative bg-amber-50 p-8 md:p-12 rounded-[2.5rem] shadow-xl text-center border-4 border-amber-900/10 min-h-[200px] flex items-center justify-center mt-8 overflow-hidden">
+                <!-- Decorative SVG Rope in background -->
+                <svg class="absolute inset-0 w-full h-full text-amber-900/5" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" viewBox="0 0 400 200">
+                    <path d="M-50,100 Q100,-50 200,100 T450,100" />
+                </svg>
+                <h3 id="knotScenarioText" class="relative z-10 text-2xl md:text-3xl font-black text-amber-950 leading-tight">Scenario goes here</h3>
+            </div>
+            
+            <div id="knotOptions" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"></div>
+        </div>
+
+        <!-- GAME: 10 ESSENTIALS -->
+        <div id="page-essentials" class="page max-w-4xl mx-auto space-y-6">
+            <div class="text-center">
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">The 10 Essentials</h2>
+                <p class="text-sky-600 font-bold uppercase tracking-widest text-sm mt-1">Tap the 10 Scout Basic Essentials. <br> <span class="text-rose-500 font-black">Warning: Decoys add +10 Seconds!</span></p>
+                <div class="mt-4 font-black text-2xl text-gray-900 bg-white inline-block px-6 py-2 rounded-full shadow border-2 border-sky-100"><span id="essentialsFoundCount">0</span> / 10 FOUND</div>
+            </div>
+            <div id="essentialsGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-6">
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SUCCESS OVERLAY -->
+    <div id="overlay" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[100] flex items-center justify-center hidden">
+        <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl m-4 border-4 border-orange-500">
+            <div id="overlayIcon" class="text-6xl mb-4">🏆</div>
+            <h2 id="overlayTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight">Level Complete!</h2>
+            <p id="overlayText" class="text-slate-600 mb-4">You've mastered this skill.</p>
+            
+            <div class="bg-orange-50 rounded-xl p-3 mb-6 border border-orange-200 shadow-inner">
+                <p class="text-[10px] uppercase font-bold text-orange-600 tracking-widest">Final Time</p>
+                <p id="finalTimeDisplay" class="text-4xl font-mono font-black text-orange-900">00:00</p>
+            </div>
+
+            <button id="overlayBtn" class="w-full bg-orange-500 text-white hover:text-white font-black py-4 rounded-2xl shadow-lg hover:bg-orange-600 transition-all uppercase tracking-widest">Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- START TIMER OVERLAY -->
+    <div id="gameStartOverlay" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[100] flex items-center justify-center hidden">
+        <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl m-4 border-4 border-orange-500">
+            <div class="text-6xl mb-4">⏱️</div>
+            <h2 id="startGameTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight">Game Title</h2>
+            <p class="text-slate-600 mb-8 font-medium">Start the timer when you are ready!</p>
+            <button onclick="beginActiveLevel()" class="w-full bg-orange-500 text-white font-black py-4 rounded-2xl shadow-lg hover:bg-orange-600 transition-all uppercase tracking-widest text-xl">Start Timer</button>
+            <button onclick="showPage('menu')" class="mt-6 text-sm text-slate-400 font-bold hover:text-gray-900 uppercase tracking-widest transition-colors">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // --- GAME DATA ---
+        const LAW = ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"];
+        
+        const EMBLEM = [
+            { id: 1, text: "3 Parts of the Scout Oath", name: "Three Points", style: "top:12%; left:25%; width:50%; height:15%;" },
+            { id: 2, text: "Freedom & Readiness to Defend", name: "Eagle & Shield", style: "top:35%; left:35%; width:30%; height:20%;" },
+            { id: 3, text: "Truth and Knowledge", name: "The Stars", style: "top:40%; left:12%; width:15%; height:12%;" },
+            { id: 4, text: "Be Prepared (Scout's Smile)", name: "The Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;" },
+            { id: 5, text: "Good Turn Daily Reminder", name: "The Knot", style: "bottom:5%; left:40%; width:20%; height:10%;" },
+            { id: 6, text: "Points you in the right direction", name: "Compass Shape", style: "top:20%; left:5%; width:15%; height:15%;" }
+        ];
+
+        const TRIAGE = [
+            { id: 1, text: "Stopped Breathing / Choking" },
+            { id: 2, text: "Serious Bleeding" },
+            { id: 3, text: "Ingested Poison" },
+            { id: 4, text: "Treating for Shock" },
+            { id: 5, text: "Serious Burns" },
+            { id: 6, text: "Minor Cuts & Scratches" }
+        ];
+
+        // REAL LOCAL BOTANICAL IMAGES
+        const PLANTS = [
+            { 
+                name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.",
+                img: "ivy.jpg"
+            },
+            { 
+                name: "White Oak", status: "safe", tip: "Large rounded lobes, no itch here.",
+                img: "oak.jpg"
+            },
+            { 
+                name: "Virginia Creeper", status: "safe", tip: "Five leaves attached at the center.",
+                img: "creeper.jpg"
+            },
+            { 
+                name: "Poison Oak", status: "toxic", tip: "Fuzzy, lobed leaves in groups of three.",
+                img: "poison_oak.jpg"
+            },
+            {
+                name: "Poison Sumac", status: "toxic", tip: "Red stems, 7-13 leaflets, grows in swamps.",
+                img: "sumac.jpg"
+            },
+            {
+                name: "Sassafras", status: "safe", tip: "Leaves look like mittens or dinosaur tracks.",
+                img: "sassafras.jpg"
+            }
+        ];
+
+        const KNOTS = [
+            { name: "Square Knot", desc: "Tie two ropes of the same thickness together." },
+            { name: "Bowline", desc: "Make a secure loop that will not slip or tighten." },
+            { name: "Clove Hitch", desc: "Start a lashing or tie a rope to a pole." },
+            { name: "Taut-line Hitch", desc: "Create an adjustable loop, great for tent guy lines." },
+            { name: "Two Half-Hitches", desc: "Securely tie a rope to a post or ring." },
+            { name: "Sheet Bend", desc: "Tie two ropes of different thicknesses together." },
+            { name: "Timber Hitch", desc: "Drag a log or start a diagonal lashing." }
+        ];
+
+        const ESSENTIALS = [
+            { name: "Pocketknife", icon: "🔪", isEssential: true },
+            { name: "First Aid Kit", icon: "✚", isEssential: true },
+            { name: "Extra Clothing", icon: "🧥", isEssential: true },
+            { name: "Rain Gear", icon: "☂️", isEssential: true },
+            { name: "Water Bottle", icon: "💧", isEssential: true },
+            { name: "Flashlight", icon: "🔦", isEssential: true },
+            { name: "Trail Food", icon: "🍎", isEssential: true },
+            { name: "Matches/Fire", icon: "🔥", isEssential: true },
+            { name: "Sun Protection", icon: "🕶️", isEssential: true },
+            { name: "Map & Compass", icon: "🧭", isEssential: true },
+            { name: "Video Game", icon: "🎮", isEssential: false },
+            { name: "Cast Iron Pan", icon: "🍳", isEssential: false },
+            { name: "Hair Dryer", icon: "💇", isEssential: false },
+            { name: "Bowling Ball", icon: "🎳", isEssential: false },
+            { name: "Radio", icon: "📻", isEssential: false }
+        ];
+
+        // --- STATE ---
+        let currentLevel = 'menu';
+        let activeSelection = null;
+        let timerInt = null;
+        let secondsElapsed = 0;
+
+        // --- TIMER LOGIC ---
+        function startTimer() {
+            clearInterval(timerInt);
+            secondsElapsed = 0;
+            updateTimerDisplay();
+            document.getElementById('globalTimer').classList.remove('hidden');
+            
+            timerInt = setInterval(() => {
+                secondsElapsed++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const m = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+            const s = String(secondsElapsed % 60).padStart(2, '0');
+            document.getElementById('globalTimer').innerText = `${m}:${s}`;
+        }
+
+        function addTimePenalty(seconds) {
+            secondsElapsed += seconds;
+            updateTimerDisplay();
+            const timerEl = document.getElementById('globalTimer');
+            timerEl.classList.remove('timer-penalty');
+            void timerEl.offsetWidth; 
+            timerEl.classList.add('timer-penalty');
+        }
+
+        function stopTimer() {
+            clearInterval(timerInt);
+        }
+
+        // --- CORE NAVIGATION ---
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(`page-${id}`).classList.add('active');
+            
+            if (id === 'menu') {
+                document.getElementById('menuBtn').style.display = 'none';
+                document.getElementById('globalTimer').classList.add('hidden');
+                document.getElementById('gameStartOverlay').classList.add('hidden');
+                stopTimer();
+            } else {
+                document.getElementById('menuBtn').style.display = 'block';
+            }
+            
+            currentLevel = id;
+            window.scrollTo(0,0);
+        }
+
+        function prepareLevel(id) {
+            currentLevel = id;
+            
+            const titles = {
+                'law': 'Scout Law Scramble',
+                'emblem': 'Emblem Pin-It',
+                'triage': 'Emergency Triage',
+                'plants': 'Safe or Toxic?',
+                'knots': 'Knot Knowledge',
+                'essentials': 'The 10 Essentials'
+            };
+            
+            document.getElementById('startGameTitle').innerText = titles[id];
+            document.getElementById('gameStartOverlay').classList.remove('hidden');
+            
+            document.getElementById('globalTimer').innerText = "00:00";
+            document.getElementById('globalTimer').classList.remove('hidden');
+        }
+
+        function beginActiveLevel() {
+            document.getElementById('gameStartOverlay').classList.add('hidden');
+            showPage(currentLevel);
+            startTimer();
+            
+            if(currentLevel === 'law') initLaw();
+            if(currentLevel === 'emblem') initEmblem();
+            if(currentLevel === 'triage') initTriage();
+            if(currentLevel === 'plants') initPlants();
+            if(currentLevel === 'knots') initKnots();
+            if(currentLevel === 'essentials') initEssentials();
+        }
+
+        function showSuccess(text, nextAction, btnText = "Back to Menu") {
+            stopTimer();
+            const overlay = document.getElementById('overlay');
+            document.getElementById('overlayText').innerText = text;
+            document.getElementById('finalTimeDisplay').innerText = document.getElementById('globalTimer').innerText;
+            
+            const btn = document.getElementById('overlayBtn');
+            btn.innerText = btnText;
+            btn.onclick = () => {
+                overlay.classList.add('hidden');
+                nextAction();
+            };
+            overlay.classList.remove('hidden');
+        }
+
+        // --- LEVEL 1: LAW ---
+        let lawIdx = 0;
+        function initLaw() {
+            lawIdx = 0;
+            const grid = document.getElementById('lawGrid');
+            const bank = document.getElementById('lawBank');
+            grid.innerHTML = ''; bank.innerHTML = '';
+            
+            LAW.forEach((_, i) => {
+                grid.innerHTML += `<div id="law-target-${i}" class="h-12 flex items-center px-4 rounded-xl text-xs font-bold border-2 border-slate-100 text-slate-300 bg-white"><span class="mr-2 opacity-50">${i+1}.</span>________</div>`;
+            });
+
+            [...LAW].sort(() => Math.random() - 0.5).forEach(word => {
+                const b = document.createElement('button');
+                b.className = "px-4 py-2 bg-orange-50 text-orange-900 border-2 border-orange-100 rounded-xl font-bold text-xs hover:border-orange-500 hover:bg-orange-100 transition-all";
+                b.innerText = word;
+                b.onclick = () => {
+                    if (word === LAW[lawIdx]) {
+                        const target = document.getElementById(`law-target-${lawIdx}`);
+                        target.innerHTML = `<span class="mr-2 opacity-50 text-orange-200">${lawIdx+1}.</span> ${word}`;
+                        target.className = "h-12 flex items-center px-4 rounded-xl text-xs font-bold bg-orange-600 text-white border-transparent shadow-md scale-105 transition-transform";
+                        b.style.visibility = 'hidden';
+                        lawIdx++;
+                        if(lawIdx === 12) {
+                            showSuccess("You've mastered the Law! A Scout is all 12.", () => showPage('menu'));
+                        }
+                    } else {
+                        b.classList.add('error-shake');
+                        setTimeout(() => b.classList.remove('error-shake'), 400);
+                    }
+                };
+                bank.appendChild(b);
+            });
+        }
+
+        // --- LEVEL 2: EMBLEM ---
+        let emblemPlaced = {};
+        function initEmblem() {
+            emblemPlaced = {}; 
+            activeSelection = null;
+            document.getElementById('checkEmblemBtn').classList.add('hidden');
+            renderEmblemBank();
+            renderEmblemTargets();
+        }
+
+        function renderEmblemBank() {
+            const bank = document.getElementById('emblemBank');
+            bank.innerHTML = '';
+            
+            const placedIds = Object.values(emblemPlaced).map(item => item.id);
+            
+            EMBLEM.filter(item => !placedIds.includes(item.id)).forEach(item => {
+                const b = document.createElement('button');
+                b.className = "p-3 bg-white border-2 border-slate-100 rounded-xl font-bold text-[10px] text-gray-900 hover:border-amber-500 text-left transition-all shadow-sm";
+                if (activeSelection && activeSelection.id === item.id) {
+                    b.classList.add('border-amber-500', 'bg-amber-50', 'scale-105');
+                }
+                b.innerText = item.text;
+                b.onclick = () => {
+                    activeSelection = (activeSelection && activeSelection.id === item.id) ? null : item;
+                    renderEmblemBank();
+                };
+                bank.appendChild(b);
+            });
+        }
+
+        function renderEmblemTargets() {
+            const container = document.getElementById('emblemTargets');
+            container.innerHTML = '';
+            
+            EMBLEM.forEach(item => {
+                const placedItem = emblemPlaced[item.id];
+                const t = document.createElement('div');
+                t.id = `emb-target-${item.id}`;
+                t.style = item.style;
+                t.className = `drop-zone absolute rounded-lg flex items-center justify-center text-center p-1 text-[8px] font-black uppercase leading-tight transition-all cursor-pointer ${
+                    placedItem 
+                    ? 'bg-amber-400 text-gray-900 border-2 border-amber-600 shadow-md z-10 scale-105' 
+                    : 'bg-white/20 border-2 border-white/40 text-white/70 hover:border-amber-400 hover:bg-amber-400/20'
+                }`;
+                t.innerText = placedItem ? placedItem.text : item.name;
+                
+                t.onclick = () => {
+                    if (activeSelection) {
+                        emblemPlaced[item.id] = activeSelection;
+                        activeSelection = null;
+                    } else if (placedItem) {
+                        delete emblemPlaced[item.id];
+                        activeSelection = placedItem;
+                    }
+                    renderEmblemBank();
+                    renderEmblemTargets();
+                    checkEmblemComplete();
+                };
+                container.appendChild(t);
+            });
+        }
+
+        function checkEmblemComplete() {
+            if (Object.keys(emblemPlaced).length === EMBLEM.length) {
+                document.getElementById('checkEmblemBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('checkEmblemBtn').classList.add('hidden');
+            }
+        }
+
+        function verifyEmblem() {
+            let correctCount = 0;
+            let wrongIds = [];
+            
+            Object.keys(emblemPlaced).forEach(targetId => {
+                const tId = parseInt(targetId);
+                if (emblemPlaced[tId].id === tId) {
+                    correctCount++;
+                    document.getElementById(`emb-target-${tId}`).classList.replace('bg-amber-400', 'bg-emerald-500');
+                    document.getElementById(`emb-target-${tId}`).classList.replace('text-gray-900', 'text-white');
+                    document.getElementById(`emb-target-${tId}`).classList.replace('border-amber-600', 'border-emerald-600');
+                } else {
+                    wrongIds.push(tId);
+                }
+            });
+
+            if (correctCount === EMBLEM.length) {
+                setTimeout(() => {
+                    showSuccess("Excellent! You know the badge inside and out.", () => showPage('menu'));
+                }, 500);
+            } else {
+                const board = document.getElementById('emblemBoard');
+                board.classList.add('error-shake');
+                
+                wrongIds.forEach(id => {
+                    const el = document.getElementById(`emb-target-${id}`);
+                    el.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+                });
+
+                setTimeout(() => {
+                    board.classList.remove('error-shake');
+                    wrongIds.forEach(id => {
+                        delete emblemPlaced[id];
+                    });
+                    renderEmblemBank();
+                    renderEmblemTargets();
+                    checkEmblemComplete();
+                }, 800);
+            }
+        }
+
+        // --- LEVEL 3: TRIAGE ---
+        let triageIdx = 0;
+        function initTriage() {
+            triageIdx = 0;
+            const list = document.getElementById('triageList');
+            const bank = document.getElementById('triageBank');
+            list.innerHTML = ''; bank.innerHTML = '';
+
+            [...TRIAGE].sort(() => Math.random() - 0.5).forEach(item => {
+                const b = document.createElement('button');
+                b.className = "p-4 bg-white border-2 border-rose-100 rounded-2xl font-bold text-sm text-gray-900 hover:border-rose-500 hover:bg-rose-50 transition-all text-left shadow-sm";
+                b.innerText = item.text;
+                b.onclick = () => {
+                    if (item.id === triageIdx + 1) {
+                        list.innerHTML += `<div class="flex items-center gap-3 bg-white p-4 rounded-xl border-l-4 border-rose-600 shadow-sm"><span class="text-[10px] font-black text-rose-400">#${item.id}</span> <span class="text-sm font-bold text-gray-900">${item.text}</span></div>`;
+                        b.remove();
+                        triageIdx++;
+                        if(triageIdx === 6) {
+                            showSuccess("You saved the day! Order of treatment is vital.", () => showPage('menu'));
+                        }
+                    } else {
+                        b.classList.add('error-shake');
+                        setTimeout(() => b.classList.remove('error-shake'), 400);
+                    }
+                };
+                bank.appendChild(b);
+            });
+        }
+
+        // --- LEVEL 4: PLANTS (PURE WIKIPEDIA IMAGES) ---
+        let plantIdx = 0;
+        let shuffledPlants = [];
+
+        function initPlants() {
+            plantIdx = 0;
+            shuffledPlants = [...PLANTS].sort(() => Math.random() - 0.5);
+            updatePlantCard();
+        }
+
+        function updatePlantCard() {
+            const plant = shuffledPlants[plantIdx];
+            const visualContainer = document.getElementById('plantVisual');
+            
+            // Beautiful, pure image. No emoji fallbacks.
+            visualContainer.innerHTML = `
+                <img 
+                    src="${plant.img}" 
+                    class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" 
+                    alt="${plant.name}" 
+                />
+            `;
+            
+            document.getElementById('plantProgress').style.width = `${(plantIdx / shuffledPlants.length) * 100}%`;
+            document.getElementById('plantFeedback').classList.add('hidden');
+            document.getElementById('plantCard').classList.remove('bg-emerald-600', 'bg-rose-600');
+            document.getElementById('plantCard').classList.add('bg-white');
+        }
+
+        function checkPlant(choice) {
+            const plant = shuffledPlants[plantIdx];
+            const feedback = document.getElementById('plantFeedback');
+            const card = document.getElementById('plantCard');
+            
+            // Hide the visual entirely so the solid color shows
+            document.getElementById('plantVisual').innerHTML = ''; 
+            
+            feedback.classList.remove('hidden');
+            document.getElementById('plantFeedbackName').innerText = plant.name;
+            document.getElementById('plantFeedbackTip').innerText = plant.tip;
+            
+            card.classList.remove('bg-white');
+            
+            if (choice === plant.status) {
+                document.getElementById('plantFeedbackIcon').innerText = "✅";
+                card.classList.add('bg-emerald-600');
+            } else {
+                document.getElementById('plantFeedbackIcon').innerText = "❌";
+                card.classList.add('bg-rose-600');
+            }
+
+            setTimeout(() => {
+                plantIdx++;
+                if (plantIdx === shuffledPlants.length) {
+                    showSuccess("Master Woodsman! You've successfully identified all plants.", () => showPage('menu'));
+                } else {
+                    updatePlantCard();
+                }
+            }, 2500); 
+        }
+
+        // --- LEVEL 5: KNOTS (UPGRADED) ---
+        let knotIdx = 0;
+        let knotQuestions = [];
+
+        function initKnots() {
+            knotQuestions = [...KNOTS].sort(() => Math.random() - 0.5);
+            knotIdx = 0;
+            renderKnotQuestion();
+        }
+
+        function renderKnotQuestion() {
+            if (knotIdx >= knotQuestions.length) {
+                showSuccess("You've tied up all the loose ends! Great job.", () => showPage('menu'));
+                return;
+            }
+            
+            const current = knotQuestions[knotIdx];
+            document.getElementById('knotScenarioText').innerText = current.desc;
+
+            let options = KNOTS.filter(k => k.name !== current.name).sort(() => Math.random() - 0.5).slice(0, 3);
+            options.push(current);
+            options.sort(() => Math.random() - 0.5);
+
+            const container = document.getElementById('knotOptions');
+            container.innerHTML = '';
+            
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "flex items-center gap-4 p-5 bg-white border-4 border-indigo-50 rounded-2xl text-left hover:border-indigo-500 hover:bg-indigo-50 transition-all shadow-sm group";
+                
+                // Add a cool SVG rope icon to the button
+                const ropeIcon = `<div class="p-3 bg-indigo-100 text-indigo-600 rounded-full group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </div>`;
+                
+                btn.innerHTML = `${ropeIcon} <span class="font-black text-xl text-gray-900">${opt.name}</span>`;
+                
+                btn.onclick = () => {
+                    if (opt.name === current.name) {
+                        btn.className = "flex items-center gap-4 p-5 bg-emerald-600 border-4 border-emerald-700 rounded-2xl text-left transition-all shadow-lg scale-105";
+                        btn.innerHTML = `<div class="p-3 bg-emerald-800 text-white rounded-full"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div> <span class="font-black text-xl text-white">${opt.name}</span>`;
+                        setTimeout(() => {
+                            knotIdx++;
+                            renderKnotQuestion();
+                        }, 800);
+                    } else {
+                        btn.classList.add('error-shake');
+                        setTimeout(() => btn.classList.remove('error-shake'), 400);
+                    }
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // --- LEVEL 6: 10 ESSENTIALS ---
+        let essentialsFoundCount = 0;
+        let activeEssentials = [];
+
+        function initEssentials() {
+            essentialsFoundCount = 0;
+            document.getElementById('essentialsFoundCount').innerText = "0";
+            
+            activeEssentials = [...ESSENTIALS].sort(() => Math.random() - 0.5);
+            
+            const grid = document.getElementById('essentialsGrid');
+            grid.innerHTML = '';
+            
+            activeEssentials.forEach((item, index) => {
+                const btn = document.createElement('button');
+                btn.id = `essential-btn-${index}`;
+                btn.className = "p-4 bg-white border-4 border-slate-100 rounded-2xl flex flex-col items-center justify-center transition-all hover:border-sky-300 hover:shadow-md aspect-square";
+                
+                btn.innerHTML = `
+                    <span class="text-4xl mb-2">${item.icon}</span>
+                    <span class="font-bold text-[10px] uppercase text-slate-600 leading-tight text-center">${item.name}</span>
+                `;
+                
+                btn.onclick = () => clickEssential(btn, item);
+                grid.appendChild(btn);
+            });
+        }
+
+        function clickEssential(btn, item) {
+            if (btn.classList.contains('bg-emerald-100')) return;
+
+            if (item.isEssential) {
+                btn.className = "p-4 bg-emerald-100 border-4 border-emerald-500 rounded-2xl flex flex-col items-center justify-center transition-all scale-105 shadow-lg aspect-square";
+                btn.innerHTML = `
+                    <span class="text-4xl mb-2">✅</span>
+                    <span class="font-bold text-[10px] uppercase text-emerald-800 leading-tight text-center">${item.name}</span>
+                `;
+                
+                essentialsFoundCount++;
+                document.getElementById('essentialsFoundCount').innerText = essentialsFoundCount;
+
+                if (essentialsFoundCount === 10) {
+                    setTimeout(() => {
+                        showSuccess("Your bag is packed! You are ready for the trail.", () => showPage('menu'));
+                    }, 500);
+                }
+            } else {
+                addTimePenalty(10);
+                
+                btn.classList.add('error-shake');
+                const oldHTML = btn.innerHTML;
+                btn.innerHTML = `
+                    <span class="text-4xl mb-2">❌</span>
+                    <span class="font-bold text-[10px] uppercase text-rose-800 leading-tight text-center">+10 SECONDS</span>
+                `;
+                
+                setTimeout(() => {
+                    btn.classList.remove('error-shake');
+                    btn.innerHTML = oldHTML;
+                }, 1000);
+            }
+        }
+
+        // Initialize Menu
+        window.onload = () => showPage('menu');
+    </script>
+</body>
+</html>
