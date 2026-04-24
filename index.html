@@ -123,7 +123,7 @@
 
             <!-- POLISHED GROUPED LEVELS -->
             <div class="grid gap-12">
-                <!-- Group 1: Foundations (Orange) -->
+                <!-- Group 1: Foundations -->
                 <section>
                     <div class="flex items-center gap-3 border-b-4 border-orange-500 pb-2 mb-6">
                         <span class="text-2xl">📜</span>
@@ -132,7 +132,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <button onclick="prepareLevel('oath')" class="btn-card bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
                             <h3 class="font-black text-gray-900 uppercase">Scout Oath</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Foundations</p>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Foundation Sequence</p>
                         </button>
                         <button onclick="prepareLevel('law')" class="btn-card bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
                             <h3 class="font-black text-gray-900 uppercase">Scout Law</h3>
@@ -140,7 +140,7 @@
                         </button>
                         <button onclick="prepareLevel('outdoor')" class="btn-card bg-white p-5 rounded-3xl border-2 border-emerald-100 hover:border-emerald-500 shadow-md text-left group">
                             <h3 class="font-black text-gray-900 uppercase">Outdoor Code</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Ethics</p>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Ethics & Conservation</p>
                         </button>
                     </div>
                 </section>
@@ -149,16 +149,28 @@
                 <section>
                     <div class="flex items-center gap-3 border-b-4 border-rose-500 pb-2 mb-6">
                         <span class="text-2xl">🏥</span>
-                        <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">First Aid & Safety</h2>
+                        <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">Emergency Preparedness</h2>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <button onclick="prepareLevel('action')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
+                            <h3 class="font-black text-gray-900 uppercase">3 C's of Response</h3>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Foundational Sequence</p>
+                        </button>
                         <button onclick="prepareLevel('triage')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
                             <h3 class="font-black text-gray-900 uppercase">Hurry Cases</h3>
                             <p class="text-[10px] text-slate-500 font-bold mt-1">Emergency Triage</p>
                         </button>
+                        <button onclick="prepareLevel('cpr')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
+                            <h3 class="font-black text-gray-900 uppercase">Heart Saver</h3>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">CPR Steps</p>
+                        </button>
                         <button onclick="prepareLevel('rice')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Sprains & Strains</h3>
+                            <h3 class="font-black text-gray-900 uppercase">Strains & Sprains</h3>
                             <p class="text-[10px] text-slate-500 font-bold mt-1">First Aid Steps</p>
+                        </button>
+                        <button onclick="prepareLevel('snake')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
+                            <h3 class="font-black text-gray-900 uppercase">Snakebite Care</h3>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Outdoor Safety</p>
                         </button>
                         <button onclick="prepareLevel('rescue')" class="btn-card bg-white p-5 rounded-3xl border-2 border-cyan-100 hover:border-cyan-500 shadow-md text-left">
                             <h3 class="font-black text-gray-900 uppercase">Water Safety</h3>
@@ -263,7 +275,7 @@
 
     </main>
 
-    <!-- START OVERLAY (Ready-Set-Go) -->
+    <!-- START OVERLAY -->
     <div id="gameStartOverlay" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full text-center shadow-2xl border-b-8 border-orange-500">
             <div id="startIcon" class="text-7xl mb-4">⭐</div>
@@ -274,16 +286,13 @@
         </div>
     </div>
 
-    <!-- SUCCESS MODAL (Official Signature Style) -->
+    <!-- SUCCESS MODAL -->
     <div id="successOverlay" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[110] flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl border-4 border-emerald-500 relative overflow-hidden">
-            <!-- Diagonal "APPROVED" Watermark -->
             <div class="absolute -right-6 top-6 rotate-45 bg-emerald-100 text-emerald-600 font-black px-10 py-1 text-[10px] uppercase tracking-widest opacity-40">Approved</div>
-            
             <div class="text-6xl mb-4">🏆</div>
             <h2 id="successTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight border-b-2 border-slate-100 pb-2">Skill Verified!</h2>
             <p id="successText" class="text-slate-600 my-6 font-bold leading-tight italic"></p>
-            
             <div class="bg-slate-50 rounded-xl p-4 mb-8 border border-slate-100 text-left relative">
                 <p class="text-[8px] uppercase font-black text-slate-400 mb-1">Senior Patrol Leader Signature</p>
                 <p class="font-brand font-black text-gray-800 text-xl italic tracking-tighter">Verified Logic</p>
@@ -292,20 +301,21 @@
                     <p id="finalTime" class="font-mono font-black text-emerald-600 text-lg">00:00</p>
                 </div>
             </div>
-
             <button onclick="showPage('menu')" class="w-full bg-emerald-500 text-white font-black py-4 rounded-2xl shadow-lg hover:bg-emerald-600 transition-all uppercase tracking-widest active:scale-95">Return to Arcade</button>
         </div>
     </div>
 
     <script>
-        // --- DATA ---
+        // --- MASTER DATA ---
         const DATA = {
             oath: { title: "Scout Oath", desc: "Order the 3 parts of the Scout Oath correctly.", icon: "⚜️", items: ["To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight"], reveal: "The Scout Oath is the foundation of our movement." },
             law: { title: "Scout Law", desc: "Order the 12 points of the Scout Law exactly.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout lives by these 12 points every single day." },
+            action: { title: "Emergency Action", desc: "The three basic steps for responding to any emergency.", icon: "🚨", items: ["Check the scene", "Call for help", "provide Care"], reveal: "Always follow the 3 C's: Check, Call, Care." },
             triage: { title: "Hurry Cases", desc: "Sequence the 'Hurry Cases' in order of priority.", icon: "🏥", items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], reveal: "Treating in this order saves lives in a crisis." },
+            cpr: { title: "CPR Sequence", desc: "Order the steps for responding to a non-responsive person.", icon: "💓", items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], reveal: "Hands-Only CPR can double a person's chance of survival!" },
+            snake: { title: "Snakebite Care", desc: "Correct procedure for treating a venomous snakebite.", icon: "🐍", items: ["Move away from the snake", "Stay calm and keep still", "Keep the bite area below heart level", "Get to a hospital immediately"], reveal: "Staying calm is the best first aid for snakebites." },
             edge: { title: "Teaching a Skill", desc: "Order the steps of the instructional method.", icon: "🎓", items: ["Explain", "Demonstrate", "Guide", "Enable"], reveal: "You just mastered the E.D.G.E. method!" },
             rice: { title: "Strains & Sprains", desc: "Order the steps for treating a minor sprain.", icon: "🩹", items: ["Rest", "Ice", "Compression", "Elevation"], reveal: "Success! You just used the R.I.C.E. method." },
-            clean: { title: "Dishwashing Station", desc: "Sequence the 3-pot method for camp sanitation.", icon: "🍽️", items: ["Wash (Hot soapy water)", "Rinse (Clean water)", "Sanitize (Water + sanitizer)", "Air Dry (Do not use towel)"], reveal: "The 3-Pot Method keeps the Troop healthy." },
             rescue: { title: "Water Safety", desc: "Order water rescue methods from safest to most risky.", icon: "🛶", items: ["Reach", "Throw", "Row", "Go"], reveal: "Always Reach and Throw before you Go!" },
             teams: { title: "Leading a Group", desc: "Identify the 4 stages of a team's development.", icon: "🤝", items: ["Forming", "Storming", "Norming", "Performing"], reveal: "These are the 4 Stages of Team Development." },
             outdoor: { title: "Outdoor Code", desc: "Sequence the points of the American Outdoor Code.", icon: "🌲", items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], reveal: "The Outdoor Code is a Scout's promise to nature." },
@@ -357,10 +367,8 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('successOverlay').classList.add('hidden');
             document.getElementById('gameStartOverlay').classList.add('hidden');
-            
             const target = document.getElementById(`page-${id}`);
             if (target) target.classList.add('active');
-            
             const m = document.getElementById('menuBtn'); const r = document.getElementById('rankBtn'); const t = document.getElementById('globalTimer');
             if (id === 'rank') { m.style.display = 'none'; r.style.display = 'none'; t.classList.add('hidden'); stopTimer(); }
             else if (id === 'menu') { m.style.display = 'none'; r.style.display = 'block'; t.classList.add('hidden'); stopTimer(); }
@@ -368,24 +376,25 @@
             window.scrollTo(0,0);
         }
 
-        // --- ARCADE POLISH: THE START OVERLAY ---
         function prepareLevel(id) {
             currentId = id;
             const overlay = document.getElementById('gameStartOverlay');
-            const data = (['plants', 'maps', 'fire', 'emblem'].includes(id)) ? 
-                { title: document.querySelector(`button[onclick="prepareLevel('${id}')"] h3`).innerText, desc: "Identify the correct objects.", icon: "🎯" } :
-                DATA[id];
-            
-            document.getElementById('startTitle').innerText = data.title;
-            document.getElementById('startDesc').innerText = data.desc || "Put the items in the correct order.";
-            document.getElementById('startIcon').innerText = data.icon || "⭐";
+            let d;
+            if (['plants', 'maps', 'fire', 'emblem'].includes(id)) {
+                d = { title: document.querySelector(`button[onclick="prepareLevel('${id}')"] h3`).innerText, desc: "Identify the correct objects.", icon: "🎯" };
+            } else {
+                d = DATA[id];
+            }
+            document.getElementById('startTitle').innerText = d.title;
+            document.getElementById('startDesc').innerText = d.desc || "Put the items in the correct order.";
+            document.getElementById('startIcon').innerText = d.icon || "⭐";
             overlay.classList.remove('hidden');
         }
 
         function beginChallenge() {
             document.getElementById('gameStartOverlay').classList.add('hidden');
             startTimer();
-            if (['oath', 'law', 'triage', 'edge', 'rice', 'clean', 'rescue', 'teams', 'outdoor'].includes(currentId)) initSequence(currentId);
+            if (['oath', 'law', 'action', 'triage', 'cpr', 'snake', 'edge', 'rice', 'rescue', 'teams', 'outdoor'].includes(currentId)) initSequence(currentId);
             else if (['plants', 'maps', 'fire'].includes(currentId)) initVisual(currentId);
             else if (currentId === 'emblem') initEmblem();
         }
@@ -464,9 +473,8 @@
                     else userSequence[i] = null;
                 }
             });
-            if (errs === 0) {
-                showFinalSuccess(DATA[currentId].reveal);
-            } else {
+            if (errs === 0) showFinalSuccess(DATA[currentId].reveal);
+            else {
                 triggerPenalty();
                 if (userDifficulty > 1) {
                     userSequence = userSequence.filter(w => w !== null);
@@ -478,8 +486,7 @@
         }
 
         function initVisual(type) {
-            visualIdx = 0;
-            visualDeck = [...DATA[type]].sort(() => Math.random() - 0.5);
+            visualIdx = 0; visualDeck = [...DATA[type]].sort(() => Math.random() - 0.5);
             const titles = { plants: "Safe or Toxic?", maps: "Map Master", fire: "Fire Builder" };
             document.getElementById('visTitle').innerText = titles[type];
             renderVisualOptions(); updateVisualCard(); showPage('visual');
@@ -491,7 +498,6 @@
             if (currentId === 'plants') { labels = ['SAFE', 'TOXIC']; states = ['safe', 'toxic']; }
             else if (currentId === 'maps') { labels = ['Water', 'Elevation', 'Human Made']; states = ['water', 'elev', 'human']; }
             else { labels = ['Start Fire', 'Warmth/Cooking']; states = ['start', 'heat']; }
-            
             labels.forEach((label, i) => {
                 const btn = document.createElement('button');
                 btn.className = "p-5 bg-slate-100 rounded-3xl font-black text-xs tracking-tighter shadow-md border-b-4 border-slate-300 hover:bg-slate-200 active:scale-95 transition-all";
@@ -507,12 +513,8 @@
             document.getElementById('visProgress').style.width = `${(visualIdx / visualDeck.length) * 100}%`;
             document.getElementById('visFeedback').classList.add('hidden');
             document.getElementById('visCard').className = "bg-white rounded-[2.5rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden transition-colors flex items-center justify-center";
-            
-            if (currentId === 'plants') {
-                display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
-            } else {
-                display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4">${item.name}</p>`;
-            }
+            if (currentId === 'plants') display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
+            else display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4">${item.name}</p>`;
         }
 
         function checkVisual(choice, btn) {
@@ -523,16 +525,8 @@
             feedback.classList.remove('hidden');
             document.getElementById('visFeedbackName').innerText = item.name;
             document.getElementById('visFeedbackTip').innerText = item.tip;
-
-            if (choice === item.status) {
-                document.getElementById('visFeedbackIcon').innerText = "✅";
-                card.classList.add('bg-emerald-600');
-            } else {
-                triggerPenalty();
-                document.getElementById('visFeedbackIcon').innerText = "❌";
-                card.classList.add('bg-rose-600');
-            }
-
+            if (choice === item.status) { document.getElementById('visFeedbackIcon').innerText = "✅"; card.classList.add('bg-emerald-600'); }
+            else { triggerPenalty(); document.getElementById('visFeedbackIcon').innerText = "❌"; card.classList.add('bg-rose-600'); }
             setTimeout(() => {
                 visualIdx++;
                 if (visualIdx < visualDeck.length) updateVisualCard();
@@ -576,11 +570,7 @@
             let errs = 0;
             Object.keys(embPlaced).forEach(id => { if (parseInt(id) !== embPlaced[id].id) errs++; });
             if (errs === 0) showFinalSuccess("You understand every symbol on the First Class Badge.");
-            else {
-                triggerPenalty();
-                document.getElementById('embBoard').classList.add('error-shake');
-                setTimeout(() => { document.getElementById('embBoard').classList.remove('error-shake'); embPlaced = {}; renderEmbBank(); renderEmbBoard(); }, 500);
-            }
+            else { triggerPenalty(); document.getElementById('embBoard').classList.add('error-shake'); setTimeout(() => { document.getElementById('embBoard').classList.remove('error-shake'); embPlaced = {}; renderEmbBank(); renderEmbBoard(); }, 500); }
         }
 
         function showFinalSuccess(revealText) {
