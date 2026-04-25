@@ -17,7 +17,7 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-card { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .btn-card { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
         .btn-card:hover { transform: translateY(-4px); }
         .btn-card:active { transform: scale(0.95); }
 
@@ -27,9 +27,9 @@
         .timer-penalty { animation: timePenalty 0.5s ease-out; color: #ef4444 !important; }
         @keyframes timePenalty { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
-        /* Slot Filling Animations */
         .slot-filled { background-color: #1e293b !important; color: white !important; border-color: #0f172a !important; cursor: pointer; animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
         .slot-wrong { background-color: #fee2e2 !important; color: #991b1b !important; border-color: #ef4444 !important; }
 
         /* Sorting Engine Elements */
@@ -43,7 +43,7 @@
         #reqFeedback { animation: slideUp 0.4s ease-out; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-        .theme-transition { transition: all 0.5s ease; }
+        .theme-transition { transition: background-color 0.5s ease, border-color 0.5s ease; }
         
         /* Persistent Footer Style */
         .podcast-link { transition: all 0.3s ease; }
@@ -54,7 +54,6 @@
 
     <!-- Unified Global Header -->
     <header id="mainHeader" class="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white p-3 shadow-xl sticky top-0 z-50 border-b-4 border-slate-800 theme-transition">
-        <!-- Persistent Progress Bar integrated into border -->
         <div class="absolute -bottom-1 left-0 h-1 bg-emerald-500 transition-all duration-1000 z-10 shadow-[0_0_10px_rgba(16,185,129,0.5)]" id="progressBar" style="width: 0%;"></div>
         
         <div class="max-w-4xl mx-auto flex justify-between items-center relative z-20">
@@ -86,14 +85,12 @@
                 <p class="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Select your Scouting Path</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Cub Path -->
                 <button onclick="selectPath('cub')" class="group relative bg-white border-4 border-amber-100 rounded-[3rem] p-8 text-center hover:border-amber-500 transition-all shadow-xl active:scale-95 overflow-hidden">
                     <div class="absolute -right-6 -top-6 text-9xl opacity-5 group-hover:opacity-10 transition-all group-hover:rotate-12">🐺</div>
                     <h3 class="text-3xl font-brand font-black text-amber-600 uppercase mb-2 leading-none">Cub Scout<br>Trail</h3>
                     <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Lions through AOL</p>
                     <div class="mt-6 bg-amber-500 text-white font-black py-3 rounded-2xl uppercase tracking-widest text-sm shadow-md">Enter Den</div>
                 </button>
-                <!-- BSA Path -->
                 <button onclick="selectPath('bsa')" class="group relative bg-white border-4 border-slate-100 rounded-[3rem] p-8 text-center hover:border-slate-900 transition-all shadow-xl active:scale-95 overflow-hidden">
                     <div class="absolute -right-6 -top-6 text-9xl opacity-5 group-hover:opacity-10 transition-all group-hover:-rotate-12">🦅</div>
                     <h3 class="text-3xl font-brand font-black text-slate-800 uppercase mb-2 leading-none">Scouts BSA<br>Arcade</h3>
@@ -141,7 +138,7 @@
         </div>
 
         <!-- PAGE 3: BSA DIFFICULTY SELECT -->
-        <div id="page-bsa-difficulty" class="page max-w-md mx-auto space-y-4 py-10">
+        <div id="page-bsa-difficulty" class="page max-w-lg mx-auto space-y-4 py-10">
             <div class="text-center mb-6">
                 <h2 class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter mb-1">Arcade Tiers</h2>
                 <p class="text-slate-500 font-bold uppercase text-[10px] tracking-widest">Higher tiers include time penalties</p>
@@ -149,30 +146,40 @@
             <button onclick="setRank(1)" class="w-full p-6 bg-white border-4 border-orange-100 rounded-[2rem] text-left hover:border-orange-500 transition-all group shadow-md flex items-center justify-between">
                 <div>
                     <span class="block text-[10px] uppercase font-black text-orange-500 tracking-tighter">Tier 1 • Beginner</span>
-                    <h3 class="text-xl font-black text-gray-900 uppercase">Scout - 2nd Class</h3>
+                    <h3 class="text-xl font-black text-gray-900 uppercase">Scout to 2nd Class</h3>
                 </div>
-                <img src="rank_scout.png" class="h-12 w-12 object-contain grayscale group-hover:grayscale-0 transition-all" />
+                <div class="flex items-center">
+                    <img src="rank_scout.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-10" />
+                    <img src="rank_tenderfoot.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-20 -ml-3" />
+                    <img src="rank_second_class.png" class="h-12 w-12 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-md z-30 -ml-3" />
+                </div>
             </button>
             <button onclick="setRank(2)" class="w-full p-6 bg-white border-4 border-amber-100 rounded-[2rem] text-left hover:border-amber-500 transition-all group shadow-md flex items-center justify-between">
                 <div>
                     <span class="block text-[10px] uppercase font-black text-amber-600 tracking-tighter">Tier 2 • Advanced</span>
-                    <h3 class="text-xl font-black text-gray-900 uppercase">1st Class - Life</h3>
+                    <h3 class="text-xl font-black text-gray-900 uppercase">1st Class to Life</h3>
                 </div>
-                <img src="rank_life.png" class="h-12 w-12 object-contain grayscale group-hover:grayscale-0 transition-all" />
+                <div class="flex items-center">
+                    <img src="rank_first_class.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-10" />
+                    <img src="rank_star.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-20 -ml-3" />
+                    <img src="rank_life.png" class="h-12 w-12 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-md z-30 -ml-3" />
+                </div>
             </button>
             <button onclick="setRank(3)" class="w-full p-6 bg-white border-4 border-red-100 rounded-[2rem] text-left hover:border-red-500 transition-all group shadow-md flex items-center justify-between">
                 <div>
                     <span class="block text-[10px] uppercase font-black text-red-600 tracking-tighter">Tier 3 • Expert</span>
                     <h3 class="text-xl font-black text-gray-900 uppercase">Eagle Scout</h3>
                 </div>
-                <img src="rank_eagle.png" class="h-12 w-12 object-contain grayscale group-hover:grayscale-0 transition-all" />
+                <div class="flex items-center pr-2">
+                    <img src="rank_eagle.png" class="h-14 w-14 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-md" />
+                </div>
             </button>
             <div class="text-center pt-4">
                 <button onclick="showPage('lobby')" class="text-[10px] font-black uppercase text-slate-400 tracking-widest hover:text-slate-900 transition-colors underline decoration-2 underline-offset-4">Change Path</button>
             </div>
         </div>
 
-        <!-- PAGE 4: GAME DASHBOARD -->
+        <!-- PAGE 4: GAME DASHBOARD (DYNAMIC MENU) -->
         <div id="page-menu" class="page space-y-10 pb-10">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-gray-900 bg-gray-900 aspect-[4/1]">
                 <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" />
@@ -186,7 +193,7 @@
             </div>
         </div>
 
-        <!-- GAME ENGINE: SEQUENCING (Shared) -->
+        <!-- GAME ENGINE: SEQUENCING -->
         <div id="page-sequence" class="page max-w-2xl mx-auto space-y-6 pb-20">
             <div class="text-center">
                 <h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand tracking-tighter leading-tight">Level Title</h2>
@@ -203,7 +210,7 @@
             </div>
         </div>
 
-        <!-- GAME ENGINE: VISUAL ID (Shared) -->
+        <!-- GAME ENGINE: VISUAL ID -->
         <div id="page-visual" class="page max-w-lg mx-auto space-y-6">
             <div class="text-center">
                 <h2 id="visTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Visual ID</h2>
@@ -248,7 +255,7 @@
             </div>
         </div>
 
-        <!-- GAME ENGINE: EMBLEM (Interactive Board) -->
+        <!-- GAME ENGINE: EMBLEM -->
         <div id="page-emblem" class="page space-y-6 pb-10">
             <div class="text-center">
                 <h2 class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none mb-2">Emblem Pin-It</h2>
@@ -330,7 +337,7 @@
             <div class="flex justify-center mb-6">
                 <img src="ATS Full Transparent .png.png" alt="Logo" class="h-16 w-16 object-contain opacity-80" />
             </div>
-            <h3 class="font-brand font-black text-white uppercase tracking-widest text-sm mb-6 opacity-90">Official Podcast for Advancement</h3>
+            <h3 class="font-brand font-black text-white uppercase tracking-widest text-sm mb-6 opacity-90">Aides to Scouting Podcast</h3>
             <div class="flex flex-wrap justify-center gap-3 mb-10">
                 <a href="https://podcasts.apple.com/us/podcast/aides-to-scouting/id1849273100" target="_blank" class="podcast-link flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-lg text-[10px] font-black uppercase tracking-widest">Apple Podcasts</a>
                 <a href="https://open.spotify.com/show/62wfjOw3n5CM170IvYPqIi" target="_blank" class="podcast-link flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-lg text-[10px] font-black uppercase tracking-widest border border-emerald-900">Spotify</a>
@@ -360,7 +367,7 @@
         const DATA = {
             // SHARED / BSA GAMES
             oath: { type: 'sequence', title: "Scout Oath", desc: "Put the lines in the correct order to reveal the foundational promise of Scouting.", icon: "⚜️", items: ["To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight"], reveal: "Foundation of Scouting.", prefix: "On my honor, I will do my best...", req: "Scout 1a", explanation: "The Scout Oath requires three promises: Duty to God/Country, Others, and Self." },
-            law: { type: 'sequence', title: "Scout Law", desc: "Sequence all 12 points of the Law correctly to prove your character.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout is...", prefix: "A Scout is...", req: "Scout 1b", explanation: "The 12 points of the Scout Law are the core values a Scout strives to live by every day." },
+            law: { type: 'sequence', title: "Scout Law", desc: "Sequence all 12 points of the Law correctly to prove your character.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout lives by these 12 points every day.", prefix: "A Scout is...", req: "Scout 1b", explanation: "The 12 points of the Scout Law are the core values a Scout strives to live by every day." },
             action: { type: 'sequence', title: "The 3 C's", desc: "Emergency action steps: Put them in order to manage any medical crisis safely.", icon: "🚨", items: ["Check the scene", "Call for help", "provide Care"], reveal: "Always follow the 3 C's.", prefix: "Action Steps:", req: "Tenderfoot 4a", explanation: "1. CHECK the scene for safety. 2. CALL for help. 3. CARE for the victim." },
             triage: { type: 'sequence', title: "Hurry Cases", desc: "Triage logic: Order life-threatening emergencies by medical priority (most dangerous first).", icon: "🏥", items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], reveal: "Triage saves lives.", prefix: "Medical Priority:", req: "Tenderfoot 4a", explanation: "Always treat life-threatening 'Hurry Cases' first: Breathing, then Bleeding, then Poison." },
             cpr: { type: 'sequence', title: "CPR Sequence", desc: "Order the steps for responding to a non-responsive person using Hands-Only CPR.", icon: "💓", items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], reveal: "Save a life.", prefix: "Steps:", req: "1st Class 6a", explanation: "Call 911 immediately, then push hard and fast in the center of the chest." },
@@ -508,13 +515,21 @@
             
             const exit = document.getElementById('exitBtn');
             const timer = document.getElementById('globalTimer');
-            if (id === 'lobby') { exit.style.display = 'none'; timer.classList.add('hidden'); stopTimer(); }
-            else if (id === 'menu') { 
-                exit.style.display = 'block'; timer.classList.add('hidden'); stopTimer(); 
+            
+            if (id === 'lobby') { 
+                exit.style.display = 'none'; 
+                timer.classList.add('hidden'); 
+                stopTimer(); 
+            } else if (id === 'menu') { 
+                exit.style.display = 'block'; 
+                timer.classList.add('hidden'); 
+                stopTimer(); 
                 renderGameGrid();
                 updateGlobalProgress();
+            } else { 
+                exit.style.display = 'block'; 
+                timer.classList.remove('hidden'); 
             }
-            else { exit.style.display = 'block'; timer.classList.remove('hidden'); }
             window.scrollTo(0,0);
         }
 
@@ -523,8 +538,12 @@
             grid.innerHTML = '';
             const games = currentProgram === 'cub' ? CUB_RANK_GAMES[currentRank] : BSA_GAMES;
             
+            if (!games) return;
+
             games.forEach(gid => {
                 const d = DATA[gid];
+                if (!d) return;
+
                 const bestTime = completedGames[gid];
                 const btn = document.createElement('button');
                 btn.className = `btn-card bg-white p-5 rounded-[2.5rem] border-2 shadow-lg text-left flex items-center justify-between group overflow-hidden ${bestTime ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-50 hover:border-orange-500'}`;
@@ -788,7 +807,7 @@
             document.getElementById('finalTime').innerText = timeStr;
             const rankImg = document.getElementById('successRankImg');
             if (currentProgram === 'cub') rankImg.src = `rank_${currentRank}.png`;
-            else rankImg.src = BSA_RANK_IMAGES[currentRank];
+            else rankImg.src = BSA_RANK_IMAGES[currentRank] || 'rank_scout.png';
             document.getElementById('successOverlay').classList.remove('hidden');
         }
 
@@ -804,9 +823,12 @@
         function hideReqFeedback() { document.getElementById('reqFeedback').classList.add('hidden'); }
 
         function updateGlobalProgress() {
+            if (!currentProgram) return;
             const pool = currentProgram === 'cub' ? CUB_RANK_GAMES[currentRank] : BSA_GAMES;
+            if (!pool) return;
+            
             const done = pool.filter(id => completedGames[id]).length;
-            const pct = Math.floor((done / pool.length) * 100);
+            const pct = pool.length > 0 ? Math.floor((done / pool.length) * 100) : 0;
             document.getElementById('progressText').innerText = `${pct}%`;
             document.getElementById('progressBar').style.width = `${pct}%`;
         }
