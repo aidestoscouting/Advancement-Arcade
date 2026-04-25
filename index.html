@@ -16,12 +16,10 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Arcade UI Elements */
         .btn-card { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .btn-card:hover { transform: translateY(-4px); }
         .btn-card:active { transform: scale(0.95); }
 
-        /* Mobile Scroll Indicator */
         #scrollCue { animation: bounce 2s infinite; }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
@@ -29,14 +27,12 @@
             60% {transform: translateY(-5px);}
         }
 
-        /* Error/Penalty Effects */
         .error-shake { animation: shake 0.3s ease-in-out; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d !important; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         
         .timer-penalty { animation: timePenalty 0.5s ease-out; color: #ef4444 !important; }
         @keyframes timePenalty { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
-        /* Slot Animations */
         .slot-filled { background-color: #1e293b !important; color: white !important; border-color: #0f172a !important; cursor: pointer; animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
@@ -44,12 +40,15 @@
 
         .symbol-svg { width: 70px; height: 70px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
 
-        /* Emblem Styling */
         .drop-zone { transition: all 0.3s ease; border: 2px dashed #cbd5e1; background: rgba(255, 255, 255, 0.7); cursor: pointer; }
         .drop-zone.active { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
         .drop-zone.filled { border: none; background: #10b981; color: white; border-radius: 8px; font-size: 8px; font-weight: 900; line-height: 1.1; padding: 4px; text-transform: uppercase; }
 
         #gameStartOverlay { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); }
+
+        /* Requirement Feedback Box */
+        #reqFeedback { animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -85,7 +84,7 @@
                 <button onclick="setRank(1)" class="w-full p-6 bg-white border-4 border-orange-100 rounded-3xl text-left hover:border-orange-500 transition-all group shadow-md active:scale-95">
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="block text-[10px] uppercase font-black text-orange-500 mb-1 tracking-tighter">Tier 1 • Beginner</span>
+                            <span class="block text-[10px] uppercase font-black text-orange-500 mb-1 tracking-tighter">Tier 1 • Beginner (With Guidance)</span>
                             <h3 class="text-xl font-black text-gray-900 uppercase">Scout - 2nd Class</h3>
                         </div>
                         <span class="text-3xl group-hover:rotate-12 transition-transform">⚜️</span>
@@ -94,7 +93,7 @@
                 <button onclick="setRank(2)" class="w-full p-6 bg-white border-4 border-amber-100 rounded-3xl text-left hover:border-amber-500 transition-all group shadow-md active:scale-95">
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="block text-[10px] uppercase font-black text-amber-600 mb-1 tracking-tighter">Tier 2 • Advanced</span>
+                            <span class="block text-[10px] uppercase font-black text-amber-600 mb-1 tracking-tighter">Tier 2 • Advanced (No Help)</span>
                             <h3 class="text-xl font-black text-gray-900 uppercase">1st Class - Life</h3>
                         </div>
                         <span class="text-3xl group-hover:rotate-12 transition-transform">⭐</span>
@@ -103,7 +102,7 @@
                 <button onclick="setRank(3)" class="w-full p-6 bg-white border-4 border-red-100 rounded-3xl text-left hover:border-red-500 transition-all group shadow-md active:scale-95">
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="block text-[10px] uppercase font-black text-red-600 mb-1 tracking-tighter">Tier 3 • Expert</span>
+                            <span class="block text-[10px] uppercase font-black text-red-600 mb-1 tracking-tighter">Tier 3 • Expert (Time Penalties)</span>
                             <h3 class="text-xl font-black text-gray-900 uppercase">Eagle Scout</h3>
                         </div>
                         <span class="text-3xl group-hover:rotate-12 transition-transform">🦅</span>
@@ -131,7 +130,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <button onclick="prepareLevel('oath')" class="btn-card bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
                             <h3 class="font-black text-gray-900 uppercase">Scout Oath</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Foundation Sequence</p>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Foundations</p>
                         </button>
                         <button onclick="prepareLevel('law')" class="btn-card bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
                             <h3 class="font-black text-gray-900 uppercase">Scout Law</h3>
@@ -307,8 +306,24 @@
         </div>
     </div>
 
+    <!-- TIER 1 GUIDANCE PANEL (Feedback Box) -->
+    <div id="reqFeedback" class="fixed bottom-0 left-0 right-0 bg-white border-t-4 border-orange-500 shadow-2xl p-6 z-[120] hidden">
+        <div class="max-w-xl mx-auto">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Scoutmaster Guidance</p>
+                <button onclick="hideReqFeedback()" class="text-slate-300 hover:text-slate-900"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-lg leading-tight mb-2">Correction Needed</h3>
+            <p id="feedbackText" class="text-slate-600 font-medium leading-tight text-sm mb-4"></p>
+            <div class="bg-orange-50 p-2 rounded-lg border border-orange-100 flex items-center gap-3">
+                <span class="bg-orange-500 text-white font-black text-[10px] px-2 py-1 rounded">REQ</span>
+                <p id="feedbackReq" class="text-[10px] font-black uppercase text-orange-700 tracking-tighter"></p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // --- MASTER DATA ---
+        // --- DATA ---
         const DATA = {
             oath: { 
                 title: "Scout Oath", 
@@ -316,121 +331,53 @@
                 icon: "⚜️", 
                 items: ["To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight"], 
                 reveal: "The Scout Oath is the foundation of our movement.",
-                prefix: "On my honor, I will do my best..."
+                prefix: "On my honor, I will do my best...",
+                req: "Scout Requirement 1a",
+                explanations: ["Duty to God/Country comes first.", "Obeying the Law is our code.", "Helping others is our service.", "Physical strength for work.", "Mental focus for learning.", "Moral character for life."]
             },
-            law: { 
-                title: "Scout Law", 
-                desc: "Memorization: Sequence all 12 points of the Scout Law in the exact order found in the handbook.", 
-                icon: "📜", 
-                items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], 
-                reveal: "A Scout lives by these 12 points every single day.",
-                prefix: "A Scout is..."
-            },
-            action: { 
-                title: "The 3 C's", 
-                desc: "Safety Check: Sequence the three basic action steps used when responding to any emergency scene.", 
-                icon: "🚨", 
-                items: ["Check the scene", "Call for help", "provide Care"], 
-                reveal: "Always follow the 3 C's: Check, Call, Care.",
-                prefix: "Emergency Action Steps:"
-            },
-            triage: { 
-                title: "Hurry Cases", 
-                desc: "Triage Logic: Order the life-threatening 'Hurry Cases' by medical priority (highest danger first).", 
-                icon: "🏥", 
-                items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], 
-                reveal: "Treating in this order saves lives in a crisis.",
-                prefix: "Medical Priority List:"
-            },
-            cpr: { 
-                title: "CPR Sequence", 
-                desc: "First Aid: Order the correct steps for responding to a non-responsive person using Hands-Only CPR.", 
-                icon: "💓", 
-                items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], 
-                reveal: "Hands-Only CPR can double a person's survival chance!",
-                prefix: "First Aid Protocol:"
-            },
-            snake: { 
-                title: "Snakebite Care", 
-                desc: "Wilderness Aid: Sequence the correct medical protocol for treating a venomous snakebite in the field.", 
-                icon: "🐍", 
-                items: ["Move away from the snake", "Stay calm and keep still", "Keep the bite area below heart level", "Get to a hospital immediately"], 
-                reveal: "Stay calm. Panic is the enemy of snakebite care.",
-                prefix: "First Aid Protocol:"
-            },
-            edge: { 
-                title: "Teaching Skills", 
-                desc: "Leadership: Sequence the four-step method used to teach any new skill to another Scout.", 
-                icon: "🎓", 
-                items: ["Explain", "Demonstrate", "Guide", "Enable"], 
-                reveal: "You just mastered the E.D.G.E. method!",
-                prefix: "The 4 Teaching Steps:"
-            },
-            rice: { 
-                title: "Strains & Sprains", 
-                desc: "First Aid: Sequence the standard treatment for minor soft-tissue injuries or sprains.", 
-                icon: "🩹", 
-                items: ["Rest", "Ice", "Compression", "Elevation"], 
-                reveal: "Success! You used the R.I.C.E. method.",
-                prefix: "First Aid Treatment:"
-            },
-            rescue: { 
-                title: "Water Safety", 
-                desc: "Rescue Order: Sequence water rescue methods from safest for the rescuer to the most risky.", 
-                icon: "🛶", 
-                items: ["Reach", "Throw", "Row", "Go"], 
-                reveal: "Always Reach and Throw before you Go!",
-                prefix: "Water Rescue Order:"
-            },
-            teams: { 
-                title: "Leading Groups", 
-                desc: "NYLT Logic: Sequence the four developmental stages every team goes through as they grow.", 
-                icon: "🤝", 
-                items: ["Forming", "Storming", "Norming", "Performing"], 
-                reveal: "These are the 4 Stages of Team Development.",
-                prefix: "Stages of Development:"
-            },
-            outdoor: { 
-                title: "Outdoor Code", 
-                desc: "Ethics: Sequence the 4 promises of the American Outdoor Code correctly.", 
-                icon: "🌲", 
-                items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], 
-                reveal: "The Outdoor Code is a promise to our planet.",
-                prefix: "As an American, I will do my best to..."
-            },
+            law: { title: "Scout Law", desc: "Memorization: Sequence all 12 points of the Scout Law in the exact order found in the handbook.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout lives by these 12 points every day.", prefix: "A Scout is...", req: "Scout Requirement 1b" },
+            action: { title: "The 3 C's", desc: "Safety Check: Sequence the three basic action steps used when responding to any emergency scene.", icon: "🚨", items: ["Check the scene", "Call for help", "provide Care"], reveal: "Always follow the 3 C's: Check, Call, Care.", prefix: "Emergency Action Steps:", req: "Tenderfoot 4a" },
+            triage: { title: "Hurry Cases", desc: "Triage Logic: Order the life-threatening 'Hurry Cases' by medical priority (highest danger first).", icon: "🏥", items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], reveal: "Treating in this order saves lives in a crisis.", prefix: "Medical Priority List:", req: "Tenderfoot 4a" },
+            cpr: { title: "CPR Sequence", desc: "First Aid: Order the correct steps for responding to a non-responsive person using Hands-Only CPR.", icon: "💓", items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], reveal: "Hands-Only CPR can double a person's survival chance!", prefix: "First Aid Protocol:", req: "First Class 6a" },
+            snake: { title: "Snakebite Care", desc: "Wilderness Aid: Sequence the correct medical protocol for treating a venomous snakebite in the field.", icon: "🐍", items: ["Move away from the snake", "Stay calm and keep still", "Keep the bite area below heart level", "Get to a hospital immediately"], reveal: "Stay calm. Panic is the enemy of snakebite care.", prefix: "First Aid Protocol:", req: "Tenderfoot 4d" },
+            edge: { title: "Teaching Skills", desc: "Leadership: Sequence the four-step method used to teach any new skill to another Scout.", icon: "🎓", items: ["Explain", "Demonstrate", "Guide", "Enable"], reveal: "You mastered the E.D.G.E. method!", prefix: "The 4 Teaching Steps:", req: "Star Requirement 6" },
+            rice: { title: "Strains & Sprains", desc: "First Aid: Sequence the standard treatment for minor soft-tissue injuries or sprains.", icon: "🩹", items: ["Rest", "Ice", "Compression", "Elevation"], reveal: "Success! You used the R.I.C.E. method.", prefix: "First Aid Treatment:", req: "Tenderfoot 4c" },
+            rescue: { title: "Water Safety", desc: "Rescue Order: Sequence water rescue methods from safest for the rescuer to the most risky.", icon: "🛶", items: ["Reach", "Throw", "Row", "Go"], reveal: "Always Reach and Throw before you Go!", prefix: "Water Rescue Order:", req: "Second Class 5c" },
+            teams: { title: "Leading Groups", desc: "NYLT Logic: Sequence the four developmental stages every team goes through as they grow.", icon: "🤝", items: ["Forming", "Storming", "Norming", "Performing"], reveal: "These are the 4 Stages of Team Development.", prefix: "Stages of Development:", req: "NYLT Syllabus" },
+            outdoor: { title: "Outdoor Code", desc: "Ethics: Sequence the 4 promises of the American Outdoor Code correctly.", icon: "🌲", items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], reveal: "The Outdoor Code is a promise to our planet.", prefix: "As an American, I will do my best to...", req: "Scout Requirement 1c" },
             
             plants: [
-                { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg" },
-                { name: "White Oak", status: "safe", tip: "Rounded lobes, no itch.", img: "oak.jpg" },
-                { name: "Virginia Creeper", status: "safe", tip: "Five leaves, often confused with ivy.", img: "creeper.jpg" },
-                { name: "Poison Oak", status: "toxic", tip: "Fuzzy leaves of three.", img: "poison_oak.jpg" },
-                { name: "Poison Sumac", status: "toxic", tip: "Red stems, grows in swamps.", img: "sumac.jpg" },
-                { name: "Sassafras", status: "safe", tip: "Mitten or dinosaur track shape.", img: "sassafras.jpg" }
+                { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg", req: "2nd Class 4" },
+                { name: "White Oak", status: "safe", tip: "Rounded lobes, no itch.", img: "oak.jpg", req: "2nd Class 4" },
+                { name: "Virginia Creeper", status: "safe", tip: "Five leaves attached at center.", img: "creeper.jpg", req: "2nd Class 4" },
+                { name: "Poison Oak", status: "toxic", tip: "Fuzzy leaves of three.", img: "poison_oak.jpg", req: "2nd Class 4" },
+                { name: "Poison Sumac", status: "toxic", tip: "Red stems, grows in swamps.", img: "sumac.jpg", req: "2nd Class 4" },
+                { name: "Sassafras", status: "safe", tip: "Mitten or dinosaur track shape.", img: "sassafras.jpg", req: "2nd Class 4" }
             ],
 
             maps: [
-                { name: "Contour Lines", status: "elev", tip: "Shows changes in elevation.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2" /></svg>' },
-                { name: "Marsh / Swamp", status: "water", tip: "Indicates wet, boggy ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 70 L40 70 M60 70 L80 70 M30 80 L70 80" stroke="#0000FF" stroke-width="2" /><path d="M25 60 L25 70 M50 60 L50 70 M75 60 L75 70" stroke="#0000FF" stroke-width="2" /></svg>' },
-                { name: "Buildings", status: "human", tip: "Solid black squares represent buildings.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black" /></svg>' },
-                { name: "Depression", status: "elev", tip: "Ticks point inward to low ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="30" fill="none" stroke="#8B4513" stroke-width="2" /><path d="M50 20 L50 25 M80 50 L75 50 M50 80 L50 75 M20 50 L25 50" stroke="#8B4513" stroke-width="2" /></svg>' }
+                { name: "Contour Lines", status: "elev", tip: "Shows changes in elevation.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2" /></svg>', req: "2nd Class 3a" },
+                { name: "Marsh / Swamp", status: "water", tip: "Indicates wet, boggy ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 70 L40 70 M60 70 L80 70 M30 80 L70 80" stroke="#0000FF" stroke-width="2" /><path d="M25 60 L25 70 M50 60 L50 70 M75 60 L75 70" stroke="#0000FF" stroke-width="2" /></svg>', req: "2nd Class 3a" },
+                { name: "Buildings", status: "human", tip: "Solid black squares represent buildings.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black" /></svg>', req: "2nd Class 3a" },
+                { name: "Depression", status: "elev", tip: "Ticks point inward to low ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="30" fill="none" stroke="#8B4513" stroke-width="2" /><path d="M50 20 L50 25 M80 50 L75 50 M50 80 L50 75 M20 50 L25 50" stroke="#8B4513" stroke-width="2" /></svg>', req: "2nd Class 3a" }
             ],
 
             fire: [
-                { name: "Tepee Lay", status: "start", tip: "The best shape for starting a new fire.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M50 10 L80 80 M50 10 L50 80" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/></svg>' },
-                { name: "Log Cabin", status: "heat", tip: "Great for sustained heat and cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/><rect x="20" y="55" width="60" height="8" fill="#8B4513"/><rect x="30" y="40" width="40" height="8" fill="#8B4513"/></svg>' }
+                { name: "Tepee Lay", status: "start", tip: "The best shape for starting a new fire.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M50 10 L80 80 M50 10 L50 80" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/></svg>', req: "2nd Class 2b" },
+                { name: "Log Cabin", status: "heat", tip: "Great for sustained heat and cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/><rect x="20" y="55" width="60" height="8" fill="#8B4513"/><rect x="30" y="40" width="40" height="8" fill="#8B4513"/></svg>', req: "2nd Class 2b" }
             ],
 
             emblem: [
-                { id: 1, text: "3 parts of the Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;" },
-                { id: 2, text: "Freedom & Readiness to Defend", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;" },
-                { id: 3, text: "Truth and Knowledge", name: "Stars", style: "top:40%; left:12%; width:15%; height:12%;" },
-                { id: 4, text: "A Scout's Smile (Prepared)", name: "Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;" },
-                { id: 5, text: "Do a Good Turn Daily", name: "Knot", style: "bottom:5%; left:40%; width:20%; height:10%;" },
-                { id: 6, text: "Points you in right direction", name: "Shape", style: "top:20%; left:5%; width:15%; height:15%;" }
+                { id: 1, text: "3 parts of the Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;", tip: "Corresponds to Duty to God/Country, Others, and Self.", req: "1st Class 1a" },
+                { id: 2, text: "Freedom & Readiness to Defend", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;", tip: "The Eagle and Shield symbolise our country.", req: "1st Class 1a" },
+                { id: 3, text: "Truth and Knowledge", name: "Stars", style: "top:40%; left:12%; width:15%; height:12%;", tip: "The two stars show the Scout's guides.", req: "1st Class 1a" },
+                { id: 4, text: "A Scout's Smile (Prepared)", name: "Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;", tip: "The shape turns up like a smile to show readiness.", req: "1st Class 1a" },
+                { id: 5, text: "Do a Good Turn Daily", name: "Knot", style: "bottom:5%; left:40%; width:20%; height:10%;", tip: "The knot reminder to serve others.", req: "1st Class 1a" },
+                { id: 6, text: "Points you in right direction", name: "Shape", style: "top:20%; left:5%; width:15%; height:15%;", tip: "The Fleur-de-lis is a compass needle.", req: "1st Class 1a" }
             ]
         };
 
-        // --- CORE ENGINE ---
+        // --- CORE LOGIC ---
         let userDifficulty = 1; let currentId = ''; let secondsElapsed = 0; let timerInt = null;
         let masterItems = []; let userSequence = []; let visualIdx = 0; let visualDeck = [];
         let embPlaced = {}; let activeEmbSelection = null;
@@ -446,6 +393,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('successOverlay').classList.add('hidden');
             document.getElementById('gameStartOverlay').classList.add('hidden');
+            hideReqFeedback();
             const target = document.getElementById(`page-${id}`);
             if (target) target.classList.add('active');
             const m = document.getElementById('menuBtn'); const r = document.getElementById('rankBtn'); const t = document.getElementById('globalTimer');
@@ -540,7 +488,7 @@
 
         function addSeqItem(word) {
             const idx = userSequence.indexOf(null);
-            if (idx !== -1) { userSequence[idx] = word; renderSeqGrid(); renderSeqBank(); }
+            if (idx !== -1) { userSequence[idx] = word; renderSeqGrid(); renderSeqBank(); hideReqFeedback(); }
         }
 
         function removeSeqItem(i) {
@@ -552,18 +500,27 @@
 
         function verifySequence() {
             if (userSequence.includes(null)) { document.getElementById('seqCheckBtn').classList.add('error-shake'); setTimeout(() => document.getElementById('seqCheckBtn').classList.remove('error-shake'), 400); return; }
-            let errs = 0; const grid = document.getElementById('seqGrid').children;
+            let errs = 0; let firstWrongIdx = -1;
+            const grid = document.getElementById('seqGrid').children;
             userSequence.forEach((w, i) => {
                 if (w !== masterItems[i]) {
                     errs++;
+                    if (firstWrongIdx === -1) firstWrongIdx = i;
                     if (userDifficulty === 1) grid[i].classList.add('slot-wrong');
                     else userSequence[i] = null;
                 }
             });
+
             if (errs === 0) showFinalSuccess(DATA[currentId].reveal);
             else {
                 triggerPenalty();
-                if (userDifficulty > 1) {
+                if (userDifficulty === 1) {
+                    showReqFeedback(
+                        "Scout Check", 
+                        `Slot #${firstWrongIdx + 1} is incorrect. Review your handbook for the correct sequence.`, 
+                        DATA[currentId].req
+                    );
+                } else {
                     userSequence = userSequence.filter(w => w !== null);
                     while(userSequence.length < masterItems.length) userSequence.push(null);
                     renderSeqGrid(); renderSeqBank();
@@ -612,8 +569,13 @@
             feedback.classList.remove('hidden');
             document.getElementById('visFeedbackName').innerText = item.name;
             document.getElementById('visFeedbackTip').innerText = item.tip;
-            if (choice === item.status) { document.getElementById('visFeedbackIcon').innerText = "✅"; card.classList.add('bg-emerald-600'); }
-            else { triggerPenalty(); document.getElementById('visFeedbackIcon').innerText = "❌"; card.classList.add('bg-rose-600'); }
+            if (choice === item.status) { document.getElementById('visFeedbackIcon').innerText = "✅"; card.classList.add('bg-emerald-600'); hideReqFeedback(); }
+            else { 
+                triggerPenalty(); 
+                document.getElementById('visFeedbackIcon').innerText = "❌"; 
+                card.classList.add('bg-rose-600'); 
+                if (userDifficulty === 1) showReqFeedback(item.name, item.tip, item.req);
+            }
             setTimeout(() => {
                 visualIdx++;
                 if (visualIdx < visualDeck.length) updateVisualCard();
@@ -632,7 +594,7 @@
                 const btn = document.createElement('button');
                 btn.className = `p-3 rounded-xl border-2 text-[10px] font-bold text-left transition-all ${activeEmbSelection?.id === item.id ? 'bg-amber-50 border-amber-500 scale-105 shadow-md' : 'bg-white border-slate-100'}`;
                 btn.innerText = item.text;
-                btn.onclick = () => { activeEmbSelection = item; renderEmbBank(); };
+                btn.onclick = () => { activeEmbSelection = item; renderEmbBank(); hideReqFeedback(); };
                 b.appendChild(btn);
             });
         }
@@ -654,14 +616,41 @@
             });
         }
         function verifyEmblem() {
-            let errs = 0;
-            Object.keys(embPlaced).forEach(id => { if (parseInt(id) !== embPlaced[id].id) errs++; });
+            let errs = 0; let firstWrongId = null;
+            Object.keys(embPlaced).forEach(id => { 
+                if (parseInt(id) !== embPlaced[id].id) {
+                    errs++;
+                    if (!firstWrongId) firstWrongId = parseInt(id);
+                }
+            });
             if (errs === 0) showFinalSuccess("You understand every symbol on the First Class Badge.");
-            else { triggerPenalty(); document.getElementById('embBoard').classList.add('error-shake'); setTimeout(() => { document.getElementById('embBoard').classList.remove('error-shake'); embPlaced = {}; renderEmbBank(); renderEmbBoard(); }, 500); }
+            else { 
+                triggerPenalty(); 
+                document.getElementById('embBoard').classList.add('error-shake'); 
+                if (userDifficulty === 1) {
+                    const wrongData = DATA.emblem.find(x => x.id === firstWrongId);
+                    showReqFeedback("Badge Symbolism", `The ${wrongData.name} part is matched incorrectly. Remember: ${wrongData.tip}`, wrongData.req);
+                }
+                setTimeout(() => { 
+                    document.getElementById('embBoard').classList.remove('error-shake'); 
+                    if (userDifficulty > 1) { embPlaced = {}; renderEmbBank(); renderEmbBoard(); }
+                }, 500); 
+            }
+        }
+
+        // --- FEEDBACK PANEL LOGIC ---
+        function showReqFeedback(title, text, req) {
+            document.getElementById('feedbackTitle').innerText = title;
+            document.getElementById('feedbackText').innerText = text;
+            document.getElementById('feedbackReq').innerText = req;
+            document.getElementById('reqFeedback').classList.remove('hidden');
+        }
+        function hideReqFeedback() {
+            document.getElementById('reqFeedback').classList.add('hidden');
         }
 
         function showFinalSuccess(revealText) {
-            stopTimer();
+            stopTimer(); hideReqFeedback();
             document.getElementById('successText').innerText = revealText;
             document.getElementById('finalTime').innerText = document.getElementById('globalTimer').innerText;
             document.getElementById('successOverlay').classList.remove('hidden');
