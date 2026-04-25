@@ -7,10 +7,11 @@
     <title>Advancement Arcade - Aides to Scouting</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@800;900&family=Caveat:wght@700&display=swap');
         
         body { font-family: 'Inter', sans-serif; background-color: #fdfaf3; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
         h1, h2, h3, .font-brand { font-family: 'Montserrat', sans-serif; }
+        .font-signature { font-family: 'Caveat', cursive; }
 
         .page { display: none; animation: fadeIn 0.4s ease-out; }
         .page.active { display: block; }
@@ -54,8 +55,11 @@
 <body class="min-h-screen flex flex-col">
 
     <!-- Global Header -->
-    <header class="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-3 shadow-xl sticky top-0 z-50 border-b-4 border-orange-500">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
+    <header class="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white p-3 shadow-xl sticky top-0 z-50 border-b-4 border-slate-800">
+        <!-- Progress Bar Integrated into Header Border -->
+        <div class="absolute -bottom-1 left-0 h-1 bg-emerald-500 transition-all duration-1000 z-10 shadow-[0_0_10px_rgba(16,185,129,0.5)]" id="progressBar" style="width: 0%;"></div>
+        
+        <div class="max-w-4xl mx-auto flex justify-between items-center relative z-20">
             <div class="flex items-center gap-4">
                 <img src="ATS Full Transparent .png.png" alt="ATS Logo" class="h-10 w-10 object-contain" />
                 <div class="hidden sm:block">
@@ -65,6 +69,12 @@
             </div>
             
             <div class="flex items-center gap-2">
+                <!-- Persistent Progress Text -->
+                <div class="flex flex-col items-end justify-center mr-2">
+                    <span class="text-[8px] text-emerald-400 uppercase tracking-widest font-bold leading-none mb-1">Progress</span>
+                    <span id="progressText" class="font-mono text-xs font-black leading-none text-white">0%</span>
+                </div>
+
                 <div id="globalTimer" class="hidden font-mono text-xl font-black text-orange-400 bg-gray-900/50 px-2 py-1 rounded mr-2">00:00</div>
                 <button id="rankBtn" onclick="showPage('rank')" class="hidden bg-white/10 hover:bg-orange-500 px-3 py-1.5 rounded-full text-[10px] font-bold transition-all border border-white/20 whitespace-nowrap uppercase">Change Rank</button>
                 <button id="menuBtn" onclick="showPage('menu')" class="hidden bg-white/10 hover:bg-orange-500 px-3 py-1.5 rounded-full text-[10px] font-bold transition-all border border-white/20 whitespace-nowrap uppercase">Menu</button>
@@ -117,17 +127,6 @@
                 <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" />
                 <div class="absolute inset-0 flex items-center justify-center text-center px-4">
                     <h2 class="text-3xl md:text-6xl font-brand font-black text-white uppercase" style="text-shadow: 4px 4px 0px rgba(0,0,0,0.5);">Advancement Arcade</h2>
-                </div>
-            </div>
-
-            <!-- Arcade Progress Bar -->
-            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100">
-                <div class="flex justify-between items-end mb-2">
-                    <h3 class="font-black text-gray-900 uppercase tracking-tight">Overall Progress</h3>
-                    <span id="progressText" class="font-bold text-emerald-600 text-lg">0%</span>
-                </div>
-                <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden">
-                    <div id="progressBar" class="h-full bg-emerald-500 transition-all duration-1000" style="width: 0%;"></div>
                 </div>
             </div>
 
@@ -236,14 +235,19 @@
                 <h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand tracking-tighter leading-tight">Level Title</h2>
                 <p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p>
             </div>
+            
             <div id="seqGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div>
-            <div id="seqBank" class="flex flex-wrap justify-center gap-2 p-4 bg-white rounded-3xl border-2 border-slate-100 shadow-inner mt-4"></div>
-            <div class="flex justify-center mt-6">
-                <button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-4 rounded-2xl shadow-xl hover:bg-orange-500 hover:scale-105 transition-all tracking-widest active:scale-95">Check the Handbook</button>
-            </div>
-            <div id="scrollCue" class="md:hidden flex flex-col items-center py-4 text-orange-400 font-bold text-[10px] uppercase tracking-widest">
+            
+            <!-- Moved Scroll Cue to sit between the grid and the bank -->
+            <div id="scrollCue" class="md:hidden flex flex-col items-center py-2 text-orange-400 font-bold text-[10px] uppercase tracking-widest">
                 <span>Scroll for more slots</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="mt-1"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+            </div>
+
+            <div id="seqBank" class="flex flex-wrap justify-center gap-2 p-4 bg-white rounded-3xl border-2 border-slate-100 shadow-inner mt-2"></div>
+            
+            <div class="flex justify-center mt-6">
+                <button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-4 rounded-2xl shadow-xl hover:bg-orange-500 hover:scale-105 transition-all tracking-widest active:scale-95">Check the Handbook</button>
             </div>
         </div>
 
@@ -307,8 +311,8 @@
             <p id="successText" class="text-slate-600 mt-4 mb-2 font-bold leading-tight italic"></p>
             <div id="successExplanation" class="mb-6 text-left text-xs text-emerald-800 bg-emerald-50 p-3 rounded-lg shadow-inner empty:hidden leading-relaxed"></div>
             <div class="bg-slate-50 rounded-xl p-4 mb-8 border border-slate-100 text-left relative">
-                <p class="text-[8px] uppercase font-black text-slate-400 mb-1">Handbook Verified</p>
-                <p class="font-brand font-black text-gray-800 text-xl italic tracking-tighter">Verified Logic</p>
+                <p class="text-[8px] uppercase font-black text-slate-400 mb-1 border-b border-slate-200 pb-1">Authorized Signature</p>
+                <p class="font-signature text-blue-800 text-4xl -rotate-2 origin-left inline-block pt-1 pb-2">Walker & Elliott</p>
                 <div class="absolute right-4 bottom-2 text-right">
                     <p class="text-[8px] uppercase font-black text-slate-400">Time Taken</p>
                     <p id="finalTime" class="font-mono font-black text-emerald-600 text-lg">00:00</p>
