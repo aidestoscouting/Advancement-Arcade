@@ -520,12 +520,12 @@
             rescue: { type: 'sequence', title: "Water Safety", desc: "Rescue Order: Put water rescue methods in order from safest for the rescuer to the most risky.", icon: "🛶", items: ["Reach", "Throw", "Row", "Go"], reveal: "Always Reach and Throw before you Go!", prefix: "Water Rescue Order:", req: "Second Class 5c", explanation: "Reach with a pole or item. Throw a line or float. Row a boat to them. Only Go (swim) as an absolute last resort if you are trained." },
             teams: { type: 'sequence', title: "Leading Groups", desc: "NYLT Logic: Put the four developmental stages every team goes through as they grow in order.", icon: "🤝", items: ["Forming", "Storming", "Norming", "Performing"], reveal: "These are the 4 Stages of Team Development.", prefix: "Stages of Development:", req: "NYLT Syllabus", explanation: "Teams Form (coming together), Storm (experiencing conflicts), Norm (agreeing on rules), and Perform (working efficiently as a team)." },
             outdoor: { type: 'sequence', title: "Outdoor Code", desc: "Ethics: Put the 4 promises of the American Outdoor Code in the correct order.", icon: "🌲", items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], reveal: "The Outdoor Code is a promise to our planet.", prefix: "As an American, I will do my best to...", req: "Scout Requirement 1c", explanation: "Leave No Trace principles align with the Outdoor Code: Be clean, careful with fire, considerate of others, and conservation-minded." },
-            water: { type: 'sequence', title: "Water Purification", desc: "Survival Skill: Put the steps for purifying water using the Rolling Boil method in the correct order.", icon: "💧", items: ["Filter out large particles and debris", "Bring water to a rolling boil", "Maintain the boil for 1 full minute", "Let the water cool before drinking"], reveal: "Boiling is the most certain way to kill all microorganisms in water.", prefix: "Boiling Method Steps:", req: "First Class 7f", explanation: "First, filter out large dirt using a cloth. Heat the water until you see large, rolling bubbles. Keep it boiling for 1 minute (or 3 minutes at high altitude) to kill all pathogens, then cool." },
+            water: { type: 'sequence', title: "Water Purify", desc: "Survival Skill: Put the steps for purifying water using the Rolling Boil method in the correct order.", icon: "💧", items: ["Filter out large particles and debris", "Bring water to a rolling boil", "Maintain the boil for 1 full minute", "Let the water cool before drinking"], reveal: "Boiling is the most certain way to kill all microorganisms in water.", prefix: "Boiling Method Steps:", req: "First Class 7f", explanation: "First, filter out large dirt using a cloth. Heat the water until you see large, rolling bubbles. Keep it boiling for 1 minute (or 3 minutes at high altitude) to kill all pathogens, then cool." },
             extinguish: { type: 'sequence', title: "Campfire Safety", desc: "Leave No Trace: Put the steps for properly and safely extinguishing a campfire in the correct order.", icon: "🔥", items: ["Let the fire burn down to ash", "Pour water to drown all embers", "Stir the ashes with a stick", "Feel for any remaining heat"], reveal: "A fire isn't out until it's cold to the touch!", prefix: "Extinguishing Steps:", req: "Second Class 2c", explanation: "To fully extinguish a fire, let it burn down, drown it with water, stir the wet ashes, and hover your hand over it. If it's too hot to touch, it's too hot to leave." },
             
             // VISUAL ID GAMES
             plants: {
-                type: 'visual', title: "Safe or Toxic?", desc: "Identify whether the flora shown in the field guide is Safe to handle or Toxic to the touch.", icon: "🌿",
+                type: 'visual', title: "Safe or Toxic?", desc: "Challenge: Identify the flora in the Field Guide as Safe or Toxic. Accuracy is key to woodsman survival.", icon: "🌿",
                 options: [ {label: "SAFE", value: "safe"}, {label: "TOXIC", value: "toxic"} ],
                 items: [
                     { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg", req: "2nd Class 4" },
@@ -537,7 +537,7 @@
                 ]
             },
             maps: {
-                type: 'visual', title: "Map Master", desc: "Correctly identify the category of standard topographic symbols used for wilderness navigation.", icon: "🗺️",
+                type: 'visual', title: "Map Master", desc: "Objective: Correcty identify the standard topographic symbols used for wilderness navigation.", icon: "🗺️",
                 options: [ {label: "Water", value: "water"}, {label: "Elevation", value: "elev"}, {label: "Human Made", value: "human"} ],
                 items: [
                     { name: "Contour Lines", status: "elev", tip: "Shows changes in elevation.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2" /></svg>', req: "2nd Class 3a" },
@@ -547,7 +547,7 @@
                 ]
             },
             fire: {
-                type: 'visual', title: "Fire Builder", desc: "Identify the standard fire lay patterns used for different camping purposes.", icon: "🏕️",
+                type: 'visual', title: "Fire Builder", desc: "Mission: Identify the standard fire lay patterns used for different camping purposes.", icon: "🏕️",
                 options: [ {label: "Start Fire", value: "start"}, {label: "Warmth/Cooking", value: "heat"} ],
                 items: [
                     { name: "Tepee Lay", status: "start", tip: "The best shape for starting a new fire.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M50 10 L80 80 M50 10 L50 80" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/></svg>', req: "2nd Class 2b" },
@@ -558,20 +558,20 @@
                 type: 'visual', title: "Knot Knowledge", desc: "Identify the correct knot based on its visual appearance and primary use.", icon: "🪢",
                 options: [ {label: "Square", value: "square"}, {label: "Bowline", value: "bowline"}, {label: "Clove Hitch", value: "clove"}, {label: "Taut-line", value: "tautline"} ],
                 items: [
-                    { name: "Square Knot", status: "square", tip: "Used to join two ropes of the same thickness.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 40 C40 40, 40 60, 50 50 C60 40, 60 60, 90 60 M10 60 C40 60, 40 40, 50 50 C60 60, 60 40, 90 40" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "Tenderfoot 3a" },
-                    { name: "Bowline", status: "bowline", tip: "Creates a secure loop that won't slip or tighten.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="60" r="20" fill="none" stroke="#475569" stroke-width="8"/><path d="M50 20 L50 40 C60 40, 70 50, 60 60 C50 70, 40 50, 50 40 L50 80" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "First Class 3b" },
-                    { name: "Clove Hitch", status: "clove", tip: "Used to start and finish most lashings.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="40" y="10" width="20" height="80" fill="#d4d4d8"/><path d="M10 30 L90 30 M10 70 L90 70 M20 70 L80 30" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "First Class 3a" },
-                    { name: "Taut-line Hitch", status: "tautline", tip: "Creates an adjustable loop, great for tent guy lines.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 20 L20 80 C20 90, 80 90, 80 80 L80 20 M20 40 L80 40 M20 60 L80 60" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "Tenderfoot 3a" }
+                    { name: "Square Knot", status: "square", tip: "Used to join two ropes of the same thickness.", img: "square_knot.jpg", req: "Tenderfoot 3a" },
+                    { name: "Bowline", status: "bowline", tip: "Creates a secure loop that won't slip or tighten.", img: "bowline.jpg", req: "First Class 3b" },
+                    { name: "Clove Hitch", status: "clove", tip: "Used to start and finish most lashings.", img: "clove_hitch.jpg", req: "First Class 3a" },
+                    { name: "Taut-line Hitch", status: "tautline", tip: "Creates an adjustable loop, great for tent guy lines.", img: "tautline.jpg", req: "Tenderfoot 3a" }
                 ]
             },
             lashings: {
                 type: 'visual', title: "Lashings", desc: "Identify the correct lashing used for pioneer camp projects.", icon: "🪵",
                 options: [ {label: "Square", value: "square"}, {label: "Diagonal", value: "diagonal"}, {label: "Shear", value: "shear"}, {label: "Tripod", value: "tripod"} ],
                 items: [
-                    { name: "Square Lashing", status: "square", tip: "Binds two poles crossing at a 90-degree angle.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="40" y="10" width="20" height="80" fill="#d4d4d8"/><rect x="10" y="40" width="80" height="20" fill="#d4d4d8"/><path d="M35 35 h30 v30 h-30 z" fill="none" stroke="#8B4513" stroke-width="5" stroke-linejoin="miter"/></svg>', req: "First Class 3a" },
-                    { name: "Diagonal Lashing", status: "diagonal", tip: "Binds two poles crossing at an angle, used to spring poles together.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><g transform="rotate(45 50 50)"><rect x="40" y="10" width="20" height="80" fill="#d4d4d8"/><rect x="10" y="40" width="80" height="20" fill="#d4d4d8"/><path d="M40 40 L60 60 M60 40 L40 60" stroke="#8B4513" stroke-width="5"/></g></svg>', req: "First Class 3a" },
-                    { name: "Shear Lashing", status: "shear", tip: "Used to bind two poles end-to-end or create an A-frame.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M40 10 L30 90 M60 10 L70 90" stroke="#d4d4d8" stroke-width="15" stroke-linecap="round"/><rect x="35" y="30" width="30" height="20" fill="#8B4513"/></svg>', req: "First Class 3a" },
-                    { name: "Tripod Lashing", status: "tripod", tip: "Binds three poles together to form a free-standing structure.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L50 90 M50 10 L20 90 M50 10 L80 90" stroke="#d4d4d8" stroke-width="12" stroke-linecap="round"/><path d="M40 30 Q50 40 60 30" fill="none" stroke="#8B4513" stroke-width="8"/></svg>', req: "Pioneering Merit Badge" }
+                    { name: "Square Lashing", status: "square", tip: "Binds two poles crossing at a 90-degree angle.", img: "square_lashing.jpg", req: "First Class 3a" },
+                    { name: "Diagonal Lashing", status: "diagonal", tip: "Binds two poles crossing at an angle, used to spring poles together.", img: "diagonal_lashing.jpg", req: "First Class 3a" },
+                    { name: "Shear Lashing", status: "shear", tip: "Used to bind two poles end-to-end or create an A-frame.", img: "shear_lashing.jpg", req: "First Class 3a" },
+                    { name: "Tripod Lashing", status: "tripod", tip: "Binds three poles together to form a free-standing structure.", img: "tripod_lashing.jpg", req: "Pioneering Merit Badge" }
                 ]
             },
 
@@ -597,7 +597,7 @@
         let embPlaced = {}; let activeEmbSelection = null;
         
         let completedGames = {};
-        const TOTAL_GAMES = 19; // 19 total games!
+        const TOTAL_GAMES = 19;
 
         function updateGlobalProgress() {
             const completedCount = Object.keys(completedGames).length;
