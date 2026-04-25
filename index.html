@@ -138,17 +138,35 @@
                         <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">Scouting Foundations</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <button onclick="prepareLevel('oath')" class="btn-card bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
-                            <h3 class="font-black text-gray-900 uppercase">Scout Oath</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Foundations</p>
+                        <button id="btn-oath" onclick="prepareLevel('oath')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-orange-600">Scout Oath</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Foundation Sequence</p>
+                            </div>
+                            <div id="status-oath" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('law')" class="btn-card bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
-                            <h3 class="font-black text-gray-900 uppercase">Scout Law</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Memorization</p>
+                        <button id="btn-law" onclick="prepareLevel('law')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-orange-600">Scout Law</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Memorization</p>
+                            </div>
+                            <div id="status-law" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('outdoor')" class="btn-card bg-white p-5 rounded-3xl border-2 border-emerald-100 hover:border-emerald-500 shadow-md text-left group">
-                            <h3 class="font-black text-gray-900 uppercase">Outdoor Code</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Ethics & Nature</p>
+                        <button id="btn-outdoor" onclick="prepareLevel('outdoor')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-emerald-100 hover:border-emerald-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-emerald-600">Outdoor Code</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Ethics & Nature</p>
+                            </div>
+                            <div id="status-outdoor" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
                     </div>
                 </section>
@@ -160,29 +178,65 @@
                         <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">Emergency Response</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <button onclick="prepareLevel('action')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">The 3 C's</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Scene Management</p>
+                        <button id="btn-action" onclick="prepareLevel('action')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-rose-600">The 3 C's</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Scene Management</p>
+                            </div>
+                            <div id="status-action" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('triage')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Hurry Cases</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Emergency Triage</p>
+                        <button id="btn-triage" onclick="prepareLevel('triage')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-rose-600">Hurry Cases</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Emergency Triage</p>
+                            </div>
+                            <div id="status-triage" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('cpr')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Heart Saver</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">CPR Steps</p>
+                        <button id="btn-cpr" onclick="prepareLevel('cpr')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-rose-600">Heart Saver</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">CPR Steps</p>
+                            </div>
+                            <div id="status-cpr" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('rice')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Strains & Sprains</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Injury Care</p>
+                        <button id="btn-rice" onclick="prepareLevel('rice')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-rose-600">Strains & Sprains</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Injury Care</p>
+                            </div>
+                            <div id="status-rice" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('snake')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Snakebite Care</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Wilderness Aid</p>
+                        <button id="btn-snake" onclick="prepareLevel('snake')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-rose-600">Snakebite Care</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Wilderness Aid</p>
+                            </div>
+                            <div id="status-snake" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('rescue')" class="btn-card bg-white p-5 rounded-3xl border-2 border-cyan-100 hover:border-cyan-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Water Safety</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Aquatic Logic</p>
+                        <button id="btn-rescue" onclick="prepareLevel('rescue')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-cyan-100 hover:border-cyan-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-cyan-600">Water Safety</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Aquatic Logic</p>
+                            </div>
+                            <div id="status-rescue" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
                     </div>
                 </section>
@@ -194,17 +248,41 @@
                         <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">Scoutcraft & Nature</h2>
                     </div>
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                        <button onclick="prepareLevel('emblem')" class="btn-card bg-white p-5 rounded-3xl border-2 border-amber-100 hover:border-amber-500 shadow-md text-left">
-                            <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase">Emblem Pin-It</h3>
+                        <button id="btn-emblem" onclick="prepareLevel('emblem')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-amber-100 hover:border-amber-500 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-amber-600">Emblem Pin-It</h3>
+                            </div>
+                            <div id="status-emblem" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('maps')" class="btn-card bg-white p-5 rounded-3xl border-2 border-blue-100 hover:border-blue-500 shadow-md text-left">
-                            <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase">Map Master</h3>
+                        <button id="btn-maps" onclick="prepareLevel('maps')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-blue-100 hover:border-blue-500 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-blue-600">Map Master</h3>
+                            </div>
+                            <div id="status-maps" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('fire')" class="btn-card bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left">
-                            <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase">Fire Builder</h3>
+                        <button id="btn-fire" onclick="prepareLevel('fire')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-orange-100 hover:border-orange-500 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-orange-600">Fire Builder</h3>
+                            </div>
+                            <div id="status-fire" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('plants')" class="btn-card bg-white p-5 rounded-3xl border-2 border-green-100 hover:border-green-500 shadow-md text-left">
-                            <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase">Safe or Toxic?</h3>
+                        <button id="btn-plants" onclick="prepareLevel('plants')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-green-100 hover:border-green-500 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-green-600">Safe or Toxic?</h3>
+                            </div>
+                            <div id="status-plants" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
                     </div>
                 </section>
@@ -216,13 +294,25 @@
                         <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">Leadership & Training</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <button onclick="prepareLevel('edge')" class="btn-card bg-white p-5 rounded-3xl border-2 border-amber-100 hover:border-amber-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Teaching Skills</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">E.D.G.E. Method</p>
+                        <button id="btn-edge" onclick="prepareLevel('edge')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-amber-100 hover:border-amber-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-amber-600">Teaching Skills</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">E.D.G.E. Method</p>
+                            </div>
+                            <div id="status-edge" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
-                        <button onclick="prepareLevel('teams')" class="btn-card bg-white p-5 rounded-3xl border-2 border-indigo-100 hover:border-indigo-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Leading Groups</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Team Development</p>
+                        <button id="btn-teams" onclick="prepareLevel('teams')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-indigo-100 hover:border-indigo-500 shadow-md text-left group">
+                            <div class="pr-10">
+                                <h3 class="font-black text-gray-900 uppercase group-hover:text-indigo-600">Leading Groups</h3>
+                                <p class="text-[10px] text-slate-500 font-bold mt-1">Team Stages</p>
+                            </div>
+                            <div id="status-teams" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
                         </button>
                     </div>
                 </section>
@@ -398,13 +488,30 @@
         let masterItems = []; let userSequence = []; let visualIdx = 0; let visualDeck = [];
         let embPlaced = {}; let activeEmbSelection = null;
         
-        let completedGames = new Set();
+        let completedGames = {};
         const TOTAL_GAMES = 15;
 
         function updateGlobalProgress() {
-            const pct = Math.floor((completedGames.size / TOTAL_GAMES) * 100);
+            const completedCount = Object.keys(completedGames).length;
+            const pct = Math.floor((completedCount / TOTAL_GAMES) * 100);
             document.getElementById('progressText').innerText = `${pct}%`;
             document.getElementById('progressBar').style.width = `${pct}%`;
+        }
+
+        function refreshMenuStatus() {
+            Object.keys(completedGames).forEach(id => {
+                const statusEl = document.getElementById(`status-${id}`);
+                const btnEl = document.getElementById(`btn-${id}`);
+                if (statusEl) {
+                    statusEl.classList.remove('hidden');
+                    statusEl.classList.add('flex');
+                    statusEl.querySelector('span').innerText = completedGames[id];
+                }
+                if (btnEl) {
+                    btnEl.classList.add('border-emerald-300', 'bg-emerald-50/30');
+                    btnEl.classList.remove('border-orange-100', 'border-rose-100', 'border-blue-100', 'border-amber-100', 'border-emerald-100', 'border-cyan-100', 'border-red-100', 'border-indigo-100', 'border-green-100');
+                }
+            });
         }
 
         function setRank(tier) {
@@ -419,11 +526,16 @@
             document.getElementById('successOverlay').classList.add('hidden');
             document.getElementById('gameStartOverlay').classList.add('hidden');
             hideReqFeedback();
+            
             const target = document.getElementById(`page-${id}`);
             if (target) target.classList.add('active');
+            
             const m = document.getElementById('menuBtn'); const r = document.getElementById('rankBtn'); const t = document.getElementById('globalTimer');
             if (id === 'rank') { m.style.display = 'none'; r.style.display = 'none'; t.classList.add('hidden'); stopTimer(); }
-            else if (id === 'menu') { m.style.display = 'none'; r.style.display = 'block'; t.classList.add('hidden'); stopTimer(); }
+            else if (id === 'menu') { 
+                m.style.display = 'none'; r.style.display = 'block'; t.classList.add('hidden'); stopTimer(); 
+                refreshMenuStatus();
+            }
             else { m.style.display = 'block'; r.style.display = 'block'; t.classList.remove('hidden'); }
             window.scrollTo(0,0);
         }
@@ -678,13 +790,17 @@
         function showFinalSuccess(revealText, explanation = "") {
             stopTimer(); hideReqFeedback();
             
-            // Update Progress
-            completedGames.add(currentId);
+            const finalTimeStr = document.getElementById('globalTimer').innerText;
+            
+            // Save time if it's the first completion, or if they beat their old time
+            if (!completedGames[currentId] || finalTimeStr < completedGames[currentId]) {
+                completedGames[currentId] = finalTimeStr;
+            }
             updateGlobalProgress();
 
             document.getElementById('successText').innerText = revealText;
             document.getElementById('successExplanation').innerHTML = explanation ? explanation.replace(/\n/g, '<br/>') : '';
-            document.getElementById('finalTime').innerText = document.getElementById('globalTimer').innerText;
+            document.getElementById('finalTime').innerText = finalTimeStr;
             document.getElementById('successOverlay').classList.remove('hidden');
         }
 
