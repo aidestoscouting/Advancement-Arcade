@@ -275,11 +275,47 @@
                                 <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
                             </div>
                         </button>
+                        <button id="btn-extinguish" onclick="prepareLevel('extinguish')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-red-100 hover:border-red-500 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-red-600">Campfire Safety</h3>
+                            </div>
+                            <div id="status-extinguish" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
+                        </button>
+                        <button id="btn-water" onclick="prepareLevel('water')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-cyan-100 hover:border-cyan-500 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-cyan-600">Water Purify</h3>
+                            </div>
+                            <div id="status-water" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
+                        </button>
                         <button id="btn-plants" onclick="prepareLevel('plants')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-green-100 hover:border-green-500 shadow-md text-left group">
                             <div class="pr-8">
                                 <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-green-600">Safe or Toxic?</h3>
                             </div>
                             <div id="status-plants" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
+                        </button>
+                        <button id="btn-knots" onclick="prepareLevel('knots')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-slate-200 hover:border-slate-500 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-slate-600">Knot Knowledge</h3>
+                            </div>
+                            <div id="status-knots" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
+                                <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
+                            </div>
+                        </button>
+                        <button id="btn-lashings" onclick="prepareLevel('lashings')" class="btn-card relative bg-white p-5 rounded-3xl border-2 border-amber-200 hover:border-amber-600 shadow-md text-left group">
+                            <div class="pr-8">
+                                <h3 class="font-black text-[11px] sm:text-sm text-gray-900 uppercase group-hover:text-amber-700">Lashings</h3>
+                            </div>
+                            <div id="status-lashings" class="absolute top-4 right-4 hidden flex-col items-end pointer-events-none">
                                 <div class="bg-emerald-500 text-white rounded-full p-1 mb-1 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                                 <span class="text-[9px] font-mono font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shadow-sm">00:00</span>
                             </div>
@@ -431,7 +467,9 @@
     <script>
         // --- MASTER DATA ---
         const DATA = {
+            // SEQUENCES
             oath: { 
+                type: 'sequence',
                 title: "Scout Oath", 
                 desc: "Challenge: Put the 6 lines of the Scout Oath in the correct order. The timer starts with the line provided below.", 
                 icon: "⚜️", 
@@ -441,46 +479,85 @@
                 req: "Scout Requirement 1a",
                 explanation: "The Scout Oath requires three promises: Duty to God and Country, Duty to Others, and Duty to Self (physically strong, mentally awake, morally straight)."
             },
-            law: { title: "Scout Law", desc: "Memorization: Put all 12 points of the Scout Law in the exact order found in the handbook.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout lives by these 12 points every day.", prefix: "A Scout is...", req: "Scout Requirement 1b", explanation: "The 12 points of the Scout Law are the core values a Scout strives to live by every day." },
-            action: { title: "The 3 C's", desc: "Safety Check: Put the three basic action steps used when responding to any emergency scene in order.", icon: "🚨", items: ["Check the scene", "Call for help", "provide Care"], reveal: "Always follow the 3 C's: Check, Call, Care.", prefix: "Emergency Action Steps:", req: "Tenderfoot 4a", explanation: "1. CHECK the scene for safety and check the victim.\n2. CALL 911 or for help.\n3. CARE for the victim." },
-            triage: { title: "Hurry Cases", desc: "Triage Logic: Put the life-threatening 'Hurry Cases' in order by medical priority (highest danger first).", icon: "🏥", items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], reveal: "Treating in this order saves lives in a crisis.", prefix: "Medical Priority List:", req: "Tenderfoot 4a", explanation: "Hurry cases demand immediate attention. You must prioritize breathing and severe bleeding before poisons or shock. Burns and minor cuts are treated last." },
-            cpr: { title: "CPR Sequence", desc: "First Aid: Put the correct steps for responding to a non-responsive person using Hands-Only CPR in order.", icon: "💓", items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], reveal: "Hands-Only CPR can double a person's survival chance!", prefix: "First Aid Protocol:", req: "First Class 6a", explanation: "Check the scene, tap the victim's collarbone and shout, tell a specific person to call 911 and get an AED, then interlock hands and push hard and fast in the center of the chest." },
-            snake: { title: "Snakebite Care", desc: "Wilderness Aid: Put the correct medical protocol for treating a venomous snakebite in the field in order.", icon: "🐍", items: ["Move away from the snake", "Stay calm and keep still", "Keep the bite area below heart level", "Get to a hospital immediately"], reveal: "Stay calm. Panic is the enemy of snakebite care.", prefix: "First Aid Protocol:", req: "Tenderfoot 4d", explanation: "Keep the victim calm to slow their heart rate. Remove jewelry, keep the bite below the heart, and transport them to medical care. Never cut or suck the wound!" },
-            edge: { title: "Teaching Skills", desc: "Leadership: Put the four-step method used to teach any new skill to another Scout in order.", icon: "🎓", items: ["Explain", "Demonstrate", "Guide", "Enable"], reveal: "You mastered the E.D.G.E. method!", prefix: "The 4 Teaching Steps:", req: "Star Requirement 6", explanation: "Explain how it's done. Demonstrate the steps. Guide the learner as they try. Enable them to succeed on their own." },
-            rice: { title: "Strains & Sprains", desc: "First Aid: Put the standard treatment for minor soft-tissue injuries or sprains in order.", icon: "🩹", items: ["Rest", "Ice", "Compression", "Elevation"], reveal: "Success! You used the R.I.C.E. method.", prefix: "First Aid Treatment:", req: "Tenderfoot 4c", explanation: "Rest the injured area. Apply Ice packs. Use an elastic bandage for Compression. Elevate the injury above the heart to reduce swelling." },
-            rescue: { title: "Water Safety", desc: "Rescue Order: Put water rescue methods in order from safest for the rescuer to the most risky.", icon: "🛶", items: ["Reach", "Throw", "Row", "Go"], reveal: "Always Reach and Throw before you Go!", prefix: "Water Rescue Order:", req: "Second Class 5c", explanation: "Reach with a pole or item. Throw a line or float. Row a boat to them. Only Go (swim) as an absolute last resort if you are trained." },
-            teams: { title: "Leading Groups", desc: "NYLT Logic: Put the four developmental stages every team goes through as they grow in order.", icon: "🤝", items: ["Forming", "Storming", "Norming", "Performing"], reveal: "These are the 4 Stages of Team Development.", prefix: "Stages of Development:", req: "NYLT Syllabus", explanation: "Teams Form (coming together), Storm (experiencing conflicts), Norm (agreeing on rules), and Perform (working efficiently as a team)." },
-            outdoor: { title: "Outdoor Code", desc: "Ethics: Put the 4 promises of the American Outdoor Code in the correct order.", icon: "🌲", items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], reveal: "The Outdoor Code is a promise to our planet.", prefix: "As an American, I will do my best to...", req: "Scout Requirement 1c", explanation: "Leave No Trace principles align with the Outdoor Code: Be clean, careful with fire, considerate of others, and conservation-minded." },
+            law: { type: 'sequence', title: "Scout Law", desc: "Memorization: Put all 12 points of the Scout Law in the exact order found in the handbook.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout lives by these 12 points every day.", prefix: "A Scout is...", req: "Scout Requirement 1b", explanation: "The 12 points of the Scout Law are the core values a Scout strives to live by every day." },
+            action: { type: 'sequence', title: "The 3 C's", desc: "Safety Check: Put the three basic action steps used when responding to any emergency scene in order.", icon: "🚨", items: ["Check the scene", "Call for help", "provide Care"], reveal: "Always follow the 3 C's: Check, Call, Care.", prefix: "Emergency Action Steps:", req: "Tenderfoot 4a", explanation: "1. CHECK the scene for safety and check the victim.\n2. CALL 911 or for help.\n3. CARE for the victim." },
+            triage: { type: 'sequence', title: "Hurry Cases", desc: "Triage Logic: Put the life-threatening 'Hurry Cases' in order by medical priority (highest danger first).", icon: "🏥", items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], reveal: "Treating in this order saves lives in a crisis.", prefix: "Medical Priority List:", req: "Tenderfoot 4a", explanation: "Hurry cases demand immediate attention. You must prioritize breathing and severe bleeding before poisons or shock. Burns and minor cuts are treated last." },
+            cpr: { type: 'sequence', title: "CPR Sequence", desc: "First Aid: Put the correct steps for responding to a non-responsive person using Hands-Only CPR in order.", icon: "💓", items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], reveal: "Hands-Only CPR can double a person's survival chance!", prefix: "First Aid Protocol:", req: "First Class 6a", explanation: "Check the scene, tap the victim's collarbone and shout, tell a specific person to call 911 and get an AED, then interlock hands and push hard and fast in the center of the chest." },
+            snake: { type: 'sequence', title: "Snakebite Care", desc: "Wilderness Aid: Put the correct medical protocol for treating a venomous snakebite in the field in order.", icon: "🐍", items: ["Move away from the snake", "Stay calm and keep still", "Keep the bite area below heart level", "Get to a hospital immediately"], reveal: "Stay calm. Panic is the enemy of snakebite care.", prefix: "First Aid Protocol:", req: "Tenderfoot 4d", explanation: "Keep the victim calm to slow their heart rate. Remove jewelry, keep the bite below the heart, and transport them to medical care. Never cut or suck the wound!" },
+            edge: { type: 'sequence', title: "Teaching Skills", desc: "Leadership: Put the four-step method used to teach any new skill to another Scout in order.", icon: "🎓", items: ["Explain", "Demonstrate", "Guide", "Enable"], reveal: "You mastered the E.D.G.E. method!", prefix: "The 4 Teaching Steps:", req: "Star Requirement 6", explanation: "Explain how it's done. Demonstrate the steps. Guide the learner as they try. Enable them to succeed on their own." },
+            rice: { type: 'sequence', title: "Strains & Sprains", desc: "First Aid: Put the standard treatment for minor soft-tissue injuries or sprains in order.", icon: "🩹", items: ["Rest", "Ice", "Compression", "Elevation"], reveal: "Success! You used the R.I.C.E. method.", prefix: "First Aid Treatment:", req: "Tenderfoot 4c", explanation: "Rest the injured area. Apply Ice packs. Use an elastic bandage for Compression. Elevate the injury above the heart to reduce swelling." },
+            rescue: { type: 'sequence', title: "Water Safety", desc: "Rescue Order: Put water rescue methods in order from safest for the rescuer to the most risky.", icon: "🛶", items: ["Reach", "Throw", "Row", "Go"], reveal: "Always Reach and Throw before you Go!", prefix: "Water Rescue Order:", req: "Second Class 5c", explanation: "Reach with a pole or item. Throw a line or float. Row a boat to them. Only Go (swim) as an absolute last resort if you are trained." },
+            teams: { type: 'sequence', title: "Leading Groups", desc: "NYLT Logic: Put the four developmental stages every team goes through as they grow in order.", icon: "🤝", items: ["Forming", "Storming", "Norming", "Performing"], reveal: "These are the 4 Stages of Team Development.", prefix: "Stages of Development:", req: "NYLT Syllabus", explanation: "Teams Form (coming together), Storm (experiencing conflicts), Norm (agreeing on rules), and Perform (working efficiently as a team)." },
+            outdoor: { type: 'sequence', title: "Outdoor Code", desc: "Ethics: Put the 4 promises of the American Outdoor Code in the correct order.", icon: "🌲", items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], reveal: "The Outdoor Code is a promise to our planet.", prefix: "As an American, I will do my best to...", req: "Scout Requirement 1c", explanation: "Leave No Trace principles align with the Outdoor Code: Be clean, careful with fire, considerate of others, and conservation-minded." },
+            water: { type: 'sequence', title: "Water Purification", desc: "Survival Skill: Put the steps for purifying water using the Rolling Boil method in the correct order.", icon: "💧", items: ["Filter out large particles and debris", "Bring water to a rolling boil", "Maintain the boil for 1 full minute", "Let the water cool before drinking"], reveal: "Boiling is the most certain way to kill all microorganisms in water.", prefix: "Boiling Method Steps:", req: "First Class 7f", explanation: "First, filter out large dirt using a cloth. Heat the water until you see large, rolling bubbles. Keep it boiling for 1 minute (or 3 minutes at high altitude) to kill all pathogens, then cool." },
+            extinguish: { type: 'sequence', title: "Campfire Safety", desc: "Leave No Trace: Put the steps for properly and safely extinguishing a campfire in the correct order.", icon: "🔥", items: ["Let the fire burn down to ash", "Pour water to drown all embers", "Stir the ashes with a stick", "Feel for any remaining heat"], reveal: "A fire isn't out until it's cold to the touch!", prefix: "Extinguishing Steps:", req: "Second Class 2c", explanation: "To fully extinguish a fire, let it burn down, drown it with water, stir the wet ashes, and hover your hand over it. If it's too hot to touch, it's too hot to leave." },
             
-            plants: [
-                { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg", req: "2nd Class 4" },
-                { name: "White Oak", status: "safe", tip: "Rounded lobes, no itch.", img: "oak.jpg", req: "2nd Class 4" },
-                { name: "Virginia Creeper", status: "safe", tip: "Five leaves attached at center.", img: "creeper.jpg", req: "2nd Class 4" },
-                { name: "Poison Oak", status: "toxic", tip: "Fuzzy leaves of three.", img: "poison_oak.jpg", req: "2nd Class 4" },
-                { name: "Poison Sumac", status: "toxic", tip: "Red stems, grows in swamps.", img: "sumac.jpg", req: "2nd Class 4" },
-                { name: "Sassafras", status: "safe", tip: "Mitten or dinosaur track shape.", img: "sassafras.jpg", req: "2nd Class 4" }
-            ],
+            // VISUAL ID GAMES
+            plants: {
+                type: 'visual', title: "Safe or Toxic?", desc: "Identify whether the flora shown in the field guide is Safe to handle or Toxic to the touch.", icon: "🌿",
+                options: [ {label: "SAFE", value: "safe"}, {label: "TOXIC", value: "toxic"} ],
+                items: [
+                    { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg", req: "2nd Class 4" },
+                    { name: "White Oak", status: "safe", tip: "Rounded lobes, no itch.", img: "oak.jpg", req: "2nd Class 4" },
+                    { name: "Virginia Creeper", status: "safe", tip: "Five leaves attached at center.", img: "creeper.jpg", req: "2nd Class 4" },
+                    { name: "Poison Oak", status: "toxic", tip: "Fuzzy leaves of three.", img: "poison_oak.jpg", req: "2nd Class 4" },
+                    { name: "Poison Sumac", status: "toxic", tip: "Red stems, grows in swamps.", img: "sumac.jpg", req: "2nd Class 4" },
+                    { name: "Sassafras", status: "safe", tip: "Mitten or dinosaur track shape.", img: "sassafras.jpg", req: "2nd Class 4" }
+                ]
+            },
+            maps: {
+                type: 'visual', title: "Map Master", desc: "Correctly identify the category of standard topographic symbols used for wilderness navigation.", icon: "🗺️",
+                options: [ {label: "Water", value: "water"}, {label: "Elevation", value: "elev"}, {label: "Human Made", value: "human"} ],
+                items: [
+                    { name: "Contour Lines", status: "elev", tip: "Shows changes in elevation.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2" /></svg>', req: "2nd Class 3a" },
+                    { name: "Marsh / Swamp", status: "water", tip: "Indicates wet, boggy ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 70 L40 70 M60 70 L80 70 M30 80 L70 80" stroke="#0000FF" stroke-width="2" /><path d="M25 60 L25 70 M50 60 L50 70 M75 60 L75 70" stroke="#0000FF" stroke-width="2" /></svg>', req: "2nd Class 3a" },
+                    { name: "Buildings", status: "human", tip: "Solid black squares represent buildings.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black" /></svg>', req: "2nd Class 3a" },
+                    { name: "Depression", status: "elev", tip: "Ticks point inward to low ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="30" fill="none" stroke="#8B4513" stroke-width="2" /><path d="M50 20 L50 25 M80 50 L75 50 M50 80 L50 75 M20 50 L25 50" stroke="#8B4513" stroke-width="2" /></svg>', req: "2nd Class 3a" }
+                ]
+            },
+            fire: {
+                type: 'visual', title: "Fire Builder", desc: "Identify the standard fire lay patterns used for different camping purposes.", icon: "🏕️",
+                options: [ {label: "Start Fire", value: "start"}, {label: "Warmth/Cooking", value: "heat"} ],
+                items: [
+                    { name: "Tepee Lay", status: "start", tip: "The best shape for starting a new fire.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M50 10 L80 80 M50 10 L50 80" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/></svg>', req: "2nd Class 2b" },
+                    { name: "Log Cabin", status: "heat", tip: "Great for sustained heat and cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/><rect x="20" y="55" width="60" height="8" fill="#8B4513"/><rect x="30" y="40" width="40" height="8" fill="#8B4513"/></svg>', req: "2nd Class 2b" }
+                ]
+            },
+            knots: {
+                type: 'visual', title: "Knot Knowledge", desc: "Identify the correct knot based on its visual appearance and primary use.", icon: "🪢",
+                options: [ {label: "Square", value: "square"}, {label: "Bowline", value: "bowline"}, {label: "Clove Hitch", value: "clove"}, {label: "Taut-line", value: "tautline"} ],
+                items: [
+                    { name: "Square Knot", status: "square", tip: "Used to join two ropes of the same thickness.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 40 C40 40, 40 60, 50 50 C60 40, 60 60, 90 60 M10 60 C40 60, 40 40, 50 50 C60 60, 60 40, 90 40" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "Tenderfoot 3a" },
+                    { name: "Bowline", status: "bowline", tip: "Creates a secure loop that won't slip or tighten.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="60" r="20" fill="none" stroke="#475569" stroke-width="8"/><path d="M50 20 L50 40 C60 40, 70 50, 60 60 C50 70, 40 50, 50 40 L50 80" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "First Class 3b" },
+                    { name: "Clove Hitch", status: "clove", tip: "Used to start and finish most lashings.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="40" y="10" width="20" height="80" fill="#d4d4d8"/><path d="M10 30 L90 30 M10 70 L90 70 M20 70 L80 30" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "First Class 3a" },
+                    { name: "Taut-line Hitch", status: "tautline", tip: "Creates an adjustable loop, great for tent guy lines.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 20 L20 80 C20 90, 80 90, 80 80 L80 20 M20 40 L80 40 M20 60 L80 60" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/></svg>', req: "Tenderfoot 3a" }
+                ]
+            },
+            lashings: {
+                type: 'visual', title: "Lashings", desc: "Identify the correct lashing used for pioneer camp projects.", icon: "🪵",
+                options: [ {label: "Square", value: "square"}, {label: "Diagonal", value: "diagonal"}, {label: "Shear", value: "shear"}, {label: "Tripod", value: "tripod"} ],
+                items: [
+                    { name: "Square Lashing", status: "square", tip: "Binds two poles crossing at a 90-degree angle.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="40" y="10" width="20" height="80" fill="#d4d4d8"/><rect x="10" y="40" width="80" height="20" fill="#d4d4d8"/><path d="M35 35 h30 v30 h-30 z" fill="none" stroke="#8B4513" stroke-width="5" stroke-linejoin="miter"/></svg>', req: "First Class 3a" },
+                    { name: "Diagonal Lashing", status: "diagonal", tip: "Binds two poles crossing at an angle, used to spring poles together.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><g transform="rotate(45 50 50)"><rect x="40" y="10" width="20" height="80" fill="#d4d4d8"/><rect x="10" y="40" width="80" height="20" fill="#d4d4d8"/><path d="M40 40 L60 60 M60 40 L40 60" stroke="#8B4513" stroke-width="5"/></g></svg>', req: "First Class 3a" },
+                    { name: "Shear Lashing", status: "shear", tip: "Used to bind two poles end-to-end or create an A-frame.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M40 10 L30 90 M60 10 L70 90" stroke="#d4d4d8" stroke-width="15" stroke-linecap="round"/><rect x="35" y="30" width="30" height="20" fill="#8B4513"/></svg>', req: "First Class 3a" },
+                    { name: "Tripod Lashing", status: "tripod", tip: "Binds three poles together to form a free-standing structure.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L50 90 M50 10 L20 90 M50 10 L80 90" stroke="#d4d4d8" stroke-width="12" stroke-linecap="round"/><path d="M40 30 Q50 40 60 30" fill="none" stroke="#8B4513" stroke-width="8"/></svg>', req: "Pioneering Merit Badge" }
+                ]
+            },
 
-            maps: [
-                { name: "Contour Lines", status: "elev", tip: "Shows changes in elevation.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2" /></svg>', req: "2nd Class 3a" },
-                { name: "Marsh / Swamp", status: "water", tip: "Indicates wet, boggy ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 70 L40 70 M60 70 L80 70 M30 80 L70 80" stroke="#0000FF" stroke-width="2" /><path d="M25 60 L25 70 M50 60 L50 70 M75 60 L75 70" stroke="#0000FF" stroke-width="2" /></svg>', req: "2nd Class 3a" },
-                { name: "Buildings", status: "human", tip: "Solid black squares represent buildings.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black" /></svg>', req: "2nd Class 3a" },
-                { name: "Depression", status: "elev", tip: "Ticks point inward to low ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="30" fill="none" stroke="#8B4513" stroke-width="2" /><path d="M50 20 L50 25 M80 50 L75 50 M50 80 L50 75 M20 50 L25 50" stroke="#8B4513" stroke-width="2" /></svg>', req: "2nd Class 3a" }
-            ],
-
-            fire: [
-                { name: "Tepee Lay", status: "start", tip: "The best shape for starting a new fire.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M50 10 L80 80 M50 10 L50 80" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/></svg>', req: "2nd Class 2b" },
-                { name: "Log Cabin", status: "heat", tip: "Great for sustained heat and cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/><rect x="20" y="55" width="60" height="8" fill="#8B4513"/><rect x="30" y="40" width="40" height="8" fill="#8B4513"/></svg>', req: "2nd Class 2b" }
-            ],
-
-            emblem: [
-                { id: 1, text: "3 parts of the Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;", tip: "Corresponds to Duty to God/Country, Others, and Self.", req: "1st Class 1a" },
-                { id: 2, text: "Freedom & Readiness to Defend", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;", tip: "The Eagle and Shield symbolise our country.", req: "1st Class 1a" },
-                { id: 3, text: "Truth and Knowledge", name: "Stars", style: "top:40%; left:12%; width:15%; height:12%;", tip: "The two stars show the Scout's guides.", req: "1st Class 1a" },
-                { id: 4, text: "A Scout's Smile (Prepared)", name: "Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;", tip: "The shape turns up like a smile to show readiness.", req: "1st Class 1a" },
-                { id: 5, text: "Do a Good Turn Daily", name: "Knot", style: "bottom:5%; left:40%; width:20%; height:10%;", tip: "The knot reminder to serve others.", req: "1st Class 1a" },
-                { id: 6, text: "Points you in right direction", name: "Shape", style: "top:20%; left:5%; width:15%; height:15%;", tip: "The Fleur-de-lis is a compass needle.", req: "1st Class 1a" }
-            ]
+            emblem: { 
+                type: 'emblem',
+                title: "Emblem Pin-It", 
+                desc: "Objective: Pin the correct meanings to each symbolic part of the First Class Badge.", 
+                icon: "🏅", 
+                parts: [
+                    { id: 1, text: "3 parts of the Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;", tip: "Corresponds to Duty to God/Country, Others, and Self.", req: "1st Class 1a" },
+                    { id: 2, text: "Freedom & Readiness to Defend", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;", tip: "The Eagle and Shield symbolise our country.", req: "1st Class 1a" },
+                    { id: 3, text: "Truth and Knowledge", name: "Stars", style: "top:40%; left:12%; width:15%; height:12%;", tip: "The two stars show the Scout's guides.", req: "1st Class 1a" },
+                    { id: 4, text: "A Scout's Smile (Prepared)", name: "Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;", tip: "The shape turns up like a smile to show readiness.", req: "1st Class 1a" },
+                    { id: 5, text: "Do a Good Turn Daily", name: "Knot", style: "bottom:5%; left:40%; width:20%; height:10%;", tip: "The knot reminder to serve others.", req: "1st Class 1a" },
+                    { id: 6, text: "Points you in right direction", name: "Shape", style: "top:20%; left:5%; width:15%; height:15%;", tip: "The Fleur-de-lis is a compass needle.", req: "1st Class 1a" }
+                ]
+            }
         };
 
         // --- CORE LOGIC ---
@@ -489,7 +566,7 @@
         let embPlaced = {}; let activeEmbSelection = null;
         
         let completedGames = {};
-        const TOTAL_GAMES = 15;
+        const TOTAL_GAMES = 19; // Updated to 19 total games!
 
         function updateGlobalProgress() {
             const completedCount = Object.keys(completedGames).length;
@@ -509,7 +586,7 @@
                 }
                 if (btnEl) {
                     btnEl.classList.add('border-emerald-300', 'bg-emerald-50/30');
-                    btnEl.classList.remove('border-orange-100', 'border-rose-100', 'border-blue-100', 'border-amber-100', 'border-emerald-100', 'border-cyan-100', 'border-red-100', 'border-indigo-100', 'border-green-100');
+                    btnEl.classList.remove('border-orange-100', 'border-rose-100', 'border-blue-100', 'border-amber-100', 'border-emerald-100', 'border-cyan-100', 'border-red-100', 'border-indigo-100', 'border-green-100', 'border-slate-200', 'border-amber-200');
                 }
             });
         }
@@ -543,20 +620,8 @@
         function prepareLevel(id) {
             currentId = id;
             const overlay = document.getElementById('gameStartOverlay');
-            let d;
-            if (['plants', 'maps', 'fire', 'emblem'].includes(id)) {
-                const btn = document.querySelector(`button[onclick="prepareLevel('${id}')"]`);
-                const title = btn.querySelector('h3').innerText;
-                const descs = {
-                    plants: "Challenge: Identify the flora in the Field Guide as Safe or Toxic. Accuracy is key to woodsman survival.",
-                    maps: "Objective: Correcty identify the standard topographic symbols used for wilderness navigation.",
-                    fire: "Mission: Identify the standard fire lay patterns used for different camping purposes.",
-                    emblem: "Objective: Pin the correct meanings to each symbolic part of the First Class Badge."
-                };
-                d = { title: title, desc: descs[id], icon: "🎯" };
-            } else {
-                d = DATA[id];
-            }
+            const d = DATA[id];
+            
             document.getElementById('startTitle').innerText = d.title;
             document.getElementById('startDesc').innerText = d.desc;
             document.getElementById('startIcon').innerText = d.icon || "⭐";
@@ -566,9 +631,9 @@
         function beginChallenge() {
             document.getElementById('gameStartOverlay').classList.add('hidden');
             startTimer();
-            if (['oath', 'law', 'action', 'triage', 'cpr', 'snake', 'edge', 'rice', 'rescue', 'teams', 'outdoor'].includes(currentId)) initSequence(currentId);
-            else if (['plants', 'maps', 'fire'].includes(currentId)) initVisual(currentId);
-            else if (currentId === 'emblem') initEmblem();
+            if (DATA[currentId].type === 'sequence') initSequence(currentId);
+            else if (DATA[currentId].type === 'visual') initVisual(currentId);
+            else if (DATA[currentId].type === 'emblem') initEmblem();
         }
 
         function startTimer() {
@@ -655,7 +720,7 @@
                     const correctList = masterItems.map((item, idx) => `${idx + 1}. ${item}`).join('<br/>');
                     showReqFeedback(
                         "Handbook Check", 
-                        `<b>Incorrect Sequence.</b> Here is the correct order:<br/><div class="mt-2 mb-3 p-3 bg-orange-100/50 rounded-lg text-left text-[11px] leading-snug font-mono text-orange-900 border border-orange-200">${correctList}</div><b>Explanation:</b> ${DATA[currentId].explanation || ''}`, 
+                        `<b>Incorrect Order.</b> Here is the correct order:<br/><div class="mt-2 mb-3 p-3 bg-orange-100/50 rounded-lg text-left text-[11px] leading-snug font-mono text-orange-900 border border-orange-200">${correctList}</div><b>Explanation:</b> ${DATA[currentId].explanation || ''}`, 
                         DATA[currentId].req
                     );
                 } else {
@@ -668,23 +733,23 @@
         }
 
         function initVisual(type) {
-            visualIdx = 0; visualDeck = [...DATA[type]].sort(() => Math.random() - 0.5);
-            const titles = { plants: "Safe or Toxic?", maps: "Map Master", fire: "Fire Builder" };
-            document.getElementById('visTitle').innerText = titles[type];
-            renderVisualOptions(); updateVisualCard(); showPage('visual');
+            visualIdx = 0; visualDeck = [...DATA[type].items].sort(() => Math.random() - 0.5);
+            document.getElementById('visTitle').innerText = DATA[type].title;
+            renderVisualOptions(type); updateVisualCard(); showPage('visual');
         }
 
-        function renderVisualOptions() {
+        function renderVisualOptions(type) {
             const container = document.getElementById('visOptions'); container.innerHTML = '';
-            let labels = [], states = [];
-            if (currentId === 'plants') { labels = ['SAFE', 'TOXIC']; states = ['safe', 'toxic']; }
-            else if (currentId === 'maps') { labels = ['Water Feature', 'Elevation', 'Human Made']; states = ['water', 'elev', 'human']; }
-            else { labels = ['Starting Fire', 'Warmth/Cooking']; states = ['start', 'heat']; }
-            labels.forEach((label, i) => {
+            const options = DATA[type].options;
+            
+            // Adjust grid columns based on number of options (e.g. 2 for safe/toxic, 4 for knots)
+            container.className = `grid gap-4 mt-6 ${options.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2'}`;
+            
+            options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = "p-5 bg-slate-100 rounded-3xl font-black text-xs tracking-tighter shadow-md border-b-4 border-slate-300 hover:bg-slate-200 active:scale-95 transition-all";
-                btn.innerText = label;
-                btn.onclick = () => checkVisual(states[i], btn);
+                btn.innerText = opt.label;
+                btn.onclick = () => checkVisual(opt.value, btn);
                 container.appendChild(btn);
             });
         }
@@ -695,8 +760,12 @@
             document.getElementById('visProgress').style.width = `${(visualIdx / visualDeck.length) * 100}%`;
             document.getElementById('visFeedback').classList.add('hidden');
             document.getElementById('visCard').className = "bg-white rounded-[2.5rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center";
-            if (currentId === 'plants') display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
-            else display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4 leading-tight text-center px-2">${item.name}</p>`;
+            
+            if (item.img) {
+                display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
+            } else if (item.svg) {
+                display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4 leading-tight text-center px-2">${item.name}</p>`;
+            }
         }
 
         function checkVisual(choice, btn) {
@@ -728,7 +797,7 @@
         function renderEmbBank() {
             const b = document.getElementById('embBank'); b.innerHTML = '';
             const usedIds = Object.values(embPlaced).map(v => v.id);
-            DATA.emblem.filter(x => !usedIds.includes(x.id)).forEach(item => {
+            DATA.emblem.parts.filter(x => !usedIds.includes(x.id)).forEach(item => {
                 const btn = document.createElement('button');
                 btn.className = `p-3 rounded-xl border-2 text-[10px] font-bold text-left transition-all ${activeEmbSelection?.id === item.id ? 'bg-amber-50 border-amber-500 scale-105 shadow-md' : 'bg-white border-slate-100'}`;
                 btn.innerText = item.text;
@@ -738,7 +807,7 @@
         }
         function renderEmbBoard() {
             const t = document.getElementById('embTargets'); t.innerHTML = '';
-            DATA.emblem.forEach(part => {
+            DATA.emblem.parts.forEach(part => {
                 const p = embPlaced[part.id];
                 const div = document.createElement('div');
                 div.style = part.style;
@@ -766,7 +835,7 @@
                 triggerPenalty(); 
                 document.getElementById('embBoard').classList.add('error-shake'); 
                 if (userDifficulty === 1) {
-                    const wrongData = DATA.emblem.find(x => x.id === firstWrongId);
+                    const wrongData = DATA.emblem.parts.find(x => x.id === firstWrongId);
                     showReqFeedback("Handbook Check", `<b>Incorrect Placement.</b><br/>The <b>${wrongData.name}</b> means:<br/><i>"${wrongData.text}"</i><br/><br/><b>Explanation:</b> ${wrongData.tip}`, wrongData.req);
                 }
                 setTimeout(() => { 
