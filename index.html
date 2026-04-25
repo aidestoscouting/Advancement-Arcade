@@ -558,20 +558,20 @@
                 type: 'visual', title: "Knot Knowledge", desc: "Identify the correct knot based on its visual appearance and primary use.", icon: "🪢",
                 options: [ {label: "Square", value: "square"}, {label: "Bowline", value: "bowline"}, {label: "Clove Hitch", value: "clove"}, {label: "Taut-line", value: "tautline"} ],
                 items: [
-                    { name: "Square Knot", status: "square", tip: "Used to join two ropes of the same thickness.", img: "square_knot.jpg", req: "Tenderfoot 3a" },
-                    { name: "Bowline", status: "bowline", tip: "Creates a secure loop that won't slip or tighten.", img: "bowline.jpg", req: "First Class 3b" },
-                    { name: "Clove Hitch", status: "clove", tip: "Used to start and finish most lashings.", img: "clove_hitch.jpg", req: "First Class 3a" },
-                    { name: "Taut-line Hitch", status: "tautline", tip: "Creates an adjustable loop, great for tent guy lines.", img: "tautline.jpg", req: "Tenderfoot 3a" }
+                    { name: "Square Knot", status: "square", tip: "Used to join two ropes of the same thickness.", img: "https://upload.wikimedia.org/wikipedia/commons/1/11/Reef_knot.jpg", req: "Tenderfoot 3a" },
+                    { name: "Bowline", status: "bowline", tip: "Creates a secure loop that won't slip or tighten.", img: "https://upload.wikimedia.org/wikipedia/commons/1/18/Bowline.jpg", req: "First Class 3b" },
+                    { name: "Clove Hitch", status: "clove", tip: "Used to start and finish most lashings.", img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Clove_hitch.jpg", req: "First Class 3a" },
+                    { name: "Taut-line Hitch", status: "tautline", tip: "Creates an adjustable loop, great for tent guy lines.", img: "https://upload.wikimedia.org/wikipedia/commons/d/df/Taut-line_hitch.jpg", req: "Tenderfoot 3a" }
                 ]
             },
             lashings: {
                 type: 'visual', title: "Lashings", desc: "Identify the correct lashing used for pioneer camp projects.", icon: "🪵",
                 options: [ {label: "Square", value: "square"}, {label: "Diagonal", value: "diagonal"}, {label: "Shear", value: "shear"}, {label: "Tripod", value: "tripod"} ],
                 items: [
-                    { name: "Square Lashing", status: "square", tip: "Binds two poles crossing at a 90-degree angle.", img: "square_lashing.jpg", req: "First Class 3a" },
-                    { name: "Diagonal Lashing", status: "diagonal", tip: "Binds two poles crossing at an angle, used to spring poles together.", img: "diagonal_lashing.jpg", req: "First Class 3a" },
-                    { name: "Shear Lashing", status: "shear", tip: "Used to bind two poles end-to-end or create an A-frame.", img: "shear_lashing.jpg", req: "First Class 3a" },
-                    { name: "Tripod Lashing", status: "tripod", tip: "Binds three poles together to form a free-standing structure.", img: "tripod_lashing.jpg", req: "Pioneering Merit Badge" }
+                    { name: "Square Lashing", status: "square", tip: "Binds two poles crossing at a 90-degree angle.", img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Square_lashing.svg", req: "First Class 3a" },
+                    { name: "Diagonal Lashing", status: "diagonal", tip: "Binds two poles crossing at an angle, used to spring poles together.", img: "https://upload.wikimedia.org/wikipedia/commons/b/b5/Diagonal_lashing.svg", req: "First Class 3a" },
+                    { name: "Shear Lashing", status: "shear", tip: "Used to bind two poles end-to-end or create an A-frame.", img: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Shear_lashing.svg", req: "First Class 3a" },
+                    { name: "Tripod Lashing", status: "tripod", tip: "Binds three poles together to form a free-standing structure.", img: "https://upload.wikimedia.org/wikipedia/commons/4/46/Tripod_lashing.svg", req: "Pioneering Merit Badge" }
                 ]
             },
 
@@ -793,7 +793,9 @@
             document.getElementById('visCard').className = "bg-white rounded-[2.5rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center";
             
             if (item.img) {
-                display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
+                // Use 'object-cover' for plants (photos), and 'object-contain' for knots/lashings (diagrams) so they aren't cropped
+                const imgClass = currentId === 'plants' ? 'object-cover' : 'object-contain p-4';
+                display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full ${imgClass} rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
             } else if (item.svg) {
                 display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4 leading-tight text-center px-2">${item.name}</p>`;
             }
