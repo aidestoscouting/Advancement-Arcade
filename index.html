@@ -773,7 +773,7 @@
             const container = document.getElementById('visOptions'); container.innerHTML = '';
             const options = DATA[type].options;
             
-            // Adjust grid columns based on number of options
+            // Adjust grid columns based on number of options (2 columns for safe/toxic, 4 for knots)
             container.className = `grid gap-4 mt-6 ${options.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2'}`;
             
             options.forEach(opt => {
@@ -795,7 +795,8 @@
             if (item.img) {
                 // Use 'object-cover' for plants (photos), and 'object-contain' for knots/lashings (diagrams) so they aren't cropped
                 const imgClass = currentId === 'plants' ? 'object-cover' : 'object-contain p-4';
-                display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full ${imgClass} rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
+                // Added an onerror fallback just in case the GitHub filename is slightly different than the code expects
+                display.innerHTML = `<img src="${item.img}" alt="${item.name}" onerror="this.onerror=null; this.src='https://placehold.co/400x300/f8fafc/94a3b8?text=Image+Missing';" class="absolute inset-0 w-full h-full ${imgClass} rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
             } else if (item.svg) {
                 display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4 leading-tight text-center px-2">${item.name}</p>`;
             }
