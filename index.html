@@ -16,10 +16,12 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Arcade UI Elements */
         .btn-card { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .btn-card:hover { transform: translateY(-4px); }
         .btn-card:active { transform: scale(0.95); }
 
+        /* Mobile Scroll Indicator */
         #scrollCue { animation: bounce 2s infinite; }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
@@ -27,22 +29,25 @@
             60% {transform: translateY(-5px);}
         }
 
+        /* Error/Penalty Effects */
         .error-shake { animation: shake 0.3s ease-in-out; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d !important; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         
         .timer-penalty { animation: timePenalty 0.5s ease-out; color: #ef4444 !important; }
         @keyframes timePenalty { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
-        .slot-filled { background-color: #1e293b !important; color: white !important; border-color: #0f172a !important; cursor: pointer; animation: popIn 0.2s ease-out; }
+        /* Slot Animations */
+        .slot-filled { background-color: #1e293b !important; color: white !important; border-color: #0f172a !important; cursor: pointer; animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
         .slot-wrong { background-color: #fee2e2 !important; color: #991b1b !important; border-color: #ef4444 !important; }
 
         .symbol-svg { width: 70px; height: 70px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
 
+        /* Emblem Styling */
         .drop-zone { transition: all 0.3s ease; border: 2px dashed #cbd5e1; background: rgba(255, 255, 255, 0.7); cursor: pointer; }
         .drop-zone.active { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
-        .drop-zone.filled { border: none; background: #10b981; color: white; border-radius: 8px; font-size: 8px; font-weight: 900; line-height: 1; padding: 2px; }
+        .drop-zone.filled { border: none; background: #10b981; color: white; border-radius: 8px; font-size: 8px; font-weight: 900; line-height: 1.1; padding: 4px; text-transform: uppercase; }
 
         #gameStartOverlay { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); }
     </style>
@@ -73,8 +78,8 @@
         <!-- RANK / TIER SELECTION -->
         <div id="page-rank" class="page active max-w-md mx-auto space-y-8 py-10">
             <div class="text-center">
-                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase tracking-tighter">Be Prepared</h2>
-                <p class="text-slate-500 font-bold uppercase text-xs tracking-widest">Select your rank to set difficulty</p>
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none">Be Prepared</h2>
+                <p class="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em] mt-2">Select your rank to begin</p>
             </div>
             <div class="grid gap-4">
                 <button onclick="setRank(1)" class="w-full p-6 bg-white border-4 border-orange-100 rounded-3xl text-left hover:border-orange-500 transition-all group shadow-md active:scale-95">
@@ -134,7 +139,7 @@
                         </button>
                         <button onclick="prepareLevel('outdoor')" class="btn-card bg-white p-5 rounded-3xl border-2 border-emerald-100 hover:border-emerald-500 shadow-md text-left group">
                             <h3 class="font-black text-gray-900 uppercase">Outdoor Code</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Ethics & Conservation</p>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Ethics & Nature</p>
                         </button>
                     </div>
                 </section>
@@ -143,12 +148,12 @@
                 <section>
                     <div class="flex items-center gap-3 border-b-4 border-rose-500 pb-2 mb-6">
                         <span class="text-2xl">🏥</span>
-                        <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">Emergency Preparedness</h2>
+                        <h2 class="text-lg font-brand font-black uppercase text-gray-900 tracking-tight">Emergency Response</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <button onclick="prepareLevel('action')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">3 C's of Response</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Foundational Sequence</p>
+                            <h3 class="font-black text-gray-900 uppercase">The 3 C's</h3>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Scene Management</p>
                         </button>
                         <button onclick="prepareLevel('triage')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
                             <h3 class="font-black text-gray-900 uppercase">Hurry Cases</h3>
@@ -160,15 +165,15 @@
                         </button>
                         <button onclick="prepareLevel('rice')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
                             <h3 class="font-black text-gray-900 uppercase">Strains & Sprains</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">First Aid Steps</p>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Injury Care</p>
                         </button>
                         <button onclick="prepareLevel('snake')" class="btn-card bg-white p-5 rounded-3xl border-2 border-rose-100 hover:border-rose-500 shadow-md text-left">
                             <h3 class="font-black text-gray-900 uppercase">Snakebite Care</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Outdoor Safety</p>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Wilderness Aid</p>
                         </button>
                         <button onclick="prepareLevel('rescue')" class="btn-card bg-white p-5 rounded-3xl border-2 border-cyan-100 hover:border-cyan-500 shadow-md text-left">
                             <h3 class="font-black text-gray-900 uppercase">Water Safety</h3>
-                            <p class="text-[10px] text-slate-500 font-bold mt-1">Aquatic Rescue</p>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1">Aquatic Logic</p>
                         </button>
                     </div>
                 </section>
@@ -203,11 +208,11 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <button onclick="prepareLevel('edge')" class="btn-card bg-white p-5 rounded-3xl border-2 border-amber-100 hover:border-amber-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Teaching a Skill</h3>
+                            <h3 class="font-black text-gray-900 uppercase">Teaching Skills</h3>
                             <p class="text-[10px] text-slate-500 font-bold mt-1">E.D.G.E. Method</p>
                         </button>
                         <button onclick="prepareLevel('teams')" class="btn-card bg-white p-5 rounded-3xl border-2 border-indigo-100 hover:border-indigo-500 shadow-md text-left">
-                            <h3 class="font-black text-gray-900 uppercase">Leading a Group</h3>
+                            <h3 class="font-black text-gray-900 uppercase">Leading Groups</h3>
                             <p class="text-[10px] text-slate-500 font-bold mt-1">Team Development</p>
                         </button>
                     </div>
@@ -218,13 +223,13 @@
         <!-- SEQUENCING ENGINE -->
         <div id="page-sequence" class="page max-w-2xl mx-auto space-y-4 pb-20">
             <div class="text-center">
-                <h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand tracking-tighter">Level Title</h2>
-                <p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px]">Instructions</p>
+                <h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand tracking-tighter leading-tight">Level Title</h2>
+                <p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p>
             </div>
             <div id="seqGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div>
             <div id="seqBank" class="flex flex-wrap justify-center gap-2 p-4 bg-white rounded-3xl border-2 border-slate-100 shadow-inner mt-4"></div>
             <div class="flex justify-center mt-6">
-                <button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-4 rounded-2xl shadow-xl hover:bg-orange-500 hover:scale-105 transition-all tracking-widest">Check with SPL</button>
+                <button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-4 rounded-2xl shadow-xl hover:bg-orange-500 hover:scale-105 transition-all tracking-widest active:scale-95">Check with SPL</button>
             </div>
             <div id="scrollCue" class="md:hidden flex flex-col items-center py-4 text-orange-400 font-bold text-[10px] uppercase tracking-widest">
                 <span>Scroll for more slots</span>
@@ -252,8 +257,8 @@
         <!-- EMBLEM ENGINE -->
         <div id="page-emblem" class="page space-y-6 pb-10">
             <div class="text-center">
-                <h2 class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight">Emblem Pin-It</h2>
-                <p class="text-amber-600 font-bold uppercase tracking-widest text-[10px]">Select meaning, then tap the badge part.</p>
+                <h2 class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Emblem Pin-It</h2>
+                <p class="text-amber-600 font-bold uppercase tracking-widest text-[10px] mt-2">Select meaning, then tap the badge part.</p>
             </div>
             <div class="flex flex-col lg:flex-row gap-6 items-center justify-center">
                 <div id="embBank" class="w-full lg:w-64 grid gap-2"></div>
@@ -263,7 +268,7 @@
                 </div>
             </div>
             <div class="flex justify-center mt-4">
-                <button id="embCheckBtn" onclick="verifyEmblem()" class="hidden bg-gray-900 text-white font-black uppercase px-10 py-4 rounded-2xl shadow-xl hover:bg-amber-500 transition-all tracking-widest">Verify Badge</button>
+                <button id="embCheckBtn" onclick="verifyEmblem()" class="hidden bg-gray-900 text-white font-black uppercase px-10 py-4 rounded-2xl shadow-xl hover:bg-amber-500 transition-all tracking-widest active:scale-95">Verify Badge</button>
             </div>
         </div>
 
@@ -275,8 +280,8 @@
             <div id="startIcon" class="text-7xl mb-4">⭐</div>
             <h2 id="startTitle" class="text-3xl font-brand font-black text-gray-900 uppercase leading-none mb-2 tracking-tight">Level Title</h2>
             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-8">
-                <p class="text-[10px] uppercase font-black text-slate-400 mb-1 tracking-widest">Mission Objective</p>
-                <p id="startDesc" class="text-slate-700 font-bold leading-tight"></p>
+                <p class="text-[10px] uppercase font-black text-slate-400 mb-1 tracking-widest text-left">Mission Objective</p>
+                <p id="startDesc" class="text-slate-700 font-bold leading-tight text-left"></p>
             </div>
             <button onclick="beginChallenge()" class="w-full bg-orange-500 text-white font-black py-5 rounded-2xl shadow-xl hover:bg-orange-600 transition-all uppercase tracking-widest text-xl active:scale-95">Start Clock</button>
             <button onclick="showPage('menu')" class="mt-6 text-xs text-slate-400 font-black uppercase tracking-widest hover:text-slate-900">Cancel</button>
@@ -288,7 +293,7 @@
         <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl border-4 border-emerald-500 relative overflow-hidden">
             <div class="absolute -right-6 top-6 rotate-45 bg-emerald-100 text-emerald-600 font-black px-10 py-1 text-[10px] uppercase tracking-widest opacity-40">Approved</div>
             <div class="text-6xl mb-4">🏆</div>
-            <h2 id="successTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight border-b-2 border-slate-100 pb-2">Skill Verified!</h2>
+            <h2 id="successTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight border-b-2 border-slate-100 pb-2 leading-none">Skill Verified!</h2>
             <p id="successText" class="text-slate-600 my-6 font-bold leading-tight italic"></p>
             <div class="bg-slate-50 rounded-xl p-4 mb-8 border border-slate-100 text-left relative">
                 <p class="text-[8px] uppercase font-black text-slate-400 mb-1">Senior Patrol Leader Signature</p>
@@ -307,42 +312,112 @@
         const DATA = {
             oath: { 
                 title: "Scout Oath", 
-                desc: "Place the 6 parts of the Scout Oath in the correct order, starting after the line: 'On my honor, I will do my best...'", 
+                desc: "Challenge: Sequence the 6 lines of the Scout Oath correctly. The timer starts with the line provided below.", 
                 icon: "⚜️", 
                 items: ["To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight"], 
-                reveal: "You have successfully sequenced the Scout Oath!",
+                reveal: "The Scout Oath is the foundation of our movement.",
                 prefix: "On my honor, I will do my best..."
             },
-            law: { title: "Scout Law", desc: "Memorization Check: Sequence all 12 points of the Scout Law in the exact order found in the handbook.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout lives by these 12 points every single day." },
-            action: { title: "3 C's of First Aid", desc: "Order the three basic 'Emergency Action Steps' taken when arriving at any scene.", icon: "🚨", items: ["Check the scene", "Call for help", "provide Care"], reveal: "Always follow the 3 C's: Check, Call, Care." },
-            triage: { title: "Hurry Cases", desc: "Triage Logic: Order the life-threatening 'Hurry Cases' by medical priority (highest danger first).", icon: "🏥", items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], reveal: "Treating in this order saves lives in a crisis." },
-            cpr: { title: "CPR Sequence", desc: "Safety Check: Order the proper steps for responding to a non-responsive person using Hands-Only CPR.", icon: "💓", items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], reveal: "Hands-Only CPR can double a person's chance of survival!" },
-            snake: { title: "Snakebite Care", desc: "Medical Protocol: Put the correct modern treatment steps for a venomous snakebite in order.", icon: "🐍", items: ["Move away from the snake", "Stay calm and keep still", "Keep the bite area below heart level", "Get to a hospital immediately"], reveal: "Staying calm and still is the best treatment for snakebites." },
-            edge: { title: "Teaching a Skill", desc: "Leadership Training: Order the steps of the method used to teach a new skill to a fellow Scout.", icon: "🎓", items: ["Explain", "Demonstrate", "Guide", "Enable"], reveal: "You just mastered the E.D.G.E. method!" },
-            rice: { title: "Strains & Sprains", desc: "Treatment Steps: Correctly sequence the treatment for minor muscle injuries or sprains.", icon: "🩹", items: ["Rest", "Ice", "Compression", "Elevation"], reveal: "Success! You used the R.I.C.E. method." },
-            rescue: { title: "Water Safety", desc: "Rescue Order: Sequence the water rescue methods from the safest for the rescuer to the most dangerous.", icon: "🛶", items: ["Reach", "Throw", "Row", "Go"], reveal: "Always Reach and Throw before you Go!" },
-            teams: { title: "Leading a Group", desc: "NYLT Knowledge: Identify the four developmental stages that every team or patrol goes through.", icon: "🤝", items: ["Forming", "Storming", "Norming", "Performing"], reveal: "These are the 4 Stages of Team Development." },
-            outdoor: { title: "Outdoor Code", desc: "Conservation Check: Sequence the points of the American Outdoor Code correctly.", icon: "🌲", items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], reveal: "The Outdoor Code is a Scout's promise to nature." },
+            law: { 
+                title: "Scout Law", 
+                desc: "Memorization: Sequence all 12 points of the Scout Law in the exact order found in the handbook.", 
+                icon: "📜", 
+                items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], 
+                reveal: "A Scout lives by these 12 points every single day.",
+                prefix: "A Scout is..."
+            },
+            action: { 
+                title: "The 3 C's", 
+                desc: "Safety Check: Sequence the three basic action steps used when responding to any emergency scene.", 
+                icon: "🚨", 
+                items: ["Check the scene", "Call for help", "provide Care"], 
+                reveal: "Always follow the 3 C's: Check, Call, Care.",
+                prefix: "Emergency Action Steps:"
+            },
+            triage: { 
+                title: "Hurry Cases", 
+                desc: "Triage Logic: Order the life-threatening 'Hurry Cases' by medical priority (highest danger first).", 
+                icon: "🏥", 
+                items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock", "Serious Burns", "Minor Cuts & Scratches"], 
+                reveal: "Treating in this order saves lives in a crisis.",
+                prefix: "Medical Priority List:"
+            },
+            cpr: { 
+                title: "CPR Sequence", 
+                desc: "First Aid: Order the correct steps for responding to a non-responsive person using Hands-Only CPR.", 
+                icon: "💓", 
+                items: ["Check the scene for safety", "Check responsiveness (Tap & Shout)", "Call 911 and get an AED", "Start chest compressions"], 
+                reveal: "Hands-Only CPR can double a person's survival chance!",
+                prefix: "First Aid Protocol:"
+            },
+            snake: { 
+                title: "Snakebite Care", 
+                desc: "Wilderness Aid: Sequence the correct medical protocol for treating a venomous snakebite in the field.", 
+                icon: "🐍", 
+                items: ["Move away from the snake", "Stay calm and keep still", "Keep the bite area below heart level", "Get to a hospital immediately"], 
+                reveal: "Stay calm. Panic is the enemy of snakebite care.",
+                prefix: "First Aid Protocol:"
+            },
+            edge: { 
+                title: "Teaching Skills", 
+                desc: "Leadership: Sequence the four-step method used to teach any new skill to another Scout.", 
+                icon: "🎓", 
+                items: ["Explain", "Demonstrate", "Guide", "Enable"], 
+                reveal: "You just mastered the E.D.G.E. method!",
+                prefix: "The 4 Teaching Steps:"
+            },
+            rice: { 
+                title: "Strains & Sprains", 
+                desc: "First Aid: Sequence the standard treatment for minor soft-tissue injuries or sprains.", 
+                icon: "🩹", 
+                items: ["Rest", "Ice", "Compression", "Elevation"], 
+                reveal: "Success! You used the R.I.C.E. method.",
+                prefix: "First Aid Treatment:"
+            },
+            rescue: { 
+                title: "Water Safety", 
+                desc: "Rescue Order: Sequence water rescue methods from safest for the rescuer to the most risky.", 
+                icon: "🛶", 
+                items: ["Reach", "Throw", "Row", "Go"], 
+                reveal: "Always Reach and Throw before you Go!",
+                prefix: "Water Rescue Order:"
+            },
+            teams: { 
+                title: "Leading Groups", 
+                desc: "NYLT Logic: Sequence the four developmental stages every team goes through as they grow.", 
+                icon: "🤝", 
+                items: ["Forming", "Storming", "Norming", "Performing"], 
+                reveal: "These are the 4 Stages of Team Development.",
+                prefix: "Stages of Development:"
+            },
+            outdoor: { 
+                title: "Outdoor Code", 
+                desc: "Ethics: Sequence the 4 promises of the American Outdoor Code correctly.", 
+                icon: "🌲", 
+                items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], 
+                reveal: "The Outdoor Code is a promise to our planet.",
+                prefix: "As an American, I will do my best to..."
+            },
             
             plants: [
                 { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg" },
                 { name: "White Oak", status: "safe", tip: "Rounded lobes, no itch.", img: "oak.jpg" },
-                { name: "Virginia Creeper", status: "safe", tip: "Five leaves attached at center.", img: "creeper.jpg" },
+                { name: "Virginia Creeper", status: "safe", tip: "Five leaves, often confused with ivy.", img: "creeper.jpg" },
                 { name: "Poison Oak", status: "toxic", tip: "Fuzzy leaves of three.", img: "poison_oak.jpg" },
                 { name: "Poison Sumac", status: "toxic", tip: "Red stems, grows in swamps.", img: "sumac.jpg" },
                 { name: "Sassafras", status: "safe", tip: "Mitten or dinosaur track shape.", img: "sassafras.jpg" }
             ],
 
             maps: [
-                { name: "Contour Lines", status: "elev", tip: "Changes in elevation.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2" /></svg>' },
-                { name: "Marsh / Swamp", status: "water", tip: "Indicates wet ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 70 L40 70 M60 70 L80 70 M30 80 L70 80" stroke="#0000FF" stroke-width="2" /><path d="M25 60 L25 70 M50 60 L50 70 M75 60 L75 70" stroke="#0000FF" stroke-width="2" /></svg>' },
-                { name: "Buildings", status: "human", tip: "Solid black squares.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black" /></svg>' },
+                { name: "Contour Lines", status: "elev", tip: "Shows changes in elevation.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2" /></svg>' },
+                { name: "Marsh / Swamp", status: "water", tip: "Indicates wet, boggy ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M20 70 L40 70 M60 70 L80 70 M30 80 L70 80" stroke="#0000FF" stroke-width="2" /><path d="M25 60 L25 70 M50 60 L50 70 M75 60 L75 70" stroke="#0000FF" stroke-width="2" /></svg>' },
+                { name: "Buildings", status: "human", tip: "Solid black squares represent buildings.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black" /></svg>' },
                 { name: "Depression", status: "elev", tip: "Ticks point inward to low ground.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="30" fill="none" stroke="#8B4513" stroke-width="2" /><path d="M50 20 L50 25 M80 50 L75 50 M50 80 L50 75 M20 50 L25 50" stroke="#8B4513" stroke-width="2" /></svg>' }
             ],
 
             fire: [
-                { name: "Tepee Lay", status: "start", tip: "Best for starting a fire.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M50 10 L80 80 M50 10 L50 80" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/></svg>' },
-                { name: "Log Cabin", status: "heat", tip: "Good for light and cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/><rect x="20" y="55" width="60" height="8" fill="#8B4513"/><rect x="30" y="40" width="40" height="8" fill="#8B4513"/></svg>' }
+                { name: "Tepee Lay", status: "start", tip: "The best shape for starting a new fire.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M50 10 L80 80 M50 10 L50 80" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/></svg>' },
+                { name: "Log Cabin", status: "heat", tip: "Great for sustained heat and cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/><rect x="20" y="55" width="60" height="8" fill="#8B4513"/><rect x="30" y="40" width="40" height="8" fill="#8B4513"/></svg>' }
             ],
 
             emblem: [
@@ -355,7 +430,7 @@
             ]
         };
 
-        // --- CORE LOGIC ---
+        // --- CORE ENGINE ---
         let userDifficulty = 1; let currentId = ''; let secondsElapsed = 0; let timerInt = null;
         let masterItems = []; let userSequence = []; let visualIdx = 0; let visualDeck = [];
         let embPlaced = {}; let activeEmbSelection = null;
@@ -371,7 +446,6 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('successOverlay').classList.add('hidden');
             document.getElementById('gameStartOverlay').classList.add('hidden');
-            
             const target = document.getElementById(`page-${id}`);
             if (target) target.classList.add('active');
             const m = document.getElementById('menuBtn'); const r = document.getElementById('rankBtn'); const t = document.getElementById('globalTimer');
@@ -385,23 +459,21 @@
             currentId = id;
             const overlay = document.getElementById('gameStartOverlay');
             let d;
-            
             if (['plants', 'maps', 'fire', 'emblem'].includes(id)) {
                 const btn = document.querySelector(`button[onclick="prepareLevel('${id}')"]`);
                 const title = btn.querySelector('h3').innerText;
-                const instructions = {
-                    'plants': "Identify whether the flora shown in the field guide is Safe to handle or Toxic to the touch.",
-                    'maps': "Correcty identify the category of standard topographic map symbols used for navigation.",
-                    'fire': "Identify common fire lay patterns used for starting, heating, or cooking in the field.",
-                    'emblem': "Map out the symbolism of the First Class Badge by dragging meanings to their correct locations."
+                const descs = {
+                    plants: "Challenge: Identify the flora in the Field Guide as Safe or Toxic. Accuracy is key to woodsman survival.",
+                    maps: "Objective: Correcty identify the standard topographic symbols used for wilderness navigation.",
+                    fire: "Mission: Identify the standard fire lay patterns used for different camping purposes.",
+                    emblem: "Objective: Pin the correct meanings to each symbolic part of the First Class Badge."
                 };
-                d = { title: title, desc: instructions[id], icon: "🎯" };
+                d = { title: title, desc: descs[id], icon: "🎯" };
             } else {
                 d = DATA[id];
             }
-            
             document.getElementById('startTitle').innerText = d.title;
-            document.getElementById('startDesc').innerText = d.desc || "Sequence the items in the correct order to prove your knowledge.";
+            document.getElementById('startDesc').innerText = d.desc;
             document.getElementById('startIcon').innerText = d.icon || "⭐";
             overlay.classList.remove('hidden');
         }
@@ -437,7 +509,7 @@
             const d = DATA[type]; masterItems = d.items;
             userSequence = Array(masterItems.length).fill(null);
             document.getElementById('seqTitle').innerText = d.title;
-            document.getElementById('seqSubtitle').innerText = d.prefix || "A Scout is...";
+            document.getElementById('seqSubtitle').innerText = d.prefix || "Sequence Steps:";
             renderSeqGrid(); renderSeqBank(); showPage('sequence');
             document.getElementById('scrollCue').style.display = (masterItems.length > 6) ? 'flex' : 'none';
         }
@@ -527,9 +599,9 @@
             const display = document.getElementById('visDisplay');
             document.getElementById('visProgress').style.width = `${(visualIdx / visualDeck.length) * 100}%`;
             document.getElementById('visFeedback').classList.add('hidden');
-            document.getElementById('visCard').className = "bg-white rounded-[2.5rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden transition-colors flex items-center justify-center";
+            document.getElementById('visCard').className = "bg-white rounded-[2.5rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center";
             if (currentId === 'plants') display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] z-10 shadow-inner bg-slate-100" />`;
-            else display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4">${item.name}</p>`;
+            else display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div> <p class="mt-4 font-black text-xl uppercase text-slate-800 absolute bottom-4 leading-tight text-center px-2">${item.name}</p>`;
         }
 
         function checkVisual(choice, btn) {
