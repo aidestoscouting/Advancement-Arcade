@@ -71,37 +71,58 @@
 
     <main class="max-w-5xl mx-auto px-4 mt-6 w-full flex-1 mb-12">
         
-        <!-- PAGE 1: MASTER LOBBY -->
+        <!-- PAGE: MASTER LOBBY -->
         <div id="page-lobby" class="page active max-w-4xl mx-auto space-y-8 py-10">
             <div class="text-center">
                 <h2 class="text-5xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">The Portal</h2>
                 <p class="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Choose your Scouting branch</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <button onclick="selectPath('cub')" class="btn-card bg-white border-4 border-amber-100 rounded-[2.5rem] p-6 text-center hover:border-amber-500 shadow-xl overflow-hidden">
-                    <div class="text-5xl mb-4">🐺</div>
-                    <h3 class="text-xl font-brand font-black text-amber-600 uppercase mb-1">Cubs</h3>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase">Lions - AOL</p>
+                
+                <!-- CUBS BUTTON -->
+                <button onclick="selectPath('cub')" class="btn-card group bg-white border-4 border-amber-100 rounded-[2.5rem] p-6 text-center hover:border-amber-500 shadow-xl overflow-hidden relative">
+                    <img src="rank_wolf.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:rotate-12 object-contain grayscale" />
+                    <div class="relative z-10">
+                        <img src="rank_wolf.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Cubs';" />
+                        <h3 class="text-xl font-brand font-black text-amber-600 uppercase mb-1">Cubs</h3>
+                        <p class="text-[9px] text-slate-400 font-bold uppercase">Lions - AOL</p>
+                    </div>
                 </button>
-                <button onclick="selectPath('bsa')" class="btn-card bg-white border-4 border-slate-100 rounded-[2.5rem] p-6 text-center hover:border-slate-900 shadow-xl overflow-hidden">
-                    <div class="text-5xl mb-4">🦅</div>
-                    <h3 class="text-xl font-brand font-black text-slate-800 uppercase mb-1">Troop</h3>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase">Scout - Eagle</p>
+
+                <!-- TROOP BUTTON -->
+                <button onclick="selectPath('bsa')" class="btn-card group bg-white border-4 border-slate-100 rounded-[2.5rem] p-6 text-center hover:border-slate-900 shadow-xl overflow-hidden relative">
+                    <img src="rank_first_class.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:-rotate-12 object-contain grayscale" />
+                    <div class="relative z-10">
+                        <img src="rank_first_class.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=BSA';" />
+                        <h3 class="text-xl font-brand font-black text-slate-800 uppercase mb-1">Troop</h3>
+                        <p class="text-[9px] text-slate-400 font-bold uppercase">Scout - Eagle</p>
+                    </div>
                 </button>
-                <button onclick="selectPath('venturing')" class="btn-card bg-white border-4 border-green-100 rounded-[2.5rem] p-6 text-center hover:border-green-700 shadow-xl overflow-hidden">
-                    <div class="text-5xl mb-4">🟢</div>
-                    <h3 class="text-xl font-brand font-black text-green-700 uppercase mb-1">Venturing</h3>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase">High Adventure</p>
+
+                <!-- VENTURING BUTTON -->
+                <button onclick="selectPath('venturing')" class="btn-card group bg-white border-4 border-green-100 rounded-[2.5rem] p-6 text-center hover:border-green-700 shadow-xl overflow-hidden relative">
+                    <img src="rank_venturing.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:rotate-12 object-contain grayscale" />
+                    <div class="relative z-10">
+                        <img src="rank_venturing.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Venture';" />
+                        <h3 class="text-xl font-brand font-black text-green-700 uppercase mb-1">Venturing</h3>
+                        <p class="text-[9px] text-slate-400 font-bold uppercase">High Adventure</p>
+                    </div>
                 </button>
-                <button onclick="selectPath('sea')" class="btn-card bg-white border-4 border-blue-100 rounded-[2.5rem] p-6 text-center hover:border-blue-900 shadow-xl overflow-hidden">
-                    <div class="text-5xl mb-4">⚓</div>
-                    <h3 class="text-xl font-brand font-black text-blue-900 uppercase mb-1">Sea Scouts</h3>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase">Maritime</p>
+
+                <!-- SEA SCOUTS BUTTON -->
+                <button onclick="selectPath('sea')" class="btn-card group bg-white border-4 border-blue-100 rounded-[2.5rem] p-6 text-center hover:border-blue-900 shadow-xl overflow-hidden relative">
+                    <img src="rank_sea_scout.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:-rotate-12 object-contain grayscale" />
+                    <div class="relative z-10">
+                        <img src="rank_sea_scout.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Sea';" />
+                        <h3 class="text-xl font-brand font-black text-blue-900 uppercase mb-1">Sea Scouts</h3>
+                        <p class="text-[9px] text-slate-400 font-bold uppercase">Maritime</p>
+                    </div>
                 </button>
+
             </div>
         </div>
 
-        <!-- PAGE 2: CUB RANKS -->
+        <!-- PAGE: CUB RANKS -->
         <div id="page-cub-ranks" class="page max-w-4xl mx-auto py-10 space-y-8">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase mb-2">Akela's Den</h2>
@@ -138,7 +159,7 @@
             </div>
         </div>
 
-        <!-- PAGE 3: BSA TIERS -->
+        <!-- PAGE: BSA TIERS -->
         <div id="page-bsa-difficulty" class="page max-w-lg mx-auto py-10 space-y-4">
             <div class="text-center mb-6">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Troop Tiers</h2>
@@ -168,7 +189,7 @@
             </div>
         </div>
 
-        <!-- PAGE 4: DASHBOARD MENU -->
+        <!-- PAGE: DASHBOARD -->
         <div id="page-menu" class="page space-y-10 pb-10">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-gray-900 bg-gray-900 aspect-[4/1]">
                 <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" onerror="this.onerror=null; this.src='https://placehold.co/1200x300/1e293b/1e293b';" />
@@ -177,7 +198,7 @@
             <div id="gameGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>
 
-        <!-- ENGINE 1: SEQUENCE -->
+        <!-- ENGINE: SEQUENCE -->
         <div id="page-sequence" class="page max-w-2xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand leading-tight">Level Title</h2><p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p></div>
             <div id="seqGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div>
@@ -185,14 +206,14 @@
             <div class="flex justify-center mt-6"><button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:scale-105 transition-all tracking-widest active:scale-95">Verify</button></div>
         </div>
 
-        <!-- ENGINE 2: VISUAL ID -->
+        <!-- ENGINE: VISUAL ID -->
         <div id="page-visual" class="page max-w-lg mx-auto space-y-6">
             <div class="text-center"><h2 id="visTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Visual ID</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="visProgress" class="h-full bg-emerald-500 w-0 transition-all"></div></div></div>
             <div id="visCard" class="bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center"><div id="visDisplay" class="w-full h-full flex items-center justify-center"></div><div id="visFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20"><div id="visFeedbackIcon" class="text-6xl mb-2 drop-shadow-md"></div><h3 id="visFeedbackName" class="text-3xl font-brand uppercase tracking-tighter text-center">Correct</h3><p id="visFeedbackTip" class="mt-2 text-center text-sm font-bold opacity-90"></p></div></div>
             <div id="visOptions" class="grid gap-4 mt-6"></div>
         </div>
 
-        <!-- ENGINE 3: SORTING -->
+        <!-- ENGINE: SORTING -->
         <div id="page-sorting" class="page max-w-2xl mx-auto space-y-8 pb-20">
             <div class="text-center"><h2 id="sortTitle" class="text-4xl font-brand font-black text-gray-900 uppercase leading-none mb-1">Sorting Challenge</h2><p id="sortSubtitle" class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Tap the bucket where this item belongs</p></div>
             <div class="flex justify-center items-center h-52 relative"><div id="sortActiveItem" class="flex flex-col items-center"><div class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20"><img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/></div><p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p></div></div>
@@ -202,21 +223,21 @@
             </div>
         </div>
 
-        <!-- ENGINE 4: PACKING -->
+        <!-- ENGINE: PACKING -->
         <div id="page-packing" class="page max-w-3xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="packTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">Packing Engine</h2><div class="inline-block bg-slate-900 text-white px-4 py-1.5 rounded-full font-mono text-sm font-black mt-2">Backpack: <span id="packCount" class="text-emerald-400">0</span> / <span id="packReqCount">10</span></div></div>
             <div id="packGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-4"></div>
             <div class="flex justify-center mt-6"><button id="packCheckBtn" onclick="verifyPacking()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-emerald-600 transition-all tracking-widest active:scale-95 text-lg">Check Bag</button></div>
         </div>
 
-        <!-- ENGINE 5: SCENARIO -->
+        <!-- ENGINE: SCENARIO -->
         <div id="page-scenario" class="page max-w-xl mx-auto space-y-6 pb-20 pt-4">
             <div class="text-center mb-6"><h2 id="scenTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none">Scenario</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="scenProgress" class="h-full bg-blue-500 w-0 transition-all"></div></div></div>
             <div class="bg-white p-8 rounded-[2rem] border-4 border-slate-100 shadow-xl relative"><div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-3xl p-3 rounded-full shadow-lg" id="scenIcon">💬</div><p id="scenPrompt" class="text-lg text-slate-700 font-bold leading-relaxed text-center mt-4"></p></div>
             <div id="scenOptions" class="grid gap-3 mt-6"></div>
         </div>
 
-        <!-- ENGINE 6: EMBLEM -->
+        <!-- ENGINE: EMBLEM -->
         <div id="page-emblem" class="page space-y-6 pb-10">
             <div class="text-center"><h2 id="embTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none mb-2">Diagram Match</h2><p class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Select meaning, then tap the part.</p></div>
             <div class="flex flex-col lg:flex-row gap-6 items-center justify-center">
@@ -290,7 +311,7 @@
                 <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-blue-600 transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                 <a href="https://www.tiktok.com/@aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-pink-600 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg></a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V5.0 Master Edition</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V5.1 Master Edition</p>
         </div>
     </footer>
 
@@ -748,7 +769,7 @@
                 ]
             },
 
-            // === VENTURING TRAIL ===
+            // --- VENTURING TRAIL ---
             lnt_master: {
                 type: 'visual', title: "LNT Master", desc: "Backcountry LNT scenarios.", icon: "🌿",
                 options: [ { label: "Durable", value: "yes" }, { label: "Fragile", value: "no" } ],
@@ -791,7 +812,7 @@
                 reveal: "Mentor Master.", req: "Summit"
             },
 
-            // === SEA SCOUTS TRAIL ===
+            // --- SEA SCOUTS TRAIL ---
             vessel_anatomy: {
                 type: 'emblem', title: "Vessel Anatomy", desc: "Identify boat parts.", icon: "⛵", img: "vessel_diagram.jpg",
                 parts: [
