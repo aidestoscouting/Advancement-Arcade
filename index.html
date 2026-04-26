@@ -129,6 +129,9 @@
                     <span class="block font-black uppercase text-[10px] text-indigo-800 tracking-widest">AOL</span>
                 </button>
             </div>
+            <div class="text-center pt-4">
+                <button onclick="exitToLobby()" class="text-[10px] font-black uppercase text-slate-400 tracking-widest hover:text-slate-900 transition-colors underline decoration-2 underline-offset-4">Change Path</button>
+            </div>
         </div>
 
         <!-- BSA TIERS -->
@@ -168,6 +171,9 @@
                     <img src="rank_eagle.png" class="h-14 w-14 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Eagle';"/>
                 </div>
             </button>
+            <div class="text-center pt-4">
+                <button onclick="exitToLobby()" class="text-[10px] font-black uppercase text-slate-400 tracking-widest hover:text-slate-900 transition-colors underline decoration-2 underline-offset-4">Change Path</button>
+            </div>
         </div>
 
         <!-- DASHBOARD MENU -->
@@ -298,7 +304,7 @@
                 <p class="text-[8px] uppercase font-black text-slate-400 mb-1 border-b border-slate-200 pb-1">Authorized Signature</p>
                 <p class="font-signature text-blue-800 text-4xl -rotate-1 origin-left inline-block pt-1 pb-1">Walker & Elliott</p>
                 <div class="absolute right-4 bottom-3 text-right">
-                    <p class="text-[8px] uppercase font-black text-slate-400 leading-none mb-1">Time</p>
+                    <p id="timeLabel" class="text-[8px] uppercase font-black text-slate-400 leading-none mb-1">Time</p>
                     <p id="finalTime" class="font-mono font-black text-emerald-600 text-lg leading-none">00:00</p>
                 </div>
             </div>
@@ -363,7 +369,7 @@
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg>
                 </a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • Version 2.0</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • Version 2.1</p>
         </div>
     </footer>
 
@@ -387,7 +393,7 @@
             six_essentials: { type: 'packing', title: "6 Essentials", desc: "Pack exactly 6 things for a Cub Scout hike.", icon: "🎒", req: "Tiger 1a", reveal: "Pack ready!", explanation: "Water, First Aid, Flashlight, Trail Food, Sunscreen, Whistle.", correctCount: 6, items: [ { name: "Water", img: "water_bottle.jpg", correct: true }, { name: "iPad", img: "tablet.jpg", correct: false }, { name: "First Aid", img: "first_aid_kit.jpg", correct: true }, { name: "Flashlight", img: "flashlight.jpg", correct: true }, { name: "Heavy Coat", img: "heavy_coat.jpg", correct: false }, { name: "Sunscreen", img: "sun_screen.jpg", correct: true }, { name: "Toys", img: "toys.jpg", correct: false }, { name: "Whistle", img: "whistle.jpg", correct: true }, { name: "Snack", img: "snack_trail_mix.jpg", correct: true } ] },
             lnt_cubs: { type: 'sorting', title: "Trash or Nature?", desc: "Put items where they belong.", icon: "🍃", buckets: ["Trash Bin", "Nature"], items:[ {name:"Wrapper", status:0, img:"candy_wrapper.jpg"}, {name:"Apple Core", status:0, img:"apple_core.jpg"}, {name:"Cool Rock", status:1, img:"cool_rock.jpg"}, {name:"Plastic", status:0, img:"plastic_bottle.jpg"}, {name:"Pinecone", status:1, img:"pinecone.jpg"}, {name:"Flower", status:1, img:"wildflower.jpg"} ], reveal: "LNT Expert!", req: "Wolf 1", explanation: "Pack it in, pack it out!" },
             weather_match: { type: 'visual', title: "Weather Gear", desc: "Pick the right gear.", icon: "☁️", options: [{label:"Winter", value:"snow"}, {label:"Rainy", value:"rain"}, {label:"Summer", value:"sun"}], items:[ {name: "Snow", status: "snow", tip: "Wear layers!", img: "weather_snow.jpg", req: "Wolf 4"}, {name: "Rain", status: "rain", tip: "Pack a poncho!", img: "weather_rain.jpg", req: "Wolf 4"}, {name: "Sunny", status: "sun", tip: "Wear a hat!", img: "weather_sun.jpg", req: "Wolf 4"} ] },
-            finding_way: { type: 'emblem', title: "Compass Points", desc: "Pin the directions.", icon: "🧭", img: "rank_first_class.png", parts: [ {id:1, text: "North", name: "Top", style: "top:10%; left:45%; width:10%; height:10%;", tip: "Points up.", req: "Wolf"}, {id:2, text: "South", name: "Bottom", style: "bottom:10%; left:45%; width:10%; height:10%;", tip: "Points down.", req: "Wolf"}, {id:3, text: "East", name: "Right", style: "top:45%; right:10%; width:10%; height:10%;", tip: "Points right.", req: "Wolf"}, {id:4, text: "West", name: "Left", style: "top:45%; left:10%; width:10%; height:10%;", tip: "Points left.", req: "Wolf"} ] },
+            finding_way: { type: 'emblem', title: "Compass Points", desc: "Pin the basic directions.", icon: "🧭", img: "compass_rose.jpg", parts: [ {id:1, text: "North", name: "Top", style: "top:10%; left:45%; width:10%; height:10%;", tip: "Points up.", req: "Wolf"}, {id:2, text: "South", name: "Bottom", style: "bottom:10%; left:45%; width:10%; height:10%;", tip: "Points down.", req: "Wolf"}, {id:3, text: "East", name: "Right", style: "top:45%; right:10%; width:10%; height:10%;", tip: "Points right.", req: "Wolf"}, {id:4, text: "West", name: "Left", style: "top:45%; left:10%; width:10%; height:10%;", tip: "Points left.", req: "Wolf"} ] },
             germs_away: { type: 'sequence', title: "Germs Away", desc: "Hand washing order.", icon: "🚰", items: ["Get hands wet", "Add soap", "Scrub for 20 seconds", "Rinse and dry"], reveal: "Squeaky clean.", prefix: "Steps:", req: "Wolf", explanation: "Sing Happy Birthday twice to reach 20 seconds." },
             whittling_chip: { type: 'sorting', title: "Knife Safety", desc: "Safe or unsafe?", icon: "🔪", buckets: ["Safe", "Unsafe"], items:[ {name:"Blood Circle", status:0, img:"gear_pocket_knife.jpg"}, {name:"Carve Toward You", status:1, img:"gear_pocket_knife.jpg"}, {name:"Close when walking", status:0, img:"gear_pocket_knife.jpg"}, {name:"Run with blade", status:1, img:"gear_pocket_knife.jpg"} ], reveal: "Whittling Chip earned.", req: "Bear", explanation: "Always carve away from yourself." },
             bear_necessities: { type: 'sequence', title: "Pitch a Tent", desc: "Order the steps.", icon: "⛺", items: ["Lay down the tarp", "Lay out the tent", "Put together the poles", "Stake it down"], reveal: "Camp ready.", prefix: "Steps:", req: "Bear", explanation: "The tarp protects the bottom of your tent." },
@@ -419,11 +425,11 @@
             fire: { type: 'visual', title: "Fire Builder", desc: "Fire lay patterns.", icon: "🏕️", options: [{label:"Start", value:"start"},{label:"Heat", value:"heat"}], items: [ {name:"Tepee Lay", status:"start", tip:"Best for starting.", svg:'<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M80 80 L50 10 M50 10 L50 80" stroke="#8B4513" stroke-width="4"/></svg>', req:"2nd Class 2b"}, {name:"Log Cabin", status:"heat", tip:"Sustained cooking.", svg:'<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/></svg>', req:"2nd Class 2b"} ] },
             knots: { type: 'visual', title: "Knot Knowledge", desc: "Identify the knot.", icon: "🪢", options: [{label:"Square", value:"square"},{label:"Bowline", value:"bowline"},{label:"Clove", value:"clove"},{label:"Taut-line", value:"tautline"}], items:[ {name:"Square Knot", status:"square", tip:"Joins ropes.", img:"square_knot.jpg", req:"Tenderfoot 3a"}, {name:"Bowline", status:"bowline", tip:"Rescue loop.", img:"bowline.jpg", req:"1st Class 3b"}, {name:"Clove Hitch", status:"clove", tip:"Starts lashings.", img:"clove_hitch.jpg", req:"1st Class 3a"}, {name:"Taut-line", status:"tautline", tip:"Adjustable loop.", img:"tautline.jpg", req:"Tenderfoot 3a"} ] },
             lashings: { type: 'visual', title: "Lashings", desc: "Pioneer lashings.", icon: "🪵", options: [{label:"Square", value:"square"},{label:"Diagonal", value:"diagonal"},{label:"Shear", value:"shear"},{label:"Tripod", value:"tripod"}], items:[ {name:"Square Lashing", status:"square", tip:"90 degrees.", img:"square_lashing.jpg", req:"1st Class 3a"}, {name:"Diagonal", status:"diagonal", tip:"Crossed poles.", img:"diagonal_lashing.jpg", req:"1st Class 3a"}, {name:"Shear", status:"shear", tip:"A-frames.", img:"shear_lashing.jpg", req:"1st Class 3a"}, {name:"Tripod", status:"tripod", tip:"3-legs.", img:"tripod_lashing.jpg", req:"1st Class 3a"} ] },
-            bsa_10_essentials: { type: 'packing', title: "10 Essentials", desc: "Pack exactly 10 items.", icon: "🎒", req: "Scout 1a", reveal: "Fully Prepared.", explanation: "Pocket knife, rain gear, trail food, flashlight, extra clothes, first aid, sunscreen, map, fire starter, water.", correctCount: 10, items: [ { name: "Water", img: "water_bottle.jpg", correct: true }, { name: "iPad", img: "tablet.jpg", correct: false }, { name: "First Aid", img: "first_aid_kit.jpg", correct: true }, { name: "Flashlight", img: "flashlight.jpg", correct: true }, { name: "Rain Gear", img: "gear_rain.jpg", correct: true }, { name: "Sunscreen", img: "sun_screen.jpg", correct: true }, { name: "Toys", img: "toys.jpg", correct: false }, { name: "Map", img: "gear_map.jpg", correct: true }, { name: "Trail Food", img: "snack_trail_mix.jpg", correct: true }, { name: "Pocket Knife", img: "gear_pocket_knife.jpg", correct: true }, { name: "Fire Starter", img: "gear_fire_starter.jpg", correct: true }, { name: "Heavy Coat", img: "heavy_coat.jpg", correct: true } ] },
+            bsa_10_essentials: { type: 'packing', title: "10 Essentials", desc: "Pack exactly 10 items.", icon: "🎒", req: "Scout 1a", reveal: "Fully Prepared.", explanation: "Pocket knife, rain gear, trail food, flashlight, compass, first aid, sunscreen, map, fire starter, water.", correctCount: 10, items: [ { name: "Water", img: "water_bottle.jpg", correct: true }, { name: "iPad", img: "tablet.jpg", correct: false }, { name: "First Aid", img: "first_aid_kit.jpg", correct: true }, { name: "Flashlight", img: "flashlight.jpg", correct: true }, { name: "Rain Gear", img: "gear_rain.jpg", correct: true }, { name: "Sunscreen", img: "sun_screen.jpg", correct: true }, { name: "Toys", img: "toys.jpg", correct: false }, { name: "Map", img: "gear_map.jpg", correct: true }, { name: "Trail Food", img: "snack_trail_mix.jpg", correct: true }, { name: "Pocket Knife", img: "gear_pocket_knife.jpg", correct: true }, { name: "Fire Starter", img: "gear_fire_starter.jpg", correct: true }, { name: "Compass", img: "compass_base.jpg", correct: true } ] },
             mb_logic: { type: 'sorting', title: "Merit Badges", desc: "Eagle Required vs Elective.", icon: "🏅", buckets: ["Eagle Required", "Elective"], items:[ {name:"First Aid", status:0, img:"mb_first_aid.jpg"}, {name:"Camping", status:0, img:"mb_camping.jpg"}, {name:"Citizenship", status:0, img:"mb_citizenship.jpg"}, {name:"Fingerprinting", status:1, img:"mb_fingerprinting.jpg"}, {name:"Basketry", status:1, img:"mb_basketry.jpg"}, {name:"Wood Carving", status:1, img:"mb_woodcarving.jpg"} ], reveal: "Advancement Ready.", req: "Star", explanation: "Silver bordered badges are required for Eagle." },
             choking_scenario: { type: 'scenario', title: "Choking Crisis", desc: "Make the right choices to save a life.", icon: "🗣️", req: "Tenderfoot 4b", reveal: "Crisis averted!", explanation: "Always encourage coughing first. If they can't breathe, begin back blows.", steps: [ { text: "You see someone grabbing their throat. They are coughing loudly. What do you do?", options: [ { label: "Give abdominal thrusts", correct: false, feedback: "If they are coughing, air is moving! Thrusts could lodge the object deeper." }, { label: "Encourage them to cough", correct: true } ] }, { text: "They stop coughing and cannot make any sound. They are turning blue.", options: [ { label: "Do the Heimlich maneuver", correct: false, feedback: "BSA protocol update: Start with 5 back blows first!" }, { label: "Call 911, start 5 back blows", correct: true } ] } ] },
             resolving_conflict: { type: 'scenario', title: "Conflict Resolution", desc: "Handle a dispute between two younger Scouts.", icon: "⚖️", req: "Life", reveal: "Great Leadership.", explanation: "A true leader listens to both sides and finds common ground.", steps: [ { text: "Two younger Scouts are yelling about whose turn it is to cook. What is your first move?", options: [ { label: "Yell at them to stop", correct: false, feedback: "A Scout is Friendly and Courteous. Yelling escalates the situation." }, { label: "Separate them and ask what's wrong", correct: true } ] }, { text: "They both claim the duty roster says it's their turn.", options: [ { label: "Tell them to figure it out", correct: false, feedback: "A leader guides and enables. Don't abandon them." }, { label: "Look at the roster together", correct: true } ] } ] },
-            compass_pin: { type: 'emblem', title: "Compass Points", desc: "Pin the 8 cardinal directions.", icon: "🧭", img: "rank_first_class.png", parts: [ {id:1, text:"North", name:"N", style:"top:5%; left:45%; width:10%; height:10%;", tip:"0 degrees.", req:"2nd Class"}, {id:2, text:"East", name:"E", style:"top:45%; right:5%; width:10%; height:10%;", tip:"90 degrees.", req:"2nd Class"}, {id:3, text:"South", name:"S", style:"bottom:5%; left:45%; width:10%; height:10%;", tip:"180 degrees.", req:"2nd Class"}, {id:4, text:"West", name:"W", style:"top:45%; left:5%; width:10%; height:10%;", tip:"270 degrees.", req:"2nd Class"} ] },
+            compass_pin: { type: 'emblem', title: "Compass Points", desc: "Pin the 8 cardinal directions.", icon: "🧭", img: "compass_rose.jpg", parts: [ {id:1, text:"North", name:"N", style:"top:5%; left:45%; width:10%; height:10%;", tip:"0 degrees.", req:"2nd Class"}, {id:2, text:"East", name:"E", style:"top:45%; right:5%; width:10%; height:10%;", tip:"90 degrees.", req:"2nd Class"}, {id:3, text:"South", name:"S", style:"bottom:5%; left:45%; width:10%; height:10%;", tip:"180 degrees.", req:"2nd Class"}, {id:4, text:"West", name:"W", style:"top:45%; left:5%; width:10%; height:10%;", tip:"270 degrees.", req:"2nd Class"}, {id:5, text:"Northeast", name:"NE", style:"top:15%; right:15%; width:15%; height:10%;", tip:"45 degrees.", req:"2nd Class"}, {id:6, text:"Southeast", name:"SE", style:"bottom:15%; right:15%; width:15%; height:10%;", tip:"135 degrees.", req:"2nd Class"}, {id:7, text:"Southwest", name:"SW", style:"bottom:15%; left:15%; width:15%; height:10%;", tip:"225 degrees.", req:"2nd Class"}, {id:8, text:"Northwest", name:"NW", style:"top:15%; left:15%; width:15%; height:10%;", tip:"315 degrees.", req:"2nd Class"} ] },
             emblem: { type: 'emblem', title: "Badge Symbols", desc: "Pin meanings to the First Class Badge.", icon: "🏅", img: "first_class_badge.png.jpg.png", parts: [ {id:1, text: "3 parts of the Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;", tip: "God/Country, Others, Self.", req: "1st Class 1a"}, {id:2, text: "Freedom & Defend it", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;", tip: "Our country.", req: "1st Class 1a"}, {id:3, text: "Truth and Knowledge", name: "Stars", style: "top:40%; left:12%; width:15%; height:12%;", tip: "Scout's guides.", req: "1st Class 1a"}, {id:4, text: "Scout's Smile", name: "Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;", tip: "Be Prepared.", req: "1st Class 1a"} ] }
         };
 
@@ -492,7 +498,7 @@
             const timer = document.getElementById('globalTimer');
             if (id === 'lobby') { exit.style.display = 'none'; timer.classList.add('hidden'); stopTimer(); }
             else if (id === 'menu') { exit.style.display = 'block'; timer.classList.add('hidden'); stopTimer(); renderGameGrid(); updateGlobalProgress(); }
-            else { exit.style.display = 'block'; timer.classList.remove('hidden'); }
+            else { exit.style.display = 'block'; }
             window.scrollTo(0,0);
         }
 
@@ -531,6 +537,16 @@
             const startBtn = document.getElementById('startBtn'), startBorder = document.getElementById('startBorder');
             if (currentProgram === 'cub') { const color = CUB_RANK_COLORS[currentRank]; startBtn.style.backgroundColor = color; startBorder.style.borderColor = color; } 
             else { startBtn.style.backgroundColor = '#f97316'; startBorder.style.borderColor = '#f97316'; }
+            
+            // Timer Visibility Logic
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
+                document.getElementById('globalTimer').classList.add('hidden');
+            } else {
+                document.getElementById('globalTimer').classList.remove('hidden');
+                document.getElementById('globalTimer').innerText = "00:00";
+            }
+            
             document.getElementById('gameStartOverlay').classList.remove('hidden');
         }
 
@@ -648,7 +664,7 @@
             } else { triggerPenalty(); showReqFeedback("Akela Says", `Not quite! That doesn't belong in ${DATA[currentId].buckets[bucketIdx]}.`, DATA[currentId].req); }
         }
 
-        // --- ENGINE 4: PACKING (NEW) ---
+        // --- ENGINE 4: PACKING (Inventory System) ---
         let packedItems = [];
         function initPacking() {
             packedItems = [];
@@ -692,7 +708,7 @@
             }
         }
 
-        // --- ENGINE 5: SCENARIO (NEW) ---
+        // --- ENGINE 5: SCENARIO (Text Adventure) ---
         let scenIdx = 0;
         function initScenario() {
             scenIdx = 0;
@@ -772,7 +788,13 @@
         }
 
         // --- UTILITIES ---
-        function startTimer() { clearInterval(timerInt); secondsElapsed = 0; updateTimerUI(); timerInt = setInterval(() => { secondsElapsed++; updateTimerUI(); }, 1000); }
+        function startTimer() { 
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) return; // No timer for early ranks
+            
+            clearInterval(timerInt); secondsElapsed = 0; updateTimerUI(); 
+            timerInt = setInterval(() => { secondsElapsed++; updateTimerUI(); }, 1000); 
+        }
         function updateTimerUI() { const m = String(Math.floor(secondsElapsed / 60)).padStart(2, '0'), s = String(secondsElapsed % 60).padStart(2, '0'); document.getElementById('globalTimer').innerText = `${m}:${s}`; }
         function stopTimer() { clearInterval(timerInt); }
         function triggerPenalty() {
@@ -785,15 +807,31 @@
         function showFinalSuccess(revealText, explanation = "") {
             stopTimer(); hideReqFeedback();
             const timeStr = document.getElementById('globalTimer').innerText;
-            if (!completedGames[currentId] || timeStr < completedGames[currentId]) completedGames[currentId] = timeStr;
+            
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            const useTimer = !(currentProgram === 'cub' && noTimerRanks.includes(currentRank));
+
+            if (!completedGames[currentId] || (useTimer && timeStr < completedGames[currentId])) {
+                completedGames[currentId] = useTimer ? timeStr : "DONE";
+            }
             updateGlobalProgress();
+            
             document.getElementById('successText').innerText = revealText;
             document.getElementById('successExplanation').innerHTML = explanation.replace(/\n/g, '<br>');
-            document.getElementById('finalTime').innerText = timeStr;
+            
+            if (useTimer) {
+                document.getElementById('timeLabel').style.display = 'block';
+                document.getElementById('finalTime').style.display = 'block';
+                document.getElementById('finalTime').innerText = timeStr;
+            } else {
+                document.getElementById('timeLabel').style.display = 'none';
+                document.getElementById('finalTime').style.display = 'none';
+            }
             
             const rankImg = document.getElementById('successRankImg');
             if (currentProgram === 'cub') rankImg.src = `rank_${currentRank}.png`;
             else rankImg.src = BSA_RANK_IMAGES[currentRank] || 'rank_scout.png';
+            
             document.getElementById('successOverlay').classList.remove('hidden');
         }
 
