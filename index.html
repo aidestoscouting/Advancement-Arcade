@@ -41,7 +41,6 @@
         #reqFeedback { animation: slideUp 0.4s ease-out; z-index: 200; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .theme-transition { transition: all 0.5s ease; }
-        
         .symbol-svg { width: 70px; height: 70px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
     </style>
 </head>
@@ -288,7 +287,7 @@
                 <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-blue-600 transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                 <a href="https://www.tiktok.com/@aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-pink-600 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg></a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V4.0 Master Edition</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V5.0 Master Edition</p>
         </div>
     </footer>
 
@@ -311,24 +310,13 @@
             
             // --- CUB SCOUT GAMES ---
             lion_sign: {
-                type: 'visual',
-                title: "Scout Sign",
-                desc: "Which image shows the Cub Scout sign?",
-                icon: "✌️",
-                options: [
-                    { label: "Correct", value: "yes" },
-                    { label: "Incorrect", value: "no" }
-                ],
-                items: [
-                    { name: "The Sign", status: "yes", tip: "Two fingers up like Akela's ears!", img: "rank_lion.png", req: "Lion" }
-                ]
+                type: 'visual', title: "Scout Sign", desc: "Which image shows the Cub Scout sign?", icon: "✌️",
+                options: [ { label: "Correct", value: "yes" }, { label: "Incorrect", value: "no" } ],
+                items: [ { name: "The Sign", status: "yes", tip: "Two fingers up like Akela's ears!", img: "rank_lion.png", req: "Lion" } ]
             },
             
             healthy_habits: {
-                type: 'sorting',
-                title: "Healthy Habits",
-                desc: "Are these habits healthy or germy?",
-                icon: "🧼",
+                type: 'sorting', title: "Healthy Habits", desc: "Are these habits healthy or germy?", icon: "🧼",
                 buckets: ["Healthy", "Germs"],
                 items: [
                     { name: "Brushing Teeth", status: 0, img: "habit_brushing.jpg" },
@@ -336,21 +324,12 @@
                     { name: "Playing in Mud", status: 1, img: "habit_dirt.jpg" },
                     { name: "Sneezing in Hands", status: 1, img: "habit_sneeze.jpg" }
                 ],
-                reveal: "Clean Cub!",
-                req: "Lion",
-                explanation: "Wash your hands to stay healthy."
+                reveal: "Clean Cub!", req: "Lion", explanation: "Wash your hands to stay healthy."
             },
             
             animal_tracks: {
-                type: 'visual',
-                title: "Track Match",
-                desc: "Match the animal track.",
-                icon: "🐾",
-                options: [
-                    { label: "Lion", value: "lion" },
-                    { label: "Wolf", value: "wolf" },
-                    { label: "Bear", value: "bear" }
-                ],
+                type: 'visual', title: "Track Match", desc: "Match the animal track.", icon: "🐾",
+                options: [ { label: "Lion", value: "lion" }, { label: "Wolf", value: "wolf" }, { label: "Bear", value: "bear" } ],
                 items: [
                     { name: "Lion Track", status: "lion", tip: "Cats hide their claws!", img: "lion_track.jpg", req: "Wolf" },
                     { name: "Wolf Track", status: "wolf", tip: "Long and narrow with claws.", img: "wolf_track.jpg", req: "Wolf" },
@@ -359,30 +338,18 @@
             },
             
             buddy_system: {
-                type: 'sorting',
-                title: "Buddy System",
-                desc: "Stay safe outdoors!",
-                icon: "🤝",
+                type: 'sorting', title: "Buddy System", desc: "Stay safe outdoors!", icon: "🤝",
                 buckets: ["SAFE", "UNSAFE"],
                 items: [
                     { name: "Walking with Buddy", status: 0, img: "rank_lion.png" },
                     { name: "Wandering Alone", status: 1, img: "toys.jpg" }
                 ],
-                reveal: "Stay together!",
-                req: "Tiger",
-                explanation: "Never go alone in the woods."
+                reveal: "Stay together!", req: "Tiger", explanation: "Never go alone in the woods."
             },
             
             community_helpers: {
-                type: 'visual',
-                title: "Helpers",
-                desc: "Match the tool to the helper.",
-                icon: "🚒",
-                options: [
-                    { label: "Firefighter", value: "fire" },
-                    { label: "Paramedic", value: "medic" },
-                    { label: "Police", value: "police" }
-                ],
+                type: 'visual', title: "Helpers", desc: "Match the tool to the helper.", icon: "🚒",
+                options: [ { label: "Firefighter", value: "fire" }, { label: "Paramedic", value: "medic" }, { label: "Police", value: "police" } ],
                 items: [
                     { name: "Fire Truck", status: "fire", tip: "Puts out fires.", img: "helper_firetruck.jpg", req: "Tiger" },
                     { name: "Stethoscope", status: "medic", tip: "Listens to hearts.", img: "helper_stethoscope.jpg", req: "Tiger" },
@@ -391,10 +358,7 @@
             },
             
             tiger_bites: {
-                type: 'sorting',
-                title: "Tiger Bites",
-                desc: "Sort the trail snacks.",
-                icon: "🍎",
+                type: 'sorting', title: "Tiger Bites", desc: "Sort the trail snacks.", icon: "🍎",
                 buckets: ["Trail Snack", "Junk Food"],
                 items: [
                     { name: "Trail Mix", status: 0, img: "snack_trail_mix.jpg" },
@@ -404,31 +368,18 @@
                     { name: "Candy", status: 1, img: "candy_wrapper.jpg" },
                     { name: "Ice Cream", status: 1, img: "snack_ice_cream.jpg" }
                 ],
-                reveal: "Healthy Choices!",
-                req: "Tiger",
-                explanation: "Eat protein for energy."
+                reveal: "Healthy Choices!", req: "Tiger", explanation: "Eat protein for energy."
             },
             
             call_911: {
-                type: 'sequence',
-                title: "Call 911",
-                desc: "Put the steps in order.",
-                icon: "📞",
+                type: 'sequence', title: "Call 911", desc: "Put the steps in order.", icon: "📞",
                 items: ["Stay Calm", "Dial 9-1-1", "Tell them where you are"],
-                reveal: "Help is coming.",
-                prefix: "Steps:",
-                req: "Tiger",
-                explanation: "Always know your location."
+                reveal: "Help is coming.", prefix: "Steps:", req: "Tiger", explanation: "Always know your location."
             },
             
             six_essentials: {
-                type: 'packing',
-                title: "6 Essentials",
-                desc: "Pack 6 hike essentials.",
-                icon: "🎒",
-                req: "Tiger",
-                reveal: "Pack ready!",
-                correctCount: 6,
+                type: 'packing', title: "6 Essentials", desc: "Pack 6 hike essentials.", icon: "🎒",
+                req: "Tiger", reveal: "Pack ready!", correctCount: 6,
                 items: [
                     { name: "Water", img: "water_bottle.jpg", correct: true },
                     { name: "First Aid", img: "first_aid_kit.jpg", correct: true },
@@ -442,10 +393,7 @@
             },
             
             lnt_cubs: {
-                type: 'sorting',
-                title: "Trash or Nature?",
-                desc: "Put items where they belong.",
-                icon: "🍃",
+                type: 'sorting', title: "Trash or Nature?", desc: "Put items where they belong.", icon: "🍃",
                 buckets: ["Trash Bin", "Nature"],
                 items: [
                     { name: "Wrapper", status: 0, img: "candy_wrapper.jpg" },
@@ -455,21 +403,12 @@
                     { name: "Pinecone", status: 1, img: "pinecone.jpg" },
                     { name: "Flower", status: 1, img: "wildflower.jpg" }
                 ],
-                reveal: "LNT Expert!",
-                req: "Wolf",
-                explanation: "Pack it in, pack it out!"
+                reveal: "LNT Expert!", req: "Wolf", explanation: "Pack it in, pack it out!"
             },
             
             weather_match: {
-                type: 'visual',
-                title: "Weather Gear",
-                desc: "Pick the right gear.",
-                icon: "☁️",
-                options: [
-                    { label: "Winter", value: "snow" },
-                    { label: "Rainy", value: "rain" },
-                    { label: "Summer", value: "sun" }
-                ],
+                type: 'visual', title: "Weather Gear", desc: "Pick the right gear.", icon: "☁️",
+                options: [ { label: "Winter", value: "snow" }, { label: "Rainy", value: "rain" }, { label: "Summer", value: "sun" } ],
                 items: [
                     { name: "Snow", status: "snow", tip: "Wear layers!", img: "weather_snow.jpg", req: "Wolf" },
                     { name: "Rain", status: "rain", tip: "Pack a poncho!", img: "weather_rain.jpg", req: "Wolf" },
@@ -478,11 +417,7 @@
             },
             
             finding_way: {
-                type: 'emblem',
-                title: "Compass Points",
-                desc: "Pin basic directions.",
-                icon: "🧭",
-                img: "compass_rose.jpg",
+                type: 'emblem', title: "Compass Points", desc: "Pin basic directions.", icon: "🧭", img: "compass_rose.jpg",
                 parts: [
                     { id: 1, text: "North", name: "Top", style: "top:10%; left:45%; width:10%; height:10%;", tip: "Up.", req: "Wolf" },
                     { id: 2, text: "South", name: "Bottom", style: "bottom:10%; left:45%; width:10%; height:10%;", tip: "Down.", req: "Wolf" },
@@ -492,53 +427,31 @@
             },
             
             germs_away: {
-                type: 'sequence',
-                title: "Germs Away",
-                desc: "Hand washing order.",
-                icon: "🚰",
+                type: 'sequence', title: "Germs Away", desc: "Hand washing order.", icon: "🚰",
                 items: ["Get hands wet", "Add soap", "Scrub for 20 seconds", "Rinse and dry"],
-                reveal: "Squeaky clean.",
-                req: "Wolf",
-                explanation: "Scrub for 20 seconds to reach kill germs."
+                reveal: "Squeaky clean.", req: "Wolf", explanation: "Scrub for 20 seconds to reach kill germs."
             },
             
             whittling_chip: {
-                type: 'sorting',
-                title: "Knife Safety",
-                desc: "Safe or unsafe?",
-                icon: "🔪",
+                type: 'sorting', title: "Knife Safety", desc: "Safe or unsafe?", icon: "🔪",
                 buckets: ["Safe", "Unsafe"],
                 items: [
                     { name: "Blood Circle", status: 0, img: "gear_pocket_knife.jpg" },
                     { name: "Carve Toward You", status: 1, img: "gear_pocket_knife.jpg" },
                     { name: "Run with blade", status: 1, img: "gear_pocket_knife.jpg" }
                 ],
-                reveal: "Whittling Chip earned.",
-                req: "Bear",
-                explanation: "Never carve toward yourself."
+                reveal: "Whittling Chip earned.", req: "Bear", explanation: "Never carve toward yourself."
             },
             
             bear_necessities: {
-                type: 'sequence',
-                title: "Pitch a Tent",
-                desc: "Order the steps.",
-                icon: "⛺",
+                type: 'sequence', title: "Pitch a Tent", desc: "Order the steps.", icon: "⛺",
                 items: ["Lay down the tarp", "Lay out the tent", "Put together the poles", "Stake it down"],
-                reveal: "Camp ready.",
-                req: "Bear",
-                explanation: "Tarp protects the tent bottom."
+                reveal: "Camp ready.", req: "Bear", explanation: "Tarp protects the tent bottom."
             },
             
             knot_tying: {
-                type: 'visual',
-                title: "Bear Knots",
-                desc: "Identify the knot.",
-                icon: "🪢",
-                options: [
-                    { label: "Square", value: "square" },
-                    { label: "Bowline", value: "bowline" },
-                    { label: "Half-Hitches", value: "two" }
-                ],
+                type: 'visual', title: "Bear Knots", desc: "Identify the knot.", icon: "🪢",
+                options: [ { label: "Square", value: "square" }, { label: "Bowline", value: "bowline" }, { label: "Half-Hitches", value: "two" } ],
                 items: [
                     { name: "Square", status: "square", tip: "Right over left.", img: "square_knot.jpg", req: "Bear" },
                     { name: "Bowline", status: "bowline", tip: "Rabbit hole.", img: "bowline.jpg", req: "Bear" },
@@ -547,10 +460,7 @@
             },
             
             chef_cubs: {
-                type: 'sorting',
-                title: "Healthy Eating",
-                desc: "Healthy or Treat?",
-                icon: "🥦",
+                type: 'sorting', title: "Healthy Eating", desc: "Healthy or Treat?", icon: "🥦",
                 buckets: ["Healthy", "Treat"],
                 items: [
                     { name: "Apple", status: 0, img: "food_apple.jpg" },
@@ -558,44 +468,28 @@
                     { name: "Candy", status: 1, img: "candy_wrapper.jpg" },
                     { name: "Broccoli", status: 0, img: "food_broccoli.jpg" }
                 ],
-                reveal: "Balanced Den!",
-                req: "Bear",
-                explanation: "Healthy foods fuel your adventures."
+                reveal: "Balanced Den!", req: "Bear", explanation: "Healthy foods fuel your adventures."
             },
             
             first_responder: {
-                type: 'sorting',
-                title: "First Aid Gear",
-                desc: "What treats what?",
-                icon: "🩹",
+                type: 'sorting', title: "First Aid Gear", desc: "What treats what?", icon: "🩹",
                 buckets: ["Bandage", "Ice Pack"],
                 items: [
                     { name: "Scrape or Cut", status: 0, img: "aid_cut.jpg" },
                     { name: "Swollen Ankle", status: 1, img: "aid_sprain.jpg" },
                     { name: "Minor Burn", status: 0, img: "aid_burn.jpg" }
                 ],
-                reveal: "Ready to help.",
-                req: "Webelos",
-                explanation: "Ice reduces swelling, bandages keep cuts clean."
+                reveal: "Ready to help.", req: "Webelos", explanation: "Ice reduces swelling, bandages keep cuts clean."
             },
             
             stop_logic: {
-                type: 'sequence',
-                title: "Lost in Woods",
-                desc: "Put S.T.O.P. in order.",
-                icon: "🛑",
+                type: 'sequence', title: "Lost in Woods", desc: "Put S.T.O.P. in order.", icon: "🛑",
                 items: ["Stop", "Think", "Observe", "Plan"],
-                reveal: "S.T.O.P. method.",
-                prefix: "Steps:",
-                req: "Webelos",
-                explanation: "Never keep walking if you are lost."
+                reveal: "S.T.O.P. method.", prefix: "Steps:", req: "Webelos", explanation: "Never keep walking if you are lost."
             },
             
             stronger_faster: {
-                type: 'sorting',
-                title: "Fitness",
-                desc: "Warm-Up or Workout?",
-                icon: "💪",
+                type: 'sorting', title: "Fitness", desc: "Warm-Up or Workout?", icon: "💪",
                 buckets: ["Warm-Up", "Workout"],
                 items: [
                     { name: "Stretching", status: 0, img: "fit_stretch.jpg" },
@@ -603,16 +497,11 @@
                     { name: "Walking", status: 0, img: "fit_walk.jpg" },
                     { name: "Sprinting", status: 1, img: "fit_sprint.jpg" }
                 ],
-                reveal: "Fit Scout.",
-                req: "Webelos",
-                explanation: "Warm up your muscles first."
+                reveal: "Fit Scout.", req: "Webelos", explanation: "Warm up your muscles first."
             },
             
             patrol_method: {
-                type: 'sorting',
-                title: "Leadership",
-                desc: "BSA vs Cub Roles.",
-                icon: "👥",
+                type: 'sorting', title: "Leadership", desc: "BSA vs Cub Roles.", icon: "👥",
                 buckets: ["Youth Led (BSA)", "Adult Led (Cub)"],
                 items: [
                     { name: "Senior Patrol Leader", status: 0, img: "rank_scout.png" },
@@ -620,168 +509,97 @@
                     { name: "Patrol Leader", status: 0, img: "rank_scout.png" },
                     { name: "Den Leader", status: 1, img: "rank_lion.png" }
                 ],
-                reveal: "Ready for a Troop.",
-                req: "AOL",
-                explanation: "In a Troop, the Scouts make the decisions."
+                reveal: "Ready for a Troop.", req: "AOL", explanation: "In a Troop, the Scouts make the decisions."
             },
 
             // --- BSA TROOP TRAIL GAMES ---
             oath: {
-                type: 'sequence',
-                title: "Scout Oath",
-                desc: "Put lines in order.",
-                icon: "⚜️",
-                items: [
-                    "To do my duty to God and my country", 
-                    "To obey the Scout Law", 
-                    "To help other people at all times", 
-                    "To keep myself physically strong", 
-                    "mentally awake", 
-                    "and morally straight"
-                ],
-                reveal: "Foundation.",
-                req: "Scout 1a"
+                type: 'sequence', title: "Scout Oath", desc: "Put lines in order.", icon: "⚜️",
+                items: [ "To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight" ],
+                reveal: "Foundation.", req: "Scout 1a"
             },
             
             law: {
-                type: 'sequence',
-                title: "Scout Law",
-                desc: "Sequence 12 points.",
-                icon: "📜",
+                type: 'sequence', title: "Scout Law", desc: "Sequence 12 points.", icon: "📜",
                 items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"],
-                reveal: "Character.",
-                req: "Scout 1b"
+                reveal: "Character.", req: "Scout 1b"
             },
             
             outdoor: {
-                type: 'sequence',
-                title: "Outdoor Code",
-                desc: "Conservation promises.",
-                icon: "🌲",
+                type: 'sequence', title: "Outdoor Code", desc: "Conservation promises.", icon: "🌲",
                 items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"],
-                reveal: "Protect our planet.",
-                req: "Scout"
+                reveal: "Protect our planet.", req: "Scout"
             },
             
             action: {
-                type: 'sequence',
-                title: "The 3 C's",
-                desc: "Crisis steps.",
-                icon: "🚨",
+                type: 'sequence', title: "The 3 C's", desc: "Crisis steps.", icon: "🚨",
                 items: ["Check the scene", "Call for help", "provide Care"],
-                reveal: "Safety First.",
-                req: "Tenderfoot"
+                reveal: "Safety First.", req: "Tenderfoot"
             },
             
             triage: {
-                type: 'sequence',
-                title: "Hurry Cases",
-                desc: "Medical priority.",
-                icon: "🏥",
+                type: 'sequence', title: "Hurry Cases", desc: "Medical priority.", icon: "🏥",
                 items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock"],
-                reveal: "Prioritized.",
-                req: "Tenderfoot"
+                reveal: "Prioritized.", req: "Tenderfoot"
             },
             
             cpr: {
-                type: 'sequence',
-                title: "CPR Sequence",
-                desc: "Hands-Only CPR.",
-                icon: "💓",
+                type: 'sequence', title: "CPR Sequence", desc: "Hands-Only CPR.", icon: "💓",
                 items: ["Check scene", "Check responsiveness", "Call 911 / AED", "Start compressions"],
-                reveal: "Heart Saved.",
-                req: "1st Class"
+                reveal: "Heart Saved.", req: "1st Class"
             },
             
             snake: {
-                type: 'sequence',
-                title: "Snakebite",
-                desc: "Venomous bite protocol.",
-                icon: "🐍",
+                type: 'sequence', title: "Snakebite", desc: "Venomous bite protocol.", icon: "🐍",
                 items: ["Move away", "Stay calm/still", "Keep bite below heart", "Get to hospital"],
-                reveal: "Stay calm.",
-                req: "Tenderfoot"
+                reveal: "Stay calm.", req: "Tenderfoot"
             },
             
             rescue: {
-                type: 'sequence',
-                title: "Water Rescue",
-                desc: "Safest to riskiest.",
-                icon: "🛶",
+                type: 'sequence', title: "Water Rescue", desc: "Safest to riskiest.", icon: "🛶",
                 items: ["Reach", "Throw", "Row", "Go"],
-                reveal: "Reach/Throw first!",
-                req: "2nd Class"
+                reveal: "Reach/Throw first!", req: "2nd Class"
             },
             
             edge: {
-                type: 'sequence',
-                title: "Teaching Skills",
-                desc: "The E.D.G.E. method.",
-                icon: "🎓",
+                type: 'sequence', title: "Teaching Skills", desc: "The E.D.G.E. method.", icon: "🎓",
                 items: ["Explain", "Demonstrate", "Guide", "Enable"],
-                reveal: "Mastered E.D.G.E.",
-                req: "Star"
+                reveal: "Mastered E.D.G.E.", req: "Star"
             },
             
             teams: {
-                type: 'sequence',
-                title: "Leading Teams",
-                desc: "NYLT Team stages.",
-                icon: "🤝",
+                type: 'sequence', title: "Leading Teams", desc: "NYLT Team stages.", icon: "🤝",
                 items: ["Forming", "Storming", "Norming", "Performing"],
-                reveal: "Team development.",
-                req: "NYLT"
+                reveal: "Team development.", req: "NYLT"
             },
             
             three_pot_wash: {
-                type: 'sequence',
-                title: "3-Pot Wash",
-                desc: "Camp dishwashing.",
-                icon: "🍽️",
+                type: 'sequence', title: "3-Pot Wash", desc: "Camp dishwashing.", icon: "🍽️",
                 items: ["Wash (Hot Soapy)", "Rinse (Hot Clear)", "Sanitize (Bleach/Boil)", "Air Dry"],
-                reveal: "Clean camp.",
-                req: "1st Class"
+                reveal: "Clean camp.", req: "1st Class"
             },
             
             water: {
-                type: 'sequence',
-                title: "Purify Water",
-                desc: "Rolling boil method.",
-                icon: "💧",
+                type: 'sequence', title: "Purify Water", desc: "Rolling boil method.", icon: "💧",
                 items: ["Filter out debris", "Bring to rolling boil", "Maintain for 1 minute", "Let cool"],
-                reveal: "Safe to drink.",
-                req: "1st Class"
+                reveal: "Safe to drink.", req: "1st Class"
             },
             
             extinguish: {
-                type: 'sequence',
-                title: "Campfire Out",
-                desc: "Extinguishing steps.",
-                icon: "🔥",
+                type: 'sequence', title: "Campfire Out", desc: "Extinguishing steps.", icon: "🔥",
                 items: ["Let burn to ash", "Drown embers", "Stir ashes", "Feel for heat"],
-                reveal: "Cold out.",
-                req: "2nd Class"
+                reveal: "Cold out.", req: "2nd Class"
             },
             
             eagle_project: {
-                type: 'sequence',
-                title: "Eagle Project",
-                desc: "Management steps.",
-                icon: "🦅",
+                type: 'sequence', title: "Eagle Project", desc: "Management steps.", icon: "🦅",
                 items: ["Concept", "Approvals", "Fundraising", "Execution", "Final Report"],
-                reveal: "Project Managed.",
-                req: "Eagle"
+                reveal: "Project Managed.", req: "Eagle"
             },
             
             plants: {
-                type: 'visual',
-                title: "Safe or Toxic?",
-                desc: "Identify flora.",
-                icon: "🌿",
-                options: [
-                    { label: "SAFE", value: "safe" },
-                    { label: "TOXIC", value: "toxic" }
-                ],
+                type: 'visual', title: "Safe or Toxic?", desc: "Identify flora.", icon: "🌿",
+                options: [ { label: "SAFE", value: "safe" }, { label: "TOXIC", value: "toxic" } ],
                 items: [
                     { name: "Poison Ivy", status: "toxic", tip: "Leaves of 3.", img: "ivy.jpg", req: "2nd Class" },
                     { name: "White Oak", status: "safe", tip: "Rounded lobes.", img: "oak.jpg", req: "2nd Class" },
@@ -790,14 +608,8 @@
             },
             
             maps: {
-                type: 'visual',
-                title: "Map Master",
-                desc: "Topographic symbols.",
-                icon: "🗺️",
-                options: [
-                    { label: "Elevation", value: "elev" },
-                    { label: "Human", value: "human" }
-                ],
+                type: 'visual', title: "Map Master", desc: "Topographic symbols.", icon: "🗺️",
+                options: [ { label: "Elevation", value: "elev" }, { label: "Human", value: "human" } ],
                 items: [
                     { name: "Contour Lines", status: "elev", tip: "Elevation changes.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2"/></svg>', req: "2nd Class" },
                     { name: "Buildings", status: "human", tip: "Black squares.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black"/></svg>', req: "2nd Class" }
@@ -805,14 +617,8 @@
             },
             
             fire: {
-                type: 'visual',
-                title: "Fire Builder",
-                desc: "Fire lay patterns.",
-                icon: "🏕️",
-                options: [
-                    { label: "Start", value: "start" },
-                    { label: "Heat", value: "heat" }
-                ],
+                type: 'visual', title: "Fire Builder", desc: "Fire lay patterns.", icon: "🏕️",
+                options: [ { label: "Start", value: "start" }, { label: "Heat", value: "heat" } ],
                 items: [
                     { name: "Tepee Lay", status: "start", tip: "Best for starting.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M80 80 L50 10 M50 10 L50 80" stroke="#8B4513" stroke-width="4"/></svg>', req: "2nd Class" },
                     { name: "Log Cabin", status: "heat", tip: "Sustained cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/></svg>', req: "2nd Class" }
@@ -820,16 +626,8 @@
             },
             
             knots: {
-                type: 'visual',
-                title: "Knot Knowledge",
-                desc: "Identify the knot.",
-                icon: "🪢",
-                options: [
-                    { label: "Square", value: "square" },
-                    { label: "Bowline", value: "bowline" },
-                    { label: "Clove", value: "clove" },
-                    { label: "Taut-line", value: "tautline" }
-                ],
+                type: 'visual', title: "Knot Knowledge", desc: "Identify the knot.", icon: "🪢",
+                options: [ { label: "Square", value: "square" }, { label: "Bowline", value: "bowline" }, { label: "Clove", value: "clove" }, { label: "Taut-line", value: "tautline" } ],
                 items: [
                     { name: "Square Knot", status: "square", tip: "Joins ropes.", img: "square_knot.jpg", req: "Tenderfoot" },
                     { name: "Bowline", status: "bowline", tip: "Rescue loop.", img: "bowline.jpg", req: "1st Class" },
@@ -839,16 +637,8 @@
             },
             
             lashings: {
-                type: 'visual',
-                title: "Lashings",
-                desc: "Pioneer lashings.",
-                icon: "🪵",
-                options: [
-                    { label: "Square", value: "square" },
-                    { label: "Diagonal", value: "diagonal" },
-                    { label: "Shear", value: "shear" },
-                    { label: "Tripod", value: "tripod" }
-                ],
+                type: 'visual', title: "Lashings", desc: "Pioneer lashings.", icon: "🪵",
+                options: [ { label: "Square", value: "square" }, { label: "Diagonal", value: "diagonal" }, { label: "Shear", value: "shear" }, { label: "Tripod", value: "tripod" } ],
                 items: [
                     { name: "Square", status: "square", tip: "90 degrees.", img: "square_lashing.jpg", req: "1st Class" },
                     { name: "Diagonal", status: "diagonal", tip: "Crossed poles.", img: "diagonal_lashing.jpg", req: "1st Class" },
@@ -858,13 +648,8 @@
             },
             
             bsa_10_essentials: {
-                type: 'packing',
-                title: "10 Essentials",
-                desc: "Pack 10 items.",
-                icon: "🎒",
-                req: "Scout",
-                reveal: "Prepared.",
-                correctCount: 10,
+                type: 'packing', title: "10 Essentials", desc: "Pack 10 items.", icon: "🎒",
+                req: "Scout", reveal: "Prepared.", correctCount: 10,
                 items: [
                     { name: "Water", img: "water_bottle.jpg", correct: true },
                     { name: "First Aid", img: "first_aid_kit.jpg", correct: true },
@@ -882,10 +667,7 @@
             },
             
             mb_logic: {
-                type: 'sorting',
-                title: "Merit Badges",
-                desc: "Eagle Required vs Elective.",
-                icon: "🏅",
+                type: 'sorting', title: "Merit Badges", desc: "Eagle Required vs Elective.", icon: "🏅",
                 buckets: ["Eagle Required", "Elective"],
                 items: [
                     { name: "First Aid", status: 0, img: "mb_first_aid.jpg" },
@@ -895,18 +677,12 @@
                     { name: "Wood Carving", status: 1, img: "mb_woodcarving.jpg" },
                     { name: "Fingerprinting", status: 1, img: "mb_fingerprinting.jpg" }
                 ],
-                reveal: "Advancement Ready.",
-                req: "Star"
+                reveal: "Advancement Ready.", req: "Star"
             },
             
             choking_scenario: {
-                type: 'scenario',
-                title: "Choking Crisis",
-                desc: "Save a life.",
-                icon: "🗣️",
-                req: "Tenderfoot",
-                reveal: "Crisis averted!",
-                explanation: "Always encourage coughing first.",
+                type: 'scenario', title: "Choking Crisis", desc: "Save a life.", icon: "🗣️",
+                req: "Tenderfoot", reveal: "Crisis averted!", explanation: "Always encourage coughing first.",
                 steps: [
                     {
                         text: "Victim is coughing loudly. What do you do?",
@@ -926,13 +702,8 @@
             },
             
             resolving_conflict: {
-                type: 'scenario',
-                title: "Conflict Res.",
-                desc: "Handle a dispute.",
-                icon: "⚖️",
-                req: "Life",
-                reveal: "Great Leadership.",
-                explanation: "A leader listens to both sides.",
+                type: 'scenario', title: "Conflict Res.", desc: "Handle a dispute.", icon: "⚖️",
+                req: "Life", reveal: "Great Leadership.", explanation: "A leader listens to both sides.",
                 steps: [
                     {
                         text: "Two younger Scouts are yelling about whose turn it is to cook. First move?",
@@ -952,11 +723,7 @@
             },
             
             compass_pin_bsa: {
-                type: 'emblem',
-                title: "The Compass",
-                desc: "Pin 8 cardinal directions.",
-                icon: "🧭",
-                img: "compass_rose.jpg",
+                type: 'emblem', title: "The Compass", desc: "Pin 8 cardinal directions.", icon: "🧭", img: "compass_rose.jpg",
                 parts: [
                     { id: 1, text: "North", name: "N", style: "top:5%; left:45%; width:10%; height:10%;", tip: "0°", req: "2nd Class" },
                     { id: 2, text: "East", name: "E", style: "top:45%; right:5%; width:10%; height:10%;", tip: "90°", req: "2nd Class" },
@@ -970,11 +737,7 @@
             },
             
             emblem: {
-                type: 'emblem',
-                title: "Badge Symbols",
-                desc: "First Class meanings.",
-                icon: "🏅",
-                img: "first_class_badge.png.jpg.png",
+                type: 'emblem', title: "Badge Symbols", desc: "First Class meanings.", icon: "🏅", img: "first_class_badge.png.jpg.png",
                 parts: [
                     { id: 1, text: "3 parts of Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;", tip: "Oath.", req: "1st Class" },
                     { id: 2, text: "Freedom & Defend it", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;", tip: "Country.", req: "1st Class" },
@@ -985,14 +748,8 @@
 
             // --- VENTURING TRAIL ---
             lnt_master: {
-                type: 'visual',
-                title: "LNT Master",
-                desc: "Backcountry LNT scenarios.",
-                icon: "🌿",
-                options: [
-                    { label: "Durable", value: "yes" },
-                    { label: "Fragile", value: "no" }
-                ],
+                type: 'visual', title: "LNT Master", desc: "Backcountry LNT scenarios.", icon: "🌿",
+                options: [ { label: "Durable", value: "yes" }, { label: "Fragile", value: "no" } ],
                 items: [
                     { name: "Slickrock", status: "yes", tip: "Durable.", img: "lnt_surface.jpg", req: "Ranger" },
                     { name: "Meadow", status: "no", tip: "Fragile.", img: "lnt_backcountry.jpg", req: "Ranger" }
@@ -1000,13 +757,8 @@
             },
             
             trek_packing: {
-                type: 'packing',
-                title: "Trek Loadout",
-                desc: "Pack for 5-days.",
-                icon: "🧗",
-                req: "ALPS",
-                reveal: "Trail Ready!",
-                correctCount: 5,
+                type: 'packing', title: "Trek Loadout", desc: "Pack for 5-days.", icon: "🧗",
+                req: "ALPS", reveal: "Trail Ready!", correctCount: 5,
                 items: [
                     { name: "Bear Can", img: "gear_bear_canister.jpg", correct: true },
                     { name: "Water Filter", img: "gear_water_filter.jpg", correct: true },
@@ -1018,13 +770,8 @@
             },
             
             expedition_leadership: {
-                type: 'scenario',
-                title: "Expedition Leader",
-                desc: "Resolve trek conflicts.",
-                icon: "⚖️",
-                req: "ALPS",
-                reveal: "Strong Crew.",
-                explanation: "Consensus is key in high adventure.",
+                type: 'scenario', title: "Expedition Leader", desc: "Resolve trek conflicts.", icon: "⚖️",
+                req: "ALPS", reveal: "Strong Crew.", explanation: "Consensus is key in high adventure.",
                 steps: [
                     {
                         text: "Your crew is split on whether to continue the climb in bad weather.",
@@ -1037,22 +784,14 @@
             },
             
             mentor_teaching: {
-                type: 'sequence',
-                title: "Mentorship",
-                desc: "Steps of mentoring.",
-                icon: "🎓",
+                type: 'sequence', title: "Mentorship", desc: "Steps of mentoring.", icon: "🎓",
                 items: ["Self-Knowledge", "Listen", "Support", "Encourage"],
-                reveal: "Mentor Master.",
-                req: "Summit"
+                reveal: "Mentor Master.", req: "Summit"
             },
 
             // --- SEA SCOUTS TRAIL ---
             vessel_anatomy: {
-                type: 'emblem',
-                title: "Vessel Anatomy",
-                desc: "Identify boat parts.",
-                icon: "⛵",
-                img: "vessel_diagram.jpg",
+                type: 'emblem', title: "Vessel Anatomy", desc: "Identify boat parts.", icon: "⛵", img: "vessel_diagram.jpg",
                 parts: [
                     { id: 1, text: "Port (Left)", name: "Port", style: "top:45%; left:10%; width:20%; height:10%;", tip: "Red side.", req: "Apprentice" },
                     { id: 2, text: "Starboard", name: "Star", style: "top:45%; right:10%; width:20%; height:10%;", tip: "Green side.", req: "Apprentice" },
@@ -1062,14 +801,8 @@
             },
             
             buoy_rules: {
-                type: 'visual',
-                title: "Nav Buoys",
-                desc: "Identify markers.",
-                icon: "🏮",
-                options: [
-                    { label: "Red Nun", value: "red" },
-                    { label: "Green Can", value: "green" }
-                ],
+                type: 'visual', title: "Nav Buoys", desc: "Identify markers.", icon: "🏮",
+                options: [ { label: "Red Nun", value: "red" }, { label: "Green Can", value: "green" } ],
                 items: [
                     { name: "Returning", status: "red", tip: "Red Right Returning.", img: "buoy_red_nuns.jpg", req: "Ordinary" },
                     { name: "Leaving", status: "green", tip: "Green Right Leaving.", img: "buoy_green_can.jpg", req: "Ordinary" }
@@ -1077,15 +810,8 @@
             },
             
             maritime_knots: {
-                type: 'visual',
-                title: "Sea Knots",
-                desc: "Maritime hitches.",
-                icon: "🪢",
-                options: [
-                    { label: "Cleat Hitch", value: "cleat" },
-                    { label: "Anchor Bend", value: "anchor" },
-                    { label: "Bowline on Bight", value: "bight" }
-                ],
+                type: 'visual', title: "Sea Knots", desc: "Maritime hitches.", icon: "🪢",
+                options: [ { label: "Cleat Hitch", value: "cleat" }, { label: "Anchor Bend", value: "anchor" }, { label: "Bowline on Bight", value: "bight" } ],
                 items: [
                     { name: "Cleat Hitch", status: "cleat", tip: "To dock.", img: "knot_cleat_hitch.jpg", req: "Apprentice" },
                     { name: "Anchor Bend", status: "anchor", tip: "To anchor.", img: "knot_anchor_bend.jpg", req: "Apprentice" },
@@ -1094,19 +820,14 @@
             },
             
             quarterdeck_leadership: {
-                type: 'sorting',
-                title: "Quarterdeck Roles",
-                desc: "Ship leadership vs Shore.",
-                icon: "⚓",
+                type: 'sorting', title: "Quarterdeck Roles", desc: "Ship leadership vs Shore.", icon: "⚓",
                 buckets: ["Quarterdeck (Youth)", "Ship Committee (Adult)"],
                 items: [
                     { name: "Boatswain", status: 0, img: "rank_sea_scout.png" },
                     { name: "Skipper", status: 1, img: "rank_lion.png" },
                     { name: "Purser", status: 0, img: "rank_sea_scout.png" }
                 ],
-                reveal: "Smooth Sailing.",
-                req: "Ordinary",
-                explanation: "Youth lead the Ship via the Quarterdeck."
+                reveal: "Smooth Sailing.", req: "Ordinary", explanation: "Youth lead the Ship via the Quarterdeck."
             }
         };
 
@@ -1230,6 +951,16 @@
                     const btn = document.createElement('button');
                     btn.className = `btn-card bg-white p-5 rounded-[2.5rem] border-2 shadow-lg text-left flex items-center justify-between ${time ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-50 hover:border-orange-500'}`;
                     btn.onclick = () => prepareGame(gid);
+                    
+                    let completionBadge = '';
+                    if (time) {
+                        if (time === "DONE") {
+                            completionBadge = `<p class="text-[9px] font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded mt-1">DONE</p>`;
+                        } else {
+                            completionBadge = `<p class="text-[7px] font-mono font-black text-emerald-600 bg-emerald-100 px-1 rounded mt-1">${time}</p>`;
+                        }
+                    }
+
                     btn.innerHTML = `
                         <div class="pr-4">
                             <h3 class="font-black text-gray-900 uppercase text-xs">${d.title}</h3>
@@ -1237,7 +968,7 @@
                         </div>
                         <div class="text-right flex flex-col items-end">
                             <span class="text-2xl">${d.icon || '⭐'}</span>
-                            ${time ? `<p class="text-[7px] font-mono font-black text-emerald-600 bg-emerald-100 px-1 rounded mt-1">${time}</p>` : ''}
+                            ${completionBadge}
                         </div>
                     `;
                     grid.appendChild(btn);
@@ -1632,22 +1363,26 @@
             stopTimer(); 
             hideReqFeedback();
             const timeStr = document.getElementById('globalTimer').innerText;
-            if (!completedGames[currentId] || timeStr < completedGames[currentId]) {
-                completedGames[currentId] = timeStr;
+            
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            const useTimer = !(currentProgram === 'cub' && noTimerRanks.includes(currentRank));
+
+            if (!completedGames[currentId] || (useTimer && timeStr < completedGames[currentId])) {
+                completedGames[currentId] = useTimer ? timeStr : "DONE";
             }
+            
             updateGlobalProgress();
             
             document.getElementById('successText').innerText = revealText;
             document.getElementById('successExplanation').innerHTML = explanation.replace(/\n/g, '<br>');
             
-            const noTimerRanks = ['lion', 'tiger', 'wolf'];
-            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
-                document.getElementById('timeLabel').classList.add('hidden');
-                document.getElementById('finalTime').classList.add('hidden');
-            } else {
+            if (useTimer) {
                 document.getElementById('timeLabel').classList.remove('hidden');
                 document.getElementById('finalTime').classList.remove('hidden');
                 document.getElementById('finalTime').innerText = timeStr;
+            } else {
+                document.getElementById('timeLabel').classList.add('hidden');
+                document.getElementById('finalTime').classList.add('hidden');
             }
 
             const rankImg = document.getElementById('successRankImg');
