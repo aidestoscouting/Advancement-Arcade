@@ -29,24 +29,20 @@
 
         .slot-filled { background-color: #1e293b !important; color: white !important; border-color: #0f172a !important; cursor: pointer; animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .slot-wrong { background-color: #fee2e2 !important; color: #991b1b !important; border-color: #ef4444 !important; }
-
-        /* Sorting Engine */
+        
         .sort-item-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
         .sort-item-card.active { ring: 6px solid #f59e0b; transform: scale(1.1); z-index: 30; }
         .bucket { transition: all 0.3s ease; }
         .bucket.highlight { transform: scale(1.05); background-color: #fffbeb; border-color: #f59e0b; }
 
-        /* Packing Engine */
         .pack-item { transition: all 0.2s ease; cursor: pointer; }
         .pack-item.selected { border-color: #10b981; background-color: #ecfdf5; transform: scale(1.05); }
-        .pack-item.selected .check-badge { opacity: 1; transform: scale(1); }
+
+        #reqFeedback { animation: slideUp 0.4s ease-out; z-index: 200; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .theme-transition { transition: all 0.5s ease; }
         
         .symbol-svg { width: 70px; height: 70px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
-
-        #reqFeedback { animation: slideUp 0.4s ease-out; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .theme-transition { transition: background-color 0.5s ease, border-color 0.5s ease; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -64,68 +60,76 @@
             </div>
             <div class="flex items-center gap-3">
                 <div class="flex flex-col items-end justify-center">
-                    <span id="progLabel" class="text-[8px] text-emerald-400 uppercase tracking-widest font-bold leading-none mb-1">Rank Progress</span>
+                    <span id="progLabel" class="text-[8px] text-emerald-400 uppercase tracking-widest font-bold leading-none mb-1 text-right">Rank Progress</span>
                     <span id="progressText" class="font-mono text-xs font-black leading-none text-white">0%</span>
                 </div>
-                <div id="globalTimer" class="hidden font-mono text-xl font-black text-orange-400 bg-gray-900/50 px-2 py-1 rounded mr-2">00:00</div>
-                <button id="exitBtn" onclick="exitToLobby()" class="hidden bg-white/10 hover:bg-red-500 px-3 py-1.5 rounded-full text-[10px] font-bold transition-all border border-white/20 uppercase tracking-tighter">Exit Path</button>
+                <div id="globalTimer" class="hidden font-mono text-xl font-black text-orange-400 bg-gray-900/50 px-2 py-1 rounded">00:00</div>
+                <button id="exitBtn" onclick="exitToLobby()" class="hidden bg-white/10 hover:bg-red-500 px-3 py-1.5 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-tighter">Exit Path</button>
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 mt-6 w-full flex-1 mb-12">
         
-        <!-- LOBBY -->
-        <div id="page-lobby" class="page active max-w-2xl mx-auto space-y-8 py-10">
+        <!-- PAGE: MASTER LOBBY -->
+        <div id="page-lobby" class="page active max-w-4xl mx-auto space-y-8 py-10">
             <div class="text-center">
-                <h2 class="text-5xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">The Arcade</h2>
-                <p class="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Select your Scouting Path</p>
+                <h2 class="text-5xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">The Portal</h2>
+                <p class="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Choose your Scouting branch</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <button onclick="selectPath('cub')" class="group relative bg-white border-4 border-amber-100 rounded-[3rem] p-8 text-center hover:border-amber-500 transition-all shadow-xl active:scale-95 overflow-hidden">
-                    <div class="absolute -right-6 -top-6 text-9xl opacity-5 group-hover:opacity-10 transition-all group-hover:rotate-12">🐺</div>
-                    <h3 class="text-3xl font-brand font-black text-amber-600 uppercase mb-2 leading-none">Cub Scout<br>Trail</h3>
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Lions through AOL</p>
-                    <div class="mt-6 bg-amber-500 text-white font-black py-3 rounded-2xl uppercase tracking-widest text-sm shadow-md">Enter Den</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="selectPath('cub')" class="btn-card bg-white border-4 border-amber-100 rounded-[2.5rem] p-6 text-center hover:border-amber-500 shadow-xl overflow-hidden">
+                    <div class="text-5xl mb-4">🐺</div>
+                    <h3 class="text-xl font-brand font-black text-amber-600 uppercase mb-1">Cubs</h3>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase">Lions - AOL</p>
                 </button>
-                <button onclick="selectPath('bsa')" class="group relative bg-white border-4 border-slate-100 rounded-[3rem] p-8 text-center hover:border-slate-900 transition-all shadow-xl active:scale-95 overflow-hidden">
-                    <div class="absolute -right-6 -top-6 text-9xl opacity-5 group-hover:opacity-10 transition-all group-hover:-rotate-12">🦅</div>
-                    <h3 class="text-3xl font-brand font-black text-slate-800 uppercase mb-2 leading-none">Scouts BSA<br>Arcade</h3>
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Scout through Eagle</p>
-                    <div class="mt-6 bg-slate-900 text-white font-black py-3 rounded-2xl uppercase tracking-widest text-sm shadow-md">Start Trail</div>
+                <button onclick="selectPath('bsa')" class="btn-card bg-white border-4 border-slate-100 rounded-[2.5rem] p-6 text-center hover:border-slate-900 shadow-xl overflow-hidden">
+                    <div class="text-5xl mb-4">🦅</div>
+                    <h3 class="text-xl font-brand font-black text-slate-800 uppercase mb-1">Troop</h3>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase">Scout - Eagle</p>
+                </button>
+                <button onclick="selectPath('venturing')" class="btn-card bg-white border-4 border-green-100 rounded-[2.5rem] p-6 text-center hover:border-green-700 shadow-xl overflow-hidden">
+                    <div class="text-5xl mb-4">🟢</div>
+                    <h3 class="text-xl font-brand font-black text-green-700 uppercase mb-1">Venturing</h3>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase">High Adventure</p>
+                </button>
+                <button onclick="selectPath('sea')" class="btn-card bg-white border-4 border-blue-100 rounded-[2.5rem] p-6 text-center hover:border-blue-900 shadow-xl overflow-hidden">
+                    <div class="text-5xl mb-4">⚓</div>
+                    <h3 class="text-xl font-brand font-black text-blue-900 uppercase mb-1">Sea Scouts</h3>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase">Maritime</p>
                 </button>
             </div>
         </div>
 
-        <!-- CUB RANKS -->
-        <div id="page-cub-ranks" class="page max-w-4xl mx-auto space-y-8 py-6">
+        <!-- PAGE: CUB RANKS -->
+        <div id="page-cub-ranks" class="page max-w-4xl mx-auto py-10 space-y-8">
             <div class="text-center">
-                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase tracking-tighter mb-2">Akela's Den</h2>
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase mb-2">Akela's Den</h2>
                 <p class="text-slate-500 font-bold uppercase text-[10px] tracking-widest">Select your rank badge</p>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 <button onclick="setRank('lion')" class="btn-card bg-white p-5 rounded-[2.5rem] border-4 border-yellow-50 hover:border-yellow-400 shadow-md">
-                    <img src="rank_lion.png" class="w-20 h-20 mx-auto object-contain mb-3" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Lion';"/>
+                    <img src="rank_lion.png" class="w-16 h-16 mx-auto object-contain mb-2" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Lion';"/>
                     <span class="block font-black uppercase text-[10px] text-yellow-600 tracking-widest">Lion</span>
                 </button>
                 <button onclick="setRank('tiger')" class="btn-card bg-white p-5 rounded-[2.5rem] border-4 border-orange-50 hover:border-orange-500 shadow-md">
-                    <img src="rank_tiger.png" class="w-20 h-20 mx-auto object-contain mb-3" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Tiger';"/>
+                    <img src="rank_tiger.png" class="w-16 h-16 mx-auto object-contain mb-2" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Tiger';"/>
                     <span class="block font-black uppercase text-[10px] text-orange-600 tracking-widest">Tiger</span>
                 </button>
                 <button onclick="setRank('wolf')" class="btn-card bg-white p-5 rounded-[2.5rem] border-4 border-red-50 hover:border-red-600 shadow-md">
-                    <img src="rank_wolf.png" class="w-20 h-20 mx-auto object-contain mb-3" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Wolf';"/>
+                    <img src="rank_wolf.png" class="w-16 h-16 mx-auto object-contain mb-2" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Wolf';"/>
                     <span class="block font-black uppercase text-[10px] text-red-600 tracking-widest">Wolf</span>
                 </button>
                 <button onclick="setRank('bear')" class="btn-card bg-white p-5 rounded-[2.5rem] border-4 border-blue-50 hover:border-blue-500 shadow-md">
-                    <img src="rank_bear.png" class="w-20 h-20 mx-auto object-contain mb-3" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Bear';"/>
+                    <img src="rank_bear.png" class="w-16 h-16 mx-auto object-contain mb-2" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Bear';"/>
                     <span class="block font-black uppercase text-[10px] text-blue-600 tracking-widest">Bear</span>
                 </button>
                 <button onclick="setRank('webelos')" class="btn-card bg-white p-5 rounded-[2.5rem] border-4 border-green-50 hover:border-green-700 shadow-md">
-                    <img src="rank_webelos.png" class="w-20 h-20 mx-auto object-contain mb-3" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Webelos';"/>
+                    <img src="rank_webelos.png" class="w-16 h-16 mx-auto object-contain mb-2" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Webelos';"/>
                     <span class="block font-black uppercase text-[10px] text-green-700 tracking-widest">Webelos</span>
                 </button>
                 <button onclick="setRank('aol')" class="btn-card bg-white p-5 rounded-[2.5rem] border-4 border-indigo-50 hover:border-indigo-800 shadow-md">
-                    <img src="rank_aol.png" class="w-20 h-20 mx-auto object-contain mb-3" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=AOL';"/>
+                    <img src="rank_aol.png" class="w-16 h-16 mx-auto object-contain mb-2" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=AOL';"/>
                     <span class="block font-black uppercase text-[10px] text-indigo-800 tracking-widest">AOL</span>
                 </button>
             </div>
@@ -134,157 +138,95 @@
             </div>
         </div>
 
-        <!-- BSA TIERS -->
-        <div id="page-bsa-difficulty" class="page max-w-lg mx-auto space-y-4 py-10">
+        <!-- PAGE: BSA TIERS -->
+        <div id="page-bsa-difficulty" class="page max-w-lg mx-auto py-10 space-y-4">
             <div class="text-center mb-6">
-                <h2 class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter mb-1">Arcade Tiers</h2>
-                <p class="text-slate-500 font-bold uppercase text-[10px] tracking-widest">Higher tiers include time penalties</p>
+                <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Troop Tiers</h2>
             </div>
-            <button onclick="setRank(1)" class="w-full p-6 bg-white border-4 border-orange-100 rounded-[2rem] text-left hover:border-orange-500 transition-all group shadow-md flex items-center justify-between">
-                <div>
-                    <span class="block text-[10px] uppercase font-black text-orange-500 tracking-tighter">Tier 1 • Beginner</span>
-                    <h3 class="text-xl font-black text-gray-900 uppercase">Scout to 2nd Class</h3>
-                </div>
-                <div class="flex items-center">
-                    <img src="rank_scout.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=S';"/>
-                    <img src="rank_tenderfoot.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-20 -ml-3" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=T';"/>
-                    <img src="rank_second_class.png" class="h-12 w-12 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-md z-30 -ml-3" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=2nd';"/>
+            <button onclick="setRank(1)" class="w-full p-6 bg-white border-4 border-orange-100 rounded-[2rem] text-left hover:border-orange-500 shadow-md flex justify-between items-center group">
+                <div><span class="block text-[10px] uppercase font-black text-orange-500">Tier 1</span><h3 class="text-xl font-black text-gray-900 uppercase">Scout to 2nd Class</h3></div>
+                <div class="flex -space-x-3">
+                    <img src="rank_scout.png" class="h-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=S';"/>
+                    <img src="rank_tenderfoot.png" class="h-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=T';"/>
+                    <img src="rank_second_class.png" class="h-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=2nd';"/>
                 </div>
             </button>
-            <button onclick="setRank(2)" class="w-full p-6 bg-white border-4 border-amber-100 rounded-[2rem] text-left hover:border-amber-500 transition-all group shadow-md flex items-center justify-between">
-                <div>
-                    <span class="block text-[10px] uppercase font-black text-amber-600 tracking-tighter">Tier 2 • Advanced</span>
-                    <h3 class="text-xl font-black text-gray-900 uppercase">1st Class to Life</h3>
-                </div>
-                <div class="flex items-center">
-                    <img src="rank_first_class.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=1st';"/>
-                    <img src="rank_star.png" class="h-10 w-10 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-sm z-20 -ml-3" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Star';"/>
-                    <img src="rank_life.png" class="h-12 w-12 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-md z-30 -ml-3" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Life';"/>
+            <button onclick="setRank(2)" class="w-full p-6 bg-white border-4 border-amber-100 rounded-[2rem] text-left hover:border-amber-500 shadow-md flex justify-between items-center group">
+                <div><span class="block text-[10px] uppercase font-black text-amber-600">Tier 2</span><h3 class="text-xl font-black text-gray-900 uppercase">1st Class to Life</h3></div>
+                <div class="flex -space-x-3">
+                    <img src="rank_first_class.png" class="h-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=1st';"/>
+                    <img src="rank_star.png" class="h-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Star';"/>
+                    <img src="rank_life.png" class="h-10" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Life';"/>
                 </div>
             </button>
-            <button onclick="setRank(3)" class="w-full p-6 bg-white border-4 border-red-100 rounded-[2rem] text-left hover:border-red-500 transition-all group shadow-md flex items-center justify-between">
-                <div>
-                    <span class="block text-[10px] uppercase font-black text-red-600 tracking-tighter">Tier 3 • Expert</span>
-                    <h3 class="text-xl font-black text-gray-900 uppercase">Eagle Scout</h3>
-                </div>
-                <div class="flex items-center pr-2">
-                    <img src="rank_eagle.png" class="h-14 w-14 object-contain grayscale group-hover:grayscale-0 transition-all drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Eagle';"/>
-                </div>
+            <button onclick="setRank(3)" class="w-full p-6 bg-white border-4 border-red-100 rounded-[2rem] text-left hover:border-red-500 shadow-md flex justify-between items-center group">
+                <div><span class="block text-[10px] uppercase font-black text-red-600">Tier 3</span><h3 class="text-xl font-black text-gray-900 uppercase">Expert (Eagle)</h3></div>
+                <img src="rank_eagle.png" class="h-12" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Eagle';"/>
             </button>
             <div class="text-center pt-4">
                 <button onclick="exitToLobby()" class="text-[10px] font-black uppercase text-slate-400 tracking-widest hover:text-slate-900 transition-colors underline decoration-2 underline-offset-4">Change Path</button>
             </div>
         </div>
 
-        <!-- DASHBOARD MENU -->
+        <!-- PAGE: DASHBOARD -->
         <div id="page-menu" class="page space-y-10 pb-10">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-gray-900 bg-gray-900 aspect-[4/1]">
-                <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" onerror="this.onerror=null; this.src='https://placehold.co/1200x300/1e293b/1e293b';"/>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <h2 id="menuTrailTitle" class="text-3xl md:text-5xl font-brand font-black text-white uppercase tracking-tighter drop-shadow-lg">Advancement Arcade</h2>
-                </div>
+                <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" onerror="this.onerror=null; this.src='https://placehold.co/1200x300/1e293b/1e293b';" />
+                <div class="absolute inset-0 flex items-center justify-center"><h2 id="menuTrailTitle" class="text-3xl md:text-5xl font-brand font-black text-white uppercase tracking-tighter drop-shadow-lg">Advancement Arcade</h2></div>
             </div>
             <div id="gameGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>
 
         <!-- ENGINE: SEQUENCE -->
         <div id="page-sequence" class="page max-w-2xl mx-auto space-y-6 pb-20">
-            <div class="text-center">
-                <h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand tracking-tighter leading-tight">Level Title</h2>
-                <p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p>
-            </div>
+            <div class="text-center"><h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand leading-tight">Level Title</h2><p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p></div>
             <div id="seqGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div>
             <div id="seqBank" class="flex flex-wrap justify-center gap-2 p-5 bg-white rounded-[2rem] border-2 border-slate-100 shadow-inner mt-2"></div>
-            <div class="flex justify-center mt-6">
-                <button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:scale-105 transition-all tracking-widest active:scale-95">Verify</button>
-            </div>
+            <div class="flex justify-center mt-6"><button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:scale-105 transition-all tracking-widest active:scale-95">Verify</button></div>
         </div>
 
         <!-- ENGINE: VISUAL ID -->
         <div id="page-visual" class="page max-w-lg mx-auto space-y-6">
-            <div class="text-center">
-                <h2 id="visTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Visual ID</h2>
-                <div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="visProgress" class="h-full bg-emerald-500 w-0 transition-all"></div></div>
-            </div>
-            <div id="visCard" class="bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center">
-                <div id="visDisplay" class="w-full h-full flex items-center justify-center"></div>
-                <div id="visFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20">
-                    <div id="visFeedbackIcon" class="text-6xl mb-2 drop-shadow-md"></div>
-                    <h3 id="visFeedbackName" class="text-3xl font-brand uppercase tracking-tighter text-center">Correct</h3>
-                    <p id="visFeedbackTip" class="mt-2 text-center text-sm font-bold opacity-90"></p>
-                </div>
-            </div>
+            <div class="text-center"><h2 id="visTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Visual ID</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="visProgress" class="h-full bg-emerald-500 w-0 transition-all"></div></div></div>
+            <div id="visCard" class="bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center"><div id="visDisplay" class="w-full h-full flex items-center justify-center"></div><div id="visFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20"><div id="visFeedbackIcon" class="text-6xl mb-2 drop-shadow-md"></div><h3 id="visFeedbackName" class="text-3xl font-brand uppercase tracking-tighter text-center">Correct</h3><p id="visFeedbackTip" class="mt-2 text-center text-sm font-bold opacity-90"></p></div></div>
             <div id="visOptions" class="grid gap-4 mt-6"></div>
         </div>
 
         <!-- ENGINE: SORTING -->
         <div id="page-sorting" class="page max-w-2xl mx-auto space-y-8 pb-20">
-            <div class="text-center">
-                <h2 id="sortTitle" class="text-4xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-1">Sorting Challenge</h2>
-                <p id="sortSubtitle" class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Tap the bucket where this item belongs</p>
-            </div>
-            <div class="flex justify-center items-center h-52 relative">
-                <div id="sortActiveItem" class="flex flex-col items-center">
-                    <div class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20">
-                        <img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/>
-                    </div>
-                    <p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p>
-                </div>
-            </div>
+            <div class="text-center"><h2 id="sortTitle" class="text-4xl font-brand font-black text-gray-900 uppercase leading-none mb-1">Sorting Challenge</h2><p id="sortSubtitle" class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Tap the bucket where this item belongs</p></div>
+            <div class="flex justify-center items-center h-52 relative"><div id="sortActiveItem" class="flex flex-col items-center"><div class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20"><img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/></div><p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p></div></div>
             <div id="sortBuckets" class="grid grid-cols-2 gap-6 mt-8">
-                <button onclick="handleBucketClick(0)" id="bucket0" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all">
-                    <div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div>
-                    <h3 id="bucketLabel0" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket A</h3>
-                </button>
-                <button onclick="handleBucketClick(1)" id="bucket1" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all">
-                    <div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div>
-                    <h3 id="bucketLabel1" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket B</h3>
-                </button>
+                <button onclick="handleBucketClick(0)" id="bucket0" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all"><div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div><h3 id="bucketLabel0" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket A</h3></button>
+                <button onclick="handleBucketClick(1)" id="bucket1" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all"><div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div><h3 id="bucketLabel1" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket B</h3></button>
             </div>
         </div>
 
-        <!-- ENGINE: PACKING (Inventory System) -->
+        <!-- ENGINE: PACKING -->
         <div id="page-packing" class="page max-w-3xl mx-auto space-y-6 pb-20">
-            <div class="text-center">
-                <h2 id="packTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">Packing Engine</h2>
-                <div class="inline-block bg-slate-900 text-white px-4 py-1.5 rounded-full font-mono text-sm font-black mt-2">
-                    Backpack: <span id="packCount" class="text-emerald-400">0</span> / <span id="packReqCount">10</span>
-                </div>
-            </div>
+            <div class="text-center"><h2 id="packTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">Packing Engine</h2><div class="inline-block bg-slate-900 text-white px-4 py-1.5 rounded-full font-mono text-sm font-black mt-2">Backpack: <span id="packCount" class="text-emerald-400">0</span> / <span id="packReqCount">10</span></div></div>
             <div id="packGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-4"></div>
-            <div class="flex justify-center mt-6">
-                <button id="packCheckBtn" onclick="verifyPacking()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-emerald-600 transition-all tracking-widest active:scale-95">Check Backpack</button>
-            </div>
+            <div class="flex justify-center mt-6"><button id="packCheckBtn" onclick="verifyPacking()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-emerald-600 transition-all tracking-widest active:scale-95 text-lg">Check Bag</button></div>
         </div>
 
-        <!-- ENGINE: SCENARIO (Text Adventure) -->
+        <!-- ENGINE: SCENARIO -->
         <div id="page-scenario" class="page max-w-xl mx-auto space-y-6 pb-20 pt-4">
-            <div class="text-center mb-6">
-                <h2 id="scenTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none">Scenario</h2>
-                <div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="scenProgress" class="h-full bg-blue-500 w-0 transition-all"></div></div>
-            </div>
-            <div class="bg-white p-8 rounded-[2rem] border-4 border-slate-100 shadow-xl relative">
-                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-3xl p-3 rounded-full shadow-lg" id="scenIcon">💬</div>
-                <p id="scenPrompt" class="text-lg text-slate-700 font-bold leading-relaxed text-center mt-4"></p>
-            </div>
+            <div class="text-center mb-6"><h2 id="scenTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none">Scenario</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="scenProgress" class="h-full bg-blue-500 w-0 transition-all"></div></div></div>
+            <div class="bg-white p-8 rounded-[2rem] border-4 border-slate-100 shadow-xl relative"><div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-3xl p-3 rounded-full shadow-lg" id="scenIcon">💬</div><p id="scenPrompt" class="text-lg text-slate-700 font-bold leading-relaxed text-center mt-4"></p></div>
             <div id="scenOptions" class="grid gap-3 mt-6"></div>
         </div>
 
         <!-- ENGINE: EMBLEM -->
         <div id="page-emblem" class="page space-y-6 pb-10">
-            <div class="text-center">
-                <h2 class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none mb-2">Emblem Pin-It</h2>
-            </div>
+            <div class="text-center"><h2 id="embTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none mb-2">Diagram Match</h2><p class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Select meaning, then tap the part.</p></div>
             <div class="flex flex-col lg:flex-row gap-6 items-center justify-center">
                 <div id="embBank" class="w-full lg:w-72 grid gap-2"></div>
                 <div id="embBoard" class="relative w-full max-w-[400px] aspect-[1/1.1] bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-slate-100 overflow-hidden">
-                    <img id="embImage" src="first_class_badge.png.jpg.png" alt="Badge" class="w-full h-full object-contain opacity-20" onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Emblem';"/>
+                    <img id="embImage" src="" alt="Base Image" class="w-full h-full object-contain opacity-20" onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Diagram';"/>
                     <div id="embTargets" class="absolute inset-0"></div>
                 </div>
             </div>
-            <div class="flex justify-center mt-4">
-                <button id="embCheckBtn" onclick="verifyEmblem()" class="hidden bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-amber-600 transition-all tracking-widest active:scale-95">Verify</button>
-            </div>
+            <div class="flex justify-center mt-4"><button id="embCheckBtn" onclick="verifyEmblem()" class="hidden bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-amber-600 transition-all tracking-widest active:scale-95">Verify</button></div>
         </div>
 
     </main>
@@ -293,22 +235,20 @@
     <div id="successOverlay" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[110] flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full text-center shadow-2xl border-4 border-emerald-500 relative overflow-hidden">
             <div class="absolute -right-8 top-8 rotate-45 bg-emerald-100 text-emerald-600 font-black px-12 py-1 text-[10px] uppercase tracking-widest opacity-40">Verified</div>
-            <div class="flex justify-center mb-4">
-                <img id="successRankImg" src="rank_lion.png" class="w-24 h-24 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Done';"/>
-            </div>
-            <h2 id="successTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight border-b-2 border-slate-100 pb-2 leading-none">Verified!</h2>
+            <div class="flex justify-center mb-4"><img id="successRankImg" src="rank_lion.png" class="w-24 h-24 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Done';"/></div>
+            <h2 id="successTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight border-b-2 border-slate-100 pb-2 leading-none text-emerald-600">Verified!</h2>
             <p id="successText" class="text-slate-600 mt-4 mb-2 font-bold leading-tight italic"></p>
-            <div id="successExplanation" class="mb-6 text-left text-[11px] text-emerald-800 bg-emerald-50 p-3 rounded-xl shadow-inner empty:hidden leading-relaxed border border-emerald-100"></div>
+            <div id="successExplanation" class="mb-6 text-left text-[11px] text-emerald-800 bg-emerald-50 p-3 rounded-xl shadow-inner border border-emerald-100 leading-relaxed"></div>
             
             <div class="bg-slate-50 rounded-2xl p-4 mb-6 border border-slate-100 text-left relative overflow-hidden">
                 <p class="text-[8px] uppercase font-black text-slate-400 mb-1 border-b border-slate-200 pb-1">Authorized Signature</p>
                 <p class="font-signature text-blue-800 text-4xl -rotate-1 origin-left inline-block pt-1 pb-1">Walker & Elliott</p>
                 <div class="absolute right-4 bottom-3 text-right">
-                    <p id="timeLabel" class="text-[8px] uppercase font-black text-slate-400 leading-none mb-1">Time</p>
+                    <p id="timeLabel" class="text-[8px] uppercase font-black text-slate-400 leading-none mb-1">Final Time</p>
                     <p id="finalTime" class="font-mono font-black text-emerald-600 text-lg leading-none">00:00</p>
                 </div>
             </div>
-            <button onclick="showPage('menu')" class="w-full bg-emerald-500 text-white font-black py-5 rounded-2xl shadow-lg hover:bg-emerald-600 transition-all uppercase tracking-widest active:scale-95 text-lg">Next Mission</button>
+            <button onclick="showPage('menu')" class="w-full bg-emerald-500 text-white font-black py-5 rounded-2xl shadow-lg hover:bg-emerald-600 transition-all uppercase tracking-widest text-lg active:scale-95">Next Mission</button>
         </div>
     </div>
 
@@ -316,18 +256,12 @@
     <div id="reqFeedback" class="fixed bottom-0 left-0 right-0 bg-white border-t-8 border-orange-500 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] p-6 z-[120] hidden">
         <div class="max-w-xl mx-auto">
             <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2">
-                    <span id="feedbackIcon" class="text-xl">🐺</span>
-                    <p id="feedbackTypeLabel" class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Akela Says</p>
-                </div>
-                <button onclick="hideReqFeedback()" class="text-slate-300 hover:text-slate-900 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                <div class="flex items-center gap-2"><span id="feedbackIcon" class="text-xl">🐺</span><p id="feedbackTypeLabel" class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Akela Says</p></div>
+                <button onclick="hideReqFeedback()" class="text-slate-300 hover:text-slate-900 transition-colors"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
-            <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-xl leading-none mb-3">Check Your Training</h3>
+            <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-xl leading-none mb-3">Check Training</h3>
             <div id="feedbackText" class="text-slate-600 font-medium leading-relaxed text-sm mb-5"></div>
-            <div id="feedbackReqBox" class="bg-orange-50 p-3 rounded-xl border border-orange-100 flex items-center gap-3">
-                <span class="bg-orange-500 text-white font-black text-[10px] px-2 py-1 rounded">REQ</span>
-                <p id="feedbackReq" class="text-[10px] font-black uppercase text-orange-700 tracking-tighter font-brand"></p>
-            </div>
+            <div id="feedbackReqBox" class="bg-orange-50 p-3 rounded-xl border border-orange-100 flex items-center gap-3"><span class="bg-orange-500 text-white font-black text-[10px] px-2 py-1 rounded">REQ</span><p id="feedbackReq" class="text-[10px] font-black uppercase text-orange-700 tracking-tighter font-brand"></p></div>
         </div>
     </div>
 
@@ -336,153 +270,916 @@
         <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full text-center shadow-2xl border-b-8 border-orange-500 transition-all" id="startBorder">
             <div id="startIcon" class="text-7xl mb-4 animate-bounce">⭐</div>
             <h2 id="startTitle" class="text-3xl font-brand font-black text-gray-900 uppercase leading-none mb-2 tracking-tight">Mission Title</h2>
-            <div class="bg-slate-50 p-5 rounded-[2rem] border border-slate-100 mb-8">
-                <p class="text-[10px] uppercase font-black text-slate-400 mb-2 tracking-widest text-center">Mission Briefing</p>
-                <p id="startDesc" class="text-slate-700 font-bold leading-tight text-center text-sm italic"></p>
-            </div>
-            <button onclick="beginActiveGame()" id="startBtn" class="w-full bg-orange-500 text-white font-black py-5 rounded-2xl shadow-xl hover:bg-orange-600 transition-all uppercase tracking-widest text-xl active:scale-95">Begin Mission</button>
-            <button onclick="showPage('menu')" class="mt-6 text-xs text-slate-400 font-black uppercase tracking-widest hover:text-slate-900 transition-colors">Abort</button>
+            <div class="bg-slate-50 p-5 rounded-[2rem] border border-slate-100 mb-8"><p class="text-[10px] uppercase font-black text-slate-400 mb-2 tracking-widest text-center">Briefing</p><p id="startDesc" class="text-slate-700 font-bold leading-tight text-center text-sm italic"></p></div>
+            <button onclick="beginActiveGame()" id="startBtn" class="w-full bg-orange-500 text-white font-black py-5 rounded-2xl shadow-xl uppercase tracking-widest text-xl active:scale-95">Begin Mission</button>
+            <button onclick="showPage('menu')" class="mt-6 text-xs text-slate-400 font-black uppercase tracking-widest hover:text-slate-900">Abort</button>
         </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="bg-slate-950 border-t-8 border-emerald-600 mt-auto py-10">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <div class="flex justify-center mb-6">
-                <img src="ATS Full Transparent .png.png" alt="Logo" class="h-16 w-16 object-contain opacity-80" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=ATS';"/>
-            </div>
+            <div class="flex justify-center mb-6"><img src="ATS Full Transparent .png.png" alt="Logo" class="h-16 w-16 object-contain opacity-80" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=ATS';"/></div>
             <h3 class="font-brand font-black text-white uppercase tracking-widest text-sm mb-6 opacity-90">Aides to Scouting Podcast</h3>
             <div class="flex flex-wrap justify-center gap-3 mb-10">
-                <a href="https://podcasts.apple.com/us/podcast/aides-to-scouting/id1849273100" target="_blank" class="podcast-link flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-lg hover:bg-purple-600">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5c-2.485 0-4.5-2.015-4.5-4.5S9.515 7.5 12 7.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5zm0-7.5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"/></svg>
-                </a>
-                <a href="https://open.spotify.com/show/62wfjOw3n5CM170IvYPqIi" target="_blank" class="podcast-link flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-lg border border-emerald-900 hover:bg-green-500">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.585 14.41a.627.627 0 0 1-.863.208c-2.365-1.445-5.344-1.77-8.854-.97a.628.628 0 1 1-.29-1.222c3.84-.876 7.127-.506 9.799 1.121a.627.627 0 0 1 .208.863zm1.233-2.756a.78.78 0 0 1-1.074.257c-2.716-1.668-6.85-2.158-10.04-1.183a.782.782 0 1 1-.455-1.496c3.65-1.115 8.24-.567 11.312 1.348a.78.78 0 0 1 .257 1.074zm.116-2.887c-3.255-1.93-8.625-2.108-11.73-1.166a.936.936 0 1 1-.544-1.792c3.557-1.08 9.48-.876 13.23 1.346a.936.936 0 1 1-.956 1.612z"/></svg>
-                </a>
-                <a href="https://www.youtube.com/@aidestoscouting" target="_blank" class="podcast-link flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-lg hover:bg-red-600">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-                </a>
-                <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="podcast-link flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-lg border border-blue-900 hover:bg-blue-600">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                </a>
-                <a href="https://www.tiktok.com/@aidestoscouting" target="_blank" class="podcast-link flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-lg hover:bg-pink-600">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg>
-                </a>
+                <a href="https://podcasts.apple.com/us/podcast/aides-to-scouting/id1849273100" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-purple-600 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5c-2.485 0-4.5-2.015-4.5-4.5S9.515 7.5 12 7.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5zm0-7.5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"/></svg></a>
+                <a href="https://open.spotify.com/show/62wfjOw3n5CM170IvYPqIi" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-green-500 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.585 14.41a.627.627 0 0 1-.863.208c-2.365-1.445-5.344-1.77-8.854-.97a.628.628 0 1 1-.29-1.222c3.84-.876 7.127-.506 9.799 1.121a.627.627 0 0 1 .208.863zm1.233-2.756a.78.78 0 0 1-1.074.257c-2.716-1.668-6.85-2.158-10.04-1.183a.782.782 0 1 1-.455-1.496c3.65-1.115 8.24-.567 11.312 1.348a.78.78 0 0 1 .257 1.074zm.116-2.887c-3.255-1.93-8.625-2.108-11.73-1.166a.936.936 0 1 1-.544-1.792c3.557-1.08 9.48-.876 13.23 1.346a.936.936 0 1 1-.956 1.612z"/></svg></a>
+                <a href="https://www.youtube.com/@aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-red-600 transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-blue-600 transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                <a href="https://www.tiktok.com/@aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-pink-600 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg></a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • Version 2.1</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V4.0 Master Edition</p>
         </div>
     </footer>
 
     <script>
-        // --- MASTER CONFIG ---
+        // ==========================================
+        // CONFIGURATION & SETUP
+        // ==========================================
         const BSA_RANK_IMAGES = { 1: 'rank_scout.png', 2: 'rank_life.png', 3: 'rank_eagle.png' };
-        const CUB_RANK_COLORS = { lion: '#facc15', tiger: '#f97316', wolf: '#dc2626', bear: '#2563eb', webelos: '#15803d', aol: '#4338ca' };
-        let currentProgram = null, currentRank = null, currentId = '';
-        let secondsElapsed = 0, timerInt = null, completedGames = {};
         
-        // --- 50+ GAME MASTER DATABASE ---
-        const DATA = {
-            // == CUB SCOUT GAMES ==
-            lion_sign: { type: 'visual', title: "Scout Sign", desc: "Which image shows the Cub Scout sign?", icon: "✌️", options: [{label:"Correct", value:"yes"}, {label:"Incorrect", value:"no"}], items:[ {name: "The Sign", status:"yes", tip: "Two fingers up like Akela's ears!", img: "rank_lion.png", req: "Lion 1"} ] },
-            healthy_habits: { type: 'sorting', title: "Healthy Habits", desc: "Are these habits healthy or germy?", icon: "🧼", buckets: ["Healthy", "Germs"], items:[ {name:"Brushing Teeth", status:0, img:"habit_brushing.jpg"}, {name:"Washing Hands", status:0, img:"habit_washing.jpg"}, {name:"Playing in Mud", status:1, img:"habit_dirt.jpg"}, {name:"Sneezing in Hands", status:1, img:"habit_sneeze.jpg"} ], reveal: "Clean Cub!", req: "Lion", explanation: "Wash your hands to stay healthy on the trail." },
-            animal_tracks: { type: 'visual', title: "Track Match", desc: "Match the animal track.", icon: "🐾", options: [{label:"Lion", value:"lion"}, {label:"Wolf", value:"wolf"}, {label:"Bear", value:"bear"}], items:[ {name: "Lion Track", status:"lion", tip: "Cats hide their claws!", img: "lion_track.jpg", req: "Wolf 2"}, {name: "Wolf Track", status:"wolf", tip: "Long and narrow with claw marks.", img: "wolf_track.jpg", req: "Wolf 2"}, {name: "Bear Track", status:"bear", tip: "Big and broad with heavy claws.", img: "bear_track.jpg", req: "Wolf 2"} ] },
-            buddy_system: { type: 'sorting', title: "Buddy System", desc: "How do we stay safe outdoors?", icon: "🤝", buckets: ["SAFE", "UNSAFE"], items:[ {name:"Walking with Buddy", status:0, img:"rank_lion.png"}, {name:"Wandering Alone", status:1, img:"toys.jpg"} ], reveal: "Stay together!", req: "Tiger", explanation: "Never go anywhere alone in the woods." },
-            community_helpers: { type: 'visual', title: "Helpers", desc: "Match the tool to the community helper.", icon: "🚒", options: [{label:"Firefighter", value:"fire"}, {label:"Paramedic", value:"medic"}, {label:"Police", value:"police"}], items:[ {name: "Fire Truck", status:"fire", tip: "Puts out fires.", img: "helper_firetruck.jpg", req: "Tiger"}, {name: "Stethoscope", status:"medic", tip: "Listens to hearts.", img: "helper_stethoscope.jpg", req: "Tiger"}, {name: "Badge", status:"police", tip: "Keeps the peace.", img: "helper_badge.jpg", req: "Tiger"} ] },
-            tiger_bites: { type: 'sorting', title: "Tiger Bites", desc: "Sort the trail snacks.", icon: "🍎", buckets: ["Trail Snack", "Junk Food"], items:[ {name:"Trail Mix", status:0, img:"snack_trail_mix.jpg"}, {name:"Apple", status:0, img:"food_apple.jpg"}, {name:"Water", status:0, img:"water_bottle.jpg"}, {name:"Soda", status:1, img:"snack_soda.jpg"}, {name:"Candy", status:1, img:"candy_wrapper.jpg"}, {name:"Ice Cream", status:1, img:"snack_ice_cream.jpg"} ], reveal: "Healthy Choices!", req: "Tiger", explanation: "Sugar makes you crash. Eat protein for energy." },
-            call_911: { type: 'sequence', title: "Call 911", desc: "Put the emergency steps in order.", icon: "📞", items: ["Stay Calm", "Dial 9-1-1", "Tell them where you are"], reveal: "Help is on the way.", prefix: "Steps:", req: "Tiger", explanation: "Always stay calm and know your location." },
-            six_essentials: { type: 'packing', title: "6 Essentials", desc: "Pack exactly 6 things for a Cub Scout hike.", icon: "🎒", req: "Tiger 1a", reveal: "Pack ready!", explanation: "Water, First Aid, Flashlight, Trail Food, Sunscreen, Whistle.", correctCount: 6, items: [ { name: "Water", img: "water_bottle.jpg", correct: true }, { name: "iPad", img: "tablet.jpg", correct: false }, { name: "First Aid", img: "first_aid_kit.jpg", correct: true }, { name: "Flashlight", img: "flashlight.jpg", correct: true }, { name: "Heavy Coat", img: "heavy_coat.jpg", correct: false }, { name: "Sunscreen", img: "sun_screen.jpg", correct: true }, { name: "Toys", img: "toys.jpg", correct: false }, { name: "Whistle", img: "whistle.jpg", correct: true }, { name: "Snack", img: "snack_trail_mix.jpg", correct: true } ] },
-            lnt_cubs: { type: 'sorting', title: "Trash or Nature?", desc: "Put items where they belong.", icon: "🍃", buckets: ["Trash Bin", "Nature"], items:[ {name:"Wrapper", status:0, img:"candy_wrapper.jpg"}, {name:"Apple Core", status:0, img:"apple_core.jpg"}, {name:"Cool Rock", status:1, img:"cool_rock.jpg"}, {name:"Plastic", status:0, img:"plastic_bottle.jpg"}, {name:"Pinecone", status:1, img:"pinecone.jpg"}, {name:"Flower", status:1, img:"wildflower.jpg"} ], reveal: "LNT Expert!", req: "Wolf 1", explanation: "Pack it in, pack it out!" },
-            weather_match: { type: 'visual', title: "Weather Gear", desc: "Pick the right gear.", icon: "☁️", options: [{label:"Winter", value:"snow"}, {label:"Rainy", value:"rain"}, {label:"Summer", value:"sun"}], items:[ {name: "Snow", status: "snow", tip: "Wear layers!", img: "weather_snow.jpg", req: "Wolf 4"}, {name: "Rain", status: "rain", tip: "Pack a poncho!", img: "weather_rain.jpg", req: "Wolf 4"}, {name: "Sunny", status: "sun", tip: "Wear a hat!", img: "weather_sun.jpg", req: "Wolf 4"} ] },
-            finding_way: { type: 'emblem', title: "Compass Points", desc: "Pin the basic directions.", icon: "🧭", img: "compass_rose.jpg", parts: [ {id:1, text: "North", name: "Top", style: "top:10%; left:45%; width:10%; height:10%;", tip: "Points up.", req: "Wolf"}, {id:2, text: "South", name: "Bottom", style: "bottom:10%; left:45%; width:10%; height:10%;", tip: "Points down.", req: "Wolf"}, {id:3, text: "East", name: "Right", style: "top:45%; right:10%; width:10%; height:10%;", tip: "Points right.", req: "Wolf"}, {id:4, text: "West", name: "Left", style: "top:45%; left:10%; width:10%; height:10%;", tip: "Points left.", req: "Wolf"} ] },
-            germs_away: { type: 'sequence', title: "Germs Away", desc: "Hand washing order.", icon: "🚰", items: ["Get hands wet", "Add soap", "Scrub for 20 seconds", "Rinse and dry"], reveal: "Squeaky clean.", prefix: "Steps:", req: "Wolf", explanation: "Sing Happy Birthday twice to reach 20 seconds." },
-            whittling_chip: { type: 'sorting', title: "Knife Safety", desc: "Safe or unsafe?", icon: "🔪", buckets: ["Safe", "Unsafe"], items:[ {name:"Blood Circle", status:0, img:"gear_pocket_knife.jpg"}, {name:"Carve Toward You", status:1, img:"gear_pocket_knife.jpg"}, {name:"Close when walking", status:0, img:"gear_pocket_knife.jpg"}, {name:"Run with blade", status:1, img:"gear_pocket_knife.jpg"} ], reveal: "Whittling Chip earned.", req: "Bear", explanation: "Always carve away from yourself." },
-            bear_necessities: { type: 'sequence', title: "Pitch a Tent", desc: "Order the steps.", icon: "⛺", items: ["Lay down the tarp", "Lay out the tent", "Put together the poles", "Stake it down"], reveal: "Camp ready.", prefix: "Steps:", req: "Bear", explanation: "The tarp protects the bottom of your tent." },
-            knot_tying: { type: 'visual', title: "Bear Knots", desc: "Identify the knot.", icon: "🪢", options: [{label:"Square", value:"square"},{label:"Bowline", value:"bowline"},{label:"Two Half-Hitches", value:"two"}], items:[ {name:"Square", status:"square", tip:"Right over left.", img:"square_knot.jpg", req:"Bear"}, {name:"Bowline", status:"bowline", tip:"Rabbit hole.", img:"bowline.jpg", req:"Bear"}, {name:"Two Half-Hitches", status:"two", tip:"Tying to a pole.", img:"two_half_hitches.jpg", req:"Bear"} ] },
-            chef_cubs: { type: 'sorting', title: "Healthy Eating", desc: "Healthy or Treat?", icon: "🥦", buckets: ["Healthy", "Treat"], items:[ {name:"Apple", status:0, img:"food_apple.jpg"}, {name:"Chicken", status:0, img:"food_chicken.jpg"}, {name:"Candy", status:1, img:"candy_wrapper.jpg"}, {name:"Broccoli", status:0, img:"food_broccoli.jpg"}, {name:"Bread", status:0, img:"food_bread.jpg"} ], reveal: "Balanced Den!", req: "Bear", explanation: "Healthy foods give you energy." },
-            first_responder: { type: 'sorting', title: "First Aid Gear", desc: "What treats what?", icon: "🩹", buckets: ["Bandage", "Ice Pack"], items:[ {name:"Scrape or Cut", status:0, img:"aid_cut.jpg"}, {name:"Swollen Ankle", status:1, img:"aid_sprain.jpg"}, {name:"Minor Burn", status:0, img:"aid_burn.jpg"} ], reveal: "Ready to help.", req: "Webelos", explanation: "Ice reduces swelling, bandages keep cuts clean." },
-            stop_logic: { type: 'sequence', title: "Lost in the Woods", desc: "Put S.T.O.P. in order.", icon: "🛑", items: ["Stop", "Think", "Observe", "Plan"], reveal: "S.T.O.P. method.", prefix: "Steps:", req: "Webelos", explanation: "Never keep walking if you are lost. Hug a tree." },
-            stronger_faster: { type: 'sorting', title: "Fitness", desc: "Warm-Up or Workout?", icon: "💪", buckets: ["Warm-Up", "Workout"], items:[ {name:"Stretching", status:0, img:"fit_stretch.jpg"}, {name:"Push-ups", status:1, img:"fit_pushup.jpg"}, {name:"Walking", status:0, img:"fit_walk.jpg"}, {name:"Sprinting", status:1, img:"fit_sprint.jpg"} ], reveal: "Fit Scout.", req: "Webelos", explanation: "Always warm up your muscles first." },
-            patrol_method: { type: 'sorting', title: "Leadership", desc: "Cub vs BSA Leadership.", icon: "👥", buckets: ["Youth Led (BSA)", "Adult Led (Cub)"], items:[ {name:"Senior Patrol Leader", status:0, img:"rank_scout.png"}, {name:"Cubmaster", status:1, img:"rank_lion.png"}, {name:"Patrol Leader", status:0, img:"rank_scout.png"}, {name:"Den Leader", status:1, img:"rank_lion.png"} ], reveal: "Ready for a Troop.", req: "AOL", explanation: "In a Troop, the Scouts make the decisions." },
-
-            // == BSA GAMES ==
-            oath: { type: 'sequence', title: "Scout Oath", desc: "Put the lines in order.", icon: "⚜️", items: ["To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight"], reveal: "Foundation of Scouting.", prefix: "On my honor...", req: "Scout 1a", explanation: "Three promises: God/Country, Others, and Self." },
-            law: { type: 'sequence', title: "Scout Law", desc: "Sequence all 12 points.", icon: "📜", items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"], reveal: "A Scout lives by these.", prefix: "A Scout is...", req: "Scout 1b", explanation: "The 12 core values of a Scout." },
-            action: { type: 'sequence', title: "The 3 C's", desc: "Emergency action steps.", icon: "🚨", items: ["Check the scene", "Call for help", "provide Care"], reveal: "Always follow the 3 C's.", prefix: "Steps:", req: "Tenderfoot 4a", explanation: "Check, Call, Care." },
-            triage: { type: 'sequence', title: "Hurry Cases", desc: "Order by medical priority.", icon: "🏥", items: ["Stopped Breathing", "Serious Bleeding", "Ingested Poison", "Treating for Shock"], reveal: "Triage saves lives.", prefix: "Priority:", req: "Tenderfoot 4a", explanation: "Breathing and bleeding come first." },
-            cpr: { type: 'sequence', title: "CPR Sequence", desc: "Hands-Only CPR.", icon: "💓", items: ["Check scene", "Check responsiveness", "Call 911 / AED", "Start compressions"], reveal: "Save a heart.", prefix: "Protocol:", req: "1st Class 6a", explanation: "Push hard and fast." },
-            snake: { type: 'sequence', title: "Snakebite", desc: "Venomous bite protocol.", icon: "🐍", items: ["Move away", "Stay calm/still", "Keep bite below heart", "Get to hospital"], reveal: "Stay calm.", prefix: "Protocol:", req: "Tenderfoot 4d", explanation: "Never cut or suck the wound." },
-            edge: { type: 'sequence', title: "Teaching Skills", desc: "Sequence the E.D.G.E. method.", icon: "🎓", items: ["Explain", "Demonstrate", "Guide", "Enable"], reveal: "Mastered E.D.G.E.", prefix: "Steps:", req: "Star 6", explanation: "Explain, Demonstrate, Guide, Enable." },
-            rice: { type: 'sequence', title: "Sprains", desc: "R.I.C.E. treatment.", icon: "🩹", items: ["Rest", "Ice", "Compression", "Elevation"], reveal: "R.I.C.E.", prefix: "Treatment:", req: "Tenderfoot 4c", explanation: "Rest, Ice, Compression, Elevation." },
-            rescue: { type: 'sequence', title: "Water Rescue", desc: "Safest to riskiest.", icon: "🛶", items: ["Reach", "Throw", "Row", "Go"], reveal: "Reach/Throw first!", prefix: "Order:", req: "2nd Class 5c", explanation: "Only 'Go' if trained." },
-            teams: { type: 'sequence', title: "Leading Teams", desc: "NYLT Team stages.", icon: "🤝", items: ["Forming", "Storming", "Norming", "Performing"], reveal: "Team development.", prefix: "Stages:", req: "NYLT", explanation: "Form, Storm, Norm, Perform." },
-            outdoor: { type: 'sequence', title: "Outdoor Code", desc: "Conservation promises.", icon: "🌲", items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"], reveal: "Protect our planet.", prefix: "As an American...", req: "Scout 1c", explanation: "LNT aligns with the code." },
-            water: { type: 'sequence', title: "Purify Water", desc: "Rolling boil method.", icon: "💧", items: ["Filter out debris", "Bring to rolling boil", "Maintain for 1 minute", "Let cool"], reveal: "Safe to drink.", prefix: "Steps:", req: "1st Class 7f", explanation: "Heat kills microorganisms." },
-            extinguish: { type: 'sequence', title: "Campfire Out", desc: "Extinguishing steps.", icon: "🔥", items: ["Let burn to ash", "Drown embers", "Stir ashes", "Feel for heat"], reveal: "Cold out.", prefix: "Steps:", req: "2nd Class 2c", explanation: "Cold to the touch." },
-            eagle_project: { type: 'sequence', title: "Eagle Project", desc: "Management steps.", icon: "🦅", items: ["Concept", "Approvals", "Fundraising", "Execution", "Final Report"], reveal: "Project Managed.", prefix: "Phases:", req: "Eagle", explanation: "A massive undertaking requiring strict order." },
-            three_pot_wash: { type: 'sequence', title: "3-Pot Wash", desc: "Camp dishwashing.", icon: "🍽️", items: ["Wash (Hot Soapy)", "Rinse (Hot Clear)", "Sanitize (Bleach/Boil)", "Air Dry"], reveal: "Clean camp.", prefix: "Steps:", req: "1st Class", explanation: "Never use a towel to dry, it spreads bacteria." },
-            plants: { type: 'visual', title: "Safe or Toxic?", desc: "Identify flora.", icon: "🌿", options: [{label:"SAFE", value:"safe"},{label:"TOXIC", value:"toxic"}], items: [ {name:"Poison Ivy", status:"toxic", tip:"Leaves of 3.", img:"ivy.jpg", req:"2nd Class 4"}, {name:"White Oak", status:"safe", tip:"Rounded lobes.", img:"oak.jpg", req:"2nd Class 4"}, {name:"Virginia Creeper", status:"safe", tip:"Five leaves.", img:"creeper.jpg", req:"2nd Class 4"} ] },
-            maps: { type: 'visual', title: "Map Master", desc: "Topographic symbols.", icon: "🗺️", options: [{label:"Elevation", value:"elev"},{label:"Human", value:"human"}], items: [ {name:"Contour Lines", status:"elev", tip:"Elevation changes.", svg:'<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50" fill="none" stroke="#8B4513" stroke-width="2"/></svg>', req:"2nd Class 3a"}, {name:"Buildings", status:"human", tip:"Black squares.", svg:'<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black"/></svg>', req:"2nd Class 3a"} ] },
-            fire: { type: 'visual', title: "Fire Builder", desc: "Fire lay patterns.", icon: "🏕️", options: [{label:"Start", value:"start"},{label:"Heat", value:"heat"}], items: [ {name:"Tepee Lay", status:"start", tip:"Best for starting.", svg:'<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M80 80 L50 10 M50 10 L50 80" stroke="#8B4513" stroke-width="4"/></svg>', req:"2nd Class 2b"}, {name:"Log Cabin", status:"heat", tip:"Sustained cooking.", svg:'<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/></svg>', req:"2nd Class 2b"} ] },
-            knots: { type: 'visual', title: "Knot Knowledge", desc: "Identify the knot.", icon: "🪢", options: [{label:"Square", value:"square"},{label:"Bowline", value:"bowline"},{label:"Clove", value:"clove"},{label:"Taut-line", value:"tautline"}], items:[ {name:"Square Knot", status:"square", tip:"Joins ropes.", img:"square_knot.jpg", req:"Tenderfoot 3a"}, {name:"Bowline", status:"bowline", tip:"Rescue loop.", img:"bowline.jpg", req:"1st Class 3b"}, {name:"Clove Hitch", status:"clove", tip:"Starts lashings.", img:"clove_hitch.jpg", req:"1st Class 3a"}, {name:"Taut-line", status:"tautline", tip:"Adjustable loop.", img:"tautline.jpg", req:"Tenderfoot 3a"} ] },
-            lashings: { type: 'visual', title: "Lashings", desc: "Pioneer lashings.", icon: "🪵", options: [{label:"Square", value:"square"},{label:"Diagonal", value:"diagonal"},{label:"Shear", value:"shear"},{label:"Tripod", value:"tripod"}], items:[ {name:"Square Lashing", status:"square", tip:"90 degrees.", img:"square_lashing.jpg", req:"1st Class 3a"}, {name:"Diagonal", status:"diagonal", tip:"Crossed poles.", img:"diagonal_lashing.jpg", req:"1st Class 3a"}, {name:"Shear", status:"shear", tip:"A-frames.", img:"shear_lashing.jpg", req:"1st Class 3a"}, {name:"Tripod", status:"tripod", tip:"3-legs.", img:"tripod_lashing.jpg", req:"1st Class 3a"} ] },
-            bsa_10_essentials: { type: 'packing', title: "10 Essentials", desc: "Pack exactly 10 items.", icon: "🎒", req: "Scout 1a", reveal: "Fully Prepared.", explanation: "Pocket knife, rain gear, trail food, flashlight, compass, first aid, sunscreen, map, fire starter, water.", correctCount: 10, items: [ { name: "Water", img: "water_bottle.jpg", correct: true }, { name: "iPad", img: "tablet.jpg", correct: false }, { name: "First Aid", img: "first_aid_kit.jpg", correct: true }, { name: "Flashlight", img: "flashlight.jpg", correct: true }, { name: "Rain Gear", img: "gear_rain.jpg", correct: true }, { name: "Sunscreen", img: "sun_screen.jpg", correct: true }, { name: "Toys", img: "toys.jpg", correct: false }, { name: "Map", img: "gear_map.jpg", correct: true }, { name: "Trail Food", img: "snack_trail_mix.jpg", correct: true }, { name: "Pocket Knife", img: "gear_pocket_knife.jpg", correct: true }, { name: "Fire Starter", img: "gear_fire_starter.jpg", correct: true }, { name: "Compass", img: "compass_base.jpg", correct: true } ] },
-            mb_logic: { type: 'sorting', title: "Merit Badges", desc: "Eagle Required vs Elective.", icon: "🏅", buckets: ["Eagle Required", "Elective"], items:[ {name:"First Aid", status:0, img:"mb_first_aid.jpg"}, {name:"Camping", status:0, img:"mb_camping.jpg"}, {name:"Citizenship", status:0, img:"mb_citizenship.jpg"}, {name:"Fingerprinting", status:1, img:"mb_fingerprinting.jpg"}, {name:"Basketry", status:1, img:"mb_basketry.jpg"}, {name:"Wood Carving", status:1, img:"mb_woodcarving.jpg"} ], reveal: "Advancement Ready.", req: "Star", explanation: "Silver bordered badges are required for Eagle." },
-            choking_scenario: { type: 'scenario', title: "Choking Crisis", desc: "Make the right choices to save a life.", icon: "🗣️", req: "Tenderfoot 4b", reveal: "Crisis averted!", explanation: "Always encourage coughing first. If they can't breathe, begin back blows.", steps: [ { text: "You see someone grabbing their throat. They are coughing loudly. What do you do?", options: [ { label: "Give abdominal thrusts", correct: false, feedback: "If they are coughing, air is moving! Thrusts could lodge the object deeper." }, { label: "Encourage them to cough", correct: true } ] }, { text: "They stop coughing and cannot make any sound. They are turning blue.", options: [ { label: "Do the Heimlich maneuver", correct: false, feedback: "BSA protocol update: Start with 5 back blows first!" }, { label: "Call 911, start 5 back blows", correct: true } ] } ] },
-            resolving_conflict: { type: 'scenario', title: "Conflict Resolution", desc: "Handle a dispute between two younger Scouts.", icon: "⚖️", req: "Life", reveal: "Great Leadership.", explanation: "A true leader listens to both sides and finds common ground.", steps: [ { text: "Two younger Scouts are yelling about whose turn it is to cook. What is your first move?", options: [ { label: "Yell at them to stop", correct: false, feedback: "A Scout is Friendly and Courteous. Yelling escalates the situation." }, { label: "Separate them and ask what's wrong", correct: true } ] }, { text: "They both claim the duty roster says it's their turn.", options: [ { label: "Tell them to figure it out", correct: false, feedback: "A leader guides and enables. Don't abandon them." }, { label: "Look at the roster together", correct: true } ] } ] },
-            compass_pin: { type: 'emblem', title: "Compass Points", desc: "Pin the 8 cardinal directions.", icon: "🧭", img: "compass_rose.jpg", parts: [ {id:1, text:"North", name:"N", style:"top:5%; left:45%; width:10%; height:10%;", tip:"0 degrees.", req:"2nd Class"}, {id:2, text:"East", name:"E", style:"top:45%; right:5%; width:10%; height:10%;", tip:"90 degrees.", req:"2nd Class"}, {id:3, text:"South", name:"S", style:"bottom:5%; left:45%; width:10%; height:10%;", tip:"180 degrees.", req:"2nd Class"}, {id:4, text:"West", name:"W", style:"top:45%; left:5%; width:10%; height:10%;", tip:"270 degrees.", req:"2nd Class"}, {id:5, text:"Northeast", name:"NE", style:"top:15%; right:15%; width:15%; height:10%;", tip:"45 degrees.", req:"2nd Class"}, {id:6, text:"Southeast", name:"SE", style:"bottom:15%; right:15%; width:15%; height:10%;", tip:"135 degrees.", req:"2nd Class"}, {id:7, text:"Southwest", name:"SW", style:"bottom:15%; left:15%; width:15%; height:10%;", tip:"225 degrees.", req:"2nd Class"}, {id:8, text:"Northwest", name:"NW", style:"top:15%; left:15%; width:15%; height:10%;", tip:"315 degrees.", req:"2nd Class"} ] },
-            emblem: { type: 'emblem', title: "Badge Symbols", desc: "Pin meanings to the First Class Badge.", icon: "🏅", img: "first_class_badge.png.jpg.png", parts: [ {id:1, text: "3 parts of the Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;", tip: "God/Country, Others, Self.", req: "1st Class 1a"}, {id:2, text: "Freedom & Defend it", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;", tip: "Our country.", req: "1st Class 1a"}, {id:3, text: "Truth and Knowledge", name: "Stars", style: "top:40%; left:12%; width:15%; height:12%;", tip: "Scout's guides.", req: "1st Class 1a"}, {id:4, text: "Scout's Smile", name: "Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;", tip: "Be Prepared.", req: "1st Class 1a"} ] }
+        const PROGRAM_COLORS = {
+            cub_lion: '#facc15', cub_tiger: '#f97316', cub_wolf: '#dc2626', 
+            cub_bear: '#2563eb', cub_webelos: '#15803d', cub_aol: '#4338ca',
+            bsa: '#10b981', venturing: '#166534', sea: '#1e3a8a'
         };
 
-        // --- TIER & RANK LISTS ---
+        // ==========================================
+        // GAME DATABASE (EXPANDED TO PREVENT TRUNCATION)
+        // ==========================================
+        const DATA = {
+            
+            // --- CUB SCOUT GAMES ---
+            lion_sign: {
+                type: 'visual',
+                title: "Scout Sign",
+                desc: "Which image shows the Cub Scout sign?",
+                icon: "✌️",
+                options: [
+                    { label: "Correct", value: "yes" },
+                    { label: "Incorrect", value: "no" }
+                ],
+                items: [
+                    { name: "The Sign", status: "yes", tip: "Two fingers up like Akela's ears!", img: "rank_lion.png", req: "Lion" }
+                ]
+            },
+            
+            healthy_habits: {
+                type: 'sorting',
+                title: "Healthy Habits",
+                desc: "Are these habits healthy or germy?",
+                icon: "🧼",
+                buckets: ["Healthy", "Germs"],
+                items: [
+                    { name: "Brushing Teeth", status: 0, img: "habit_brushing.jpg" },
+                    { name: "Washing Hands", status: 0, img: "habit_washing.jpg" },
+                    { name: "Playing in Mud", status: 1, img: "habit_dirt.jpg" },
+                    { name: "Sneezing in Hands", status: 1, img: "habit_sneeze.jpg" }
+                ],
+                reveal: "Clean Cub!",
+                req: "Lion",
+                explanation: "Wash your hands to stay healthy."
+            },
+            
+            animal_tracks: {
+                type: 'visual',
+                title: "Track Match",
+                desc: "Match the animal track.",
+                icon: "🐾",
+                options: [
+                    { label: "Lion", value: "lion" },
+                    { label: "Wolf", value: "wolf" },
+                    { label: "Bear", value: "bear" }
+                ],
+                items: [
+                    { name: "Lion Track", status: "lion", tip: "Cats hide their claws!", img: "lion_track.jpg", req: "Wolf" },
+                    { name: "Wolf Track", status: "wolf", tip: "Long and narrow with claws.", img: "wolf_track.jpg", req: "Wolf" },
+                    { name: "Bear Track", status: "bear", tip: "Big and broad with heavy claws.", img: "bear_track.jpg", req: "Wolf" }
+                ]
+            },
+            
+            buddy_system: {
+                type: 'sorting',
+                title: "Buddy System",
+                desc: "Stay safe outdoors!",
+                icon: "🤝",
+                buckets: ["SAFE", "UNSAFE"],
+                items: [
+                    { name: "Walking with Buddy", status: 0, img: "rank_lion.png" },
+                    { name: "Wandering Alone", status: 1, img: "toys.jpg" }
+                ],
+                reveal: "Stay together!",
+                req: "Tiger",
+                explanation: "Never go alone in the woods."
+            },
+            
+            community_helpers: {
+                type: 'visual',
+                title: "Helpers",
+                desc: "Match the tool to the helper.",
+                icon: "🚒",
+                options: [
+                    { label: "Firefighter", value: "fire" },
+                    { label: "Paramedic", value: "medic" },
+                    { label: "Police", value: "police" }
+                ],
+                items: [
+                    { name: "Fire Truck", status: "fire", tip: "Puts out fires.", img: "helper_firetruck.jpg", req: "Tiger" },
+                    { name: "Stethoscope", status: "medic", tip: "Listens to hearts.", img: "helper_stethoscope.jpg", req: "Tiger" },
+                    { name: "Badge", status: "police", tip: "Keeps the peace.", img: "helper_badge.jpg", req: "Tiger" }
+                ]
+            },
+            
+            tiger_bites: {
+                type: 'sorting',
+                title: "Tiger Bites",
+                desc: "Sort the trail snacks.",
+                icon: "🍎",
+                buckets: ["Trail Snack", "Junk Food"],
+                items: [
+                    { name: "Trail Mix", status: 0, img: "snack_trail_mix.jpg" },
+                    { name: "Apple", status: 0, img: "food_apple.jpg" },
+                    { name: "Water", status: 0, img: "water_bottle.jpg" },
+                    { name: "Soda", status: 1, img: "snack_soda.jpg" },
+                    { name: "Candy", status: 1, img: "candy_wrapper.jpg" },
+                    { name: "Ice Cream", status: 1, img: "snack_ice_cream.jpg" }
+                ],
+                reveal: "Healthy Choices!",
+                req: "Tiger",
+                explanation: "Eat protein for energy."
+            },
+            
+            call_911: {
+                type: 'sequence',
+                title: "Call 911",
+                desc: "Put the steps in order.",
+                icon: "📞",
+                items: ["Stay Calm", "Dial 9-1-1", "Tell them where you are"],
+                reveal: "Help is coming.",
+                prefix: "Steps:",
+                req: "Tiger",
+                explanation: "Always know your location."
+            },
+            
+            six_essentials: {
+                type: 'packing',
+                title: "6 Essentials",
+                desc: "Pack 6 hike essentials.",
+                icon: "🎒",
+                req: "Tiger",
+                reveal: "Pack ready!",
+                correctCount: 6,
+                items: [
+                    { name: "Water", img: "water_bottle.jpg", correct: true },
+                    { name: "First Aid", img: "first_aid_kit.jpg", correct: true },
+                    { name: "Flashlight", img: "flashlight.jpg", correct: true },
+                    { name: "Sunscreen", img: "sun_screen.jpg", correct: true },
+                    { name: "Whistle", img: "whistle.jpg", correct: true },
+                    { name: "Snack", img: "snack_trail_mix.jpg", correct: true },
+                    { name: "iPad", img: "tablet.jpg", correct: false },
+                    { name: "Toys", img: "toys.jpg", correct: false }
+                ]
+            },
+            
+            lnt_cubs: {
+                type: 'sorting',
+                title: "Trash or Nature?",
+                desc: "Put items where they belong.",
+                icon: "🍃",
+                buckets: ["Trash Bin", "Nature"],
+                items: [
+                    { name: "Wrapper", status: 0, img: "candy_wrapper.jpg" },
+                    { name: "Apple Core", status: 0, img: "apple_core.jpg" },
+                    { name: "Cool Rock", status: 1, img: "cool_rock.jpg" },
+                    { name: "Plastic", status: 0, img: "plastic_bottle.jpg" },
+                    { name: "Pinecone", status: 1, img: "pinecone.jpg" },
+                    { name: "Flower", status: 1, img: "wildflower.jpg" }
+                ],
+                reveal: "LNT Expert!",
+                req: "Wolf",
+                explanation: "Pack it in, pack it out!"
+            },
+            
+            weather_match: {
+                type: 'visual',
+                title: "Weather Gear",
+                desc: "Pick the right gear.",
+                icon: "☁️",
+                options: [
+                    { label: "Winter", value: "snow" },
+                    { label: "Rainy", value: "rain" },
+                    { label: "Summer", value: "sun" }
+                ],
+                items: [
+                    { name: "Snow", status: "snow", tip: "Wear layers!", img: "weather_snow.jpg", req: "Wolf" },
+                    { name: "Rain", status: "rain", tip: "Pack a poncho!", img: "weather_rain.jpg", req: "Wolf" },
+                    { name: "Sunny", status: "sun", tip: "Wear a hat!", img: "weather_sun.jpg", req: "Wolf" }
+                ]
+            },
+            
+            finding_way: {
+                type: 'emblem',
+                title: "Compass Points",
+                desc: "Pin basic directions.",
+                icon: "🧭",
+                img: "compass_rose.jpg",
+                parts: [
+                    { id: 1, text: "North", name: "Top", style: "top:10%; left:45%; width:10%; height:10%;", tip: "Up.", req: "Wolf" },
+                    { id: 2, text: "South", name: "Bottom", style: "bottom:10%; left:45%; width:10%; height:10%;", tip: "Down.", req: "Wolf" },
+                    { id: 3, text: "East", name: "Right", style: "top:45%; right:10%; width:10%; height:10%;", tip: "Right.", req: "Wolf" },
+                    { id: 4, text: "West", name: "Left", style: "top:45%; left:10%; width:10%; height:10%;", tip: "Left.", req: "Wolf" }
+                ]
+            },
+            
+            germs_away: {
+                type: 'sequence',
+                title: "Germs Away",
+                desc: "Hand washing order.",
+                icon: "🚰",
+                items: ["Get hands wet", "Add soap", "Scrub for 20 seconds", "Rinse and dry"],
+                reveal: "Squeaky clean.",
+                req: "Wolf",
+                explanation: "Scrub for 20 seconds to reach kill germs."
+            },
+            
+            whittling_chip: {
+                type: 'sorting',
+                title: "Knife Safety",
+                desc: "Safe or unsafe?",
+                icon: "🔪",
+                buckets: ["Safe", "Unsafe"],
+                items: [
+                    { name: "Blood Circle", status: 0, img: "gear_pocket_knife.jpg" },
+                    { name: "Carve Toward You", status: 1, img: "gear_pocket_knife.jpg" },
+                    { name: "Run with blade", status: 1, img: "gear_pocket_knife.jpg" }
+                ],
+                reveal: "Whittling Chip earned.",
+                req: "Bear",
+                explanation: "Never carve toward yourself."
+            },
+            
+            bear_necessities: {
+                type: 'sequence',
+                title: "Pitch a Tent",
+                desc: "Order the steps.",
+                icon: "⛺",
+                items: ["Lay down the tarp", "Lay out the tent", "Put together the poles", "Stake it down"],
+                reveal: "Camp ready.",
+                req: "Bear",
+                explanation: "Tarp protects the tent bottom."
+            },
+            
+            knot_tying: {
+                type: 'visual',
+                title: "Bear Knots",
+                desc: "Identify the knot.",
+                icon: "🪢",
+                options: [
+                    { label: "Square", value: "square" },
+                    { label: "Bowline", value: "bowline" },
+                    { label: "Half-Hitches", value: "two" }
+                ],
+                items: [
+                    { name: "Square", status: "square", tip: "Right over left.", img: "square_knot.jpg", req: "Bear" },
+                    { name: "Bowline", status: "bowline", tip: "Rabbit hole.", img: "bowline.jpg", req: "Bear" },
+                    { name: "Two Half-Hitches", status: "two", tip: "Tying to a pole.", img: "two_half_hitches.jpg", req: "Bear" }
+                ]
+            },
+            
+            chef_cubs: {
+                type: 'sorting',
+                title: "Healthy Eating",
+                desc: "Healthy or Treat?",
+                icon: "🥦",
+                buckets: ["Healthy", "Treat"],
+                items: [
+                    { name: "Apple", status: 0, img: "food_apple.jpg" },
+                    { name: "Chicken", status: 0, img: "food_chicken.jpg" },
+                    { name: "Candy", status: 1, img: "candy_wrapper.jpg" },
+                    { name: "Broccoli", status: 0, img: "food_broccoli.jpg" }
+                ],
+                reveal: "Balanced Den!",
+                req: "Bear",
+                explanation: "Healthy foods fuel your adventures."
+            },
+            
+            first_responder: {
+                type: 'sorting',
+                title: "First Aid Gear",
+                desc: "What treats what?",
+                icon: "🩹",
+                buckets: ["Bandage", "Ice Pack"],
+                items: [
+                    { name: "Scrape or Cut", status: 0, img: "aid_cut.jpg" },
+                    { name: "Swollen Ankle", status: 1, img: "aid_sprain.jpg" },
+                    { name: "Minor Burn", status: 0, img: "aid_burn.jpg" }
+                ],
+                reveal: "Ready to help.",
+                req: "Webelos",
+                explanation: "Ice reduces swelling, bandages keep cuts clean."
+            },
+            
+            stop_logic: {
+                type: 'sequence',
+                title: "Lost in Woods",
+                desc: "Put S.T.O.P. in order.",
+                icon: "🛑",
+                items: ["Stop", "Think", "Observe", "Plan"],
+                reveal: "S.T.O.P. method.",
+                prefix: "Steps:",
+                req: "Webelos",
+                explanation: "Never keep walking if you are lost."
+            },
+            
+            stronger_faster: {
+                type: 'sorting',
+                title: "Fitness",
+                desc: "Warm-Up or Workout?",
+                icon: "💪",
+                buckets: ["Warm-Up", "Workout"],
+                items: [
+                    { name: "Stretching", status: 0, img: "fit_stretch.jpg" },
+                    { name: "Push-ups", status: 1, img: "fit_pushup.jpg" },
+                    { name: "Walking", status: 0, img: "fit_walk.jpg" },
+                    { name: "Sprinting", status: 1, img: "fit_sprint.jpg" }
+                ],
+                reveal: "Fit Scout.",
+                req: "Webelos",
+                explanation: "Warm up your muscles first."
+            },
+            
+            patrol_method: {
+                type: 'sorting',
+                title: "Leadership",
+                desc: "BSA vs Cub Roles.",
+                icon: "👥",
+                buckets: ["Youth Led (BSA)", "Adult Led (Cub)"],
+                items: [
+                    { name: "Senior Patrol Leader", status: 0, img: "rank_scout.png" },
+                    { name: "Cubmaster", status: 1, img: "rank_lion.png" },
+                    { name: "Patrol Leader", status: 0, img: "rank_scout.png" },
+                    { name: "Den Leader", status: 1, img: "rank_lion.png" }
+                ],
+                reveal: "Ready for a Troop.",
+                req: "AOL",
+                explanation: "In a Troop, the Scouts make the decisions."
+            },
+
+            // --- BSA TROOP TRAIL GAMES ---
+            oath: {
+                type: 'sequence',
+                title: "Scout Oath",
+                desc: "Put lines in order.",
+                icon: "⚜️",
+                items: [
+                    "To do my duty to God and my country", 
+                    "To obey the Scout Law", 
+                    "To help other people at all times", 
+                    "To keep myself physically strong", 
+                    "mentally awake", 
+                    "and morally straight"
+                ],
+                reveal: "Foundation.",
+                req: "Scout 1a"
+            },
+            
+            law: {
+                type: 'sequence',
+                title: "Scout Law",
+                desc: "Sequence 12 points.",
+                icon: "📜",
+                items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"],
+                reveal: "Character.",
+                req: "Scout 1b"
+            },
+            
+            outdoor: {
+                type: 'sequence',
+                title: "Outdoor Code",
+                desc: "Conservation promises.",
+                icon: "🌲",
+                items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"],
+                reveal: "Protect our planet.",
+                req: "Scout"
+            },
+            
+            action: {
+                type: 'sequence',
+                title: "The 3 C's",
+                desc: "Crisis steps.",
+                icon: "🚨",
+                items: ["Check the scene", "Call for help", "provide Care"],
+                reveal: "Safety First.",
+                req: "Tenderfoot"
+            },
+            
+            triage: {
+                type: 'sequence',
+                title: "Hurry Cases",
+                desc: "Medical priority.",
+                icon: "🏥",
+                items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock"],
+                reveal: "Prioritized.",
+                req: "Tenderfoot"
+            },
+            
+            cpr: {
+                type: 'sequence',
+                title: "CPR Sequence",
+                desc: "Hands-Only CPR.",
+                icon: "💓",
+                items: ["Check scene", "Check responsiveness", "Call 911 / AED", "Start compressions"],
+                reveal: "Heart Saved.",
+                req: "1st Class"
+            },
+            
+            snake: {
+                type: 'sequence',
+                title: "Snakebite",
+                desc: "Venomous bite protocol.",
+                icon: "🐍",
+                items: ["Move away", "Stay calm/still", "Keep bite below heart", "Get to hospital"],
+                reveal: "Stay calm.",
+                req: "Tenderfoot"
+            },
+            
+            rescue: {
+                type: 'sequence',
+                title: "Water Rescue",
+                desc: "Safest to riskiest.",
+                icon: "🛶",
+                items: ["Reach", "Throw", "Row", "Go"],
+                reveal: "Reach/Throw first!",
+                req: "2nd Class"
+            },
+            
+            edge: {
+                type: 'sequence',
+                title: "Teaching Skills",
+                desc: "The E.D.G.E. method.",
+                icon: "🎓",
+                items: ["Explain", "Demonstrate", "Guide", "Enable"],
+                reveal: "Mastered E.D.G.E.",
+                req: "Star"
+            },
+            
+            teams: {
+                type: 'sequence',
+                title: "Leading Teams",
+                desc: "NYLT Team stages.",
+                icon: "🤝",
+                items: ["Forming", "Storming", "Norming", "Performing"],
+                reveal: "Team development.",
+                req: "NYLT"
+            },
+            
+            three_pot_wash: {
+                type: 'sequence',
+                title: "3-Pot Wash",
+                desc: "Camp dishwashing.",
+                icon: "🍽️",
+                items: ["Wash (Hot Soapy)", "Rinse (Hot Clear)", "Sanitize (Bleach/Boil)", "Air Dry"],
+                reveal: "Clean camp.",
+                req: "1st Class"
+            },
+            
+            water: {
+                type: 'sequence',
+                title: "Purify Water",
+                desc: "Rolling boil method.",
+                icon: "💧",
+                items: ["Filter out debris", "Bring to rolling boil", "Maintain for 1 minute", "Let cool"],
+                reveal: "Safe to drink.",
+                req: "1st Class"
+            },
+            
+            extinguish: {
+                type: 'sequence',
+                title: "Campfire Out",
+                desc: "Extinguishing steps.",
+                icon: "🔥",
+                items: ["Let burn to ash", "Drown embers", "Stir ashes", "Feel for heat"],
+                reveal: "Cold out.",
+                req: "2nd Class"
+            },
+            
+            eagle_project: {
+                type: 'sequence',
+                title: "Eagle Project",
+                desc: "Management steps.",
+                icon: "🦅",
+                items: ["Concept", "Approvals", "Fundraising", "Execution", "Final Report"],
+                reveal: "Project Managed.",
+                req: "Eagle"
+            },
+            
+            plants: {
+                type: 'visual',
+                title: "Safe or Toxic?",
+                desc: "Identify flora.",
+                icon: "🌿",
+                options: [
+                    { label: "SAFE", value: "safe" },
+                    { label: "TOXIC", value: "toxic" }
+                ],
+                items: [
+                    { name: "Poison Ivy", status: "toxic", tip: "Leaves of 3.", img: "ivy.jpg", req: "2nd Class" },
+                    { name: "White Oak", status: "safe", tip: "Rounded lobes.", img: "oak.jpg", req: "2nd Class" },
+                    { name: "Virginia Creeper", status: "safe", tip: "Five leaves.", img: "creeper.jpg", req: "2nd Class" }
+                ]
+            },
+            
+            maps: {
+                type: 'visual',
+                title: "Map Master",
+                desc: "Topographic symbols.",
+                icon: "🗺️",
+                options: [
+                    { label: "Elevation", value: "elev" },
+                    { label: "Human", value: "human" }
+                ],
+                items: [
+                    { name: "Contour Lines", status: "elev", tip: "Elevation changes.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55" fill="none" stroke="#8B4513" stroke-width="2"/></svg>', req: "2nd Class" },
+                    { name: "Buildings", status: "human", tip: "Black squares.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black"/></svg>', req: "2nd Class" }
+                ]
+            },
+            
+            fire: {
+                type: 'visual',
+                title: "Fire Builder",
+                desc: "Fire lay patterns.",
+                icon: "🏕️",
+                options: [
+                    { label: "Start", value: "start" },
+                    { label: "Heat", value: "heat" }
+                ],
+                items: [
+                    { name: "Tepee Lay", status: "start", tip: "Best for starting.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 80 M80 80 L50 10 M50 10 L50 80" stroke="#8B4513" stroke-width="4"/></svg>', req: "2nd Class" },
+                    { name: "Log Cabin", status: "heat", tip: "Sustained cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/></svg>', req: "2nd Class" }
+                ]
+            },
+            
+            knots: {
+                type: 'visual',
+                title: "Knot Knowledge",
+                desc: "Identify the knot.",
+                icon: "🪢",
+                options: [
+                    { label: "Square", value: "square" },
+                    { label: "Bowline", value: "bowline" },
+                    { label: "Clove", value: "clove" },
+                    { label: "Taut-line", value: "tautline" }
+                ],
+                items: [
+                    { name: "Square Knot", status: "square", tip: "Joins ropes.", img: "square_knot.jpg", req: "Tenderfoot" },
+                    { name: "Bowline", status: "bowline", tip: "Rescue loop.", img: "bowline.jpg", req: "1st Class" },
+                    { name: "Clove Hitch", status: "clove", tip: "Starts lashings.", img: "clove_hitch.jpg", req: "1st Class" },
+                    { name: "Taut-line", status: "tautline", tip: "Adjustable loop.", img: "tautline.jpg", req: "Tenderfoot" }
+                ]
+            },
+            
+            lashings: {
+                type: 'visual',
+                title: "Lashings",
+                desc: "Pioneer lashings.",
+                icon: "🪵",
+                options: [
+                    { label: "Square", value: "square" },
+                    { label: "Diagonal", value: "diagonal" },
+                    { label: "Shear", value: "shear" },
+                    { label: "Tripod", value: "tripod" }
+                ],
+                items: [
+                    { name: "Square", status: "square", tip: "90 degrees.", img: "square_lashing.jpg", req: "1st Class" },
+                    { name: "Diagonal", status: "diagonal", tip: "Crossed poles.", img: "diagonal_lashing.jpg", req: "1st Class" },
+                    { name: "Shear", status: "shear", tip: "A-frames.", img: "shear_lashing.jpg", req: "1st Class" },
+                    { name: "Tripod", status: "tripod", tip: "3-legs.", img: "tripod_lashing.jpg", req: "1st Class" }
+                ]
+            },
+            
+            bsa_10_essentials: {
+                type: 'packing',
+                title: "10 Essentials",
+                desc: "Pack 10 items.",
+                icon: "🎒",
+                req: "Scout",
+                reveal: "Prepared.",
+                correctCount: 10,
+                items: [
+                    { name: "Water", img: "water_bottle.jpg", correct: true },
+                    { name: "First Aid", img: "first_aid_kit.jpg", correct: true },
+                    { name: "Flashlight", img: "flashlight.jpg", correct: true },
+                    { name: "Rain Gear", img: "gear_rain.jpg", correct: true },
+                    { name: "Sunscreen", img: "sun_screen.jpg", correct: true },
+                    { name: "Map", img: "gear_map.jpg", correct: true },
+                    { name: "Trail Food", img: "snack_trail_mix.jpg", correct: true },
+                    { name: "Pocket Knife", img: "gear_pocket_knife.jpg", correct: true },
+                    { name: "Fire Starter", img: "gear_fire_starter.jpg", correct: true },
+                    { name: "Compass", img: "compass_base.jpg", correct: true },
+                    { name: "iPad", img: "tablet.jpg", correct: false },
+                    { name: "Toys", img: "toys.jpg", correct: false }
+                ]
+            },
+            
+            mb_logic: {
+                type: 'sorting',
+                title: "Merit Badges",
+                desc: "Eagle Required vs Elective.",
+                icon: "🏅",
+                buckets: ["Eagle Required", "Elective"],
+                items: [
+                    { name: "First Aid", status: 0, img: "mb_first_aid.jpg" },
+                    { name: "Camping", status: 0, img: "mb_camping.jpg" },
+                    { name: "Citizenship", status: 0, img: "mb_citizenship.jpg" },
+                    { name: "Basketry", status: 1, img: "mb_basketry.jpg" },
+                    { name: "Wood Carving", status: 1, img: "mb_woodcarving.jpg" },
+                    { name: "Fingerprinting", status: 1, img: "mb_fingerprinting.jpg" }
+                ],
+                reveal: "Advancement Ready.",
+                req: "Star"
+            },
+            
+            choking_scenario: {
+                type: 'scenario',
+                title: "Choking Crisis",
+                desc: "Save a life.",
+                icon: "🗣️",
+                req: "Tenderfoot",
+                reveal: "Crisis averted!",
+                explanation: "Always encourage coughing first.",
+                steps: [
+                    {
+                        text: "Victim is coughing loudly. What do you do?",
+                        options: [
+                            { label: "Abdominal thrusts", correct: false, feedback: "If they cough, air is moving!" },
+                            { label: "Encourage coughing", correct: true }
+                        ]
+                    },
+                    {
+                        text: "They stop coughing and are turning blue.",
+                        options: [
+                            { label: "Do the Heimlich", correct: false, feedback: "Start with 5 back blows first!" },
+                            { label: "Call 911, start 5 back blows", correct: true }
+                        ]
+                    }
+                ]
+            },
+            
+            resolving_conflict: {
+                type: 'scenario',
+                title: "Conflict Res.",
+                desc: "Handle a dispute.",
+                icon: "⚖️",
+                req: "Life",
+                reveal: "Great Leadership.",
+                explanation: "A leader listens to both sides.",
+                steps: [
+                    {
+                        text: "Two younger Scouts are yelling about whose turn it is to cook. First move?",
+                        options: [
+                            { label: "Yell at them to stop", correct: false, feedback: "A Scout is Friendly. Yelling escalates." },
+                            { label: "Separate them and ask what's wrong", correct: true }
+                        ]
+                    },
+                    {
+                        text: "They both claim the roster says it's their turn.",
+                        options: [
+                            { label: "Tell them to figure it out", correct: false, feedback: "Guide and enable. Don't abandon them." },
+                            { label: "Look at the roster together", correct: true }
+                        ]
+                    }
+                ]
+            },
+            
+            compass_pin_bsa: {
+                type: 'emblem',
+                title: "The Compass",
+                desc: "Pin 8 cardinal directions.",
+                icon: "🧭",
+                img: "compass_rose.jpg",
+                parts: [
+                    { id: 1, text: "North", name: "N", style: "top:5%; left:45%; width:10%; height:10%;", tip: "0°", req: "2nd Class" },
+                    { id: 2, text: "East", name: "E", style: "top:45%; right:5%; width:10%; height:10%;", tip: "90°", req: "2nd Class" },
+                    { id: 3, text: "South", name: "S", style: "bottom:5%; left:45%; width:10%; height:10%;", tip: "180°", req: "2nd Class" },
+                    { id: 4, text: "West", name: "W", style: "top:45%; left:5%; width:10%; height:10%;", tip: "270°", req: "2nd Class" },
+                    { id: 5, text: "Northeast", name: "NE", style: "top:15%; right:15%; width:15%; height:10%;", tip: "45°", req: "2nd Class" },
+                    { id: 6, text: "Southeast", name: "SE", style: "bottom:15%; right:15%; width:15%; height:10%;", tip: "135°", req: "2nd Class" },
+                    { id: 7, text: "Southwest", name: "SW", style: "bottom:15%; left:15%; width:15%; height:10%;", tip: "225°", req: "2nd Class" },
+                    { id: 8, text: "Northwest", name: "NW", style: "top:15%; left:15%; width:15%; height:10%;", tip: "315°", req: "2nd Class" }
+                ]
+            },
+            
+            emblem: {
+                type: 'emblem',
+                title: "Badge Symbols",
+                desc: "First Class meanings.",
+                icon: "🏅",
+                img: "first_class_badge.png.jpg.png",
+                parts: [
+                    { id: 1, text: "3 parts of Scout Oath", name: "3 Points", style: "top:12%; left:25%; width:50%; height:15%;", tip: "Oath.", req: "1st Class" },
+                    { id: 2, text: "Freedom & Defend it", name: "Eagle", style: "top:35%; left:35%; width:30%; height:20%;", tip: "Country.", req: "1st Class" },
+                    { id: 3, text: "Truth and Knowledge", name: "Stars", style: "top:40%; left:12%; width:15%; height:12%;", tip: "Guides.", req: "1st Class" },
+                    { id: 4, text: "Scout's Smile", name: "Scroll", style: "bottom:18%; left:15%; width:70%; height:12%;", tip: "Be Prepared.", req: "1st Class" }
+                ]
+            },
+
+            // --- VENTURING TRAIL ---
+            lnt_master: {
+                type: 'visual',
+                title: "LNT Master",
+                desc: "Backcountry LNT scenarios.",
+                icon: "🌿",
+                options: [
+                    { label: "Durable", value: "yes" },
+                    { label: "Fragile", value: "no" }
+                ],
+                items: [
+                    { name: "Slickrock", status: "yes", tip: "Durable.", img: "lnt_surface.jpg", req: "Ranger" },
+                    { name: "Meadow", status: "no", tip: "Fragile.", img: "lnt_backcountry.jpg", req: "Ranger" }
+                ]
+            },
+            
+            trek_packing: {
+                type: 'packing',
+                title: "Trek Loadout",
+                desc: "Pack for 5-days.",
+                icon: "🧗",
+                req: "ALPS",
+                reveal: "Trail Ready!",
+                correctCount: 5,
+                items: [
+                    { name: "Bear Can", img: "gear_bear_canister.jpg", correct: true },
+                    { name: "Water Filter", img: "gear_water_filter.jpg", correct: true },
+                    { name: "Stove", img: "gear_stove.jpg", correct: true },
+                    { name: "Sleeping Pad", img: "gear_sleeping_pad.jpg", correct: true },
+                    { name: "First Aid", img: "first_aid_kit.jpg", correct: true },
+                    { name: "Toys", img: "toys.jpg", correct: false }
+                ]
+            },
+            
+            expedition_leadership: {
+                type: 'scenario',
+                title: "Expedition Leader",
+                desc: "Resolve trek conflicts.",
+                icon: "⚖️",
+                req: "ALPS",
+                reveal: "Strong Crew.",
+                explanation: "Consensus is key in high adventure.",
+                steps: [
+                    {
+                        text: "Your crew is split on whether to continue the climb in bad weather.",
+                        options: [
+                            { label: "Order everyone up", correct: false, feedback: "Safety first. Forcing a climb leads to risk." },
+                            { label: "Huddle for consensus", correct: true }
+                        ]
+                    }
+                ]
+            },
+            
+            mentor_teaching: {
+                type: 'sequence',
+                title: "Mentorship",
+                desc: "Steps of mentoring.",
+                icon: "🎓",
+                items: ["Self-Knowledge", "Listen", "Support", "Encourage"],
+                reveal: "Mentor Master.",
+                req: "Summit"
+            },
+
+            // --- SEA SCOUTS TRAIL ---
+            vessel_anatomy: {
+                type: 'emblem',
+                title: "Vessel Anatomy",
+                desc: "Identify boat parts.",
+                icon: "⛵",
+                img: "vessel_diagram.jpg",
+                parts: [
+                    { id: 1, text: "Port (Left)", name: "Port", style: "top:45%; left:10%; width:20%; height:10%;", tip: "Red side.", req: "Apprentice" },
+                    { id: 2, text: "Starboard", name: "Star", style: "top:45%; right:10%; width:20%; height:10%;", tip: "Green side.", req: "Apprentice" },
+                    { id: 3, text: "Bow (Front)", name: "Bow", style: "top:5%; left:40%; width:20%; height:10%;", tip: "Forward.", req: "Apprentice" },
+                    { id: 4, text: "Stern (Rear)", name: "Stern", style: "bottom:5%; left:40%; width:20%; height:10%;", tip: "Aft.", req: "Apprentice" }
+                ]
+            },
+            
+            buoy_rules: {
+                type: 'visual',
+                title: "Nav Buoys",
+                desc: "Identify markers.",
+                icon: "🏮",
+                options: [
+                    { label: "Red Nun", value: "red" },
+                    { label: "Green Can", value: "green" }
+                ],
+                items: [
+                    { name: "Returning", status: "red", tip: "Red Right Returning.", img: "buoy_red_nuns.jpg", req: "Ordinary" },
+                    { name: "Leaving", status: "green", tip: "Green Right Leaving.", img: "buoy_green_can.jpg", req: "Ordinary" }
+                ]
+            },
+            
+            maritime_knots: {
+                type: 'visual',
+                title: "Sea Knots",
+                desc: "Maritime hitches.",
+                icon: "🪢",
+                options: [
+                    { label: "Cleat Hitch", value: "cleat" },
+                    { label: "Anchor Bend", value: "anchor" },
+                    { label: "Bowline on Bight", value: "bight" }
+                ],
+                items: [
+                    { name: "Cleat Hitch", status: "cleat", tip: "To dock.", img: "knot_cleat_hitch.jpg", req: "Apprentice" },
+                    { name: "Anchor Bend", status: "anchor", tip: "To anchor.", img: "knot_anchor_bend.jpg", req: "Apprentice" },
+                    { name: "Bowline on Bight", status: "bight", tip: "Double loop.", img: "knot_bowline_bight.jpg", req: "Ordinary" }
+                ]
+            },
+            
+            quarterdeck_leadership: {
+                type: 'sorting',
+                title: "Quarterdeck Roles",
+                desc: "Ship leadership vs Shore.",
+                icon: "⚓",
+                buckets: ["Quarterdeck (Youth)", "Ship Committee (Adult)"],
+                items: [
+                    { name: "Boatswain", status: 0, img: "rank_sea_scout.png" },
+                    { name: "Skipper", status: 1, img: "rank_lion.png" },
+                    { name: "Purser", status: 0, img: "rank_sea_scout.png" }
+                ],
+                reveal: "Smooth Sailing.",
+                req: "Ordinary",
+                explanation: "Youth lead the Ship via the Quarterdeck."
+            }
+        };
+
+        // ==========================================
+        // TRAIL & LEVEL ALLOCATIONS
+        // ==========================================
         const CUB_RANK_GAMES = {
             lion: ['lion_sign', 'healthy_habits', 'animal_tracks', 'buddy_system'],
             tiger: ['community_helpers', 'tiger_bites', 'six_essentials', 'call_911'],
             wolf: ['weather_match', 'finding_way', 'lnt_cubs', 'germs_away'],
             bear: ['whittling_chip', 'bear_necessities', 'knot_tying', 'chef_cubs'],
-            webelos: ['stop_logic', 'first_responder', 'stronger_faster'],
+            webelos: ['first_responder', 'stop_logic', 'stronger_faster'],
             aol: ['patrol_method', 'oath', 'law', 'outdoor']
         };
 
-        const BSA_TIER_GAMES = {
-            1: ['oath', 'law', 'action', 'bsa_10_essentials', 'knots', 'maps', 'compass_pin', 'choking_scenario'],
-            2: ['triage', 'cpr', 'snake', 'rescue', 'lashings', 'three_pot_wash', 'plants', 'water', 'emblem'],
-            3: ['edge', 'teams', 'resolving_conflict', 'eagle_project', 'outdoor', 'fire', 'mb_logic', 'extinguish']
+        const BSA_TIER_GAMES = { 
+            1: ['oath', 'law', 'action', 'bsa_10_essentials', 'knots', 'maps', 'compass_pin_bsa', 'choking_scenario'], 
+            2: ['triage', 'cpr', 'snake', 'rescue', 'lashings', 'three_pot_wash', 'plants', 'water', 'emblem'], 
+            3: ['edge', 'teams', 'resolving_conflict', 'eagle_project', 'outdoor', 'fire', 'mb_logic', 'extinguish'] 
         };
+        
+        const VENTURING_GAMES = ['lnt_master', 'trek_packing', 'expedition_leadership', 'mentor_teaching'];
+        
+        const SEA_SCOUT_GAMES = ['vessel_anatomy', 'buoy_rules', 'maritime_knots', 'quarterdeck_leadership'];
 
-        // --- SYSTEM CORE ---
+        // ==========================================
+        // SYSTEM CORE & NAVIGATION
+        // ==========================================
         function selectPath(path) {
             currentProgram = path;
-            document.getElementById('trailDisplay').innerText = path === 'cub' ? "Cub Scout Trail" : "Scouts BSA Arcade";
-            showPage(path === 'cub' ? 'cub-ranks' : 'bsa-difficulty');
+            const trailDisplay = document.getElementById('trailDisplay');
+            trailDisplay.innerText = path.toUpperCase() + " TRAIL";
+            
+            if (path === 'cub') {
+                showPage('cub-ranks');
+            } else if (path === 'bsa') {
+                showPage('bsa-difficulty');
+            } else { 
+                currentRank = path;
+                const color = PROGRAM_COLORS[path] || '#1e293b';
+                document.getElementById('mainHeader').style.borderColor = color;
+                document.getElementById('progressBar').style.backgroundColor = color;
+                document.getElementById('progLabel').innerText = path.toUpperCase() + " PROGRESS";
+                showPage('menu'); 
+            }
         }
 
         function setRank(rank) {
             currentRank = rank;
-            const displayTitle = typeof rank === 'string' ? rank.toUpperCase() : "BSA TIER " + rank;
-            const trailDisplay = document.getElementById('trailDisplay');
-            if (trailDisplay) trailDisplay.innerText = displayTitle;
             
-            if (currentProgram === 'cub') {
-                const themeColor = CUB_RANK_COLORS[rank];
-                document.getElementById('mainHeader').style.borderColor = themeColor;
-                document.getElementById('progressBar').style.backgroundColor = themeColor;
-                document.getElementById('progLabel').innerText = `${rank.toUpperCase()} PROGRESS`;
-            } else {
-                document.getElementById('mainHeader').style.borderColor = '#1e293b';
-                document.getElementById('progressBar').style.backgroundColor = '#10b981';
-                document.getElementById('progLabel').innerText = `TIER ${rank} PROGRESS`;
+            let displayRank = String(rank).toUpperCase();
+            if (currentProgram === 'bsa') {
+                displayRank = "TIER " + rank;
             }
+            
+            const key = currentProgram === 'cub' ? `cub_${rank}` : currentProgram === 'bsa' ? 'bsa' : currentProgram;
+            const color = PROGRAM_COLORS[key] || '#1e293b';
+            
+            document.getElementById('mainHeader').style.borderColor = color;
+            document.getElementById('progressBar').style.backgroundColor = color;
+            document.getElementById('progLabel').innerText = displayRank + " PROGRESS";
+            
             showPage('menu');
         }
 
         function exitToLobby() {
             showPage('lobby');
-            currentProgram = null; currentRank = null;
+            currentProgram = null; 
+            currentRank = null;
             document.getElementById('mainHeader').style.borderColor = '#1e293b';
-            document.getElementById('progressBar').style.backgroundColor = '#10b981';
             document.getElementById('progressBar').style.width = '0%';
             document.getElementById('progressText').innerText = '0%';
-            document.getElementById('trailDisplay').innerText = 'Select Trail';
+            document.getElementById('trailDisplay').innerText = 'SELECT TRAIL';
         }
 
         function showPage(id) {
@@ -492,61 +1189,88 @@
             hideReqFeedback();
             
             const target = document.getElementById(`page-${id}`);
-            if (target) target.classList.add('active');
+            if (target) {
+                target.classList.add('active');
+            }
             
-            const exit = document.getElementById('exitBtn');
-            const timer = document.getElementById('globalTimer');
-            if (id === 'lobby') { exit.style.display = 'none'; timer.classList.add('hidden'); stopTimer(); }
-            else if (id === 'menu') { exit.style.display = 'block'; timer.classList.add('hidden'); stopTimer(); renderGameGrid(); updateGlobalProgress(); }
-            else { exit.style.display = 'block'; }
+            const exitBtn = document.getElementById('exitBtn');
+            exitBtn.style.display = id === 'lobby' ? 'none' : 'block';
+            document.getElementById('globalTimer').classList.add('hidden');
+            stopTimer();
+            
+            if (id === 'menu') { 
+                renderGameGrid(); 
+                updateGlobalProgress(); 
+            }
+            
             window.scrollTo(0,0);
         }
 
         function renderGameGrid() {
-            const grid = document.getElementById('gameGrid'); grid.innerHTML = '';
-            const games = currentProgram === 'cub' ? CUB_RANK_GAMES[currentRank] : BSA_TIER_GAMES[currentRank];
-            if (!games) return;
-
-            games.forEach(gid => {
-                const d = DATA[gid];
-                if (!d) return;
-                const bestTime = completedGames[gid];
-                const btn = document.createElement('button');
-                btn.className = `btn-card bg-white p-5 rounded-[2.5rem] border-2 shadow-lg text-left flex items-center justify-between group overflow-hidden ${bestTime ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-50 hover:border-orange-500'}`;
-                btn.onclick = () => prepareActiveGame(gid);
+            try {
+                const grid = document.getElementById('gameGrid'); 
+                grid.innerHTML = '';
+                let games = [];
                 
-                btn.innerHTML = `
-                    <div class="pr-6">
-                        <h3 class="font-black text-gray-900 uppercase text-sm">${d.title}</h3>
-                        <p class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">${d.req || 'Requirement'}</p>
-                    </div>
-                    <div class="flex flex-col items-end">
-                        <span class="text-3xl">${d.icon || '⭐'}</span>
-                        ${bestTime ? `<div class="flex items-center gap-1 mt-1 bg-emerald-500 text-white px-1.5 py-0.5 rounded shadow-sm"><span class="text-[8px] font-mono font-black">${bestTime}</span></div>` : ''}
-                    </div>`;
-                grid.appendChild(btn);
-            });
+                if (currentProgram === 'cub') games = CUB_RANK_GAMES[currentRank] || [];
+                else if (currentProgram === 'bsa') games = BSA_TIER_GAMES[currentRank] || [];
+                else if (currentProgram === 'venturing') games = VENTURING_GAMES || [];
+                else if (currentProgram === 'sea') games = SEA_SCOUT_GAMES || [];
+
+                if (!games || games.length === 0) {
+                    grid.innerHTML = '<div class="col-span-full p-4 bg-rose-100 text-rose-800 rounded-xl text-center font-bold">Games for this rank are currently missing. Please restart the app.</div>';
+                    return;
+                }
+
+                games.forEach(gid => {
+                    const d = DATA[gid]; 
+                    if (!d) return; 
+                    
+                    const time = completedGames[gid];
+                    const btn = document.createElement('button');
+                    btn.className = `btn-card bg-white p-5 rounded-[2.5rem] border-2 shadow-lg text-left flex items-center justify-between ${time ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-50 hover:border-orange-500'}`;
+                    btn.onclick = () => prepareGame(gid);
+                    btn.innerHTML = `
+                        <div class="pr-4">
+                            <h3 class="font-black text-gray-900 uppercase text-xs">${d.title}</h3>
+                            <p class="text-[8px] text-slate-400 font-bold uppercase">${d.req || 'Req'}</p>
+                        </div>
+                        <div class="text-right flex flex-col items-end">
+                            <span class="text-2xl">${d.icon || '⭐'}</span>
+                            ${time ? `<p class="text-[7px] font-mono font-black text-emerald-600 bg-emerald-100 px-1 rounded mt-1">${time}</p>` : ''}
+                        </div>
+                    `;
+                    grid.appendChild(btn);
+                });
+            } catch (error) {
+                document.getElementById('gameGrid').innerHTML = `<div class="col-span-full p-4 bg-red-100 text-red-800 rounded-xl text-xs font-mono">Error: ${error.message}</div>`;
+            }
         }
 
-        function prepareActiveGame(id) {
-            currentId = id; const d = DATA[id];
+        function prepareGame(id) {
+            currentId = id; 
+            const d = DATA[id];
             document.getElementById('startTitle').innerText = d.title;
             document.getElementById('startDesc').innerText = d.desc;
             document.getElementById('startIcon').innerText = d.icon || "⭐";
             
-            const startBtn = document.getElementById('startBtn'), startBorder = document.getElementById('startBorder');
-            if (currentProgram === 'cub') { const color = CUB_RANK_COLORS[currentRank]; startBtn.style.backgroundColor = color; startBorder.style.borderColor = color; } 
-            else { startBtn.style.backgroundColor = '#f97316'; startBorder.style.borderColor = '#f97316'; }
-            
-            // Timer Visibility Logic
+            const timerEl = document.getElementById('globalTimer');
             const noTimerRanks = ['lion', 'tiger', 'wolf'];
             if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
-                document.getElementById('globalTimer').classList.add('hidden');
+                timerEl.classList.add('hidden');
             } else {
-                document.getElementById('globalTimer').classList.remove('hidden');
-                document.getElementById('globalTimer').innerText = "00:00";
+                timerEl.classList.remove('hidden');
+                timerEl.innerText = "00:00";
             }
             
+            const startBtn = document.getElementById('startBtn');
+            const startBorder = document.getElementById('startBorder');
+            const key = currentProgram === 'cub' ? `cub_${currentRank}` : currentProgram === 'bsa' ? 'bsa' : currentProgram;
+            const color = PROGRAM_COLORS[key] || '#f97316';
+            
+            startBtn.style.backgroundColor = color;
+            startBorder.style.borderColor = color;
+
             document.getElementById('gameStartOverlay').classList.remove('hidden');
         }
 
@@ -562,131 +1286,195 @@
             else if (d.type === 'emblem') initEmblem();
         }
 
-        // --- ENGINE 1: SEQUENCE ---
+        // ==========================================
+        // ENGINE LOGIC
+        // ==========================================
+
+        // --- SEQUENCE ENGINE ---
         let userSequence = [];
         function initSequence() {
             userSequence = Array(DATA[currentId].items.length).fill(null);
             document.getElementById('seqTitle').innerText = DATA[currentId].title;
-            document.getElementById('seqSubtitle').innerText = DATA[currentId].prefix || "Put in order:";
-            renderSeqGrid(); renderSeqBank(); showPage('sequence');
+            renderSeqGrid(); 
+            renderSeqBank(); 
+            showPage('sequence');
         }
         function renderSeqGrid() {
-            const grid = document.getElementById('seqGrid'); grid.innerHTML = '';
+            const grid = document.getElementById('seqGrid'); 
+            grid.innerHTML = '';
             userSequence.forEach((word, i) => {
                 const div = document.createElement('div');
                 div.className = `h-14 flex items-center px-4 rounded-2xl text-[11px] font-bold border-2 transition-all ${word ? 'slot-filled shadow-md' : 'bg-white border-slate-100 border-dashed text-slate-300'}`;
                 div.innerHTML = `<span class="mr-3 opacity-30 font-black">${i+1}.</span> ${word || '________'}`;
-                if (word) div.onclick = () => { userSequence[i] = null; renderSeqGrid(); renderSeqBank(); };
+                if (word) {
+                    div.onclick = () => { 
+                        userSequence[i] = null; 
+                        renderSeqGrid(); 
+                        renderSeqBank(); 
+                    };
+                }
                 grid.appendChild(div);
             });
         }
         function renderSeqBank() {
-            const bank = document.getElementById('seqBank'); bank.innerHTML = '';
+            const bank = document.getElementById('seqBank'); 
+            bank.innerHTML = '';
             const used = userSequence.filter(w => w !== null);
             DATA[currentId].items.filter(w => !used.includes(w)).sort(()=>Math.random()-0.5).forEach(word => {
                 const btn = document.createElement('button');
-                btn.className = "px-4 py-2.5 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold text-[10px] shadow-sm hover:border-orange-400 active:scale-90 transition-all";
+                btn.className = "px-4 py-2.5 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold text-[10px] shadow-sm hover:border-orange-400";
                 btn.innerText = word;
-                btn.onclick = () => { const nextIdx = userSequence.indexOf(null); if (nextIdx !== -1) { userSequence[nextIdx] = word; renderSeqGrid(); renderSeqBank(); hideReqFeedback(); } };
+                btn.onclick = () => { 
+                    const nextIdx = userSequence.indexOf(null); 
+                    if (nextIdx !== -1) { 
+                        userSequence[nextIdx] = word; 
+                        renderSeqGrid(); 
+                        renderSeqBank(); 
+                        hideReqFeedback(); 
+                    } 
+                };
                 bank.appendChild(btn);
             });
         }
         function verifySequence() {
-            if (userSequence.includes(null)) { document.getElementById('seqCheckBtn').classList.add('error-shake'); setTimeout(()=>document.getElementById('seqCheckBtn').classList.remove('error-shake'), 400); return; }
-            let errs = 0; userSequence.forEach((w, i) => { if (w !== DATA[currentId].items[i]) errs++; });
-            if (errs === 0) showFinalSuccess(DATA[currentId].reveal, DATA[currentId].explanation);
-            else {
-                triggerPenalty();
+            if (userSequence.includes(null)) return;
+            let errs = 0; 
+            userSequence.forEach((w, i) => { 
+                if (w !== DATA[currentId].items[i]) errs++; 
+            });
+            if (errs === 0) {
+                showFinalSuccess(DATA[currentId].reveal || "Logic Mastered!", DATA[currentId].explanation || "");
+            } else { 
+                triggerPenalty(); 
                 if (currentProgram === 'cub' || currentRank === 1) {
-                    const c = DATA[currentId].items.map((w,i)=>`${i+1}. ${w}`).join('<br>');
-                    showReqFeedback("Review Required", `<b>Incorrect Order.</b> Correct order is:<br><div class="mt-2 mb-2 p-3 bg-orange-100/50 rounded-lg text-left text-[11px] font-mono border border-orange-200">${c}</div>`, DATA[currentId].req);
-                } else { userSequence = Array(DATA[currentId].items.length).fill(null); renderSeqGrid(); renderSeqBank(); }
-                document.getElementById('seqCheckBtn').classList.add('error-shake'); setTimeout(()=>document.getElementById('seqCheckBtn').classList.remove('error-shake'), 400);
+                    showReqFeedback("Check Handbook", `Review the correct order.`, DATA[currentId].req); 
+                } else { 
+                    userSequence = Array(DATA[currentId].items.length).fill(null); 
+                    renderSeqGrid(); 
+                    renderSeqBank(); 
+                } 
             }
         }
 
-        // --- ENGINE 2: VISUAL ID ---
+        // --- VISUAL ID ENGINE ---
         let visualIdx = 0, visualDeck = [];
         function initVisual() {
-            visualIdx = 0; visualDeck = [...DATA[currentId].items].sort(()=>Math.random()-0.5);
+            visualIdx = 0; 
+            visualDeck = [...DATA[currentId].items].sort(()=>Math.random()-0.5);
             document.getElementById('visTitle').innerText = DATA[currentId].title;
-            const optCont = document.getElementById('visOptions'); optCont.innerHTML = '';
-            const opts = DATA[currentId].options;
-            optCont.className = `grid gap-4 mt-6 ${opts.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`;
-            opts.forEach(opt => {
+            const optCont = document.getElementById('visOptions'); 
+            optCont.innerHTML = '';
+            DATA[currentId].options.forEach(opt => {
                 const btn = document.createElement('button');
-                btn.className = "p-6 bg-slate-100 rounded-[2rem] font-black text-xs tracking-tighter shadow-md border-b-4 border-slate-300 hover:bg-slate-200 active:scale-95";
+                btn.className = "p-6 bg-slate-100 rounded-[2rem] font-black text-xs shadow-md border-b-4 border-slate-300 hover:bg-slate-200";
                 btn.innerText = opt.label;
                 btn.onclick = () => {
-                    const item = visualDeck[visualIdx], feedback = document.getElementById('visFeedback'), card = document.getElementById('visCard');
+                    const item = visualDeck[visualIdx];
+                    const feedback = document.getElementById('visFeedback');
+                    const card = document.getElementById('visCard');
                     feedback.classList.remove('hidden');
-                    document.getElementById('visFeedbackName').innerText = item.name;
-                    document.getElementById('visFeedbackTip').innerText = item.tip;
-                    if (opt.value === item.status) { feedback.querySelector('div').innerText = "✅"; card.classList.add('bg-emerald-600'); hideReqFeedback(); } 
-                    else {
-                        triggerPenalty(); feedback.querySelector('div').innerText = "❌"; card.classList.add('bg-rose-600');
-                        if (currentProgram === 'cub' || currentRank === 1) showReqFeedback(currentProgram === 'cub' ? "Akela Says" : "Handbook Check", item.tip, item.req);
+                    
+                    if (opt.value === item.status) { 
+                        feedback.querySelector('div').innerText = "✅"; 
+                        card.classList.add('bg-emerald-600'); 
+                        hideReqFeedback(); 
+                    } else { 
+                        triggerPenalty(); 
+                        feedback.querySelector('div').innerText = "❌"; 
+                        card.classList.add('bg-rose-600'); 
+                        if (currentProgram === 'cub' || currentRank === 1) {
+                            showReqFeedback("Check Handbook", item.tip, item.req); 
+                        }
                     }
-                    setTimeout(() => { visualIdx++; if (visualIdx < visualDeck.length) updateVisualCard(); else showFinalSuccess("Vision Skill Verified!", "Excellent identification work."); }, 2000);
+                    setTimeout(() => { 
+                        visualIdx++; 
+                        if (visualIdx < visualDeck.length) {
+                            updateVisualCard(); 
+                        } else {
+                            showFinalSuccess("Vision Skills Verified!", "Accurate identification confirmed."); 
+                        }
+                    }, 1500);
                 };
                 optCont.appendChild(btn);
             });
-            updateVisualCard(); showPage('visual');
+            updateVisualCard(); 
+            showPage('visual');
         }
         function updateVisualCard() {
             const item = visualDeck[visualIdx];
             document.getElementById('visProgress').style.width = `${(visualIdx / visualDeck.length) * 100}%`;
             document.getElementById('visFeedback').classList.add('hidden');
             document.getElementById('visCard').className = "bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center";
-            const display = document.getElementById('visDisplay');
-            if (item.img) display.innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full ${currentId==='plants'?'object-cover':'object-contain p-6'} rounded-[2rem] z-10" onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=Missing';"/>`;
-            else display.innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div><p class="absolute bottom-6 font-black uppercase text-xl text-slate-800 tracking-tighter">${item.name}</p>`;
+            
+            if (item.img) {
+                document.getElementById('visDisplay').innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-contain p-6 rounded-[2rem]" onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=Image';"/>`;
+            } else if (item.svg) {
+                document.getElementById('visDisplay').innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div>`;
+            }
         }
 
-        // --- ENGINE 3: SORTING ---
+        // --- SORTING ENGINE ---
         let sortIdx = 0, sortDeck = [];
         function initSorting() {
-            sortIdx = 0; sortDeck = [...DATA[currentId].items].sort(()=>Math.random()-0.5);
+            sortIdx = 0; 
+            sortDeck = [...DATA[currentId].items].sort(()=>Math.random()-0.5);
             document.getElementById('sortTitle').innerText = DATA[currentId].title;
             document.getElementById('bucketLabel0').innerText = DATA[currentId].buckets[0];
             document.getElementById('bucketLabel1').innerText = DATA[currentId].buckets[1];
-            updateSortItem(); showPage('sorting');
+            updateSortItem(); 
+            showPage('sorting');
         }
-        function updateSortItem() {
-            document.getElementById('sortImg').src = sortDeck[sortIdx].img;
-            document.getElementById('sortItemName').innerText = sortDeck[sortIdx].name;
-            document.querySelectorAll('.bucket').forEach(b => b.classList.remove('highlight'));
+        function updateSortItem() { 
+            document.getElementById('sortImg').src = sortDeck[sortIdx].img; 
+            document.getElementById('sortItemName').innerText = sortDeck[sortIdx].name; 
         }
         function handleBucketClick(bucketIdx) {
-            if (sortDeck[sortIdx].status === bucketIdx) {
-                document.getElementById(`bucket${bucketIdx}`).classList.add('highlight');
-                setTimeout(() => { sortIdx++; if (sortIdx < sortDeck.length) updateSortItem(); else showFinalSuccess(DATA[currentId].reveal, DATA[currentId].explanation); }, 300);
-            } else { triggerPenalty(); showReqFeedback("Akela Says", `Not quite! That doesn't belong in ${DATA[currentId].buckets[bucketIdx]}.`, DATA[currentId].req); }
+            if (sortDeck[sortIdx].status === bucketIdx) { 
+                sortIdx++; 
+                if (sortIdx < sortDeck.length) {
+                    updateSortItem(); 
+                } else {
+                    showFinalSuccess(DATA[currentId].reveal || "Sorted!", DATA[currentId].explanation || ""); 
+                }
+            } else { 
+                triggerPenalty(); 
+                showReqFeedback("Try Again", `That doesn't belong in ${DATA[currentId].buckets[bucketIdx]}.`, DATA[currentId].req); 
+            }
         }
 
-        // --- ENGINE 4: PACKING (Inventory System) ---
+        // --- PACKING ENGINE ---
         let packedItems = [];
         function initPacking() {
-            packedItems = [];
+            packedItems = []; 
             const d = DATA[currentId];
             document.getElementById('packTitle').innerText = d.title;
             document.getElementById('packReqCount').innerText = d.correctCount;
             document.getElementById('packCount').innerText = '0';
             
-            const grid = document.getElementById('packGrid'); grid.innerHTML = '';
+            const grid = document.getElementById('packGrid'); 
+            grid.innerHTML = '';
+            
             [...d.items].sort(()=>Math.random()-0.5).forEach(item => {
                 const btn = document.createElement('div');
-                btn.className = "pack-item bg-white p-3 rounded-2xl border-4 border-slate-100 shadow-md relative flex flex-col items-center";
+                btn.className = "pack-item bg-white p-3 rounded-2xl border-4 border-slate-100 flex flex-col items-center relative";
                 btn.innerHTML = `
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-slate-50 rounded-xl mb-2 flex items-center justify-center p-2"><img src="${item.img}" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Gear';"/></div>
-                    <p class="text-[9px] font-black uppercase text-center leading-tight tracking-tighter">${item.name}</p>
-                    <div class="check-badge absolute -top-2 -right-2 bg-emerald-500 text-white rounded-full p-1 opacity-0 transition-all scale-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <img src="${item.img}" class="w-16 h-16 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Gear';"/>
+                    <p class="text-[9px] font-black uppercase mt-2 text-center">${item.name}</p>
+                    <div class="check-badge absolute -top-2 -right-2 bg-emerald-500 text-white rounded-full p-1 opacity-0 transition-all scale-50">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
                 `;
-                btn.onclick = () => {
-                    if (packedItems.includes(item.name)) { packedItems = packedItems.filter(i => i !== item.name); btn.classList.remove('selected'); } 
-                    else { packedItems.push(item.name); btn.classList.add('selected'); }
-                    document.getElementById('packCount').innerText = packedItems.length;
-                    hideReqFeedback();
+                btn.onclick = () => { 
+                    if (packedItems.includes(item.name)) { 
+                        packedItems = packedItems.filter(i => i !== item.name); 
+                        btn.classList.remove('selected'); 
+                        btn.querySelector('.check-badge').classList.add('opacity-0'); 
+                    } else { 
+                        packedItems.push(item.name); 
+                        btn.classList.add('selected'); 
+                        btn.querySelector('.check-badge').classList.remove('opacity-0'); 
+                    } 
+                    document.getElementById('packCount').innerText = packedItems.length; 
                 };
                 grid.appendChild(btn);
             });
@@ -694,169 +1482,218 @@
         }
         function verifyPacking() {
             const d = DATA[currentId];
-            if (packedItems.length !== d.correctCount) {
-                document.getElementById('packCheckBtn').classList.add('error-shake'); setTimeout(()=>document.getElementById('packCheckBtn').classList.remove('error-shake'), 400);
-                showReqFeedback("Check Count", `You need exactly ${d.correctCount} items. You have ${packedItems.length}.`, d.req);
-                return;
+            if (packedItems.length !== d.correctCount) { 
+                showReqFeedback("Gear Count", `You need exactly ${d.correctCount} items.`, d.req); 
+                return; 
             }
             const correctNames = d.items.filter(i => i.correct).map(i => i.name);
-            const isPerfect = packedItems.every(name => correctNames.includes(name));
-            if (isPerfect) showFinalSuccess(d.reveal, d.explanation);
-            else {
-                triggerPenalty(); document.getElementById('packCheckBtn').classList.add('error-shake'); setTimeout(()=>document.getElementById('packCheckBtn').classList.remove('error-shake'), 400);
-                if (currentProgram === 'cub' || currentRank === 1) showReqFeedback("Review Gear", "Something in your bag shouldn't be there! Review the list.", d.req);
+            if (packedItems.every(n => correctNames.includes(n))) {
+                showFinalSuccess(d.reveal, d.explanation);
+            } else { 
+                triggerPenalty(); 
+                showReqFeedback("Gear Check", "Review your packing list essentials.", d.req); 
             }
         }
 
-        // --- ENGINE 5: SCENARIO (Text Adventure) ---
+        // --- SCENARIO ENGINE ---
         let scenIdx = 0;
-        function initScenario() {
-            scenIdx = 0;
-            document.getElementById('scenTitle').innerText = DATA[currentId].title;
-            updateScenarioUI(); showPage('scenario');
+        function initScenario() { 
+            scenIdx = 0; 
+            document.getElementById('scenTitle').innerText = DATA[currentId].title; 
+            updateScenarioUI(); 
+            showPage('scenario'); 
         }
         function updateScenarioUI() {
-            const d = DATA[currentId];
+            const d = DATA[currentId]; 
             document.getElementById('scenProgress').style.width = `${(scenIdx / d.steps.length) * 100}%`;
             document.getElementById('scenPrompt').innerText = d.steps[scenIdx].text;
-            const optionsDiv = document.getElementById('scenOptions'); optionsDiv.innerHTML = '';
             
-            d.steps[scenIdx].options.sort(()=>Math.random()-0.5).forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = "p-5 bg-white border-4 border-slate-100 rounded-[2rem] shadow-md hover:border-blue-400 text-left transition-all active:scale-95 group";
-                btn.innerHTML = `<span class="block font-black text-sm text-slate-800 group-hover:text-blue-600">${opt.label}</span>`;
-                btn.onclick = () => {
-                    if (opt.correct) {
-                        scenIdx++;
-                        if (scenIdx < d.steps.length) updateScenarioUI();
-                        else showFinalSuccess(d.reveal, d.explanation);
-                    } else {
-                        triggerPenalty();
-                        showReqFeedback("Incorrect Choice", opt.feedback, d.req);
-                    }
+            const optionsDiv = document.getElementById('scenOptions'); 
+            optionsDiv.innerHTML = '';
+            
+            d.steps[scenIdx].options.forEach(opt => {
+                const btn = document.createElement('button'); 
+                btn.className = "p-5 bg-white border-4 border-slate-100 rounded-[2rem] text-left hover:border-orange-400";
+                btn.innerHTML = `<span class="block font-black text-sm text-slate-800">${opt.label}</span>`;
+                btn.onclick = () => { 
+                    if (opt.correct) { 
+                        scenIdx++; 
+                        if (scenIdx < d.steps.length) {
+                            updateScenarioUI(); 
+                        } else {
+                            showFinalSuccess(d.reveal, d.explanation); 
+                        }
+                    } else { 
+                        triggerPenalty(); 
+                        showReqFeedback("Incorrect", opt.feedback, d.req); 
+                    } 
                 };
                 optionsDiv.appendChild(btn);
             });
         }
 
-        // --- ENGINE 6: EMBLEM ---
+        // --- EMBLEM ENGINE ---
         let embPlaced = {}, activeEmb = null;
-        function initEmblem() {
-            embPlaced = {}; activeEmb = null; 
-            document.getElementById('embImage').src = DATA[currentId].img;
-            renderEmbBank(); renderEmbBoard(); showPage('emblem');
+        function initEmblem() { 
+            embPlaced = {}; 
+            activeEmb = null; 
+            document.getElementById('embImage').src = DATA[currentId].img; 
+            renderEmbBank(); 
+            renderEmbBoard(); 
+            showPage('emblem'); 
         }
         function renderEmbBank() {
-            const bank = document.getElementById('embBank'); bank.innerHTML = '';
+            const bank = document.getElementById('embBank'); 
+            bank.innerHTML = '';
             const usedIds = Object.values(embPlaced).map(v=>v.id);
             DATA[currentId].parts.filter(p => !usedIds.includes(p.id)).forEach(part => {
-                const btn = document.createElement('button');
-                btn.className = `p-3 rounded-xl border-2 text-[10px] font-bold text-left transition-all ${activeEmb?.id === part.id ? 'bg-amber-50 border-amber-500 scale-105 shadow-md' : 'bg-white border-slate-100'}`;
-                btn.innerText = part.text;
-                btn.onclick = () => { activeEmb = part; renderEmbBank(); hideReqFeedback(); };
+                const btn = document.createElement('button'); 
+                btn.className = `p-3 rounded-xl border-2 text-[10px] font-bold text-left ${activeEmb?.id === part.id ? 'bg-amber-50 border-amber-500 ring-2 ring-amber-500 shadow-md scale-105 transition-all' : 'bg-white border-slate-100'}`;
+                btn.innerText = part.text; 
+                btn.onclick = () => { activeEmb = part; renderEmbBank(); }; 
                 bank.appendChild(btn);
             });
         }
         function renderEmbBoard() {
-            const targets = document.getElementById('embTargets'); targets.innerHTML = '';
+            const targets = document.getElementById('embTargets'); 
+            targets.innerHTML = '';
             DATA[currentId].parts.forEach(part => {
                 const p = embPlaced[part.id];
-                const div = document.createElement('div'); div.style = part.style;
-                div.className = `absolute rounded flex items-center justify-center text-center p-1 border-2 transition-all cursor-pointer ${p ? 'bg-emerald-500 border-emerald-600 text-white font-black text-[8px]' : 'bg-white/10 border-dashed border-slate-300 text-slate-400 font-bold text-[8px]'}`;
+                const div = document.createElement('div'); 
+                div.style = part.style;
+                div.className = `absolute rounded flex items-center justify-center text-center p-1 border-2 cursor-pointer ${p ? 'bg-emerald-500 border-emerald-600 text-white font-black text-[8px]' : 'bg-white/10 border-dashed border-slate-300 text-slate-400 font-bold text-[8px]'}`;
                 div.innerText = p ? p.text : part.name;
-                div.onclick = () => {
-                    if (activeEmb) { embPlaced[part.id] = activeEmb; activeEmb = null; }
-                    else if (p) delete embPlaced[part.id];
-                    renderEmbBank(); renderEmbBoard();
-                    document.getElementById('embCheckBtn').style.display = (Object.keys(embPlaced).length === DATA[currentId].parts.length) ? 'block' : 'none';
+                div.onclick = () => { 
+                    if (activeEmb) { 
+                        embPlaced[part.id] = activeEmb; 
+                        activeEmb = null; 
+                    } else if (p) {
+                        delete embPlaced[part.id]; 
+                    }
+                    renderEmbBank(); 
+                    renderEmbBoard(); 
+                    document.getElementById('embCheckBtn').style.display = (Object.keys(embPlaced).length === DATA[currentId].parts.length) ? 'block' : 'none'; 
                 };
                 targets.appendChild(div);
             });
         }
         function verifyEmblem() {
             let errs = 0, firstErr = null;
-            Object.keys(embPlaced).forEach(id => { if (parseInt(id) !== embPlaced[id].id) { errs++; if(!firstErr) firstErr = parseInt(id); } });
-            if (errs === 0) showFinalSuccess("Badge Mastered!", "You know the symbol of Scouting.");
-            else { 
+            Object.keys(embPlaced).forEach(id => { 
+                if (parseInt(id) !== embPlaced[id].id) { 
+                    errs++; 
+                    if(!firstErr) firstErr = parseInt(id); 
+                } 
+            });
+            
+            if (errs === 0) {
+                showFinalSuccess("Mastered!", "Diagram accurately verified.");
+            } else { 
                 triggerPenalty(); 
                 if (currentProgram === 'cub' || currentRank === 1) {
                     const d = DATA[currentId].parts.find(x=>x.id===firstErr);
                     showReqFeedback("Handbook Check", `Match Error: The ${d.name} means "${d.text}".<br><br><b>Symbolism:</b> ${d.tip}`, d.req);
                 }
-                embPlaced = {}; renderEmbBank(); renderEmbBoard();
+                embPlaced = {}; 
+                renderEmbBank(); 
+                renderEmbBoard(); 
             }
         }
 
-        // --- UTILITIES ---
+        // ==========================================
+        // UTILITIES
+        // ==========================================
         function startTimer() { 
             const noTimerRanks = ['lion', 'tiger', 'wolf'];
-            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) return; // No timer for early ranks
-            
-            clearInterval(timerInt); secondsElapsed = 0; updateTimerUI(); 
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) return;
+            secondsElapsed = 0; 
+            updateTimerUI(); 
             timerInt = setInterval(() => { secondsElapsed++; updateTimerUI(); }, 1000); 
         }
-        function updateTimerUI() { const m = String(Math.floor(secondsElapsed / 60)).padStart(2, '0'), s = String(secondsElapsed % 60).padStart(2, '0'); document.getElementById('globalTimer').innerText = `${m}:${s}`; }
-        function stopTimer() { clearInterval(timerInt); }
+        function updateTimerUI() { 
+            const m = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+            const s = String(secondsElapsed % 60).padStart(2, '0'); 
+            document.getElementById('globalTimer').innerText = `${m}:${s}`; 
+        }
+        function stopTimer() { 
+            clearInterval(timerInt); 
+        }
         function triggerPenalty() {
-            if (currentProgram === 'bsa' && currentRank === 3) {
-                secondsElapsed += 10; document.getElementById('globalTimer').classList.add('timer-penalty');
+            const survivalPrograms = ['bsa', 'venturing', 'sea'];
+            if ((survivalPrograms.includes(currentProgram) && currentRank === 3) || currentProgram === 'venturing' || currentProgram === 'sea') {
+                secondsElapsed += 10; 
+                document.getElementById('globalTimer').classList.add('timer-penalty');
                 setTimeout(() => document.getElementById('globalTimer').classList.remove('timer-penalty'), 1000);
+                updateTimerUI();
             }
         }
 
         function showFinalSuccess(revealText, explanation = "") {
-            stopTimer(); hideReqFeedback();
+            stopTimer(); 
+            hideReqFeedback();
             const timeStr = document.getElementById('globalTimer').innerText;
-            
-            const noTimerRanks = ['lion', 'tiger', 'wolf'];
-            const useTimer = !(currentProgram === 'cub' && noTimerRanks.includes(currentRank));
-
-            if (!completedGames[currentId] || (useTimer && timeStr < completedGames[currentId])) {
-                completedGames[currentId] = useTimer ? timeStr : "DONE";
+            if (!completedGames[currentId] || timeStr < completedGames[currentId]) {
+                completedGames[currentId] = timeStr;
             }
             updateGlobalProgress();
             
             document.getElementById('successText').innerText = revealText;
             document.getElementById('successExplanation').innerHTML = explanation.replace(/\n/g, '<br>');
             
-            if (useTimer) {
-                document.getElementById('timeLabel').style.display = 'block';
-                document.getElementById('finalTime').style.display = 'block';
-                document.getElementById('finalTime').innerText = timeStr;
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
+                document.getElementById('timeLabel').classList.add('hidden');
+                document.getElementById('finalTime').classList.add('hidden');
             } else {
-                document.getElementById('timeLabel').style.display = 'none';
-                document.getElementById('finalTime').style.display = 'none';
+                document.getElementById('timeLabel').classList.remove('hidden');
+                document.getElementById('finalTime').classList.remove('hidden');
+                document.getElementById('finalTime').innerText = timeStr;
             }
-            
+
             const rankImg = document.getElementById('successRankImg');
             if (currentProgram === 'cub') rankImg.src = `rank_${currentRank}.png`;
-            else rankImg.src = BSA_RANK_IMAGES[currentRank] || 'rank_scout.png';
+            else if (currentProgram === 'bsa') rankImg.src = BSA_RANK_IMAGES[currentRank] || 'rank_scout.png';
+            else rankImg.src = `rank_${currentProgram}.png`;
             
             document.getElementById('successOverlay').classList.remove('hidden');
         }
 
         function showReqFeedback(title, html, req) {
-            document.getElementById('feedbackTitle').innerText = title;
-            document.getElementById('feedbackText').innerHTML = html;
-            document.getElementById('feedbackReq').innerText = req;
+            document.getElementById('feedbackTitle').innerText = title; 
+            document.getElementById('feedbackText').innerHTML = html; 
+            document.getElementById('feedbackReq').innerText = req || "HANDBOOK";
             const isCub = currentProgram === 'cub';
-            document.getElementById('feedbackTypeLabel').innerText = isCub ? "Akela Says" : "Handbook Reference";
+            document.getElementById('feedbackTypeLabel').innerText = isCub ? "Akela Says" : "Training Check";
             document.getElementById('feedbackIcon').innerText = isCub ? "🐺" : "📜";
             document.getElementById('reqFeedback').classList.remove('hidden');
         }
-        function hideReqFeedback() { document.getElementById('reqFeedback').classList.add('hidden'); }
+        function hideReqFeedback() { 
+            document.getElementById('reqFeedback').classList.add('hidden'); 
+        }
 
         function updateGlobalProgress() {
             if (!currentProgram) return;
-            const pool = currentProgram === 'cub' ? CUB_RANK_GAMES[currentRank] : BSA_TIER_GAMES[currentRank];
-            if (!pool) return;
+            let pool = [];
+            if (currentProgram === 'cub') pool = CUB_RANK_GAMES[currentRank];
+            else if (currentProgram === 'bsa') pool = BSA_TIER_GAMES[currentRank];
+            else if (currentProgram === 'venturing') pool = VENTURING_GAMES;
+            else if (currentProgram === 'sea') pool = SEA_SCOUT_GAMES;
+            
+            if (!pool || pool.length === 0) return;
             const done = pool.filter(id => completedGames[id]).length;
-            const pct = pool.length > 0 ? Math.floor((done / pool.length) * 100) : 0;
+            const pct = Math.floor((done / pool.length) * 100);
             document.getElementById('progressText').innerText = `${pct}%`;
             document.getElementById('progressBar').style.width = `${pct}%`;
         }
 
-        window.onload = () => showPage('lobby');
+        // Initialize safely
+        window.onload = () => {
+            try {
+                showPage('lobby');
+            } catch(e) {
+                console.error("Initialization error:", e);
+            }
+        };
     </script>
 </body>
 </html>
