@@ -41,6 +41,7 @@
         #reqFeedback { animation: slideUp 0.4s ease-out; z-index: 200; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .theme-transition { transition: all 0.5s ease; }
+        
         .symbol-svg { width: 70px; height: 70px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
     </style>
 </head>
@@ -70,7 +71,7 @@
 
     <main class="max-w-5xl mx-auto px-4 mt-6 w-full flex-1 mb-12">
         
-        <!-- PAGE: MASTER LOBBY -->
+        <!-- PAGE 1: MASTER LOBBY -->
         <div id="page-lobby" class="page active max-w-4xl mx-auto space-y-8 py-10">
             <div class="text-center">
                 <h2 class="text-5xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">The Portal</h2>
@@ -100,7 +101,7 @@
             </div>
         </div>
 
-        <!-- PAGE: CUB RANKS -->
+        <!-- PAGE 2: CUB RANKS -->
         <div id="page-cub-ranks" class="page max-w-4xl mx-auto py-10 space-y-8">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase mb-2">Akela's Den</h2>
@@ -137,7 +138,7 @@
             </div>
         </div>
 
-        <!-- PAGE: BSA TIERS -->
+        <!-- PAGE 3: BSA TIERS -->
         <div id="page-bsa-difficulty" class="page max-w-lg mx-auto py-10 space-y-4">
             <div class="text-center mb-6">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Troop Tiers</h2>
@@ -167,7 +168,7 @@
             </div>
         </div>
 
-        <!-- PAGE: DASHBOARD -->
+        <!-- PAGE 4: DASHBOARD MENU -->
         <div id="page-menu" class="page space-y-10 pb-10">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-gray-900 bg-gray-900 aspect-[4/1]">
                 <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" onerror="this.onerror=null; this.src='https://placehold.co/1200x300/1e293b/1e293b';" />
@@ -176,7 +177,7 @@
             <div id="gameGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>
 
-        <!-- ENGINE: SEQUENCE -->
+        <!-- ENGINE 1: SEQUENCE -->
         <div id="page-sequence" class="page max-w-2xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand leading-tight">Level Title</h2><p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p></div>
             <div id="seqGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div>
@@ -184,14 +185,14 @@
             <div class="flex justify-center mt-6"><button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:scale-105 transition-all tracking-widest active:scale-95">Verify</button></div>
         </div>
 
-        <!-- ENGINE: VISUAL ID -->
+        <!-- ENGINE 2: VISUAL ID -->
         <div id="page-visual" class="page max-w-lg mx-auto space-y-6">
             <div class="text-center"><h2 id="visTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Visual ID</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="visProgress" class="h-full bg-emerald-500 w-0 transition-all"></div></div></div>
             <div id="visCard" class="bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center"><div id="visDisplay" class="w-full h-full flex items-center justify-center"></div><div id="visFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20"><div id="visFeedbackIcon" class="text-6xl mb-2 drop-shadow-md"></div><h3 id="visFeedbackName" class="text-3xl font-brand uppercase tracking-tighter text-center">Correct</h3><p id="visFeedbackTip" class="mt-2 text-center text-sm font-bold opacity-90"></p></div></div>
             <div id="visOptions" class="grid gap-4 mt-6"></div>
         </div>
 
-        <!-- ENGINE: SORTING -->
+        <!-- ENGINE 3: SORTING -->
         <div id="page-sorting" class="page max-w-2xl mx-auto space-y-8 pb-20">
             <div class="text-center"><h2 id="sortTitle" class="text-4xl font-brand font-black text-gray-900 uppercase leading-none mb-1">Sorting Challenge</h2><p id="sortSubtitle" class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Tap the bucket where this item belongs</p></div>
             <div class="flex justify-center items-center h-52 relative"><div id="sortActiveItem" class="flex flex-col items-center"><div class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20"><img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/></div><p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p></div></div>
@@ -201,21 +202,21 @@
             </div>
         </div>
 
-        <!-- ENGINE: PACKING -->
+        <!-- ENGINE 4: PACKING -->
         <div id="page-packing" class="page max-w-3xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="packTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">Packing Engine</h2><div class="inline-block bg-slate-900 text-white px-4 py-1.5 rounded-full font-mono text-sm font-black mt-2">Backpack: <span id="packCount" class="text-emerald-400">0</span> / <span id="packReqCount">10</span></div></div>
             <div id="packGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-4"></div>
             <div class="flex justify-center mt-6"><button id="packCheckBtn" onclick="verifyPacking()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-emerald-600 transition-all tracking-widest active:scale-95 text-lg">Check Bag</button></div>
         </div>
 
-        <!-- ENGINE: SCENARIO -->
+        <!-- ENGINE 5: SCENARIO -->
         <div id="page-scenario" class="page max-w-xl mx-auto space-y-6 pb-20 pt-4">
             <div class="text-center mb-6"><h2 id="scenTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none">Scenario</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="scenProgress" class="h-full bg-blue-500 w-0 transition-all"></div></div></div>
             <div class="bg-white p-8 rounded-[2rem] border-4 border-slate-100 shadow-xl relative"><div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-3xl p-3 rounded-full shadow-lg" id="scenIcon">💬</div><p id="scenPrompt" class="text-lg text-slate-700 font-bold leading-relaxed text-center mt-4"></p></div>
             <div id="scenOptions" class="grid gap-3 mt-6"></div>
         </div>
 
-        <!-- ENGINE: EMBLEM -->
+        <!-- ENGINE 6: EMBLEM -->
         <div id="page-emblem" class="page space-y-6 pb-10">
             <div class="text-center"><h2 id="embTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none mb-2">Diagram Match</h2><p class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Select meaning, then tap the part.</p></div>
             <div class="flex flex-col lg:flex-row gap-6 items-center justify-center">
@@ -256,7 +257,9 @@
         <div class="max-w-xl mx-auto">
             <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-2"><span id="feedbackIcon" class="text-xl">🐺</span><p id="feedbackTypeLabel" class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Akela Says</p></div>
-                <button onclick="hideReqFeedback()" class="text-slate-300 hover:text-slate-900 transition-colors"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                <button onclick="hideReqFeedback()" class="text-slate-300 hover:text-slate-900 transition-colors">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
             </div>
             <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-xl leading-none mb-3">Check Training</h3>
             <div id="feedbackText" class="text-slate-600 font-medium leading-relaxed text-sm mb-5"></div>
@@ -304,11 +307,10 @@
         };
 
         // ==========================================
-        // GAME DATABASE (EXPANDED TO PREVENT TRUNCATION)
+        // GAME DATABASE
         // ==========================================
         const DATA = {
-            
-            // --- CUB SCOUT GAMES ---
+            // === CUB SCOUT GAMES ===
             lion_sign: {
                 type: 'visual', title: "Scout Sign", desc: "Which image shows the Cub Scout sign?", icon: "✌️",
                 options: [ { label: "Correct", value: "yes" }, { label: "Incorrect", value: "no" } ],
@@ -512,17 +514,17 @@
                 reveal: "Ready for a Troop.", req: "AOL", explanation: "In a Troop, the Scouts make the decisions."
             },
 
-            // --- BSA TROOP TRAIL GAMES ---
+            // === BSA TROOP GAMES ===
             oath: {
                 type: 'sequence', title: "Scout Oath", desc: "Put lines in order.", icon: "⚜️",
                 items: [ "To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight" ],
-                reveal: "Foundation.", req: "Scout 1a"
+                reveal: "Foundation.", req: "Scout"
             },
             
             law: {
                 type: 'sequence', title: "Scout Law", desc: "Sequence 12 points.", icon: "📜",
                 items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"],
-                reveal: "Character.", req: "Scout 1b"
+                reveal: "Character.", req: "Scout"
             },
             
             outdoor: {
@@ -746,7 +748,7 @@
                 ]
             },
 
-            // --- VENTURING TRAIL ---
+            // === VENTURING TRAIL ===
             lnt_master: {
                 type: 'visual', title: "LNT Master", desc: "Backcountry LNT scenarios.", icon: "🌿",
                 options: [ { label: "Durable", value: "yes" }, { label: "Fragile", value: "no" } ],
@@ -789,7 +791,7 @@
                 reveal: "Mentor Master.", req: "Summit"
             },
 
-            // --- SEA SCOUTS TRAIL ---
+            // === SEA SCOUTS TRAIL ===
             vessel_anatomy: {
                 type: 'emblem', title: "Vessel Anatomy", desc: "Identify boat parts.", icon: "⛵", img: "vessel_diagram.jpg",
                 parts: [
@@ -856,6 +858,13 @@
         // ==========================================
         // SYSTEM CORE & NAVIGATION
         // ==========================================
+        let currentProgram = null; 
+        let currentRank = null; 
+        let currentId = '';
+        let secondsElapsed = 0; 
+        let timerInt = null; 
+        let completedGames = {};
+
         function selectPath(path) {
             currentProgram = path;
             const trailDisplay = document.getElementById('trailDisplay');
@@ -939,7 +948,7 @@
                 else if (currentProgram === 'sea') games = SEA_SCOUT_GAMES || [];
 
                 if (!games || games.length === 0) {
-                    grid.innerHTML = '<div class="col-span-full p-4 bg-rose-100 text-rose-800 rounded-xl text-center font-bold">Games for this rank are currently missing. Please restart the app.</div>';
+                    grid.innerHTML = '<div class="col-span-full p-4 bg-rose-100 text-rose-800 rounded-xl text-center font-bold">Games for this rank are missing.</div>';
                     return;
                 }
 
