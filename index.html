@@ -440,7 +440,7 @@
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg>
                 </a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V10.0 Master Edition</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V11.0 Master Edition</p>
         </div>
     </footer>
 
@@ -817,7 +817,7 @@
                     "and morally straight"
                 ],
                 reveal: "Foundation.",
-                prefix: "On my honor...",
+                prefix: "On my honor, I will do my best...",
                 req: "Scout"
             },
             
@@ -837,7 +837,12 @@
                 title: "Outdoor Code",
                 desc: "Conservation promises.",
                 icon: "🌲",
-                items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"],
+                items: [
+                    "Be clean in my outdoor manners", 
+                    "Be careful with fire", 
+                    "Be considerate in the outdoors", 
+                    "and be conservation minded"
+                ],
                 reveal: "Protect our planet.",
                 prefix: "As an American, I will do my best to...",
                 req: "Scout"
@@ -871,7 +876,7 @@
                 title: "Hurry Cases",
                 desc: "Medical priority.",
                 icon: "🏥",
-                items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock"],
+                items: ["Serious Bleeding", "Stopped Breathing", "Internal Poisoning", "Treating for Shock"],
                 reveal: "Prioritized.",
                 prefix: "Priority:",
                 req: "Tenderfoot"
@@ -884,7 +889,7 @@
                 icon: "💓",
                 items: ["Check scene", "Check responsiveness", "Call 911 / AED", "Start compressions"],
                 reveal: "Heart Saved.",
-                prefix: "Protocol:",
+                prefix: "Steps:",
                 req: "1st Class"
             },
             
@@ -895,7 +900,7 @@
                 icon: "🐍",
                 items: ["Move away", "Stay calm/still", "Keep bite below heart", "Get to hospital"],
                 reveal: "Stay calm.",
-                prefix: "Protocol:",
+                prefix: "Steps:",
                 req: "Tenderfoot"
             },
             
@@ -986,9 +991,9 @@
                     { label: "TOXIC", value: "toxic" }
                 ],
                 items: [
-                    { name: "Poison Ivy", status: "toxic", tip: "Leaves of 3.", img: "ivy.jpg", req: "2nd Class" },
-                    { name: "White Oak", status: "safe", tip: "Rounded lobes.", img: "oak.jpg", req: "2nd Class" },
-                    { name: "Virginia Creeper", status: "safe", tip: "Five leaves.", img: "creeper.jpg", req: "2nd Class" }
+                    { name: "Poison Ivy", status: "toxic", tip: "Leaves of three, let it be.", img: "ivy.jpg", req: "2nd Class" },
+                    { name: "White Oak", status: "safe", tip: "Rounded lobes. No itch here.", img: "oak.jpg", req: "2nd Class" },
+                    { name: "Virginia Creeper", status: "safe", tip: "Five leaves, let it thrive.", img: "creeper.jpg", req: "2nd Class" }
                 ]
             },
             
@@ -999,11 +1004,11 @@
                 icon: "🗺️",
                 options: [
                     { label: "Elevation", value: "elev" },
-                    { label: "Human", value: "human" }
+                    { label: "Human Built", value: "human" }
                 ],
                 items: [
                     { name: "Contour Lines", status: "elev", tip: "Elevation changes.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 65 Q35 35 55 65 T85 65 M20 80 Q40 50 60 80 T80 80" fill="none" stroke="#d97706" stroke-width="3"/></svg>', req: "2nd Class" },
-                    { name: "Buildings", status: "human", tip: "Black squares.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="40" y="40" width="20" height="20" fill="#1e293b"/></svg>', req: "2nd Class" }
+                    { name: "Buildings", status: "human", tip: "Black squares are structures.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="40" y="40" width="20" height="20" fill="#1e293b"/></svg>', req: "2nd Class" }
                 ]
             },
             
@@ -1013,12 +1018,12 @@
                 desc: "Fire lay patterns.",
                 icon: "🏕️",
                 options: [
-                    { label: "Start", value: "start" },
-                    { label: "Heat", value: "heat" }
+                    { label: "Starting", value: "start" },
+                    { label: "Cooking/Heat", value: "heat" }
                 ],
                 items: [
-                    { name: "Tepee Lay", status: "start", tip: "Best for starting.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M45 20 L25 85 M55 20 L75 85 M50 15 L50 85 M40 25 L60 85 M60 25 L40 85" stroke="#8B4513" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M40 85 Q50 60 60 85 Q50 75 40 85" fill="#f97316"/></svg>', req: "2nd Class" },
-                    { name: "Log Cabin", status: "heat", tip: "Sustained cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="12" rx="4" fill="#8B4513" /><rect x="20" y="50" width="60" height="12" rx="4" fill="#8B4513" /><rect x="25" y="30" width="12" height="60" rx="4" fill="#65320d" /><rect x="63" y="30" width="12" height="60" rx="4" fill="#65320d" /><path d="M45 70 Q50 50 55 70 Q50 60 45 70" fill="#ef4444"/></svg>', req: "2nd Class" }
+                    { name: "Tepee Lay", status: "start", tip: "Great for catching the first flames.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M45 20 L25 85 M55 20 L75 85 M50 15 L50 85 M40 25 L60 85 M60 25 L40 85" stroke="#8B4513" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M40 85 Q50 60 60 85 Q50 75 40 85" fill="#f97316"/></svg>', req: "2nd Class" },
+                    { name: "Log Cabin", status: "heat", tip: "Produces great sustained coals.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="12" rx="4" fill="#8B4513" /><rect x="20" y="50" width="60" height="12" rx="4" fill="#8B4513" /><rect x="25" y="30" width="12" height="60" rx="4" fill="#65320d" /><rect x="63" y="30" width="12" height="60" rx="4" fill="#65320d" /><path d="M45 70 Q50 50 55 70 Q50 60 45 70" fill="#ef4444"/></svg>', req: "2nd Class" }
                 ]
             },
             
@@ -1071,15 +1076,15 @@
                 correctCount: 10,
                 items: [
                     { name: "Water", img: "water_bottle.jpg", correct: true },
-                    { name: "First Aid", img: "first_aid_kit.jpg", correct: true },
+                    { name: "First Aid Kit", img: "first_aid_kit.jpg", correct: true },
                     { name: "Flashlight", img: "flashlight.jpg", correct: true },
                     { name: "Rain Gear", img: "gear_rain.jpg", correct: true },
                     { name: "Sunscreen", img: "sun_screen.jpg", correct: true },
-                    { name: "Map", img: "gear_map.jpg", correct: true },
+                    { name: "Map & Compass", img: "compass_base.jpg", correct: true },
                     { name: "Trail Food", img: "snack_trail_mix.jpg", correct: true },
-                    { name: "Pocket Knife", img: "gear_pocket_knife.jpg", correct: true },
+                    { name: "Pocketknife", img: "gear_pocket_knife.jpg", correct: true },
                     { name: "Fire Starter", img: "gear_fire_starter.jpg", correct: true },
-                    { name: "Compass", img: "compass_base.jpg", correct: true },
+                    { name: "Extra Clothing", img: "heavy_coat.jpg", correct: true },
                     { name: "iPad", img: "tablet.jpg", correct: false },
                     { name: "Toys", img: "toys.jpg", correct: false }
                 ]
