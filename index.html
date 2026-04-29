@@ -21,7 +21,7 @@
         .btn-card:hover { transform: translateY(-4px); }
         .btn-card:active { transform: scale(0.95); }
 
-        .error-shake { animation: shake 0.3s ease-in-out; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d !important; }
+        .error-shake { animation: shake 0.4s ease-in-out; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d !important; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         
         .timer-penalty { animation: timePenalty 0.5s ease-out; color: #ef4444 !important; }
@@ -71,7 +71,7 @@
 
     <main class="max-w-5xl mx-auto px-4 mt-6 w-full flex-1 mb-12">
         
-        <!-- PAGE: MASTER LOBBY -->
+        <!-- PAGE 1: MASTER LOBBY -->
         <div id="page-lobby" class="page active max-w-4xl mx-auto space-y-8 py-10">
             <div class="text-center">
                 <h2 class="text-5xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">The Portal</h2>
@@ -79,9 +79,8 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-                <!-- CUBS BUTTON -->
                 <button onclick="selectPath('cub')" class="btn-card group bg-white border-4 border-amber-100 rounded-[2.5rem] p-6 text-center hover:border-amber-500 shadow-xl overflow-hidden relative">
-                    <img src="rank_wolf.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:rotate-12 object-contain grayscale" />
+                    <img src="rank_wolf.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:rotate-12 object-contain grayscale" onerror="this.onerror=null; this.src='';" />
                     <div class="relative z-10">
                         <img src="rank_wolf.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Cubs';" />
                         <h3 class="text-xl font-brand font-black text-amber-600 uppercase mb-1">Cubs</h3>
@@ -89,9 +88,8 @@
                     </div>
                 </button>
 
-                <!-- TROOP BUTTON -->
                 <button onclick="selectPath('bsa')" class="btn-card group bg-white border-4 border-slate-100 rounded-[2.5rem] p-6 text-center hover:border-slate-900 shadow-xl overflow-hidden relative">
-                    <img src="rank_first_class.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:-rotate-12 object-contain grayscale" />
+                    <img src="rank_first_class.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:-rotate-12 object-contain grayscale" onerror="this.onerror=null; this.src='';" />
                     <div class="relative z-10">
                         <img src="rank_first_class.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=BSA';" />
                         <h3 class="text-xl font-brand font-black text-slate-800 uppercase mb-1">Troop</h3>
@@ -99,9 +97,8 @@
                     </div>
                 </button>
 
-                <!-- VENTURING BUTTON -->
                 <button onclick="selectPath('venturing')" class="btn-card group bg-white border-4 border-green-100 rounded-[2.5rem] p-6 text-center hover:border-green-700 shadow-xl overflow-hidden relative">
-                    <img src="rank_venturing.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:rotate-12 object-contain grayscale" />
+                    <img src="rank_venturing.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:rotate-12 object-contain grayscale" onerror="this.onerror=null; this.src='';" />
                     <div class="relative z-10">
                         <img src="rank_venturing.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Venture';" />
                         <h3 class="text-xl font-brand font-black text-green-700 uppercase mb-1">Venturing</h3>
@@ -109,9 +106,8 @@
                     </div>
                 </button>
 
-                <!-- SEA SCOUTS BUTTON -->
                 <button onclick="selectPath('sea')" class="btn-card group bg-white border-4 border-blue-100 rounded-[2.5rem] p-6 text-center hover:border-blue-900 shadow-xl overflow-hidden relative">
-                    <img src="rank_sea_scout.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:-rotate-12 object-contain grayscale" />
+                    <img src="rank_sea_scout.png" class="absolute -right-8 -top-8 w-40 h-40 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:-rotate-12 object-contain grayscale" onerror="this.onerror=null; this.src='';" />
                     <div class="relative z-10">
                         <img src="rank_sea_scout.png" class="h-16 w-16 mx-auto mb-3 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Sea';" />
                         <h3 class="text-xl font-brand font-black text-blue-900 uppercase mb-1">Sea Scouts</h3>
@@ -122,7 +118,7 @@
             </div>
         </div>
 
-        <!-- PAGE: CUB RANKS -->
+        <!-- PAGE 2: CUB RANKS -->
         <div id="page-cub-ranks" class="page max-w-4xl mx-auto py-10 space-y-8">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase mb-2">Akela's Den</h2>
@@ -159,7 +155,7 @@
             </div>
         </div>
 
-        <!-- PAGE: BSA TIERS -->
+        <!-- PAGE 3: BSA TIERS -->
         <div id="page-bsa-difficulty" class="page max-w-lg mx-auto py-10 space-y-4">
             <div class="text-center mb-6">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Troop Tiers</h2>
@@ -189,7 +185,7 @@
             </div>
         </div>
 
-        <!-- PAGE: DASHBOARD -->
+        <!-- PAGE 4: DASHBOARD MENU -->
         <div id="page-menu" class="page space-y-10 pb-10">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-gray-900 bg-gray-900 aspect-[4/1]">
                 <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" onerror="this.onerror=null; this.src='https://placehold.co/1200x300/1e293b/1e293b';" />
@@ -198,7 +194,7 @@
             <div id="gameGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>
 
-        <!-- ENGINE: SEQUENCE -->
+        <!-- ENGINE 1: SEQUENCE -->
         <div id="page-sequence" class="page max-w-2xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand leading-tight">Level Title</h2><p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p></div>
             <div id="seqGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div>
@@ -206,38 +202,38 @@
             <div class="flex justify-center mt-6"><button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:scale-105 transition-all tracking-widest active:scale-95">Verify</button></div>
         </div>
 
-        <!-- ENGINE: VISUAL ID -->
+        <!-- ENGINE 2: VISUAL ID -->
         <div id="page-visual" class="page max-w-lg mx-auto space-y-6">
             <div class="text-center"><h2 id="visTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Visual ID</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="visProgress" class="h-full bg-emerald-500 w-0 transition-all"></div></div></div>
             <div id="visCard" class="bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center"><div id="visDisplay" class="w-full h-full flex items-center justify-center"></div><div id="visFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20"><div id="visFeedbackIcon" class="text-6xl mb-2 drop-shadow-md"></div><h3 id="visFeedbackName" class="text-3xl font-brand uppercase tracking-tighter text-center">Correct</h3><p id="visFeedbackTip" class="mt-2 text-center text-sm font-bold opacity-90"></p></div></div>
             <div id="visOptions" class="grid gap-4 mt-6"></div>
         </div>
 
-        <!-- ENGINE: SORTING -->
+        <!-- ENGINE 3: SORTING -->
         <div id="page-sorting" class="page max-w-2xl mx-auto space-y-8 pb-20">
             <div class="text-center"><h2 id="sortTitle" class="text-4xl font-brand font-black text-gray-900 uppercase leading-none mb-1">Sorting Challenge</h2><p id="sortSubtitle" class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Tap the bucket where this item belongs</p></div>
-            <div class="flex justify-center items-center h-52 relative"><div id="sortActiveItem" class="flex flex-col items-center"><div class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20"><img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/></div><p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p></div></div>
+            <div class="flex justify-center items-center h-52 relative"><div id="sortActiveItem" class="flex flex-col items-center"><div id="sortCardWrapper" class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20"><img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/></div><p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p></div></div>
             <div id="sortBuckets" class="grid grid-cols-2 gap-6 mt-8">
                 <button onclick="handleBucketClick(0)" id="bucket0" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all"><div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div><h3 id="bucketLabel0" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket A</h3></button>
                 <button onclick="handleBucketClick(1)" id="bucket1" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all"><div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div><h3 id="bucketLabel1" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket B</h3></button>
             </div>
         </div>
 
-        <!-- ENGINE: PACKING -->
+        <!-- ENGINE 4: PACKING -->
         <div id="page-packing" class="page max-w-3xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="packTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">Packing Engine</h2><div class="inline-block bg-slate-900 text-white px-4 py-1.5 rounded-full font-mono text-sm font-black mt-2">Backpack: <span id="packCount" class="text-emerald-400">0</span> / <span id="packReqCount">10</span></div></div>
             <div id="packGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-4"></div>
             <div class="flex justify-center mt-6"><button id="packCheckBtn" onclick="verifyPacking()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-emerald-600 transition-all tracking-widest active:scale-95 text-lg">Check Bag</button></div>
         </div>
 
-        <!-- ENGINE: SCENARIO -->
+        <!-- ENGINE 5: SCENARIO -->
         <div id="page-scenario" class="page max-w-xl mx-auto space-y-6 pb-20 pt-4">
             <div class="text-center mb-6"><h2 id="scenTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none">Scenario</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="scenProgress" class="h-full bg-blue-500 w-0 transition-all"></div></div></div>
             <div class="bg-white p-8 rounded-[2rem] border-4 border-slate-100 shadow-xl relative"><div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-3xl p-3 rounded-full shadow-lg" id="scenIcon">💬</div><p id="scenPrompt" class="text-lg text-slate-700 font-bold leading-relaxed text-center mt-4"></p></div>
             <div id="scenOptions" class="grid gap-3 mt-6"></div>
         </div>
 
-        <!-- ENGINE: EMBLEM -->
+        <!-- ENGINE 6: EMBLEM -->
         <div id="page-emblem" class="page space-y-6 pb-10">
             <div class="text-center"><h2 id="embTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none mb-2">Diagram Match</h2><p class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Select meaning, then tap the part.</p></div>
             <div class="flex flex-col lg:flex-row gap-6 items-center justify-center">
@@ -259,7 +255,7 @@
             <div class="flex justify-center mb-4"><img id="successRankImg" src="rank_lion.png" class="w-24 h-24 object-contain drop-shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Done';"/></div>
             <h2 id="successTitle" class="text-3xl font-brand font-black text-gray-900 mb-2 uppercase tracking-tight border-b-2 border-slate-100 pb-2 leading-none text-emerald-600">Verified!</h2>
             <p id="successText" class="text-slate-600 mt-4 mb-2 font-bold leading-tight italic"></p>
-            <div id="successExplanation" class="mb-6 text-left text-[11px] text-emerald-800 bg-emerald-50 p-3 rounded-xl shadow-inner border border-emerald-100 leading-relaxed"></div>
+            <div id="successExplanation" class="mb-6 text-left text-[11px] text-emerald-800 bg-emerald-50 p-3 rounded-xl shadow-inner border border-emerald-100 leading-relaxed empty:hidden"></div>
             
             <div class="bg-slate-50 rounded-2xl p-4 mb-6 border border-slate-100 text-left relative overflow-hidden">
                 <p class="text-[8px] uppercase font-black text-slate-400 mb-1 border-b border-slate-200 pb-1">Authorized Signature</p>
@@ -273,18 +269,22 @@
         </div>
     </div>
 
-    <!-- FEEDBACK BOX -->
+    <!-- FEEDBACK BOX (LEARNING MODE) -->
     <div id="reqFeedback" class="fixed bottom-0 left-0 right-0 bg-white border-t-8 border-orange-500 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] p-6 z-[120] hidden">
-        <div class="max-w-xl mx-auto">
-            <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2"><span id="feedbackIcon" class="text-xl">🐺</span><p id="feedbackTypeLabel" class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Akela Says</p></div>
-                <button onclick="hideReqFeedback()" class="text-slate-300 hover:text-slate-900 transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                </button>
+        <div class="max-w-xl mx-auto relative">
+            <button onclick="hideReqFeedback()" class="absolute -top-2 right-0 text-slate-300 hover:text-slate-900 transition-colors p-2 bg-slate-100 rounded-full">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="flex items-center gap-2 mb-3">
+                <span id="feedbackIcon" class="text-xl">🐺</span>
+                <p id="feedbackTypeLabel" class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Akela Says</p>
             </div>
-            <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-xl leading-none mb-3">Check Training</h3>
-            <div id="feedbackText" class="text-slate-600 font-medium leading-relaxed text-sm mb-5"></div>
-            <div id="feedbackReqBox" class="bg-orange-50 p-3 rounded-xl border border-orange-100 flex items-center gap-3"><span class="bg-orange-500 text-white font-black text-[10px] px-2 py-1 rounded">REQ</span><p id="feedbackReq" class="text-[10px] font-black uppercase text-orange-700 tracking-tighter font-brand"></p></div>
+            <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-xl leading-none mb-3">Let's Review</h3>
+            <div id="feedbackText" class="text-slate-600 font-medium leading-relaxed text-sm mb-5 bg-orange-50 p-4 rounded-xl border border-orange-100"></div>
+            <div id="feedbackReqBox" class="flex items-center gap-3">
+                <span class="bg-orange-500 text-white font-black text-[10px] px-2 py-1 rounded shadow">REQUIREMENT</span>
+                <p id="feedbackReq" class="text-[10px] font-black uppercase text-orange-700 tracking-tighter font-brand"></p>
+            </div>
         </div>
     </div>
 
@@ -294,8 +294,8 @@
             <div id="startIcon" class="text-7xl mb-4 animate-bounce">⭐</div>
             <h2 id="startTitle" class="text-3xl font-brand font-black text-gray-900 uppercase leading-none mb-2 tracking-tight">Mission Title</h2>
             <div class="bg-slate-50 p-5 rounded-[2rem] border border-slate-100 mb-8"><p class="text-[10px] uppercase font-black text-slate-400 mb-2 tracking-widest text-center">Briefing</p><p id="startDesc" class="text-slate-700 font-bold leading-tight text-center text-sm italic"></p></div>
-            <button onclick="beginActiveGame()" id="startBtn" class="w-full bg-orange-500 text-white font-black py-5 rounded-2xl shadow-xl uppercase tracking-widest text-xl active:scale-95">Begin Mission</button>
-            <button onclick="showPage('menu')" class="mt-6 text-xs text-slate-400 font-black uppercase tracking-widest hover:text-slate-900">Abort</button>
+            <button onclick="beginActiveGame()" id="startBtn" class="w-full bg-orange-500 text-white font-black py-5 rounded-2xl shadow-xl uppercase tracking-widest text-xl active:scale-95 hover:-translate-y-1 transition-all">Begin Mission</button>
+            <button onclick="showPage('menu')" class="mt-6 text-xs text-slate-400 font-black uppercase tracking-widest hover:text-slate-900 transition-colors">Abort</button>
         </div>
     </div>
 
@@ -311,7 +311,7 @@
                 <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-blue-600 transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                 <a href="https://www.tiktok.com/@aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-pink-600 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg></a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V5.1 Master Edition</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V5.2 Master Edition</p>
         </div>
     </footer>
 
@@ -337,7 +337,6 @@
                 options: [ { label: "Correct", value: "yes" }, { label: "Incorrect", value: "no" } ],
                 items: [ { name: "The Sign", status: "yes", tip: "Two fingers up like Akela's ears!", img: "rank_lion.png", req: "Lion" } ]
             },
-            
             healthy_habits: {
                 type: 'sorting', title: "Healthy Habits", desc: "Are these habits healthy or germy?", icon: "🧼",
                 buckets: ["Healthy", "Germs"],
@@ -349,7 +348,6 @@
                 ],
                 reveal: "Clean Cub!", req: "Lion", explanation: "Wash your hands to stay healthy."
             },
-            
             animal_tracks: {
                 type: 'visual', title: "Track Match", desc: "Match the animal track.", icon: "🐾",
                 options: [ { label: "Lion", value: "lion" }, { label: "Wolf", value: "wolf" }, { label: "Bear", value: "bear" } ],
@@ -359,7 +357,6 @@
                     { name: "Bear Track", status: "bear", tip: "Big and broad with heavy claws.", img: "bear_track.jpg", req: "Wolf" }
                 ]
             },
-            
             buddy_system: {
                 type: 'sorting', title: "Buddy System", desc: "Stay safe outdoors!", icon: "🤝",
                 buckets: ["SAFE", "UNSAFE"],
@@ -369,7 +366,6 @@
                 ],
                 reveal: "Stay together!", req: "Tiger", explanation: "Never go alone in the woods."
             },
-            
             community_helpers: {
                 type: 'visual', title: "Helpers", desc: "Match the tool to the helper.", icon: "🚒",
                 options: [ { label: "Firefighter", value: "fire" }, { label: "Paramedic", value: "medic" }, { label: "Police", value: "police" } ],
@@ -379,7 +375,6 @@
                     { name: "Badge", status: "police", tip: "Keeps the peace.", img: "helper_badge.jpg", req: "Tiger" }
                 ]
             },
-            
             tiger_bites: {
                 type: 'sorting', title: "Tiger Bites", desc: "Sort the trail snacks.", icon: "🍎",
                 buckets: ["Trail Snack", "Junk Food"],
@@ -393,13 +388,11 @@
                 ],
                 reveal: "Healthy Choices!", req: "Tiger", explanation: "Eat protein for energy."
             },
-            
             call_911: {
                 type: 'sequence', title: "Call 911", desc: "Put the steps in order.", icon: "📞",
                 items: ["Stay Calm", "Dial 9-1-1", "Tell them where you are"],
                 reveal: "Help is coming.", prefix: "Steps:", req: "Tiger", explanation: "Always know your location."
             },
-            
             six_essentials: {
                 type: 'packing', title: "6 Essentials", desc: "Pack 6 hike essentials.", icon: "🎒",
                 req: "Tiger", reveal: "Pack ready!", correctCount: 6,
@@ -414,7 +407,6 @@
                     { name: "Toys", img: "toys.jpg", correct: false }
                 ]
             },
-            
             lnt_cubs: {
                 type: 'sorting', title: "Trash or Nature?", desc: "Put items where they belong.", icon: "🍃",
                 buckets: ["Trash Bin", "Nature"],
@@ -428,7 +420,6 @@
                 ],
                 reveal: "LNT Expert!", req: "Wolf", explanation: "Pack it in, pack it out!"
             },
-            
             weather_match: {
                 type: 'visual', title: "Weather Gear", desc: "Pick the right gear.", icon: "☁️",
                 options: [ { label: "Winter", value: "snow" }, { label: "Rainy", value: "rain" }, { label: "Summer", value: "sun" } ],
@@ -438,7 +429,6 @@
                     { name: "Sunny", status: "sun", tip: "Wear a hat!", img: "weather_sun.jpg", req: "Wolf" }
                 ]
             },
-            
             finding_way: {
                 type: 'emblem', title: "Compass Points", desc: "Pin basic directions.", icon: "🧭", img: "compass_rose.jpg",
                 parts: [
@@ -448,13 +438,11 @@
                     { id: 4, text: "West", name: "Left", style: "top:45%; left:10%; width:10%; height:10%;", tip: "Left.", req: "Wolf" }
                 ]
             },
-            
             germs_away: {
                 type: 'sequence', title: "Germs Away", desc: "Hand washing order.", icon: "🚰",
                 items: ["Get hands wet", "Add soap", "Scrub for 20 seconds", "Rinse and dry"],
                 reveal: "Squeaky clean.", req: "Wolf", explanation: "Scrub for 20 seconds to reach kill germs."
             },
-            
             whittling_chip: {
                 type: 'sorting', title: "Knife Safety", desc: "Safe or unsafe?", icon: "🔪",
                 buckets: ["Safe", "Unsafe"],
@@ -465,13 +453,11 @@
                 ],
                 reveal: "Whittling Chip earned.", req: "Bear", explanation: "Never carve toward yourself."
             },
-            
             bear_necessities: {
                 type: 'sequence', title: "Pitch a Tent", desc: "Order the steps.", icon: "⛺",
                 items: ["Lay down the tarp", "Lay out the tent", "Put together the poles", "Stake it down"],
                 reveal: "Camp ready.", req: "Bear", explanation: "Tarp protects the tent bottom."
             },
-            
             knot_tying: {
                 type: 'visual', title: "Bear Knots", desc: "Identify the knot.", icon: "🪢",
                 options: [ { label: "Square", value: "square" }, { label: "Bowline", value: "bowline" }, { label: "Half-Hitches", value: "two" } ],
@@ -481,7 +467,6 @@
                     { name: "Two Half-Hitches", status: "two", tip: "Tying to a pole.", img: "two_half_hitches.jpg", req: "Bear" }
                 ]
             },
-            
             chef_cubs: {
                 type: 'sorting', title: "Healthy Eating", desc: "Healthy or Treat?", icon: "🥦",
                 buckets: ["Healthy", "Treat"],
@@ -493,7 +478,6 @@
                 ],
                 reveal: "Balanced Den!", req: "Bear", explanation: "Healthy foods fuel your adventures."
             },
-            
             first_responder: {
                 type: 'sorting', title: "First Aid Gear", desc: "What treats what?", icon: "🩹",
                 buckets: ["Bandage", "Ice Pack"],
@@ -504,13 +488,11 @@
                 ],
                 reveal: "Ready to help.", req: "Webelos", explanation: "Ice reduces swelling, bandages keep cuts clean."
             },
-            
             stop_logic: {
                 type: 'sequence', title: "Lost in Woods", desc: "Put S.T.O.P. in order.", icon: "🛑",
                 items: ["Stop", "Think", "Observe", "Plan"],
                 reveal: "S.T.O.P. method.", prefix: "Steps:", req: "Webelos", explanation: "Never keep walking if you are lost."
             },
-            
             stronger_faster: {
                 type: 'sorting', title: "Fitness", desc: "Warm-Up or Workout?", icon: "💪",
                 buckets: ["Warm-Up", "Workout"],
@@ -522,7 +504,6 @@
                 ],
                 reveal: "Fit Scout.", req: "Webelos", explanation: "Warm up your muscles first."
             },
-            
             patrol_method: {
                 type: 'sorting', title: "Leadership", desc: "BSA vs Cub Roles.", icon: "👥",
                 buckets: ["Youth Led (BSA)", "Adult Led (Cub)"],
@@ -541,85 +522,71 @@
                 items: [ "To do my duty to God and my country", "To obey the Scout Law", "To help other people at all times", "To keep myself physically strong", "mentally awake", "and morally straight" ],
                 reveal: "Foundation.", req: "Scout"
             },
-            
             law: {
                 type: 'sequence', title: "Scout Law", desc: "Sequence 12 points.", icon: "📜",
                 items: ["Trustworthy", "Loyal", "Helpful", "Friendly", "Courteous", "Kind", "Obedient", "Cheerful", "Thrifty", "Brave", "Clean", "Reverent"],
                 reveal: "Character.", req: "Scout"
             },
-            
             outdoor: {
                 type: 'sequence', title: "Outdoor Code", desc: "Conservation promises.", icon: "🌲",
                 items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"],
                 reveal: "Protect our planet.", req: "Scout"
             },
-            
             action: {
                 type: 'sequence', title: "The 3 C's", desc: "Crisis steps.", icon: "🚨",
                 items: ["Check the scene", "Call for help", "provide Care"],
                 reveal: "Safety First.", req: "Tenderfoot"
             },
-            
             triage: {
                 type: 'sequence', title: "Hurry Cases", desc: "Medical priority.", icon: "🏥",
                 items: ["Stopped Breathing / Choking", "Serious Bleeding", "Ingested Poison", "Treating for Shock"],
                 reveal: "Prioritized.", req: "Tenderfoot"
             },
-            
             cpr: {
                 type: 'sequence', title: "CPR Sequence", desc: "Hands-Only CPR.", icon: "💓",
                 items: ["Check scene", "Check responsiveness", "Call 911 / AED", "Start compressions"],
                 reveal: "Heart Saved.", req: "1st Class"
             },
-            
             snake: {
                 type: 'sequence', title: "Snakebite", desc: "Venomous bite protocol.", icon: "🐍",
                 items: ["Move away", "Stay calm/still", "Keep bite below heart", "Get to hospital"],
                 reveal: "Stay calm.", req: "Tenderfoot"
             },
-            
             rescue: {
                 type: 'sequence', title: "Water Rescue", desc: "Safest to riskiest.", icon: "🛶",
                 items: ["Reach", "Throw", "Row", "Go"],
                 reveal: "Reach/Throw first!", req: "2nd Class"
             },
-            
             edge: {
                 type: 'sequence', title: "Teaching Skills", desc: "The E.D.G.E. method.", icon: "🎓",
                 items: ["Explain", "Demonstrate", "Guide", "Enable"],
                 reveal: "Mastered E.D.G.E.", req: "Star"
             },
-            
             teams: {
                 type: 'sequence', title: "Leading Teams", desc: "NYLT Team stages.", icon: "🤝",
                 items: ["Forming", "Storming", "Norming", "Performing"],
                 reveal: "Team development.", req: "NYLT"
             },
-            
             three_pot_wash: {
                 type: 'sequence', title: "3-Pot Wash", desc: "Camp dishwashing.", icon: "🍽️",
                 items: ["Wash (Hot Soapy)", "Rinse (Hot Clear)", "Sanitize (Bleach/Boil)", "Air Dry"],
                 reveal: "Clean camp.", req: "1st Class"
             },
-            
             water: {
                 type: 'sequence', title: "Purify Water", desc: "Rolling boil method.", icon: "💧",
                 items: ["Filter out debris", "Bring to rolling boil", "Maintain for 1 minute", "Let cool"],
                 reveal: "Safe to drink.", req: "1st Class"
             },
-            
             extinguish: {
                 type: 'sequence', title: "Campfire Out", desc: "Extinguishing steps.", icon: "🔥",
                 items: ["Let burn to ash", "Drown embers", "Stir ashes", "Feel for heat"],
                 reveal: "Cold out.", req: "2nd Class"
             },
-            
             eagle_project: {
                 type: 'sequence', title: "Eagle Project", desc: "Management steps.", icon: "🦅",
                 items: ["Concept", "Approvals", "Fundraising", "Execution", "Final Report"],
                 reveal: "Project Managed.", req: "Eagle"
             },
-            
             plants: {
                 type: 'visual', title: "Safe or Toxic?", desc: "Identify flora.", icon: "🌿",
                 options: [ { label: "SAFE", value: "safe" }, { label: "TOXIC", value: "toxic" } ],
@@ -629,7 +596,6 @@
                     { name: "Virginia Creeper", status: "safe", tip: "Five leaves.", img: "creeper.jpg", req: "2nd Class" }
                 ]
             },
-            
             maps: {
                 type: 'visual', title: "Map Master", desc: "Topographic symbols.", icon: "🗺️",
                 options: [ { label: "Elevation", value: "elev" }, { label: "Human", value: "human" } ],
@@ -638,7 +604,6 @@
                     { name: "Buildings", status: "human", tip: "Black squares.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black"/></svg>', req: "2nd Class" }
                 ]
             },
-            
             fire: {
                 type: 'visual', title: "Fire Builder", desc: "Fire lay patterns.", icon: "🏕️",
                 options: [ { label: "Start", value: "start" }, { label: "Heat", value: "heat" } ],
@@ -647,7 +612,6 @@
                     { name: "Log Cabin", status: "heat", tip: "Sustained cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="8" fill="#8B4513"/></svg>', req: "2nd Class" }
                 ]
             },
-            
             knots: {
                 type: 'visual', title: "Knot Knowledge", desc: "Identify the knot.", icon: "🪢",
                 options: [ { label: "Square", value: "square" }, { label: "Bowline", value: "bowline" }, { label: "Clove", value: "clove" }, { label: "Taut-line", value: "tautline" } ],
@@ -658,7 +622,6 @@
                     { name: "Taut-line", status: "tautline", tip: "Adjustable loop.", img: "tautline.jpg", req: "Tenderfoot" }
                 ]
             },
-            
             lashings: {
                 type: 'visual', title: "Lashings", desc: "Pioneer lashings.", icon: "🪵",
                 options: [ { label: "Square", value: "square" }, { label: "Diagonal", value: "diagonal" }, { label: "Shear", value: "shear" }, { label: "Tripod", value: "tripod" } ],
@@ -669,7 +632,6 @@
                     { name: "Tripod", status: "tripod", tip: "3-legs.", img: "tripod_lashing.jpg", req: "1st Class" }
                 ]
             },
-            
             bsa_10_essentials: {
                 type: 'packing', title: "10 Essentials", desc: "Pack 10 items.", icon: "🎒",
                 req: "Scout", reveal: "Prepared.", correctCount: 10,
@@ -688,7 +650,6 @@
                     { name: "Toys", img: "toys.jpg", correct: false }
                 ]
             },
-            
             mb_logic: {
                 type: 'sorting', title: "Merit Badges", desc: "Eagle Required vs Elective.", icon: "🏅",
                 buckets: ["Eagle Required", "Elective"],
@@ -702,7 +663,6 @@
                 ],
                 reveal: "Advancement Ready.", req: "Star"
             },
-            
             choking_scenario: {
                 type: 'scenario', title: "Choking Crisis", desc: "Save a life.", icon: "🗣️",
                 req: "Tenderfoot", reveal: "Crisis averted!", explanation: "Always encourage coughing first.",
@@ -723,7 +683,6 @@
                     }
                 ]
             },
-            
             resolving_conflict: {
                 type: 'scenario', title: "Conflict Res.", desc: "Handle a dispute.", icon: "⚖️",
                 req: "Life", reveal: "Great Leadership.", explanation: "A leader listens to both sides.",
@@ -744,7 +703,6 @@
                     }
                 ]
             },
-            
             compass_pin_bsa: {
                 type: 'emblem', title: "The Compass", desc: "Pin 8 cardinal directions.", icon: "🧭", img: "compass_rose.jpg",
                 parts: [
@@ -758,7 +716,6 @@
                     { id: 8, text: "Northwest", name: "NW", style: "top:15%; left:15%; width:15%; height:10%;", tip: "315°", req: "2nd Class" }
                 ]
             },
-            
             emblem: {
                 type: 'emblem', title: "Badge Symbols", desc: "First Class meanings.", icon: "🏅", img: "first_class_badge.png.jpg.png",
                 parts: [
@@ -778,7 +735,6 @@
                     { name: "Meadow", status: "no", tip: "Fragile.", img: "lnt_backcountry.jpg", req: "Ranger" }
                 ]
             },
-            
             trek_packing: {
                 type: 'packing', title: "Trek Loadout", desc: "Pack for 5-days.", icon: "🧗",
                 req: "ALPS", reveal: "Trail Ready!", correctCount: 5,
@@ -791,7 +747,6 @@
                     { name: "Toys", img: "toys.jpg", correct: false }
                 ]
             },
-            
             expedition_leadership: {
                 type: 'scenario', title: "Expedition Leader", desc: "Resolve trek conflicts.", icon: "⚖️",
                 req: "ALPS", reveal: "Strong Crew.", explanation: "Consensus is key in high adventure.",
@@ -805,7 +760,6 @@
                     }
                 ]
             },
-            
             mentor_teaching: {
                 type: 'sequence', title: "Mentorship", desc: "Steps of mentoring.", icon: "🎓",
                 items: ["Self-Knowledge", "Listen", "Support", "Encourage"],
@@ -822,7 +776,6 @@
                     { id: 4, text: "Stern (Rear)", name: "Stern", style: "bottom:5%; left:40%; width:20%; height:10%;", tip: "Aft.", req: "Apprentice" }
                 ]
             },
-            
             buoy_rules: {
                 type: 'visual', title: "Nav Buoys", desc: "Identify markers.", icon: "🏮",
                 options: [ { label: "Red Nun", value: "red" }, { label: "Green Can", value: "green" } ],
@@ -831,7 +784,6 @@
                     { name: "Leaving", status: "green", tip: "Green Right Leaving.", img: "buoy_green_can.jpg", req: "Ordinary" }
                 ]
             },
-            
             maritime_knots: {
                 type: 'visual', title: "Sea Knots", desc: "Maritime hitches.", icon: "🪢",
                 options: [ { label: "Cleat Hitch", value: "cleat" }, { label: "Anchor Bend", value: "anchor" }, { label: "Bowline on Bight", value: "bight" } ],
@@ -841,7 +793,6 @@
                     { name: "Bowline on Bight", status: "bight", tip: "Double loop.", img: "knot_bowline_bight.jpg", req: "Ordinary" }
                 ]
             },
-            
             quarterdeck_leadership: {
                 type: 'sorting', title: "Quarterdeck Roles", desc: "Ship leadership vs Shore.", icon: "⚓",
                 buckets: ["Quarterdeck (Youth)", "Ship Committee (Adult)"],
@@ -873,7 +824,6 @@
         };
         
         const VENTURING_GAMES = ['lnt_master', 'trek_packing', 'expedition_leadership', 'mentor_teaching'];
-        
         const SEA_SCOUT_GAMES = ['vessel_anatomy', 'buoy_rules', 'maritime_knots', 'quarterdeck_leadership'];
 
         // ==========================================
@@ -885,6 +835,12 @@
         let secondsElapsed = 0; 
         let timerInt = null; 
         let completedGames = {};
+
+        function isLearningMode() {
+            if (currentProgram === 'cub') return true;
+            if (currentProgram === 'bsa' && (currentRank === 1 || currentRank === 2)) return true;
+            return false;
+        }
 
         function selectPath(path) {
             currentProgram = path;
@@ -907,11 +863,8 @@
 
         function setRank(rank) {
             currentRank = rank;
-            
             let displayRank = String(rank).toUpperCase();
-            if (currentProgram === 'bsa') {
-                displayRank = "TIER " + rank;
-            }
+            if (currentProgram === 'bsa') displayRank = "TIER " + rank;
             
             const key = currentProgram === 'cub' ? `cub_${rank}` : currentProgram === 'bsa' ? 'bsa' : currentProgram;
             const color = PROGRAM_COLORS[key] || '#1e293b';
@@ -940,12 +893,9 @@
             hideReqFeedback();
             
             const target = document.getElementById(`page-${id}`);
-            if (target) {
-                target.classList.add('active');
-            }
+            if (target) target.classList.add('active');
             
-            const exitBtn = document.getElementById('exitBtn');
-            exitBtn.style.display = id === 'lobby' ? 'none' : 'block';
+            document.getElementById('exitBtn').style.display = id === 'lobby' ? 'none' : 'block';
             document.getElementById('globalTimer').classList.add('hidden');
             stopTimer();
             
@@ -1016,13 +966,8 @@
             document.getElementById('startIcon').innerText = d.icon || "⭐";
             
             const timerEl = document.getElementById('globalTimer');
-            const noTimerRanks = ['lion', 'tiger', 'wolf'];
-            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
-                timerEl.classList.add('hidden');
-            } else {
-                timerEl.classList.remove('hidden');
-                timerEl.innerText = "00:00";
-            }
+            timerEl.classList.remove('hidden');
+            timerEl.innerText = "00:00";
             
             const startBtn = document.getElementById('startBtn');
             const startBorder = document.getElementById('startBorder');
@@ -1048,7 +993,7 @@
         }
 
         // ==========================================
-        // ENGINE LOGIC
+        // ENGINE LOGIC (WITH FEEDBACK FIXES)
         // ==========================================
 
         // --- SEQUENCE ENGINE ---
@@ -1107,13 +1052,18 @@
                 showFinalSuccess(DATA[currentId].reveal || "Logic Mastered!", DATA[currentId].explanation || "");
             } else { 
                 triggerPenalty(); 
-                if (currentProgram === 'cub' || currentRank === 1) {
-                    showReqFeedback("Check Handbook", `Review the correct order.`, DATA[currentId].req); 
-                } else { 
-                    userSequence = Array(DATA[currentId].items.length).fill(null); 
-                    renderSeqGrid(); 
-                    renderSeqBank(); 
-                } 
+                document.getElementById('seqCheckBtn').classList.add('error-shake');
+                setTimeout(() => document.getElementById('seqCheckBtn').classList.remove('error-shake'), 400);
+
+                if (isLearningMode()) {
+                    const correctList = DATA[currentId].items.map((w,i)=>`${i+1}. ${w}`).join('<br>');
+                    showReqFeedback("Let's Review", `<b>Incorrect Order.</b> Here is the correct sequence:<br><div class="mt-2 p-3 bg-orange-100/50 rounded text-left text-[10px] border border-orange-200">${correctList}</div><br>Try again!`, DATA[currentId].req); 
+                }
+                
+                // Reset for retry
+                userSequence = Array(DATA[currentId].items.length).fill(null); 
+                renderSeqGrid(); 
+                renderSeqBank(); 
             }
         }
 
@@ -1133,28 +1083,37 @@
                     const item = visualDeck[visualIdx];
                     const feedback = document.getElementById('visFeedback');
                     const card = document.getElementById('visCard');
-                    feedback.classList.remove('hidden');
                     
                     if (opt.value === item.status) { 
+                        feedback.classList.remove('hidden');
                         feedback.querySelector('div').innerText = "✅"; 
                         card.classList.add('bg-emerald-600'); 
                         hideReqFeedback(); 
+                        
+                        document.querySelectorAll('#visOptions button').forEach(b => b.disabled = true);
+                        
+                        setTimeout(() => { 
+                            feedback.classList.add('hidden');
+                            card.classList.remove('bg-emerald-600'); 
+                            document.querySelectorAll('#visOptions button').forEach(b => b.disabled = false);
+                            
+                            visualIdx++; 
+                            if (visualIdx < visualDeck.length) {
+                                updateVisualCard(); 
+                            } else {
+                                showFinalSuccess("Vision Skills Verified!", "Accurate identification confirmed."); 
+                            }
+                        }, 1200);
                     } else { 
                         triggerPenalty(); 
-                        feedback.querySelector('div').innerText = "❌"; 
-                        card.classList.add('bg-rose-600'); 
-                        if (currentProgram === 'cub' || currentRank === 1) {
-                            showReqFeedback("Check Handbook", item.tip, item.req); 
+                        card.classList.add('error-shake');
+                        setTimeout(() => card.classList.remove('error-shake'), 400);
+
+                        if (isLearningMode()) {
+                            const correctOpt = DATA[currentId].options.find(o => o.value === item.status);
+                            showReqFeedback("Let's Review", `<b>Not quite!</b> This is actually <b>${correctOpt ? correctOpt.label : 'something else'}</b>.<br><br><b>Hint:</b> ${item.tip}`, item.req); 
                         }
                     }
-                    setTimeout(() => { 
-                        visualIdx++; 
-                        if (visualIdx < visualDeck.length) {
-                            updateVisualCard(); 
-                        } else {
-                            showFinalSuccess("Vision Skills Verified!", "Accurate identification confirmed."); 
-                        }
-                    }, 1500);
                 };
                 optCont.appendChild(btn);
             });
@@ -1191,15 +1150,27 @@
         }
         function handleBucketClick(bucketIdx) {
             if (sortDeck[sortIdx].status === bucketIdx) { 
-                sortIdx++; 
-                if (sortIdx < sortDeck.length) {
-                    updateSortItem(); 
-                } else {
-                    showFinalSuccess(DATA[currentId].reveal || "Sorted!", DATA[currentId].explanation || ""); 
-                }
+                document.getElementById(`bucket${bucketIdx}`).classList.add('highlight');
+                hideReqFeedback();
+                
+                setTimeout(() => {
+                    document.getElementById(`bucket${bucketIdx}`).classList.remove('highlight');
+                    sortIdx++; 
+                    if (sortIdx < sortDeck.length) {
+                        updateSortItem(); 
+                    } else {
+                        showFinalSuccess(DATA[currentId].reveal || "Sorted!", DATA[currentId].explanation || ""); 
+                    }
+                }, 400);
             } else { 
                 triggerPenalty(); 
-                showReqFeedback("Try Again", `That doesn't belong in ${DATA[currentId].buckets[bucketIdx]}.`, DATA[currentId].req); 
+                document.getElementById(`bucket${bucketIdx}`).classList.add('error-shake');
+                setTimeout(() => document.getElementById(`bucket${bucketIdx}`).classList.remove('error-shake'), 400);
+                
+                if (isLearningMode()) {
+                    const correctBucket = DATA[currentId].buckets[sortDeck[sortIdx].status];
+                    showReqFeedback("Let's Review", `<b>Oops!</b> ${sortDeck[sortIdx].name} actually belongs in the <b>${correctBucket}</b> bucket.<br><br>Try picking the other bucket!`, DATA[currentId].req); 
+                }
             }
         }
 
@@ -1244,15 +1215,24 @@
         function verifyPacking() {
             const d = DATA[currentId];
             if (packedItems.length !== d.correctCount) { 
-                showReqFeedback("Gear Count", `You need exactly ${d.correctCount} items.`, d.req); 
+                document.getElementById('packCheckBtn').classList.add('error-shake');
+                setTimeout(()=>document.getElementById('packCheckBtn').classList.remove('error-shake'), 400);
+                showReqFeedback("Gear Count", `You need exactly ${d.correctCount} items. You have ${packedItems.length} packed.`, d.req); 
                 return; 
             }
+            
             const correctNames = d.items.filter(i => i.correct).map(i => i.name);
             if (packedItems.every(n => correctNames.includes(n))) {
                 showFinalSuccess(d.reveal, d.explanation);
             } else { 
                 triggerPenalty(); 
-                showReqFeedback("Gear Check", "Review your packing list essentials.", d.req); 
+                document.getElementById('packCheckBtn').classList.add('error-shake');
+                setTimeout(()=>document.getElementById('packCheckBtn').classList.remove('error-shake'), 400);
+
+                if (isLearningMode()) {
+                    const correctList = correctNames.join(", ");
+                    showReqFeedback("Let's Review", `<b>Incorrect Gear.</b> Here is what you should have packed:<br><br><b>${correctList}</b><br><br>Unpack the wrong items and try again!`, d.req); 
+                }
             }
         }
 
@@ -1272,13 +1252,14 @@
             const optionsDiv = document.getElementById('scenOptions'); 
             optionsDiv.innerHTML = '';
             
-            d.steps[scenIdx].options.forEach(opt => {
+            d.steps[scenIdx].options.sort(()=>Math.random()-0.5).forEach(opt => {
                 const btn = document.createElement('button'); 
                 btn.className = "p-5 bg-white border-4 border-slate-100 rounded-[2rem] text-left hover:border-orange-400";
                 btn.innerHTML = `<span class="block font-black text-sm text-slate-800">${opt.label}</span>`;
                 btn.onclick = () => { 
                     if (opt.correct) { 
                         scenIdx++; 
+                        hideReqFeedback();
                         if (scenIdx < d.steps.length) {
                             updateScenarioUI(); 
                         } else {
@@ -1286,7 +1267,12 @@
                         }
                     } else { 
                         triggerPenalty(); 
-                        showReqFeedback("Incorrect", opt.feedback, d.req); 
+                        btn.classList.add('error-shake');
+                        setTimeout(() => btn.classList.remove('error-shake'), 400);
+                        
+                        if (isLearningMode()) {
+                            showReqFeedback("Let's Review", `<b>Not quite!</b><br><br>${opt.feedback}<br><br>Try choosing the other option.`, d.req); 
+                        }
                     } 
                 };
                 optionsDiv.appendChild(btn);
@@ -1301,6 +1287,7 @@
             document.getElementById('embImage').src = DATA[currentId].img; 
             renderEmbBank(); 
             renderEmbBoard(); 
+            document.getElementById('embCheckBtn').style.display = 'none';
             showPage('emblem'); 
         }
         function renderEmbBank() {
@@ -1351,13 +1338,25 @@
                 showFinalSuccess("Mastered!", "Diagram accurately verified.");
             } else { 
                 triggerPenalty(); 
-                if (currentProgram === 'cub' || currentRank === 1) {
-                    const d = DATA[currentId].parts.find(x=>x.id===firstErr);
-                    showReqFeedback("Handbook Check", `Match Error: The ${d.name} means "${d.text}".<br><br><b>Symbolism:</b> ${d.tip}`, d.req);
+                document.getElementById('embCheckBtn').classList.add('error-shake');
+                setTimeout(() => document.getElementById('embCheckBtn').classList.remove('error-shake'), 400);
+
+                if (isLearningMode()) {
+                    const correctPartData = DATA[currentId].parts.find(x => x.id === firstErr);
+                    const placedWrong = embPlaced[firstErr];
+                    showReqFeedback("Let's Review", `<b>Match Error!</b> You placed "${placedWrong.text}" in the wrong spot.<br><br>The correct meaning for that part is <b>"${correctPartData.text}"</b>.<br><br><b>Symbolism:</b> ${correctPartData.tip}`, DATA[currentId].req);
                 }
-                embPlaced = {}; 
+
+                // Remove ONLY the wrong ones so they don't have to start totally over
+                Object.keys(embPlaced).forEach(id => { 
+                    if (parseInt(id) !== embPlaced[id].id) { 
+                        delete embPlaced[id];
+                    } 
+                });
+
                 renderEmbBank(); 
                 renderEmbBoard(); 
+                document.getElementById('embCheckBtn').style.display = 'none';
             }
         }
 
@@ -1365,23 +1364,25 @@
         // UTILITIES
         // ==========================================
         function startTimer() { 
-            const noTimerRanks = ['lion', 'tiger', 'wolf'];
-            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) return;
             secondsElapsed = 0; 
             updateTimerUI(); 
+            document.getElementById('globalTimer').classList.remove('hidden');
             timerInt = setInterval(() => { secondsElapsed++; updateTimerUI(); }, 1000); 
         }
+
         function updateTimerUI() { 
             const m = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
             const s = String(secondsElapsed % 60).padStart(2, '0'); 
             document.getElementById('globalTimer').innerText = `${m}:${s}`; 
         }
+
         function stopTimer() { 
             clearInterval(timerInt); 
         }
+
         function triggerPenalty() {
-            const survivalPrograms = ['bsa', 'venturing', 'sea'];
-            if ((survivalPrograms.includes(currentProgram) && currentRank === 3) || currentProgram === 'venturing' || currentProgram === 'sea') {
+            // Only apply +10s penalty to Challenge Modes (BSA Tier 3, Venture, Sea Scout)
+            if (!isLearningMode()) {
                 secondsElapsed += 10; 
                 document.getElementById('globalTimer').classList.add('timer-penalty');
                 setTimeout(() => document.getElementById('globalTimer').classList.remove('timer-penalty'), 1000);
@@ -1394,11 +1395,15 @@
             hideReqFeedback();
             const timeStr = document.getElementById('globalTimer').innerText;
             
+            // Set as "DONE" for learning mode Cubs so time isn't the focus. Keep exact time for others.
             const noTimerRanks = ['lion', 'tiger', 'wolf'];
-            const useTimer = !(currentProgram === 'cub' && noTimerRanks.includes(currentRank));
+            let displayTime = timeStr;
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
+                displayTime = "DONE";
+            }
 
-            if (!completedGames[currentId] || (useTimer && timeStr < completedGames[currentId])) {
-                completedGames[currentId] = useTimer ? timeStr : "DONE";
+            if (!completedGames[currentId] || (displayTime !== "DONE" && timeStr < completedGames[currentId])) {
+                completedGames[currentId] = displayTime;
             }
             
             updateGlobalProgress();
@@ -1406,13 +1411,13 @@
             document.getElementById('successText').innerText = revealText;
             document.getElementById('successExplanation').innerHTML = explanation.replace(/\n/g, '<br>');
             
-            if (useTimer) {
+            if (displayTime === "DONE") {
+                document.getElementById('timeLabel').classList.add('hidden');
+                document.getElementById('finalTime').classList.add('hidden');
+            } else {
                 document.getElementById('timeLabel').classList.remove('hidden');
                 document.getElementById('finalTime').classList.remove('hidden');
                 document.getElementById('finalTime').innerText = timeStr;
-            } else {
-                document.getElementById('timeLabel').classList.add('hidden');
-                document.getElementById('finalTime').classList.add('hidden');
             }
 
             const rankImg = document.getElementById('successRankImg');
@@ -1427,11 +1432,14 @@
             document.getElementById('feedbackTitle').innerText = title; 
             document.getElementById('feedbackText').innerHTML = html; 
             document.getElementById('feedbackReq').innerText = req || "HANDBOOK";
+            
             const isCub = currentProgram === 'cub';
             document.getElementById('feedbackTypeLabel').innerText = isCub ? "Akela Says" : "Training Check";
             document.getElementById('feedbackIcon').innerText = isCub ? "🐺" : "📜";
+            
             document.getElementById('reqFeedback').classList.remove('hidden');
         }
+
         function hideReqFeedback() { 
             document.getElementById('reqFeedback').classList.add('hidden'); 
         }
