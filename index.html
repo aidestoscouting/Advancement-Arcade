@@ -483,4 +483,434 @@
             grid.innerHTML = '';
             userSequence.forEach((word, i) => {
                 const div = document.createElement('div');
-                div.className = `h-14 flex items-center px-4 rounded-2xl text-[11px] font-bold border-2 transition-all ${word ? 'slot-filled shadow-md' : 'bg-white border-slate-100 border-dashed text-slate-300
+                div.className = `h-14 flex items-center px-4 rounded-2xl text-[11px] font-bold border-2 transition-all ${word ? 'slot-filled shadow-md' : 'bg-white border-slate-100 border-dashed text-slate-300'}`;
+                div.innerHTML = `<span class="mr-3 opacity-30 font-black">${i+1}.</span> ${word || '________'}`;
+                if (word) div.onclick = () => { userSequence[i] = null; renderSeqGrid(); renderSeqBank(); };
+                grid.appendChild(div);
+            });
+        }
+        function renderSeqBank() {
+            const bank = document.getElementById('seqBank'); 
+            bank.innerHTML = '';
+            const used = userSequence.filter(w => w !== null);
+            DATA[currentId].items.filter(w => !used.includes(w)).sort(()=>Math.random()-0.5).forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = "px-4 py-2.5 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold text-[10px] shadow-sm hover:border-orange-400";
+                btn.innerText = word;
+                btn.onclick = () => { const nextIdx = userSequence.indexOf(null); if (nextIdx !== -1) { userSequence[nextIdx] = word; renderSeqGrid(); renderSeqBank(); hideReqFeedback(); } };
+                bank.appendChild(btn);
+            });
+        }
+        function verifySequence() {
+            if (userSequence.includes(null)) return;
+            let errs = 0; 
+            userSequence.forEach((w, i) => { if (w !== DATA[currentId].items[i]) errs++; });
+            if (errs === 0) {
+                showFinalSuccess(DATA[currentId].reveal || "Logic Mastered!", DATA[currentId].explanation || "");
+            } else { 
+                triggerPenalty(); 
+                document.getElementById('seqCheckBtn').classList.add('error-shake');
+                setTimeout(() => document.getElementById('seqCheckBtn').classList.remove('error-shake'), 400);
+
+                if (isLearningMode()) {
+                    const correctList = DATA[currentId].items.map((w,i)=>`${i+1}. ${w}`).join('<br>');
+                    showReqFeedback("Let's Review", `<b>Incorrect Order.</b> Here is the correct sequence:<br><div class="mt-2 p-3 bg-orange-100/50 rounded text-left text-[10px] border border-orange-200">${correctList}</div><br>Try again!`, DATA[currentId].req); 
+                }
+                userSequence = Array(DATA[currentId].items.length).fill(null); 
+                renderSeqGrid(); 
+                renderSeqBank(); 
+            }
+        }
+
+        // --- VISUAL ID ENGINE ---
+        let visualIdx = 0, visualDeck = [];
+        function initVisual() {
+            visualIdx = 0; 
+            visualDeck = [...DATA[currentId].items].sort(()=>Math.random()-0.5);
+            document.getElementById('visTitle').innerText = DATA[currentId].title;
+            const optCont = document.getElementById('visOptions'); 
+            optCont.innerHTML = '';
+            DATA[currentId].options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "p-6 bg-slate-100 rounded-[2rem] font-black text-xs shadow-md border-b-4 border-slate-300 hover:bg-slate-200";
+                btn.innerText = opt.label;
+                btn.onclick = () => {
+                    const item = visualDeck[visualIdx];
+                    const feedback = document.getElementById('visFeedback');
+                    const card = document.getElementById('visCard');
+                    
+                    if (opt.value === item.status) { 
+                        feedback.classList.remove('hidden');
+                        feedback.querySelector('div').innerText = "✅"; 
+                        card.classList.add('bg-emerald-600'); 
+                        hideReqFeedback(); 
+                        document.querySelectorAll('#visOptions button').forEach(b => b.disabled = true);
+                        
+                        setTimeout(() => { 
+                            feedback.classList.add('hidden');
+                            card.classList.remove('bg-emerald-600'); 
+                            document.querySelectorAll('#visOptions button').forEach(b => b.disabled = false);
+                            visualIdx++; 
+                            if (visualIdx < visualDeck.length) updateVisualCard(); 
+                            else showFinalSuccess("Vision Skills Verified!", "Accurate identification confirmed."); 
+                        }, 1200);
+                    } else { 
+                        triggerPenalty(); 
+                        card.classList.add('error-shake');
+                        setTimeout(() => card.classList.remove('error-shake'), 400);
+
+                        if (isLearningMode()) {
+                            const correctOpt = DATA[currentId].options.find(o => o.value === item.status);
+                            showReqFeedback("Let's Review", `<b>Not quite!</b> This is actually <b>${correctOpt ? correctOpt.label : 'something else'}</b>.<br><br><b>Hint:</b> ${item.tip}`, item.req); 
+                        }
+                    }
+                };
+                optCont.appendChild(btn);
+            });
+            updateVisualCard(); 
+            showPage('visual');
+        }
+        function updateVisualCard() {
+            const item = visualDeck[visualIdx];
+            document.getElementById('visProgress').style.width = `${(visualIdx / visualDeck.length) * 100}%`;
+            document.getElementById('visFeedback').classList.add('hidden');
+            document.getElementById('visCard').className = "bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center";
+            
+            if (item.img) document.getElementById('visDisplay').innerHTML = `<img src="${item.img}" class="absolute inset-0 w-full h-full object-contain p-6 rounded-[2rem]" onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=Image';"/>`;
+            else if (item.svg) document.getElementById('visDisplay').innerHTML = `<div class="bg-slate-50 p-8 rounded-full border-4 border-slate-100">${item.svg}</div>`;
+        }
+
+        // --- SORTING ENGINE ---
+        let sortIdx = 0, sortDeck = [];
+        function initSorting() {
+            sortIdx = 0; 
+            sortDeck = [...DATA[currentId].items].sort(()=>Math.random()-0.5);
+            document.getElementById('sortTitle').innerText = DATA[currentId].title;
+            document.getElementById('bucketLabel0').innerText = DATA[currentId].buckets[0];
+            document.getElementById('bucketLabel1').innerText = DATA[currentId].buckets[1];
+            updateSortItem(); 
+            showPage('sorting');
+        }
+        function updateSortItem() { 
+            document.getElementById('sortImg').src = sortDeck[sortIdx].img; 
+            document.getElementById('sortItemName').innerText = sortDeck[sortIdx].name; 
+        }
+        function handleBucketClick(bucketIdx) {
+            if (sortDeck[sortIdx].status === bucketIdx) { 
+                document.getElementById(`bucket${bucketIdx}`).classList.add('highlight');
+                hideReqFeedback();
+                setTimeout(() => {
+                    document.getElementById(`bucket${bucketIdx}`).classList.remove('highlight');
+                    sortIdx++; 
+                    if (sortIdx < sortDeck.length) updateSortItem(); 
+                    else showFinalSuccess(DATA[currentId].reveal || "Sorted!", DATA[currentId].explanation || ""); 
+                }, 400);
+            } else { 
+                triggerPenalty(); 
+                document.getElementById(`bucket${bucketIdx}`).classList.add('error-shake');
+                setTimeout(() => document.getElementById(`bucket${bucketIdx}`).classList.remove('error-shake'), 400);
+                
+                if (isLearningMode()) {
+                    const correctBucket = DATA[currentId].buckets[sortDeck[sortIdx].status];
+                    showReqFeedback("Let's Review", `<b>Oops!</b> ${sortDeck[sortIdx].name} actually belongs in the <b>${correctBucket}</b> bucket.<br><br>Try picking the other bucket!`, DATA[currentId].req); 
+                }
+            }
+        }
+
+        // --- PACKING ENGINE ---
+        let packedItems = [];
+        function initPacking() {
+            packedItems = []; 
+            const d = DATA[currentId];
+            document.getElementById('packTitle').innerText = d.title;
+            document.getElementById('packReqCount').innerText = d.correctCount;
+            document.getElementById('packCount').innerText = '0';
+            
+            const grid = document.getElementById('packGrid'); 
+            grid.innerHTML = '';
+            
+            [...d.items].sort(()=>Math.random()-0.5).forEach(item => {
+                const btn = document.createElement('div');
+                btn.className = "pack-item bg-white p-3 rounded-2xl border-4 border-slate-100 flex flex-col items-center relative";
+                btn.innerHTML = `<img src="${item.img}" class="w-16 h-16 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Gear';"/><p class="text-[9px] font-black uppercase mt-2 text-center">${item.name}</p><div class="check-badge absolute -top-2 -right-2 bg-emerald-500 text-white rounded-full p-1 opacity-0 transition-all scale-50"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg></div>`;
+                btn.onclick = () => { 
+                    if (packedItems.includes(item.name)) { 
+                        packedItems = packedItems.filter(i => i !== item.name); 
+                        btn.classList.remove('selected'); 
+                        btn.querySelector('.check-badge').classList.add('opacity-0'); 
+                    } else { 
+                        packedItems.push(item.name); 
+                        btn.classList.add('selected'); 
+                        btn.querySelector('.check-badge').classList.remove('opacity-0'); 
+                    } 
+                    document.getElementById('packCount').innerText = packedItems.length; 
+                };
+                grid.appendChild(btn);
+            });
+            showPage('packing');
+        }
+        function verifyPacking() {
+            const d = DATA[currentId];
+            if (packedItems.length !== d.correctCount) { 
+                document.getElementById('packCheckBtn').classList.add('error-shake');
+                setTimeout(()=>document.getElementById('packCheckBtn').classList.remove('error-shake'), 400);
+                showReqFeedback("Gear Count", `You need exactly ${d.correctCount} items. You have ${packedItems.length} packed.`, d.req); 
+                return; 
+            }
+            const correctNames = d.items.filter(i => i.correct).map(i => i.name);
+            if (packedItems.every(n => correctNames.includes(n))) {
+                showFinalSuccess(d.reveal, d.explanation);
+            } else { 
+                triggerPenalty(); 
+                document.getElementById('packCheckBtn').classList.add('error-shake');
+                setTimeout(()=>document.getElementById('packCheckBtn').classList.remove('error-shake'), 400);
+
+                if (isLearningMode()) {
+                    const correctList = correctNames.join(", ");
+                    showReqFeedback("Let's Review", `<b>Incorrect Gear.</b> Here is what you should have packed:<br><br><b>${correctList}</b><br><br>Unpack the wrong items and try again!`, d.req); 
+                }
+            }
+        }
+
+        // --- SCENARIO ENGINE ---
+        let scenIdx = 0;
+        function initScenario() { 
+            scenIdx = 0; 
+            document.getElementById('scenTitle').innerText = DATA[currentId].title; 
+            updateScenarioUI(); 
+            showPage('scenario'); 
+        }
+        function updateScenarioUI() {
+            const d = DATA[currentId]; 
+            document.getElementById('scenProgress').style.width = `${(scenIdx / d.steps.length) * 100}%`;
+            document.getElementById('scenPrompt').innerText = d.steps[scenIdx].text;
+            
+            const optionsDiv = document.getElementById('scenOptions'); 
+            optionsDiv.innerHTML = '';
+            
+            d.steps[scenIdx].options.sort(()=>Math.random()-0.5).forEach(opt => {
+                const btn = document.createElement('button'); 
+                btn.className = "p-5 bg-white border-4 border-slate-100 rounded-[2rem] text-left hover:border-orange-400";
+                btn.innerHTML = `<span class="block font-black text-sm text-slate-800">${opt.label}</span>`;
+                btn.onclick = () => { 
+                    if (opt.correct) { 
+                        scenIdx++; 
+                        hideReqFeedback();
+                        if (scenIdx < d.steps.length) updateScenarioUI(); 
+                        else showFinalSuccess(d.reveal, d.explanation); 
+                    } else { 
+                        triggerPenalty(); 
+                        btn.classList.add('error-shake');
+                        setTimeout(() => btn.classList.remove('error-shake'), 400);
+                        
+                        if (isLearningMode()) {
+                            showReqFeedback("Let's Review", `<b>Not quite!</b><br><br>${opt.feedback}<br><br>Try choosing the other option.`, d.req); 
+                        }
+                    } 
+                };
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        // --- EMBLEM ENGINE ---
+        let embPlaced = {}, activeEmb = null;
+        function initEmblem() { 
+            embPlaced = {}; 
+            activeEmb = null; 
+            document.getElementById('embImage').src = DATA[currentId].img; 
+            renderEmbBank(); 
+            renderEmbBoard(); 
+            document.getElementById('embCheckBtn').style.display = 'none';
+            showPage('emblem'); 
+        }
+        function renderEmbBank() {
+            const bank = document.getElementById('embBank'); 
+            bank.innerHTML = '';
+            const usedIds = Object.values(embPlaced).map(v=>v.id);
+            DATA[currentId].parts.filter(p => !usedIds.includes(p.id)).forEach(part => {
+                const btn = document.createElement('button'); 
+                btn.className = `p-3 rounded-xl border-2 text-[10px] font-bold text-left ${activeEmb?.id === part.id ? 'bg-amber-50 border-amber-500 ring-2 ring-amber-500 shadow-md scale-105 transition-all' : 'bg-white border-slate-100'}`;
+                btn.innerText = part.text; 
+                btn.onclick = () => { activeEmb = part; renderEmbBank(); }; 
+                bank.appendChild(btn);
+            });
+        }
+        function renderEmbBoard() {
+            const targets = document.getElementById('embTargets'); 
+            targets.innerHTML = '';
+            DATA[currentId].parts.forEach(part => {
+                const p = embPlaced[part.id];
+                const div = document.createElement('div'); 
+                div.style = part.style;
+                div.className = `absolute rounded flex items-center justify-center text-center p-1 border-2 cursor-pointer ${p ? 'bg-emerald-500 border-emerald-600 text-white font-black text-[8px]' : 'bg-white/10 border-dashed border-slate-300 text-slate-400 font-bold text-[8px]'}`;
+                div.innerText = p ? p.text : part.name;
+                div.onclick = () => { 
+                    if (activeEmb) { embPlaced[part.id] = activeEmb; activeEmb = null; } 
+                    else if (p) { delete embPlaced[part.id]; }
+                    renderEmbBank(); 
+                    renderEmbBoard(); 
+                    document.getElementById('embCheckBtn').style.display = (Object.keys(embPlaced).length === DATA[currentId].parts.length) ? 'block' : 'none'; 
+                };
+                targets.appendChild(div);
+            });
+        }
+        function verifyEmblem() {
+            let errs = 0, firstErr = null;
+            Object.keys(embPlaced).forEach(id => { 
+                if (parseInt(id) !== embPlaced[id].id) { 
+                    errs++; 
+                    if(!firstErr) firstErr = parseInt(id); 
+                } 
+            });
+            
+            if (errs === 0) {
+                showFinalSuccess("Mastered!", "Diagram accurately verified.");
+            } else { 
+                triggerPenalty(); 
+                document.getElementById('embCheckBtn').classList.add('error-shake');
+                setTimeout(() => document.getElementById('embCheckBtn').classList.remove('error-shake'), 400);
+
+                if (isLearningMode()) {
+                    const correctPartData = DATA[currentId].parts.find(x => x.id === firstErr);
+                    const placedWrong = embPlaced[firstErr];
+                    const wrongText = placedWrong ? placedWrong.text : "nothing";
+                    showReqFeedback("Let's Review", `<b>Match Error!</b> You placed "${wrongText}" in the wrong spot.<br><br>The correct meaning for that part is <b>"${correctPartData.text}"</b>.<br><br><b>Symbolism:</b> ${correctPartData.tip}`, DATA[currentId].req);
+                }
+
+                Object.keys(embPlaced).forEach(id => { 
+                    if (parseInt(id) !== embPlaced[id].id) delete embPlaced[id];
+                });
+
+                renderEmbBank(); 
+                renderEmbBoard(); 
+                document.getElementById('embCheckBtn').style.display = 'none';
+            }
+        }
+
+        // ==========================================
+        // UTILITIES & CERTIFICATES
+        // ==========================================
+        function startTimer() { 
+            clearInterval(globalTimerInterval);
+            secondsElapsed = 0; 
+            updateTimerUI(); 
+            document.getElementById('globalTimer').classList.remove('hidden');
+            globalTimerInterval = setInterval(() => { secondsElapsed++; updateTimerUI(); }, 1000); 
+        }
+
+        function updateTimerUI() { 
+            const m = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+            const s = String(secondsElapsed % 60).padStart(2, '0'); 
+            document.getElementById('globalTimer').innerText = `${m}:${s}`; 
+        }
+
+        function stopTimer() { 
+            clearInterval(globalTimerInterval); 
+        }
+
+        function triggerPenalty() {
+            if (!isLearningMode()) {
+                secondsElapsed += 10; 
+                document.getElementById('globalTimer').classList.add('timer-penalty');
+                setTimeout(() => document.getElementById('globalTimer').classList.remove('timer-penalty'), 1000);
+                updateTimerUI();
+            }
+        }
+
+        function showFinalSuccess(revealText, explanation = "") {
+            stopTimer(); 
+            hideReqFeedback();
+            const timeStr = document.getElementById('globalTimer').innerText;
+            
+            let displayTime = timeStr;
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
+                displayTime = "DONE";
+            }
+
+            if (!completedGames[currentId] || (displayTime !== "DONE" && timeStr < completedGames[currentId])) {
+                completedGames[currentId] = displayTime;
+            }
+            
+            updateGlobalProgress();
+            document.getElementById('successText').innerText = revealText;
+            
+            const d = DATA[currentId];
+            let fullExplanation = explanation ? explanation.replace(/\n/g, '<br>') : "";
+            if (d.homework) {
+                fullExplanation += `<br><br><div class="bg-emerald-100 p-2 rounded border border-emerald-200"><strong>Take it Outside:</strong> ${d.homework}</div>`;
+            }
+            document.getElementById('successExplanation').innerHTML = fullExplanation;
+            
+            if (displayTime === "DONE") {
+                document.getElementById('timeLabel').classList.add('hidden');
+                document.getElementById('finalTime').classList.add('hidden');
+            } else {
+                document.getElementById('timeLabel').classList.remove('hidden');
+                document.getElementById('finalTime').classList.remove('hidden');
+                document.getElementById('finalTime').innerText = timeStr;
+            }
+
+            const rankImg = document.getElementById('successRankImg');
+            if (currentProgram === 'cub') rankImg.src = `rank_${currentRank}.png`;
+            else if (currentProgram === 'bsa') rankImg.src = BSA_RANK_IMAGES[currentRank] || 'rank_scout.png';
+            else if (currentProgram === 'sea') rankImg.src = 'rank_sea_scout.png';
+            else if (currentProgram === 'venturing') rankImg.src = 'rank_venturing.png';
+            
+            document.getElementById('successOverlay').classList.remove('hidden');
+        }
+
+        function showReqFeedback(title, html, req) {
+            document.getElementById('feedbackTitle').innerText = title; 
+            document.getElementById('feedbackText').innerHTML = html; 
+            document.getElementById('feedbackReq').innerText = req || "HANDBOOK";
+            const isCub = currentProgram === 'cub';
+            document.getElementById('feedbackTypeLabel').innerText = isCub ? "Akela Says" : "Training Check";
+            document.getElementById('feedbackIcon').innerText = isCub ? "🐺" : "📜";
+            document.getElementById('reqFeedback').classList.remove('hidden');
+        }
+
+        function hideReqFeedback() { 
+            document.getElementById('reqFeedback').classList.add('hidden'); 
+        }
+
+        function updateGlobalProgress() {
+            if (!currentProgram) return;
+            let pool = [];
+            if (currentProgram === 'cub') pool = CUB_RANK_GAMES[currentRank];
+            else if (currentProgram === 'bsa') pool = BSA_TIER_GAMES[currentRank];
+            else if (currentProgram === 'venturing') pool = VENTURING_GAMES;
+            else if (currentProgram === 'sea') pool = SEA_SCOUT_GAMES;
+            
+            if (!pool || pool.length === 0) return;
+            const done = pool.filter(id => completedGames[id]).length;
+            const pct = Math.floor((done / pool.length) * 100);
+            
+            document.getElementById('progressText').innerText = `${pct}%`;
+            document.getElementById('progressBar').style.width = `${pct}%`;
+
+            const certContainer = document.getElementById('claimCertContainer');
+            if (pct === 100) certContainer.classList.remove('hidden');
+            else certContainer.classList.add('hidden');
+        }
+
+        function openCertificateModal() {
+            let displayRank = String(currentRank).toUpperCase();
+            if (currentProgram === 'bsa') displayRank = "BSA TIER " + currentRank;
+            document.getElementById('certTrailName').innerText = displayRank + " TRAIL";
+            
+            const today = new Date();
+            document.getElementById('certDate').innerText = today.toLocaleDateString();
+            document.getElementById('certDisclaimer').innerText = DISCLAIMERS[currentProgram] || DISCLAIMERS.bsa;
+            
+            document.getElementById('certificateModal').classList.remove('hidden');
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('certificateModal').classList.add('hidden');
+        }
+
+        window.onload = () => showPage('lobby');
+    </script>
+</body>
+</html>
