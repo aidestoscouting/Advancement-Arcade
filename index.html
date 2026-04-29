@@ -440,7 +440,7 @@
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg>
                 </a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V9.0 Master Edition</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V10.0 Master Edition</p>
         </div>
     </footer>
 
@@ -839,7 +839,7 @@
                 icon: "🌲",
                 items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"],
                 reveal: "Protect our planet.",
-                prefix: "As an American, I will...",
+                prefix: "As an American, I will do my best to...",
                 req: "Scout"
             },
             
@@ -1002,8 +1002,8 @@
                     { label: "Human", value: "human" }
                 ],
                 items: [
-                    { name: "Contour Lines", status: "elev", tip: "Elevation changes.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 55 Q35 25 55 55 T85 55 M20 60 Q40 30 60 60 T80 60" fill="none" stroke="#8B4513" stroke-width="4"/></svg>', req: "2nd Class" },
-                    { name: "Buildings", status: "human", tip: "Black squares.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="35" y="35" width="30" height="30" fill="black"/></svg>', req: "2nd Class" }
+                    { name: "Contour Lines", status: "elev", tip: "Elevation changes.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M10 50 Q30 20 50 50 T90 50 M15 65 Q35 35 55 65 T85 65 M20 80 Q40 50 60 80 T80 80" fill="none" stroke="#d97706" stroke-width="3"/></svg>', req: "2nd Class" },
+                    { name: "Buildings", status: "human", tip: "Black squares.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="40" y="40" width="20" height="20" fill="#1e293b"/></svg>', req: "2nd Class" }
                 ]
             },
             
@@ -1017,8 +1017,8 @@
                     { label: "Heat", value: "heat" }
                 ],
                 items: [
-                    { name: "Tepee Lay", status: "start", tip: "Best for starting.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M50 10 L20 90 M50 10 L80 90 M50 10 L50 90" stroke="#8B4513" stroke-width="6" stroke-linecap="round" fill="none"/></svg>', req: "2nd Class" },
-                    { name: "Log Cabin", status: "heat", tip: "Sustained cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="20" width="60" height="60" fill="none" stroke="#8B4513" stroke-width="8"/><line x1="20" y1="40" x2="80" y2="40" stroke="#8B4513" stroke-width="8"/><line x1="40" y1="20" x2="40" y2="80" stroke="#8B4513" stroke-width="8"/></svg>', req: "2nd Class" }
+                    { name: "Tepee Lay", status: "start", tip: "Best for starting.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><path d="M45 20 L25 85 M55 20 L75 85 M50 15 L50 85 M40 25 L60 85 M60 25 L40 85" stroke="#8B4513" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M40 85 Q50 60 60 85 Q50 75 40 85" fill="#f97316"/></svg>', req: "2nd Class" },
+                    { name: "Log Cabin", status: "heat", tip: "Sustained cooking.", svg: '<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="70" width="60" height="12" rx="4" fill="#8B4513" /><rect x="20" y="50" width="60" height="12" rx="4" fill="#8B4513" /><rect x="25" y="30" width="12" height="60" rx="4" fill="#65320d" /><rect x="63" y="30" width="12" height="60" rx="4" fill="#65320d" /><path d="M45 70 Q50 50 55 70 Q50 60 45 70" fill="#ef4444"/></svg>', req: "2nd Class" }
                 ]
             },
             
@@ -1345,6 +1345,7 @@
         };
         
         const VENTURING_GAMES = ['lnt_master', 'trek_packing', 'venturing_hierarchy', 'expedition_leadership', 'mentor_teaching'];
+        
         const SEA_SCOUT_GAMES = ['vessel_anatomy', 'buoy_rules', 'maritime_knots', 'quarterdeck_hierarchy'];
 
         // ==========================================
@@ -1443,50 +1444,54 @@
         }
 
         function renderGameGrid() {
-            const grid = document.getElementById('gameGrid'); 
-            grid.innerHTML = '';
-            let games = [];
-            
-            if (currentProgram === 'cub') games = CUB_RANK_GAMES[currentRank] || [];
-            else if (currentProgram === 'bsa') games = BSA_TIER_GAMES[currentRank] || [];
-            else if (currentProgram === 'venturing') games = VENTURING_GAMES || [];
-            else if (currentProgram === 'sea') games = SEA_SCOUT_GAMES || [];
-
-            if (games.length === 0) {
-                grid.innerHTML = '<div class="col-span-full p-4 bg-rose-100 text-rose-800 rounded-xl text-center font-bold">Games for this rank are missing.</div>';
-                return;
-            }
-
-            games.forEach(gid => {
-                const d = DATA[gid]; 
-                if (!d) return; 
+            try {
+                const grid = document.getElementById('gameGrid'); 
+                grid.innerHTML = '';
+                let games = [];
                 
-                const time = completedGames[gid];
-                const btn = document.createElement('button');
-                btn.className = `btn-card bg-white p-5 rounded-[2.5rem] border-2 shadow-lg text-left flex items-center justify-between ${time ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-50 hover:border-orange-500'}`;
-                btn.onclick = () => prepareGame(gid);
-                
-                let completionBadge = '';
-                if (time) {
-                    if (time === "DONE") {
-                        completionBadge = `<p class="text-[9px] font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded mt-1">DONE</p>`;
-                    } else {
-                        completionBadge = `<p class="text-[7px] font-mono font-black text-emerald-600 bg-emerald-100 px-1 rounded mt-1">${time}</p>`;
-                    }
+                if (currentProgram === 'cub') games = CUB_RANK_GAMES[currentRank] || [];
+                else if (currentProgram === 'bsa') games = BSA_TIER_GAMES[currentRank] || [];
+                else if (currentProgram === 'venturing') games = VENTURING_GAMES || [];
+                else if (currentProgram === 'sea') games = SEA_SCOUT_GAMES || [];
+
+                if (!games || games.length === 0) {
+                    grid.innerHTML = '<div class="col-span-full p-4 bg-rose-100 text-rose-800 rounded-xl text-center font-bold">Games for this rank are missing.</div>';
+                    return;
                 }
 
-                btn.innerHTML = `
-                    <div class="pr-4">
-                        <h3 class="font-black text-gray-900 uppercase text-xs">${d.title}</h3>
-                        <p class="text-[8px] text-slate-400 font-bold uppercase">${d.req || 'Req'}</p>
-                    </div>
-                    <div class="text-right flex flex-col items-end">
-                        <span class="text-2xl">${d.icon || '⭐'}</span>
-                        ${completionBadge}
-                    </div>
-                `;
-                grid.appendChild(btn);
-            });
+                games.forEach(gid => {
+                    const d = DATA[gid]; 
+                    if (!d) return; 
+                    
+                    const time = completedGames[gid];
+                    const btn = document.createElement('button');
+                    btn.className = `btn-card bg-white p-5 rounded-[2.5rem] border-2 shadow-lg text-left flex items-center justify-between ${time ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-50 hover:border-orange-500'}`;
+                    btn.onclick = () => prepareGame(gid);
+                    
+                    let completionBadge = '';
+                    if (time) {
+                        if (time === "DONE") {
+                            completionBadge = `<p class="text-[9px] font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded mt-1">DONE</p>`;
+                        } else {
+                            completionBadge = `<p class="text-[7px] font-mono font-black text-emerald-600 bg-emerald-100 px-1 rounded mt-1">${time}</p>`;
+                        }
+                    }
+
+                    btn.innerHTML = `
+                        <div class="pr-4">
+                            <h3 class="font-black text-gray-900 uppercase text-xs">${d.title}</h3>
+                            <p class="text-[8px] text-slate-400 font-bold uppercase">${d.req || 'Req'}</p>
+                        </div>
+                        <div class="text-right flex flex-col items-end">
+                            <span class="text-2xl">${d.icon || '⭐'}</span>
+                            ${completionBadge}
+                        </div>
+                    `;
+                    grid.appendChild(btn);
+                });
+            } catch (error) {
+                document.getElementById('gameGrid').innerHTML = `<div class="col-span-full p-4 bg-red-100 text-red-800 rounded-xl text-xs font-mono">Error: ${error.message}</div>`;
+            }
         }
 
         function prepareGame(id) {
@@ -1767,6 +1772,7 @@
         }
 
         // --- SCENARIO ENGINE ---
+        let scenIdx = 0;
         function initScenario() { 
             scenIdx = 0; 
             document.getElementById('scenTitle').innerText = DATA[currentId].title; 
@@ -1781,7 +1787,7 @@
             const optionsDiv = document.getElementById('scenOptions'); 
             optionsDiv.innerHTML = '';
             
-            d.steps[scenIdx].options.sort(()=>Math.random()-0.5).forEach(opt => {
+            d.steps[scenIdx].options.forEach(opt => {
                 const btn = document.createElement('button'); 
                 btn.className = "p-5 bg-white border-4 border-slate-100 rounded-[2rem] text-left hover:border-orange-400";
                 btn.innerHTML = `<span class="block font-black text-sm text-slate-800">${opt.label}</span>`;
@@ -1896,6 +1902,7 @@
             clearInterval(globalTimerInterval);
             secondsElapsed = 0; 
             updateTimerUI(); 
+            document.getElementById('globalTimer').classList.remove('hidden');
             globalTimerInterval = setInterval(() => { 
                 secondsElapsed++; 
                 updateTimerUI(); 
