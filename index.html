@@ -42,12 +42,17 @@
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .theme-transition { transition: all 0.5s ease; }
         
-        .symbol-svg { width: 70px; height: 70px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
+        @media print {
+            body * { visibility: hidden; }
+            #certPrintArea, #certPrintArea * { visibility: visible; }
+            #certPrintArea { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 0; padding: 20px; box-shadow: none; }
+            #printBtnHide, #closeCertBtn { display: none !important; }
+            body { background-color: white; }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Global Header -->
     <header id="mainHeader" class="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white p-3 shadow-xl sticky top-0 z-50 border-b-4 border-slate-800 theme-transition">
         <div class="absolute -bottom-1 left-0 h-1 bg-emerald-500 transition-all duration-1000 z-10 shadow-[0_0_10px_rgba(16,185,129,0.5)]" id="progressBar" style="width: 0%;"></div>
         <div class="max-w-4xl mx-auto flex justify-between items-center relative z-20">
@@ -71,7 +76,6 @@
 
     <main class="max-w-5xl mx-auto px-4 mt-6 w-full flex-1 mb-12">
         
-        <!-- PAGE 1: MASTER LOBBY -->
         <div id="page-lobby" class="page active max-w-4xl mx-auto space-y-8 py-10">
             <div class="text-center">
                 <h2 class="text-5xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">The Portal</h2>
@@ -118,7 +122,6 @@
             </div>
         </div>
 
-        <!-- PAGE 2: CUB RANKS -->
         <div id="page-cub-ranks" class="page max-w-4xl mx-auto py-10 space-y-8">
             <div class="text-center">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase mb-2">Akela's Den</h2>
@@ -155,7 +158,6 @@
             </div>
         </div>
 
-        <!-- PAGE 3: BSA TIERS -->
         <div id="page-bsa-difficulty" class="page max-w-lg mx-auto py-10 space-y-4">
             <div class="text-center mb-6">
                 <h2 class="text-4xl font-brand font-black text-gray-900 uppercase">Troop Tiers</h2>
@@ -185,16 +187,21 @@
             </div>
         </div>
 
-        <!-- PAGE 4: DASHBOARD MENU -->
         <div id="page-menu" class="page space-y-10 pb-10">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-gray-900 bg-gray-900 aspect-[4/1]">
                 <img src="Facebook banner .jpg.png" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" onerror="this.onerror=null; this.src='https://placehold.co/1200x300/1e293b/1e293b';" />
                 <div class="absolute inset-0 flex items-center justify-center"><h2 id="menuTrailTitle" class="text-3xl md:text-5xl font-brand font-black text-white uppercase tracking-tighter drop-shadow-lg">Advancement Arcade</h2></div>
             </div>
+            
+            <div id="claimCertContainer" class="hidden text-center bg-gradient-to-r from-emerald-500 to-emerald-600 p-6 rounded-[2rem] shadow-xl text-white">
+                <h3 class="text-2xl font-black font-brand uppercase tracking-tighter mb-2">Trail Mastered!</h3>
+                <p class="text-sm font-bold opacity-90 mb-4">You have completed 100% of this section.</p>
+                <button onclick="openCertificateModal()" class="bg-white text-emerald-600 px-8 py-3 rounded-full font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-md">Claim Certificate</button>
+            </div>
+
             <div id="gameGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>
 
-        <!-- ENGINE 1: SEQUENCE -->
         <div id="page-sequence" class="page max-w-2xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="seqTitle" class="text-3xl font-black text-gray-900 uppercase font-brand leading-tight">Level Title</h2><p id="seqSubtitle" class="text-orange-600 font-black uppercase tracking-widest text-[10px] mt-2 italic">Instructions</p></div>
             <div id="seqGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div>
@@ -202,38 +209,33 @@
             <div class="flex justify-center mt-6"><button id="seqCheckBtn" onclick="verifySequence()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:scale-105 transition-all tracking-widest active:scale-95">Verify</button></div>
         </div>
 
-        <!-- ENGINE 2: VISUAL ID -->
         <div id="page-visual" class="page max-w-lg mx-auto space-y-6">
             <div class="text-center"><h2 id="visTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none">Visual ID</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="visProgress" class="h-full bg-emerald-500 w-0 transition-all"></div></div></div>
             <div id="visCard" class="bg-white rounded-[3rem] shadow-2xl p-6 border-4 border-white aspect-[4/3] relative overflow-hidden flex items-center justify-center"><div id="visDisplay" class="w-full h-full flex items-center justify-center"></div><div id="visFeedback" class="absolute inset-0 flex flex-col items-center justify-center text-white font-black p-6 hidden z-20"><div id="visFeedbackIcon" class="text-6xl mb-2 drop-shadow-md"></div><h3 id="visFeedbackName" class="text-3xl font-brand uppercase tracking-tighter text-center">Correct</h3><p id="visFeedbackTip" class="mt-2 text-center text-sm font-bold opacity-90"></p></div></div>
             <div id="visOptions" class="grid gap-4 mt-6"></div>
         </div>
 
-        <!-- ENGINE 3: SORTING -->
         <div id="page-sorting" class="page max-w-2xl mx-auto space-y-8 pb-20">
             <div class="text-center"><h2 id="sortTitle" class="text-4xl font-brand font-black text-gray-900 uppercase leading-none mb-1">Sorting Challenge</h2><p id="sortSubtitle" class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Tap the bucket where this item belongs</p></div>
-            <div class="flex justify-center items-center h-52 relative"><div id="sortActiveItem" class="flex flex-col items-center"><div id="sortCardWrapper" class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20"><img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/></div><p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p></div></div>
+            <div class="flex justify-center items-center h-52 relative"><div id="sortActiveItem" class="flex flex-col items-center"><div class="w-44 h-44 bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden p-2 sort-item-card active shadow-orange-500/20"><img id="sortImg" src="" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Missing';"/></div><p id="sortItemName" class="font-black uppercase text-slate-800 mt-3 tracking-tighter text-xl"></p></div></div>
             <div id="sortBuckets" class="grid grid-cols-2 gap-6 mt-8">
                 <button onclick="handleBucketClick(0)" id="bucket0" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all"><div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div><h3 id="bucketLabel0" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket A</h3></button>
                 <button onclick="handleBucketClick(1)" id="bucket1" class="bucket flex flex-col items-center p-8 bg-white rounded-[2.5rem] border-4 border-slate-100 shadow-lg hover:shadow-xl group transition-all"><div class="text-6xl mb-2 group-hover:scale-110 transition-transform">📥</div><h3 id="bucketLabel1" class="font-brand font-black uppercase text-xl text-slate-900 tracking-tighter">Bucket B</h3></button>
             </div>
         </div>
 
-        <!-- ENGINE 4: PACKING -->
         <div id="page-packing" class="page max-w-3xl mx-auto space-y-6 pb-20">
             <div class="text-center"><h2 id="packTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none mb-2">Packing Engine</h2><div class="inline-block bg-slate-900 text-white px-4 py-1.5 rounded-full font-mono text-sm font-black mt-2">Backpack: <span id="packCount" class="text-emerald-400">0</span> / <span id="packReqCount">10</span></div></div>
             <div id="packGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-4"></div>
             <div class="flex justify-center mt-6"><button id="packCheckBtn" onclick="verifyPacking()" class="bg-gray-900 text-white font-black uppercase px-10 py-5 rounded-2xl shadow-xl hover:bg-emerald-600 transition-all tracking-widest active:scale-95 text-lg">Check Bag</button></div>
         </div>
 
-        <!-- ENGINE 5: SCENARIO -->
         <div id="page-scenario" class="page max-w-xl mx-auto space-y-6 pb-20 pt-4">
             <div class="text-center mb-6"><h2 id="scenTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tighter leading-none">Scenario</h2><div class="w-full h-1.5 bg-slate-200 rounded-full mt-4 overflow-hidden"><div id="scenProgress" class="h-full bg-blue-500 w-0 transition-all"></div></div></div>
             <div class="bg-white p-8 rounded-[2rem] border-4 border-slate-100 shadow-xl relative"><div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-3xl p-3 rounded-full shadow-lg" id="scenIcon">💬</div><p id="scenPrompt" class="text-lg text-slate-700 font-bold leading-relaxed text-center mt-4"></p></div>
             <div id="scenOptions" class="grid gap-3 mt-6"></div>
         </div>
 
-        <!-- ENGINE 6: EMBLEM -->
         <div id="page-emblem" class="page space-y-6 pb-10">
             <div class="text-center"><h2 id="embTitle" class="text-3xl font-brand font-black text-gray-900 uppercase tracking-tight leading-none mb-2">Diagram Match</h2><p class="text-amber-600 font-bold uppercase tracking-widest text-[10px] italic">Select meaning, then tap the part.</p></div>
             <div class="flex flex-col lg:flex-row gap-6 items-center justify-center">
@@ -248,7 +250,46 @@
 
     </main>
 
-    <!-- SUCCESS MODAL -->
+    <div id="certificateModal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[150] flex items-center justify-center hidden p-4">
+        <div id="certPrintArea" class="bg-white rounded-[2rem] p-10 max-w-2xl w-full text-center shadow-2xl relative border-8 border-slate-100">
+            <button id="closeCertBtn" onclick="closeCertificateModal()" class="absolute top-4 right-4 text-slate-400 hover:text-rose-500 font-black text-xl">&times;</button>
+            
+            <div class="flex justify-center mb-6">
+                <img src="ATS Full Transparent .png.png" alt="ATS Logo" class="h-24 w-24 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=ATS';"/>
+            </div>
+            
+            <h2 class="text-4xl font-brand font-black text-gray-900 uppercase tracking-tighter mb-2">Certificate of Study</h2>
+            <p class="text-slate-500 font-bold uppercase tracking-widest text-[10px] mb-8 border-b-2 border-slate-100 pb-4">Aides to Scouting Advancement Arcade</p>
+            
+            <div class="mb-6">
+                <p class="text-xs uppercase font-black text-slate-400 mb-1">Awarded To</p>
+                <input type="text" id="certNameInput" placeholder="Type Scout Name Here..." class="text-3xl font-signature text-center border-b-2 border-dashed border-slate-300 focus:border-emerald-500 outline-none w-3/4 pb-1 text-slate-800" />
+            </div>
+
+            <div class="mb-8">
+                <p class="text-xs uppercase font-black text-slate-400 mb-1">For Mastering The</p>
+                <p id="certTrailName" class="text-xl font-black uppercase text-emerald-600 tracking-tighter"></p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8">
+                <p id="certDisclaimer" class="text-sm font-bold text-slate-600 italic leading-relaxed"></p>
+            </div>
+
+            <div class="flex justify-between items-end border-t-2 border-slate-100 pt-6">
+                <div class="text-left">
+                    <p class="text-[8px] uppercase font-black text-slate-400 mb-1">Date Completed</p>
+                    <p id="certDate" class="font-mono font-black text-slate-700"></p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[8px] uppercase font-black text-slate-400 mb-1">Authorized Signature</p>
+                    <p class="font-signature text-blue-800 text-2xl -rotate-2 origin-left">Walker & Elliott</p>
+                </div>
+            </div>
+
+            <button id="printBtnHide" onclick="window.print()" class="mt-8 bg-slate-900 text-white px-10 py-4 rounded-xl font-black uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg w-full">Print Certificate</button>
+        </div>
+    </div>
+
     <div id="successOverlay" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[110] flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full text-center shadow-2xl border-4 border-emerald-500 relative overflow-hidden">
             <div class="absolute -right-8 top-8 rotate-45 bg-emerald-100 text-emerald-600 font-black px-12 py-1 text-[10px] uppercase tracking-widest opacity-40">Verified</div>
@@ -269,26 +310,20 @@
         </div>
     </div>
 
-    <!-- FEEDBACK BOX (LEARNING MODE) -->
     <div id="reqFeedback" class="fixed bottom-0 left-0 right-0 bg-white border-t-8 border-orange-500 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] p-6 z-[120] hidden">
-        <div class="max-w-xl mx-auto relative">
-            <button onclick="hideReqFeedback()" class="absolute -top-2 right-0 text-slate-300 hover:text-slate-900 transition-colors p-2 bg-slate-100 rounded-full">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-            <div class="flex items-center gap-2 mb-3">
-                <span id="feedbackIcon" class="text-xl">🐺</span>
-                <p id="feedbackTypeLabel" class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Akela Says</p>
+        <div class="max-w-xl mx-auto">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2"><span id="feedbackIcon" class="text-xl">🐺</span><p id="feedbackTypeLabel" class="text-[10px] font-black uppercase text-orange-600 tracking-widest">Akela Says</p></div>
+                <button onclick="hideReqFeedback()" class="text-slate-300 hover:text-slate-900 transition-colors">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
             </div>
-            <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-xl leading-none mb-3">Let's Review</h3>
-            <div id="feedbackText" class="text-slate-600 font-medium leading-relaxed text-sm mb-5 bg-orange-50 p-4 rounded-xl border border-orange-100"></div>
-            <div id="feedbackReqBox" class="flex items-center gap-3">
-                <span class="bg-orange-500 text-white font-black text-[10px] px-2 py-1 rounded shadow">REQUIREMENT</span>
-                <p id="feedbackReq" class="text-[10px] font-black uppercase text-orange-700 tracking-tighter font-brand"></p>
-            </div>
+            <h3 id="feedbackTitle" class="font-brand font-black text-gray-900 uppercase text-xl leading-none mb-3">Check Training</h3>
+            <div id="feedbackText" class="text-slate-600 font-medium leading-relaxed text-sm mb-5"></div>
+            <div id="feedbackReqBox" class="bg-orange-50 p-3 rounded-xl border border-orange-100 flex items-center gap-3"><span class="bg-orange-500 text-white font-black text-[10px] px-2 py-1 rounded">REQ</span><p id="feedbackReq" class="text-[10px] font-black uppercase text-orange-700 tracking-tighter font-brand"></p></div>
         </div>
     </div>
 
-    <!-- START OVERLAY -->
     <div id="gameStartOverlay" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4 bg-gray-900/90 backdrop-blur-sm">
         <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full text-center shadow-2xl border-b-8 border-orange-500 transition-all" id="startBorder">
             <div id="startIcon" class="text-7xl mb-4 animate-bounce">⭐</div>
@@ -299,7 +334,6 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="bg-slate-950 border-t-8 border-emerald-600 mt-auto py-10">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <div class="flex justify-center mb-6"><img src="ATS Full Transparent .png.png" alt="Logo" class="h-16 w-16 object-contain opacity-80" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=ATS';"/></div>
@@ -311,7 +345,7 @@
                 <a href="https://www.facebook.com/aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-blue-600 transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                 <a href="https://www.tiktok.com/@aidestoscouting" target="_blank" class="bg-slate-900 text-white p-3 rounded-full hover:bg-pink-600 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.63-.55 3.26-1.57 4.54-1.11 1.39-2.73 2.22-4.5 2.37-1.92.16-3.88-.3-5.38-1.5-1.5-1.2-2.45-3.05-2.62-5.01-.17-1.97.2-4 1.25-5.63 1.05-1.63 2.71-2.72 4.6-3.08v4.13c-.92.21-1.8.72-2.39 1.48-.59.76-.87 1.75-.76 2.71.11.96.61 1.83 1.36 2.4.76.57 1.74.83 2.69.7.96-.13 1.82-.64 2.38-1.41.56-.76.84-1.74.76-2.71V.02h-.03z"/></svg></a>
             </div>
-            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V5.2 Master Edition</p>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Advancement Arcade • V6.0 Master Edition</p>
         </div>
     </footer>
 
@@ -327,6 +361,13 @@
             bsa: '#10b981', venturing: '#166534', sea: '#1e3a8a'
         };
 
+        const DISCLAIMERS = {
+            cub: "This certificate shows you practiced! Remember to 'Do Your Best' when showing your Den Leader at your next meeting.",
+            bsa: "This certificate shows you studied. You must still complete and demonstrate the requirements as written in your Scout handbook.",
+            venturing: "Lead the Adventure. This proves your knowledge; now demonstrate these skills with your Crew.",
+            sea: "Chart your course. This shows you know the ropes; now apply these skills on the water with your Ship."
+        };
+
         // ==========================================
         // GAME DATABASE
         // ==========================================
@@ -335,7 +376,8 @@
             lion_sign: {
                 type: 'visual', title: "Scout Sign", desc: "Which image shows the Cub Scout sign?", icon: "✌️",
                 options: [ { label: "Correct", value: "yes" }, { label: "Incorrect", value: "no" } ],
-                items: [ { name: "The Sign", status: "yes", tip: "Two fingers up like Akela's ears!", img: "rank_lion.png", req: "Lion" } ]
+                items: [ { name: "The Sign", status: "yes", tip: "Two fingers up like Akela's ears!", img: "rank_lion.png", req: "Lion" } ],
+                homework: "Show your Den Leader the sign at your next meeting!"
             },
             healthy_habits: {
                 type: 'sorting', title: "Healthy Habits", desc: "Are these habits healthy or germy?", icon: "🧼",
@@ -364,7 +406,8 @@
                     { name: "Walking with Buddy", status: 0, img: "rank_lion.png" },
                     { name: "Wandering Alone", status: 1, img: "toys.jpg" }
                 ],
-                reveal: "Stay together!", req: "Tiger", explanation: "Never go alone in the woods."
+                reveal: "Stay together!", req: "Tiger", explanation: "Never go alone in the woods.",
+                homework: "Tell your Den Leader who your buddy is!"
             },
             community_helpers: {
                 type: 'visual', title: "Helpers", desc: "Match the tool to the helper.", icon: "🚒",
@@ -405,7 +448,8 @@
                     { name: "Snack", img: "snack_trail_mix.jpg", correct: true },
                     { name: "iPad", img: "tablet.jpg", correct: false },
                     { name: "Toys", img: "toys.jpg", correct: false }
-                ]
+                ],
+                homework: "Pack your real bag and show your family!"
             },
             lnt_cubs: {
                 type: 'sorting', title: "Trash or Nature?", desc: "Put items where they belong.", icon: "🍃",
@@ -465,7 +509,8 @@
                     { name: "Square", status: "square", tip: "Right over left.", img: "square_knot.jpg", req: "Bear" },
                     { name: "Bowline", status: "bowline", tip: "Rabbit hole.", img: "bowline.jpg", req: "Bear" },
                     { name: "Two Half-Hitches", status: "two", tip: "Tying to a pole.", img: "two_half_hitches.jpg", req: "Bear" }
-                ]
+                ],
+                homework: "Grab a rope and show your Den Leader you can tie a Square Knot!"
             },
             chef_cubs: {
                 type: 'sorting', title: "Healthy Eating", desc: "Healthy or Treat?", icon: "🥦",
@@ -531,6 +576,11 @@
                 type: 'sequence', title: "Outdoor Code", desc: "Conservation promises.", icon: "🌲",
                 items: ["Be Clean in my Outdoor Manners", "Be Careful with Fire", "Be Considerate in the Outdoors", "Be Conservation-minded"],
                 reveal: "Protect our planet.", req: "Scout"
+            },
+            patrol_hierarchy: {
+                type: 'sequence', title: "Patrol Method", desc: "Organize the Chain of Command.", icon: "👥",
+                items: ["Senior Patrol Leader", "Assistant SPL", "Patrol Leader", "Assistant Patrol Leader"],
+                reveal: "Youth Led.", req: "Scout", explanation: "The SPL runs the troop, PLs run the patrols."
             },
             action: {
                 type: 'sequence', title: "The 3 C's", desc: "Crisis steps.", icon: "🚨",
@@ -620,7 +670,8 @@
                     { name: "Bowline", status: "bowline", tip: "Rescue loop.", img: "bowline.jpg", req: "1st Class" },
                     { name: "Clove Hitch", status: "clove", tip: "Starts lashings.", img: "clove_hitch.jpg", req: "1st Class" },
                     { name: "Taut-line", status: "tautline", tip: "Adjustable loop.", img: "tautline.jpg", req: "Tenderfoot" }
-                ]
+                ],
+                homework: "Grab a rope and demonstrate a Bowline and Clove Hitch for your Scoutmaster."
             },
             lashings: {
                 type: 'visual', title: "Lashings", desc: "Pioneer lashings.", icon: "🪵",
@@ -726,7 +777,7 @@
                 ]
             },
 
-            // --- VENTURING TRAIL ---
+            // === VENTURING TRAIL ===
             lnt_master: {
                 type: 'visual', title: "LNT Master", desc: "Backcountry LNT scenarios.", icon: "🌿",
                 options: [ { label: "Durable", value: "yes" }, { label: "Fragile", value: "no" } ],
@@ -760,13 +811,18 @@
                     }
                 ]
             },
+            venturing_hierarchy: {
+                type: 'sequence', title: "Crew Officers", desc: "Organize the Chain of Command.", icon: "🟢",
+                items: ["Crew President", "VP of Administration", "VP of Program", "Secretary / Treasurer"],
+                reveal: "Youth Led.", req: "ALPS", explanation: "The President oversees the VPs."
+            },
             mentor_teaching: {
                 type: 'sequence', title: "Mentorship", desc: "Steps of mentoring.", icon: "🎓",
                 items: ["Self-Knowledge", "Listen", "Support", "Encourage"],
                 reveal: "Mentor Master.", req: "Summit"
             },
 
-            // --- SEA SCOUTS TRAIL ---
+            // === SEA SCOUTS TRAIL ===
             vessel_anatomy: {
                 type: 'emblem', title: "Vessel Anatomy", desc: "Identify boat parts.", icon: "⛵", img: "vessel_diagram.jpg",
                 parts: [
@@ -778,10 +834,10 @@
             },
             buoy_rules: {
                 type: 'visual', title: "Nav Buoys", desc: "Identify markers.", icon: "🏮",
-                options: [ { label: "Red Nun", value: "red" }, { label: "Green Can", value: "green" } ],
+                options: [ { label: "Return (Keep Right)", value: "red" }, { label: "Leave (Keep Right)", value: "green" } ],
                 items: [
-                    { name: "Returning", status: "red", tip: "Red Right Returning.", img: "buoy_red_nuns.jpg", req: "Ordinary" },
-                    { name: "Leaving", status: "green", tip: "Green Right Leaving.", img: "buoy_green_can.jpg", req: "Ordinary" }
+                    { name: "Returning from Sea", status: "red", tip: "Red Right Returning.", img: "buoy_red_nuns.jpg", req: "Ordinary" },
+                    { name: "Heading out to Sea", status: "green", tip: "Keep green on the right.", img: "buoy_green_can.jpg", req: "Ordinary" }
                 ]
             },
             maritime_knots: {
@@ -791,16 +847,12 @@
                     { name: "Cleat Hitch", status: "cleat", tip: "To dock.", img: "knot_cleat_hitch.jpg", req: "Apprentice" },
                     { name: "Anchor Bend", status: "anchor", tip: "To anchor.", img: "knot_anchor_bend.jpg", req: "Apprentice" },
                     { name: "Bowline on Bight", status: "bight", tip: "Double loop.", img: "knot_bowline_bight.jpg", req: "Ordinary" }
-                ]
-            },
-            quarterdeck_leadership: {
-                type: 'sorting', title: "Quarterdeck Roles", desc: "Ship leadership vs Shore.", icon: "⚓",
-                buckets: ["Quarterdeck (Youth)", "Ship Committee (Adult)"],
-                items: [
-                    { name: "Boatswain", status: 0, img: "rank_sea_scout.png" },
-                    { name: "Skipper", status: 1, img: "rank_lion.png" },
-                    { name: "Purser", status: 0, img: "rank_sea_scout.png" }
                 ],
+                homework: "Grab a line and demonstrate a Cleat Hitch on a real boat."
+            },
+            quarterdeck_hierarchy: {
+                type: 'sequence', title: "The Quarterdeck", desc: "Organize Ship Leadership.", icon: "⚓",
+                items: ["Boatswain", "Boatswain's Mate", "Crew Leader", "Assistant Crew Leader"],
                 reveal: "Smooth Sailing.", req: "Ordinary", explanation: "Youth lead the Ship via the Quarterdeck."
             }
         };
@@ -818,13 +870,14 @@
         };
 
         const BSA_TIER_GAMES = { 
-            1: ['oath', 'law', 'action', 'bsa_10_essentials', 'knots', 'maps', 'compass_pin_bsa', 'choking_scenario'], 
+            1: ['oath', 'law', 'patrol_hierarchy', 'action', 'bsa_10_essentials', 'knots', 'maps', 'compass_pin_bsa', 'choking_scenario'], 
             2: ['triage', 'cpr', 'snake', 'rescue', 'lashings', 'three_pot_wash', 'plants', 'water', 'emblem'], 
             3: ['edge', 'teams', 'resolving_conflict', 'eagle_project', 'outdoor', 'fire', 'mb_logic', 'extinguish'] 
         };
         
-        const VENTURING_GAMES = ['lnt_master', 'trek_packing', 'expedition_leadership', 'mentor_teaching'];
-        const SEA_SCOUT_GAMES = ['vessel_anatomy', 'buoy_rules', 'maritime_knots', 'quarterdeck_leadership'];
+        const VENTURING_GAMES = ['lnt_master', 'trek_packing', 'venturing_hierarchy', 'expedition_leadership', 'mentor_teaching'];
+        
+        const SEA_SCOUT_GAMES = ['vessel_anatomy', 'buoy_rules', 'maritime_knots', 'quarterdeck_hierarchy'];
 
         // ==========================================
         // SYSTEM CORE & NAVIGATION
@@ -833,7 +886,7 @@
         let currentRank = null; 
         let currentId = '';
         let secondsElapsed = 0; 
-        let timerInt = null; 
+        let globalTimerInterval = null; 
         let completedGames = {};
 
         function isLearningMode() {
@@ -890,6 +943,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('successOverlay').classList.add('hidden');
             document.getElementById('gameStartOverlay').classList.add('hidden');
+            document.getElementById('certificateModal').classList.add('hidden');
             hideReqFeedback();
             
             const target = document.getElementById(`page-${id}`);
@@ -966,8 +1020,13 @@
             document.getElementById('startIcon').innerText = d.icon || "⭐";
             
             const timerEl = document.getElementById('globalTimer');
-            timerEl.classList.remove('hidden');
-            timerEl.innerText = "00:00";
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) {
+                timerEl.classList.add('hidden');
+            } else {
+                timerEl.classList.remove('hidden');
+                timerEl.innerText = "00:00";
+            }
             
             const startBtn = document.getElementById('startBtn');
             const startBorder = document.getElementById('startBorder');
@@ -1361,13 +1420,16 @@
         }
 
         // ==========================================
-        // UTILITIES
+        // UTILITIES & CERTIFICATES
         // ==========================================
         function startTimer() { 
+            clearInterval(globalTimerInterval);
+            const noTimerRanks = ['lion', 'tiger', 'wolf'];
+            if (currentProgram === 'cub' && noTimerRanks.includes(currentRank)) return;
             secondsElapsed = 0; 
             updateTimerUI(); 
             document.getElementById('globalTimer').classList.remove('hidden');
-            timerInt = setInterval(() => { secondsElapsed++; updateTimerUI(); }, 1000); 
+            globalTimerInterval = setInterval(() => { secondsElapsed++; updateTimerUI(); }, 1000); 
         }
 
         function updateTimerUI() { 
@@ -1377,7 +1439,7 @@
         }
 
         function stopTimer() { 
-            clearInterval(timerInt); 
+            clearInterval(globalTimerInterval); 
         }
 
         function triggerPenalty() {
@@ -1409,7 +1471,14 @@
             updateGlobalProgress();
             
             document.getElementById('successText').innerText = revealText;
-            document.getElementById('successExplanation').innerHTML = explanation.replace(/\n/g, '<br>');
+            
+            // Incorporate Homework prompt into explanation if it exists
+            const d = DATA[currentId];
+            let fullExplanation = explanation.replace(/\n/g, '<br>');
+            if (d.homework) {
+                fullExplanation += `<br><br><div class="bg-emerald-100 p-2 rounded border border-emerald-200"><strong>Take it Outside:</strong> ${d.homework}</div>`;
+            }
+            document.getElementById('successExplanation').innerHTML = fullExplanation;
             
             if (displayTime === "DONE") {
                 document.getElementById('timeLabel').classList.add('hidden');
@@ -1455,8 +1524,36 @@
             if (!pool || pool.length === 0) return;
             const done = pool.filter(id => completedGames[id]).length;
             const pct = Math.floor((done / pool.length) * 100);
+            
             document.getElementById('progressText').innerText = `${pct}%`;
             document.getElementById('progressBar').style.width = `${pct}%`;
+
+            // Trigger Certificate availability
+            const certContainer = document.getElementById('claimCertContainer');
+            if (pct === 100) {
+                certContainer.classList.remove('hidden');
+            } else {
+                certContainer.classList.add('hidden');
+            }
+        }
+
+        function openCertificateModal() {
+            let displayRank = String(currentRank).toUpperCase();
+            if (currentProgram === 'bsa') displayRank = "BSA TIER " + currentRank;
+            
+            document.getElementById('certTrailName').innerText = displayRank + " TRAIL";
+            
+            const today = new Date();
+            document.getElementById('certDate').innerText = today.toLocaleDateString();
+            
+            // Set disclaimer based on program
+            document.getElementById('certDisclaimer').innerText = DISCLAIMERS[currentProgram] || DISCLAIMERS.bsa;
+            
+            document.getElementById('certificateModal').classList.remove('hidden');
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('certificateModal').classList.add('hidden');
         }
 
         // Initialize safely
